@@ -72,29 +72,9 @@
                       </div>
                   </div>  
 
-                  <div class="esqueceuSenha">
-                      <button id="EsqueceuSenhaBtn">Esqueceu a senha?</button>
-                      <!-- Modal de Esqueceu a Senha -->
-                      <div id="loginModalEsqueceuSenha" class="modal">
-                          <div class="modal-content">
-                              <span class="close">&times;</span>
-                              <h2>Login Necessário</h2>
-                              <form id="autorizedEsqueceuSenha">
-                              <div class="modal-row">
-                                  <label for="loginEsqueceuSenha">Email:</label>
-                                  <input type="text" id="loginEsqueceuSenha" name="Email" required><br><br>
-                                  </div>
-                                  <div class="modal-row">
-                                  <label for="senhaEsqueceuSenha">Senha:</label>
-                                  <input type="password" id="senhaEsqueceuSenha" name="senha" required><br><br>
-                                  </div>
-                                  <div class="modal-row">
-                                  <button type="submit">Entrar</button>
-                                  </div>
-                                </form>
-                          </div>
-                      </div>
-                  </div>
+                 <div class="recuperarsenha">
+                    <a href="recuperarSenha.php">Recuperar Senha</a>
+                 </div>
               </div>
               
 
