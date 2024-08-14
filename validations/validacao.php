@@ -4,7 +4,7 @@ session_start();
 ob_start(); // limpar o buff de saida 
 include_once("../conexao.php");
 
-data_default_timezone_set('America/Sao_Paulo');
+date_default_timezone_set('America/Sao_Paulo');
 
 
 //importa as classe do phpmailer
@@ -33,6 +33,7 @@ if ($conectar) {
             
             // Verifique se a senha está sendo comparada corretamente
             if (password_verify($password, $row_usuario['password'])) {
+                $_SESSION['codigo'] = $row_usuario['codigo'];
                 $_SESSION['nome'] = $row_usuario['nome'];
                 $_SESSION['cpf'] = $row_usuario['cpf'];
                 $_SESSION['email'] = $row_usuario['email'];
@@ -89,7 +90,7 @@ if ($conectar) {
                     $mail->SMTPDebug = SMTP::DEBUG_SERVER;             // imprimir os erros
 
                     //PERMITIR  O ENVIO DO EMAIL COM CARCTER ESPECIAL
-                    $email->CharSet = 'UTF-8';
+                    $mail->CharSet = 'UTF-8';
 
                     $mail->isSMTP();                                   // definir para usar a SMTP
                     $mail->Host       = 'sandbox.smtp.mailtrap.io';            // Serviço de envio de email
@@ -120,7 +121,7 @@ if ($conectar) {
                     //enviar o email
                     $mail->send();
 
-                    header('Location: validar_codigo.php');
+                    header('Location: ../validations_codigos/validar_cod_autenticacao.php');
 
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -134,7 +135,7 @@ if ($conectar) {
                     die("Erro ao executar a query: " . $result_up_usuario->error);
                 }
 
-                header("Location: ../Screen/pagedev.php");
+                //header("Location: ../Screen/pagedev.php");
                 exit();
             } else {
                 $_SESSION['msg'] = "Senha incorreta!";
