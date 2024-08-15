@@ -16,7 +16,6 @@ if ($conn instanceof mysqli) {
     // Acessar o if quando o usuário clicar no botão acessar do formulário
     if (!empty($dados['ValCodigo'])) {
         
-        
         // RECUPERAR OS DADOS DO USUÁRIO NO BANCO DE DADOS
         $query_usuario = "SELECT codigo, nome, cpf, email, password, telefone, celular, acesso, data_codigo_autenticacao
                           FROM tbdev
@@ -42,7 +41,37 @@ if ($conn instanceof mysqli) {
 
         if ($result_usuario->num_rows > 0) {
             // Ler o registro retornado do banco de dados
-            $row_usuario = $result_usuario->fetch_assoc();
+            $row_usuario = $result_usuario->fetch_assoc(); 
+
+            // query para salvar no banco de dados o código e a data gerada
+            $query_up_usuario = "UPDATE tbdev SET 
+                codigo_autenticacao = NULL,
+                data_codigo_autenticacao = NULL
+                WHERE codigo = ?
+                LIMIT 1";
+
+            // Preparar a query
+            $stmt_up = $conn->prepare($query_up_usuario);
+
+            // Verificar se a preparação da query foi bem-sucedida
+            if ($stmt_up === false) {
+                die("Erro na preparação da query de atualização: " . $conn->error);
+            }
+
+            // Substituir o placeholder pelo valor de $_SESSION['codigo']
+            $stmt_up->bind_param('s', $_SESSION['codigo']);
+
+            // Executar a query de atualização
+            $stmt_up->execute();
+
+            // Salvar os dados do usuário na sessão
+            $_SESSION['nome'] = $row_usuario['nome'];
+            $_SESSION['codigo_autenticacao'] = true;
+
+            // Redirecionar o usuário 
+            header('Location: ../Screen/pagedev.php');
+            exit();
+
         } else {
             $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Dev não encontrado!</p>";
             header("Location: ../loginDev.php");
@@ -53,6 +82,7 @@ if ($conn instanceof mysqli) {
     die("Conexão com o banco de dados não estabelecida.");
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

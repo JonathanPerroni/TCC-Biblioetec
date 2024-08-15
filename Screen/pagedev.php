@@ -1,5 +1,9 @@
 <?php
 session_start();
+ob_start();
+
+date_default_timezone_set('America/Sao_Paulo');
+
 include_once("../conexao.php");
 ?>
 <!DOCTYPE html>
