@@ -73,7 +73,7 @@
                   </div>  
 
                  <div class="recuperarsenha">
-                    <a href="recuperarSenha.php">Recuperar Senha</a>
+                    <a href="validations_codigos/validar_cod_aut_recuperar_senha.php">Recuperar Senha</a>
                  </div>
               </div>
               

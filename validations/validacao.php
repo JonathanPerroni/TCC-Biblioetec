@@ -109,6 +109,7 @@ if ($conectar) {
                     $mail->isHTML(true);                   
                     //titulo do email
                     $mail->Subject = 'Aqui esta o codigo de verificação';
+                    
                     //conteudo  do email  em formato HTML
                     $mail->Body    = "Ola! " . $row_usuario['nome'] . ", Autenticação  de multifator.<br><br>
                     seu codigo de verificação de 6 digitos é $codigo_autenticacao.<br><br> Esse codigo foi  enviado
