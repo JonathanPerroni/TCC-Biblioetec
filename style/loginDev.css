@@ -158,14 +158,13 @@ input[type="submit"]:hover{
     flex-direction: row;
     gap: 0 20px;
     font-size: 10px;
-    border: 2px solid red;
+   
    
 }
 
 .containerApoio .primeiroAcesso button{
     border: none;
     background-color: transparent;
-    font-size: 10px;
     font-weight: bold;
     
 }
@@ -174,17 +173,30 @@ input[type="submit"]:hover{
     color: #1c86dc;
 }
 
-.containerApoio .esqueceuSenha button{
+.containerApoio  button,
+.recuperarsenha  button{
     border: none;
     background-color: transparent;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
+    text-decoration: none;
+    color: black;
+    
+
   
 }
 
-.containerApoio .esqueceuSenha button:hover{
+
+ .recuperarsenha button a{
+    text-decoration: none;
+    color: black;
+ }
+
+.containerApoio button:hover,
+.recuperarsenha  button a:hover{
     color: #1c86dc;
 }
+
 
 
 
@@ -271,8 +283,7 @@ input[type="submit"]:hover{
 @media (max-width: 465px){
 
     main{
-        display: flex;
-      
+        display: flex;      
         align-items: center;
     }
 
@@ -288,9 +299,6 @@ input[type="submit"]:hover{
     }
 
 
-
-
-col
     .separation-line{
         height: 2px;
         width: 100%;

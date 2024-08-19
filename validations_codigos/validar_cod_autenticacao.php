@@ -73,9 +73,8 @@ if ($conn instanceof mysqli) {
             exit();
 
         } else {
-            $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Dev não encontrado!</p>";
-            header("Location: ../loginDev.php");
-            exit();
+            $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Codigo Invalido</p>";
+            
         }
     }
 } else {
@@ -89,6 +88,190 @@ if ($conn instanceof mysqli) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validar Codigo de Acesso</title>
+    <link rel="stylesheet" href="/biblioetec/Desenvolvedor/style/defaults.css">
+    <Style>
+ body{
+        height: 90vh;
+        justify-content: center;
+        align-items: center;
+        }
+
+        main{
+    max-width:400px;   
+    width: 100%;
+    height: auto;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.25 );
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+}
+header{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;    
+    text-align: center;
+}
+
+h1{
+    font-size: 25px;
+}
+
+.separation-line{
+    height: 2px;
+        width: 80%;
+        margin: 0px 16px;
+        background-color: var(--off-white);
+        color: var(--off-white);
+}
+
+
+
+#brand-title{
+    color:  var(--primary-emphasis);
+    font-weight: 600;   
+    width: 200px;
+}
+
+#cad-title{
+    color: var(--off-black);
+    font-weight: 400;   
+    width: 200px;
+}
+
+.formsContainer{
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+
+form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;    
+    justify-content:  center;
+    align-items: center;  
+    
+}
+
+.form-row{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around ;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    min-width: 100%;
+    gap: 5px;
+   
+}
+.input-container {
+            margin-bottom: 15px;
+            position: relative;
+            flex-grow: 1;   
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-container input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .input-error {
+            border: 1px solid red;
+        }
+        .input-success {
+            border: 1px solid green;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        input{
+    outline: none;
+    border: 1px solid;
+    width: 100%;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--secondary-emphasis);
+    caret-color: var(--secondary-emphasis);
+    background-color: var(--off-white);
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+input:focus{
+    border: 2px solid var(--secondary-emphasis);
+    transition: ease-in .1s;
+}
+
+
+.placeholder{
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    color: var(--secondary-emphasis);
+    font-weight: 500;    
+    transition: .3s;
+    pointer-events: none;
+}
+
+
+input:focus + .placeholder,
+input:not(:placeholder-shown) + .placeholder {
+    font-size: 12px;
+    top: -16px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    appearance: textfield;
+}
+
+input[type="submit"]{
+    color: white;
+    background-color: var(--secondary-emphasis);
+    cursor: pointer;
+    transition: ease-in-out .2s;
+    margin-bottom: 5px;
+}
+input[type="submit"]:hover{
+    scale: 1.025;
+    background-color: #3B6603;
+}
+
+    </Style>
 </head>
 <body>
 <main>
@@ -99,11 +282,27 @@ if ($conn instanceof mysqli) {
     </header>
     <div class="formsContainer">
         <form action="" method="post">
-            <label for="">Código: </label>
-            <input type="text" name="codigo_autenticacao" placeholder="Digite o codigo" id=""><br><br>
-
-            <input type="submit" name="ValCodigo" value="Validar"><br><br>
+        <div class="form-row">
+        <div class="input-container"> 
+           
+            <input type="text"  name="codigo_autenticacao" placeholder="" >
+            <label for=""class="placeholder">Código </label>
+            </div>
+           
+            <div class="input-container"> 
+            <input type="submit" name="ValCodigo" value="Validar"><br>
+          
+            </div>
+            <?php
+                  if (isset($_SESSION['msg'])) {
+                      echo $_SESSION['msg'];
+                      unset($_SESSION['msg']);
+                  }
+                  ?>
+            </div>
+         
         </form>
+   
     </div>
 </main>   
 </body>

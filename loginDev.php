@@ -14,6 +14,8 @@
   </head>
   <body>
       <main>
+    
+    
           <header>
               <h1 id="brand-title">Biblietec</h1>
               <span class="separation-line"></span>
@@ -73,7 +75,7 @@
                   </div>  
 
                  <div class="recuperarsenha">
-                    <a href="validations_codigos/validar_cod_aut_recuperar_senha.php">Recuperar Senha</a>
+                    <button><a href="validations_codigos/validar_cod_aut_recuperar_senha.php">Recuperar Senha</a></button>
                  </div>
               </div>
               

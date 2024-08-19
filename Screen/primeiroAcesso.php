@@ -290,11 +290,22 @@ a:hover{
     }
 
     .container-btn{
-    border:2px solid red;
+   
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0 5px;
+}
+
+.erros-notification{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap:  5px  10px;
+    justify-content:  center;
+    align-items: center; 
+    
 }
 }
 
