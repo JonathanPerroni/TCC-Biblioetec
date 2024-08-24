@@ -70,8 +70,8 @@ if (!empty($dados['SendRecupSenha'])) {
                             $mail->isSMTP();
                             $mail->Host       = 'sandbox.smtp.mailtrap.io';
                             $mail->SMTPAuth   = true;
-                            $mail->Username   = '0a1cfc235b42dd';
-                            $mail->Password   = 'c23abe058e2e4f';
+                            $mail->Username   = '83b76c3790613b';
+                            $mail->Password   = '62ae586ad2ecb3';
                             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                             $mail->Port       = 465;
 

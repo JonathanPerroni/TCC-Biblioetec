@@ -182,7 +182,7 @@ form{
             flex-grow: 1;   
             width: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             
         }
@@ -259,17 +259,55 @@ input[type="number"] {
     appearance: textfield;
 }
 
-input[type="submit"]{
-    color: white;
-    background-color: var(--secondary-emphasis);
-    cursor: pointer;
-    transition: ease-in-out .2s;
-    margin-bottom: 5px;
-}
-input[type="submit"]:hover{
-    scale: 1.025;
-    background-color: #3B6603;
-}
+ /* Estiliza o botão de submissão */
+ input[type="submit"] {
+            color: white;
+            background-color: var(--secondary-emphasis);
+            cursor: pointer;
+            transition: ease-in-out 0.2s;
+            margin-bottom: 5px;
+            
+        }
+
+        /* Adiciona animação ao hover do botão */
+        input[type="submit"]:hover {
+            scale: 1.025;
+            background-color: #3B6603;
+        }
+
+        /* Define o estilo do contêiner dos botões */
+        .container-btn {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 0 5px;
+        }
+
+        /* Estiliza links (como botões) */
+        a {
+            color: white;
+            background-color: var(--secondary-emphasis);
+            cursor: pointer;
+            transition: ease-in-out 0.2s;
+            margin-bottom: 5px;
+            font-size: 12px;
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500; 
+            
+        }
+
+        /* Adiciona animação ao hover dos links */
+        a:hover {
+            scale: 1.025;
+            background-color: #B20000;
+        }
 
     </Style>
 </head>
@@ -289,10 +327,12 @@ input[type="submit"]:hover{
             <label for=""class="placeholder">Código </label>
             </div>
            
-            <div class="input-container"> 
-            <input type="submit" name="ValCodigo" value="Validar"><br>
-          
-            </div>
+            
+            <div class="container-btn">
+                    <input type="submit" name="ValCodigo" value="Validar"><br>
+                    <a href="logout.php" class="voltar">Sair</a>
+                </div>
+            
             <?php
                   if (isset($_SESSION['msg'])) {
                       echo $_SESSION['msg'];
