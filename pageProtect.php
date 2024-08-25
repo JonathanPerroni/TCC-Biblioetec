@@ -7,6 +7,7 @@ if(!function_exists("protect")){
 
         if(!isset($_SESSION['email']) || !is_numeric($_SESSION['email'])){
             header("Location: loginDev.php");
+        
         }
     }
 }
