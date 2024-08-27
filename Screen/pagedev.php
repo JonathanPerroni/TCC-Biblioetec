@@ -30,7 +30,7 @@ if (empty($_SESSION['email'])) {
     <div class="sidebar">
             <ul>
                 <li class="list active">
-                    <a href="#">
+                    <a href="pagedev.php">
                     <span class="icon-sidebar"><ion-icon name="home-outline"></ion-icon></span>
                     <span class="title-navegation">Inicio</span>
                     </a>
@@ -48,7 +48,7 @@ if (empty($_SESSION['email'])) {
                     </a>
                 </li>
                 <li class="list">
-                    <a href="#">
+                    <a href="../../User_etec/cadastrar_escola.php">
                     <span class="icon-sidebar"><ion-icon name="save-outline"></ion-icon></span>
                     <span class="title-navegation">Cadastro</span>
                     </a>
