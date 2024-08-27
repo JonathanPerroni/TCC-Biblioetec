@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/defaults.css">
+</head>
+<body>
+    <main>
+        <!--titulo-->
+        <header>
+            <h1 id="brand-title">Biblietec</h1>
+            <span class="separation-line"></span>
+            <h1 id="login-title">Login</h1>
+        </header>
+
+        <div class="container"><!--div principal-->
+            
+            <div class="seletor"><!--div do seletor-->
+                <select name="acesso" id="acesso" required>
+                    <option value="">Tipo de Acesso</option>
+                    <option value="dev">Desenvolvedor</option>
+                    <option value="admin">Administrador</option>
+                    <option value="bib">Bibliotecário</option>
+                    <option value="prof">Professor</option>
+                    <option value="aluno">Aluno</option>
+                    <option value="fun">Funcionario</option>
+                </select> 
+            </div> <!-- fim da div do seletor-->
+
+            <!--INICIO DA DIV DO FORMULARIO 1 -->
+            <div class="forms-container"><!--div do formulario 1-->
+                <form id="form1" class="form-container" action="#" method="post">
+                    <div class="form-row" id="juntos"><!--div do form linha-->
+                        <div class="input-group"> <!--input-group-->
+                            <input type="number" name="codEtec" id="codEtec" placeholder="" required>
+                            <label for="codEtec" id="labelCodEtec" class="placeholder">Cód Etec</label>
+                        </div><!-- fim da input-group-->
+                        <button id="etecsButton">?</button>                            
+                    </div><!--fim da div do form linha-->
+
+                    <div class="form-row"><!--div do form linha-->
+                        <div class="input-group"> <!--input-group-->
+                            <input type="text" name="user" id="user" placeholder="" required>
+                            <label for="user" id="labelUser" class="placeholder">Usuário</label>
+                        </div><!-- fim da input-group-->
+
+                        
+                        <div class="input-group"> <!--input-group-->
+                            <input type="password" name="password" id="password" placeholder="" required>
+                            <label for="password" id="labelPassword" class="placeholder">Senha</label>
+                        </div><!-- fim da input-group-->
+                    </div><!--fim da div do form linha-->
+
+                    <div class="form-row"><!--input-group-->
+                        <input type="submit" value="Entrar">
+                    </div><!-- fim do input-group-->
+                </form>
+            </div><!-- fim da div do formulario 1-->
+
+            <!--INICIO DA DIV DO FORMULARIO 2 -->
+            <div class="forms-container"><!--div do formulario 2-->
+                <form id="form2" class="form-container" action="#" method="post">
+                    <div class="form-row"><!--div do form linha-->
+                        <div class="input-group"> <!--input-group-->
+                            <input type="text" name="user" id="user" placeholder="" required>
+                            <label for="user" id="labelUser" class="placeholder">Usuário</label>
+                        </div><!-- fim da input-group-->
+                        <div class="input-group"> <!--input-group-->
+                            <input type="password" name="password" id="password" placeholder="" required>
+                            <label for="password" id="labelPassword" class="placeholder">Senha</label>
+                        </div><!-- fim da input-group-->
+                    </div><!--fim da div do form linha-->
+
+                    <div class="form-row"><!--input-group-->
+                        <input type="submit" value="Entrar">
+                    </div><!-- fim do input-group-->
+                </form>
+            </div><!-- fim da div do formulario 2-->
+        </div> <!-- fim da div principal-->
+    </main>
+
+    <script>
+        // Seleciona o elemento do tipo de usuário
+        const userTypeSelect = document.getElementById('acesso');
+
+        // Seleciona os contêineres dos formulários
+        const form1 = document.getElementById('form1');
+        const form2 = document.getElementById('form2');
+
+        // Função para atualizar a exibição dos formulários com base no valor selecionado
+        function updateFormDisplay() {
+            const selectedType = userTypeSelect.value;
+            if (selectedType === 'aluno' || selectedType === 'admin' || selectedType === 'bib' || selectedType === 'prof' || selectedType === 'fun') {
+                form1.style.display = 'block';
+                form2.style.display = 'none';
+            } else if (selectedType === 'dev') {
+                form1.style.display = 'none';
+                form2.style.display = 'block';
+            } else {
+                form1.style.display = 'block';
+                form2.style.display = 'none';
+            }
+        }
+
+        // Define 'aluno' como valor padrão do select e atualiza a exibição dos formulários
+        userTypeSelect.value = 'aluno';
+        updateFormDisplay();
+
+        // Adiciona um evento de mudança ao seletor de tipo de usuário
+        userTypeSelect.addEventListener('change', updateFormDisplay);
+
+
+       
+    </script>
+</body>
+</html>
