@@ -71,7 +71,7 @@ if (empty($_SESSION['email'])) {
         <nav class="menu-nav">
         <div class="logo">
                 <p class="logoTitle">
-                    <h1 id="brand-title">BiblioEtec</h1>
+                    <h1 id="brand-title">Biblio<span class="destaque" >Etec</span></h1>
                 </p>
             </div>
 
@@ -104,6 +104,7 @@ if (empty($_SESSION['email'])) {
         </nav>
     </header>
 
+    <main class="maincontainer">
     <div class="content" id="content">
         <h1>menu responsivo - jhow zitos</h1>
     </div>
@@ -113,6 +114,10 @@ if (empty($_SESSION['email'])) {
     </div>
 
     <h2>hello world</h2>
+
+    </main>
+
+
 
     <script>
         //js do menu perfil
