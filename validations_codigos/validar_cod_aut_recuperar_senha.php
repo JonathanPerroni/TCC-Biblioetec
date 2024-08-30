@@ -55,7 +55,7 @@ if (!empty($dados['SendRecupSenha'])) {
                     // Executar a query
                     if ($stmt_up->execute()) {
                         // Gerar o link de recuperação de senha
-                        $link = "http://localhost/biblioetec/Desenvolvedor/Screen/esqueceuSenha.php?chave=" . urlencode($chave_recuperar_senha);
+                        $link = "http://localhost/biblioetec/Desenvolvedor/ScreenDev/esqueceuSenha.php?chave=" . urlencode($chave_recuperar_senha);
 
                         // Incluir o composer
                         require '../lib/vendor/autoload.php';

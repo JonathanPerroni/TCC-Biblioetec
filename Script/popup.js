@@ -28,7 +28,7 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 if (xhr.responseText.trim() === "success") {
-                    window.location.href = "Screen/primeiroAcesso.php";
+                    window.location.href = "ScreenDev/primeiroAcesso.php";
                 } else {
                     alert("Email ou senha incorretos!");
                 }

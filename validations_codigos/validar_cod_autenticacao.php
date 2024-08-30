@@ -69,7 +69,7 @@ if ($conn instanceof mysqli) {
             $_SESSION['codigo_autenticacao'] = true;
 
             // Redirecionar o usuário 
-            header('Location: ../Screen/pagedev.php');
+            header('Location: ../ScreenDev/pagedev.php');
             exit();
 
         } else {
