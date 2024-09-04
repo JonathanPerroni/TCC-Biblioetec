@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../conexao.php");
+include_once("../../../../conexao.php");
 
 ?>
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ include_once("../conexao.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Primeiro Acesso</title>
-    <link rel="stylesheet" href="../style/defaults.css">
+    <link rel="stylesheet" href="../../../../style/defaults.css">
     <style>
         
         body{
@@ -62,7 +62,7 @@ include_once("../conexao.php");
             width: 200px;
         }
 
-        .PrimeiroAcesso{
+        .validacao{
             margin-top: 10px;
             width: 100%;
             height: 100%;
@@ -233,75 +233,77 @@ include_once("../conexao.php");
         }
 
         @media (max-width:465px) {
-            body{
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            }
-            
-            main{
-                display: flex;
-                align-items: center;
-            
-            }
+                    body{
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    }
+                    
+                    main{
+                        display: flex;
+                        align-items: center;
+                    
+                    }
 
-            header{
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                text-align: center;
-                width: 200px;
-                height:auto;
-            }
+                    header{
+                        display: flex;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                        text-align: center;
+                        width: 200px;
+                        height:auto;
+                    }
 
-            .separation-line{
-                height: 2px;
-                width: 100%;
-                margin: 0px 16px;
-                background-color: var(--off-white);
-                color: var(--off-white);
-            }
+                    .separation-line{
+                        height: 2px;
+                        width: 100%;
+                        margin: 0px 16px;
+                        background-color: var(--off-white);
+                        color: var(--off-white);
+                    }
 
 
-            .PrimeiroAcesso {
-                display:flex;
-                flex-direction: column;
+                    .validacao {
+                        display:flex;
+                        flex-direction: column;
 
-            }
+                    }
 
-            form{
-                display: flex;
-                flex-wrap: wrap;
-                flex-direction: column;
+                    form{
+                        display: flex;
+                        flex-wrap: wrap;
+                        flex-direction: column;
 
-            }
-            .form-row{
-                display: flex;
-                flex-wrap: wrap;
-                flex-direction: column;
-            }
+                    }
+                    .form-row{
+                        display: flex;
+                        flex-wrap: wrap;
+                        flex-direction: column;
+                    }
 
-            .container-btn{
-        
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 0 5px;
+                    .container-btn{
+                
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0 5px;
+                }
+
+                .erros-notification{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    height: auto;
+                    gap:  5px  10px;
+                    justify-content:  center;
+                    align-items: center; 
+                    
+                }
         }
 
-        .erros-notification{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: auto;
-            gap:  5px  10px;
-            justify-content:  center;
-            align-items: center; 
-            
-        }
-}
     </style>
+    
 </head>
 <body>
     <main class="container"> 
@@ -313,9 +315,9 @@ include_once("../conexao.php");
               <span class="separation-line"></span>
               <h1 id="cad-title">Cadastro Dev</h1>
           </header>
-        <div class="PrimeiroAcesso">
+        <div class="validacao">
             
-            <form action="processarPrimeiroAcesso.php" method="post">
+            <form action="validacao_cad_dev.php" method="post">
             
             <div class="form-row">
                     <div class="input-container">                        
@@ -380,7 +382,7 @@ include_once("../conexao.php");
                 <div class="container-btn">
                 <input type="submit" value="Enviar"><br>
                 
-                 <a href="logout.php"  class="voltar">Voltar</a>
+                 <a href="../../../pagedev.php"  class="voltar">Voltar</a>
                 
                
                 </div>
