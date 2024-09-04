@@ -4,6 +4,7 @@ body {
     max-height: 100vh;
     flex-wrap: wrap;
     position: relative; /* Adicionado para permitir o uso do pseudo-elemento e desfoque */
+   
 }
 
 :root {
@@ -39,7 +40,10 @@ header {
 
 .sidebar:hover {
     width: 205px; /* Expande o sidebar ao passar o mouse */
+    
 }
+
+
 
 .sidebar ul {
     position: absolute;
@@ -126,8 +130,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, .8);
-    padding-left: 6%;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, .8);    
+    padding-left: 6%;z-index: 1;
 }
 
 
@@ -138,8 +142,13 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 5px;
+    transition: transform 1.5s;
 }
 
+.sidebar:hover ~ .menu-nav .logo {
+    transform: translateX(135px);
+}
 .menu-nav .destaque{
     color: var(--off-black);
 }
@@ -189,7 +198,7 @@ header {
 .menu-nav .perfil h2 span {
     border: 1px solid rgb(128, 26, 0);
     
-    font-size: clamp(2px, 1.2vw, 12px);
+    font-size: clamp(8px, 1.2vw, 12px);
     color: var(--primary-emphasis);
     font-weight: bold;
 }
@@ -224,6 +233,7 @@ header {
     opacity: 0;
     visibility: hidden;
     transition: .3s;
+    
 }
 
 .menu-nav .menuPerfil.ativo {
@@ -278,34 +288,80 @@ header {
 @media screen and (max-width: 1024px) {
     .menu-nav .perfil{
         height: 70%;
-        max-width: 22%;
-        width: 100%;
+        max-width: 100%;
+        width: 230px;
+       
+    }
+    .logoTitle{
+        margin-left: 100px;
     }
 
+    .sidebar:hover ~ .menu-nav .logo {
+        transform: translateX(135px);
+    }
 }
 
 
 @media screen and (max-width: 768px) {
     .menu-nav .perfil{
         height: 70%;
-        max-width: 25%;
-        width: 100%;
+        max-width: 100%;
+        width: 170px;
+        
     }
+
 }
 
 @media screen and (max-width: 608px) {
+   
     .menu-nav .perfil{
         height: 70%;
-        max-width: 30%;
-        width: 100%;
+        max-width: 100%;
+        width: 170px;
     }
+
+    .perfil h2 span{
+        font-size: 10px;
+    }
+
+    .logoTitle{
+        margin-left: 125px;
+    }
+    .sidebar:hover ~ .menu-nav .logo {
+        transform: translateX(135px);
+    }
+
 }
 
 @media screen and (max-width: 523px) {
+ 
     .menu-nav .perfil{
         height: 70%;
-        max-width: 33%;
-        width: 100%;
+        max-width: 100%;
+        width: 160px;
     }
+    .menu-nav .menuPerfil {
+        width: 150px;
+       
+    }
+
 }
 
+@media screen and (width < 456px) {
+
+
+
+    .menu-nav .perfil{
+        height: 70%;
+        max-width: 100%;
+        width: 160px;
+    }
+    .logoTitle{
+        margin-left: 140px;
+    }
+   
+    .sidebar:hover ~ .menu-nav .logo {
+        transform: translateX(-100px);
+        
+    }
+}
