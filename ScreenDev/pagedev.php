@@ -127,10 +127,10 @@ if (empty($_SESSION['email'])) {
                 .sidebar ul li.active a::before {
                     content: '';
                     position: absolute;
-                    top: -30px;
+                    top: -25px;
                     right: 0;
-                    width: 30px;
-                    height: 30px;
+                    width: 25px;
+                    height: 25px;
                     background: var(--off-black);
                     border-radius: 50%;
                     box-shadow: 15px 15px 0 var(--primary-emphasis);
@@ -139,15 +139,64 @@ if (empty($_SESSION['email'])) {
                 .sidebar ul li.active a::after {
                     content: '';
                     position: absolute;
-                    bottom: -30px;
+                    bottom: -25px;
                     right: 0;
-                    width: 30px;
-                    height: 30px;
+                    width: 25px;
+                    height: 25px;
                     background: var(--off-black);
                     border-radius: 50%;
                     box-shadow: 15px -15px 0 var(--primary-emphasis);
                 }
+                                        
+                    /* Inicialmente ocultar o dropdown */
+                    .sidebar .dropdown-menu {
+                        display: none;
+                        padding-left: 0;
+                        margin: 0;
+                        list-style: none;
+                        background-color: var(--off-black);
+                        border-left: 5px solid var(--primary-emphasis);
+                        position: relative;
+                        left: 45px; /* Ajuste conforme a largura do seu sidebar */
+                        
+                        
+                    }
 
+
+
+                    /* Mostrar o dropdown quando o item pai estiver ativo */
+                    .sidebar .dropdown.active .dropdown-menu {
+                        display: block;
+                        padding: 10px 0;
+                        background-color: var(--primary-emphasis);   
+                        width: 100%;
+                    
+                        
+                    }
+
+
+                    /* Estilos dos itens do dropdown */
+                    .sidebar .dropdown-menu li {
+                        padding: 10px;
+                        
+                    }
+
+                    .sidebar .dropdown-menu li a {
+                        color: var(--off-white);
+                        text-decoration: none;
+                        display: block;
+                        width: 100%;
+                        left: -10px;
+                    }
+
+                    .sidebar .dropdown-menu li a:hover {
+                        color: var(--off-black);
+
+                        
+                    }
+
+
+                                
                 .menu-nav {    
                     position: relative;
                     width: 100%;
@@ -417,12 +466,21 @@ if (empty($_SESSION['email'])) {
                     <span class="title-navegation">Lista Escola</span>
                     </a>
                 </li>
-                <li class="list">
-                    <a href="#">
-                    <span class="icon-sidebar"><ion-icon name="save-outline"></ion-icon></span>
-                    <span class="title-navegation">Cadastro</span>
-                    </a>
+                <li class="list dropdown">
+                     <a href="#" class="dropdown-toggle">
+                         <span class="icon-sidebar"><ion-icon name="save-outline"></ion-icon></span>
+                         <span class="title-navegation">Cadastro</span>
+                     </a>
+                                 <ul class="dropdown-menu">
+                                 <li><a href="sidebarDev/cadastro/cadDev/cadastrar_dev.php">Cadastrar Dev</a></li>
+                                <li><a href="sidebarDev/cadastro/cadAdmin/cadastrar_admin.php">Cadastrar Admin</a></li>
+                                <li><a href="#">Cadastrar Escola</a></li>
+                                </ul>
                 </li>
+               
+           
+        
+                
                 <li class="list">
                     <a href="#">
                     <span class="icon-sidebar"><ion-icon name="reader-outline"></ion-icon></span>
@@ -511,7 +569,7 @@ if (empty($_SESSION['email'])) {
         list.forEach((item)=> 
         item.addEventListener('click', activeLink));
     </script>
-
+    <script src="scripts.js"></script>
     <!-- Áreas dos ícones -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
