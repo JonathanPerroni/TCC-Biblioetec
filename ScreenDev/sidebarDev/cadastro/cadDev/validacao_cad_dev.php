@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("../../../../conexao.php");
-
+date_default_timezone_set('America/Sao_Paulo');
 
 // Recebe e filtra os dados do formulário
 $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
@@ -12,6 +12,12 @@ $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 $telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
 $celular = filter_input(INPUT_POST, 'celular', FILTER_SANITIZE_STRING);
 $acesso = filter_input(INPUT_POST, 'acesso', FILTER_SANITIZE_STRING);
+
+// Captura o usuário logado
+$cadastrado_por = $_SESSION['nome']; // Presumindo que o nome do usuário logado está na sessão
+
+// Captura a data e hora do cadastro
+$data_cadastro = date('Y-m-d H:i:s'); // Formato padrão do MySQL para DATETIME
 
 // Inicializa arrays para armazenar erros e valores dos campos
 $errors = [];

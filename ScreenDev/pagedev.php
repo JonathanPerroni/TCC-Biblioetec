@@ -474,7 +474,7 @@ if (empty($_SESSION['email'])) {
                                  <ul class="dropdown-menu">
                                  <li><a href="sidebarDev/cadastro/cadDev/cadastrar_dev.php">Cadastrar Dev</a></li>
                                 <li><a href="sidebarDev/cadastro/cadAdmin/cadastrar_admin.php">Cadastrar Admin</a></li>
-                                <li><a href="#">Cadastrar Escola</a></li>
+                                <li><a href="sidebarDev/cadastro/cadEscola/cadastrar_escola.php">Cadastrar Escola</a></li>
                                 </ul>
                 </li>
                
