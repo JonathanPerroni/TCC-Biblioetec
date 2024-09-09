@@ -2,6 +2,20 @@
 session_start();
 include_once("../../../../conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
+
+
+// Recupera os dados das escolas e puxando o nome da escola
+$sql = "SELECT codigo_escola, unidadeEscola FROM dados_etec"; // substitua 'dados_etec' pelo nome da sua tabela
+$result = $conn->query($sql);
+
+$dadosEtec = [];
+if ($result && $result->num_rows > 0) {
+    // Adiciona cada código e nome ao array
+    while ($row = $result->fetch_assoc()) {
+        $dadosEtec[] = $row;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -391,8 +405,17 @@ date_default_timezone_set('America/Sao_Paulo');
 
                     <div class="input-container">
                        
-                        <input type="text" name="codigo_escola" id="codigo_escola" placeholder="" value="<?php echo isset($_SESSION['values']['codigo_escola']) ? htmlspecialchars($_SESSION['values']['codigo_escola']) : ''; ?>" required>
-                        <label for="codigo_escola" class="placeholder">Codigo Escola:</label>
+                    <input type="text" id="codigo_escola" name="codigo_escola" list="codigos" class="input-list" placeholder="Código Etec" required>
+                        <datalist id="codigos" name="codigo_escola">
+                            <?php
+                            foreach ($dadosEtec as $escola) {
+                                $codigo = $escola['codigo_escola'];
+                                $nome = $escola['unidadeEscola'];
+
+                                echo "<option value=\"$codigo - $nome\">$codigo - $nome</option>";
+                            }
+                            ?>
+                        </datalist>
                     </div>
                     
                   
@@ -429,5 +452,7 @@ date_default_timezone_set('America/Sao_Paulo');
     unset($_SESSION['values']);
     unset($_SESSION['errors']);
     ?>
+
+    <script src="cadAdmin.js"></script>
 </body>
 </html>
