@@ -2,7 +2,23 @@
 session_start();
 include_once("../../../../conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
+
+
+
+// Recupera os dados das escolas e puxando o nome da escola
+$sql = "SELECT codigo_escola, unidadeEscola FROM dados_etec"; // substitua 'dados_etec' pelo nome da sua tabela
+$result = $conn->query($sql);
+
+$dadosEtec = [];
+if ($result && $result->num_rows > 0) {
+    // Adiciona cada código e nome ao array
+    while ($row = $result->fetch_assoc()) {
+        $dadosEtec[] = $row;
+    }
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -336,10 +352,11 @@ date_default_timezone_set('America/Sao_Paulo');
             
             <form action="validacao_cad_escola.php" method="post">
             
+
             <div class="form-row">
                     <div class="input-container">                        
-                        <input type="text" name="nome_escola" id="nome_escola" placeholder="" class="<?php echo !empty($_SESSION['errors']['nome_escola']) ? 'input-error' : ''; ?>" value="<?php echo isset($_SESSION['values']['nome_escola']) ? htmlspecialchars($_SESSION['values']['nome_escola']) : ''; ?>" required>
-                        <label for="nome_escola"  class="placeholder">Nome da Escola:</label>
+                    <input type="text" name="nome_escola" id="nome_escola" placeholder="" class="<?php echo !empty($_SESSION['errors']['nome_escola']) ? 'input-error' : ''; ?>" value="<?php echo isset($_SESSION['values']['nome_escola']) ? htmlspecialchars($_SESSION['values']['nome_escola']) : ''; ?>" required> 
+                    <label for="nome_escola"  class="placeholder">Nome da Escola:</label>
                      
                     </div>
                     
@@ -370,7 +387,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <div class="form-row">
                     <div class="input-container">
                        
-                        <select name="tipo_escola" id="tipo_escola"  class="input-list" required>
+                        <select name="tipoEscola" id="tipoEscola"  class="input-list" required>
                             <option value="">Escolha o tipo</option>
                             <option value="ensinoMedio">Ensino Medio</option>
                             <option value="tecnico">Ensino Tecnico</option>
@@ -380,8 +397,19 @@ date_default_timezone_set('America/Sao_Paulo');
                     </div>
                     <div class="input-container">
                        
-                        <input type="text" name="codigo_escola" id="codigo_escola" placeholder="" class="<?php echo !empty($_SESSION['errors']['codigo_escola']) ? 'input-error' : ''; ?>" required>
-                        <label for="codigo_escola" class="placeholder">Codigo Escola:</label>
+                    
+                   
+                    
+                    <input type="text" id="codigo_escola" name="codigo_escola" list="codigos" class="input-list" placeholder="Código Etec" required>
+                        <datalist id="codigos" name="codigo_escola">
+                            <?php
+                            foreach ($dadosEtec as $escola) {
+                                $codigo = $escola['codigo_escola'];
+                                $nome = $escola['unidadeEscola'];
+                                echo "<option value=\"$codigo - $nome\">$codigo - $nome</option>";
+                            }
+                            ?>
+                        </datalist>
                     </div>
                     
                   
@@ -406,13 +434,13 @@ date_default_timezone_set('America/Sao_Paulo');
                 <div class="form-row">
                  <div class="input-container">
                        
-                       <input type="text" name="endereco" id="endereco" placeholder="" value="<?php echo isset($_SESSION['values']['endereco']) ? htmlspecialchars($_SESSION['values']['endereco']) : ''; ?>" required>
+                       <input type="text" name="endereco" id="ruaEscola" placeholder="" value="<?php echo isset($_SESSION['values']['endereco']) ? htmlspecialchars($_SESSION['values']['endereco']) : ''; ?>" required>
                        <label for="endereco" class="placeholder">Endereço:</label>
                    </div>
 
                     <div class="input-container">
                        
-                        <input type="text" name="bairro" id="bairro" placeholder="" value="<?php echo isset($_SESSION['values']['bairro']) ? htmlspecialchars($_SESSION['values']['bairro']) : ''; ?>" required>
+                        <input type="text" name="bairro" id="bairroEscola" placeholder="" value="<?php echo isset($_SESSION['values']['bairro']) ? htmlspecialchars($_SESSION['values']['bairro']) : ''; ?>" required>
                         <label for="bairro" class="placeholder">Bairro:</label>
                     </div>
                     
@@ -421,13 +449,13 @@ date_default_timezone_set('America/Sao_Paulo');
                 <div class="form-row">
                  <div class="input-container">
                        
-                       <input type="text" name="numero" id="numero" placeholder="" value="<?php echo isset($_SESSION['values']['numero']) ? htmlspecialchars($_SESSION['values']['numero']) : ''; ?>" required>
+                       <input type="text" name="numero" id="numeroEscola" placeholder="" value="<?php echo isset($_SESSION['values']['numero']) ? htmlspecialchars($_SESSION['values']['numero']) : ''; ?>" required>
                        <label for="numero" class="placeholder">Nº :</label>
                    </div>
 
                     <div class="input-container">
                        
-                        <input type="text" name="cep" id="cep" placeholder="" value="<?php echo isset($_SESSION['values']['cep']) ? htmlspecialchars($_SESSION['values']['cep']) : ''; ?>" required>
+                        <input type="text" name="cep" id="cepEscola" placeholder="" value="<?php echo isset($_SESSION['values']['cep']) ? htmlspecialchars($_SESSION['values']['cep']) : ''; ?>" required>
                         <label for="cep" class="placeholder">CEP:</label>
                     </div>
                     
@@ -437,7 +465,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <div class="form-row">
                  <div class="input-container">
                        
-                       <input type="text" name="cidade" id="cidade" placeholder="" value="<?php echo isset($_SESSION['values']['cidade']) ? htmlspecialchars($_SESSION['values']['cidade']) : ''; ?>" required>
+                       <input type="text" name="cidade" id="municipioETEC" placeholder="" value="<?php echo isset($_SESSION['values']['cidade']) ? htmlspecialchars($_SESSION['values']['cidade']) : ''; ?>" required>
                        <label for="cidade" class="placeholder">Cidade:</label>
                    </div>
 
@@ -509,5 +537,6 @@ date_default_timezone_set('America/Sao_Paulo');
     unset($_SESSION['values']);
     unset($_SESSION['errors']);
     ?>
+    <script src="cadEscola.js"></script>
 </body>
 </html>
