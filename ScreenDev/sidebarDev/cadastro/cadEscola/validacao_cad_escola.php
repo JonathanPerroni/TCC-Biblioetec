@@ -76,100 +76,90 @@ function validarCNPJ($cnpj) {
     return $cnpj[13] == $digito2;
 }
 
-// Normalizar o CNPJ removendo caracteres não numéricos
-$cnpj = preg_replace('/[^0-9]/', '', $cnpj);
+// Função para validar se o CEP é válido
+function validarCEP($cep) {
+    $cep = preg_replace('/[^0-9]/', '', $cep);
+    return strlen($cep) === 8 && is_numeric($cep);
+}
 
+// Verificação dos campos obrigatórios
+$required_fields = [
+    'nome_escola' => 'Nome da escola é obrigatório!',
+    'cnpj' => 'CNPJ é obrigatório!',
+    'email' => 'Email é obrigatório!',
+    'confirma_email' => 'Confirmação de email é obrigatória!',
+    'telefone' => 'Telefone é obrigatório!',
+    'endereco' => 'Endereço é obrigatório!',
+    'bairro' => 'Bairro é obrigatório!',
+    'numero' => 'Número é obrigatório!',
+    'cep' => 'CEP é obrigatório!',
+    'cidade' => 'Cidade é obrigatória!',
+    'estado' => 'Estado é obrigatório!',
+];
+
+foreach ($required_fields as $field => $message) {
+    if (empty($values[$field])) {
+        $errors[$field] = $message;
+    }
+}
+
+// Validação do CNPJ
+$cnpj = preg_replace('/[^0-9]/', '', $cnpj);
 if (!empty($cnpj) && !validarCNPJ($cnpj)) {
     $errors['cnpj'] = "CNPJ inválido!";
-   
 }
-    // O CNPJ existe na tabela secundária
-    // Verificar se o CNPJ também está na tabela principal
-    $query_verifica_cnpj_principal = "SELECT COUNT(*) AS total FROM tbescola WHERE cnpj = ?";
-    $stmt_verifica_cnpj_principal = $conn->prepare($query_verifica_cnpj_principal);
 
-    if (!$stmt_verifica_cnpj_principal) {
-        die("Erro na preparação da query: " . $conn->error);
-    }
-
-    $stmt_verifica_cnpj_principal->bind_param("s", $cnpj);
-    $stmt_verifica_cnpj_principal->execute();
-    $result_verifica_cnpj_principal = $stmt_verifica_cnpj_principal->get_result();
-    $row_verifica_cnpj_principal = $result_verifica_cnpj_principal->fetch_assoc();
-
-
-    if ($row_verifica_cnpj_principal['total'] > 0) {
-        $errors['cnpj'] = "CNPJ já cadastrado!";
-    } 
-
+// Verificar se o CNPJ já está cadastrado
+$query_verifica_cnpj_principal = "SELECT COUNT(*) AS total FROM tbescola WHERE cnpj = ?";
+$stmt_verifica_cnpj_principal = $conn->prepare($query_verifica_cnpj_principal);
+$stmt_verifica_cnpj_principal->bind_param("s", $cnpj);
+$stmt_verifica_cnpj_principal->execute();
+$result_verifica_cnpj_principal = $stmt_verifica_cnpj_principal->get_result();
+$row_verifica_cnpj_principal = $result_verifica_cnpj_principal->fetch_assoc();
+if ($row_verifica_cnpj_principal['total'] > 0) {
+    $errors['cnpj'] = "CNPJ já cadastrado!";
+}
 
 // Verificar se o código da escola já está em uso
 $query_verifica_codigo_escola = "SELECT COUNT(*) AS total FROM tbescola WHERE codigo_escola = ?";
 $stmt_verifica_codigo_escola = $conn->prepare($query_verifica_codigo_escola);
-
-if (!$stmt_verifica_codigo_escola) {
-    die("Erro na preparação da query: " . $conn->error);
-}
-
 $stmt_verifica_codigo_escola->bind_param("s", $codigo_escola);
 $stmt_verifica_codigo_escola->execute();
 $result_verifica_codigo_escola = $stmt_verifica_codigo_escola->get_result();
 $row_verifica_codigo_escola = $result_verifica_codigo_escola->fetch_assoc();
-
 if ($row_verifica_codigo_escola['total'] > 0) {
     $errors['codigo_escola'] = "Código da Escola já em uso!";
-   
 }
 
 // Verificar se os e-mails são iguais
 if (!empty($email) && !empty($confirma_email) && $email !== $confirma_email) {
     $errors['confirma_email'] = "Os e-mails não são iguais!";
-   
 }
 
 // Verificar se o email é válido
 if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors['email'] = "Email inválido!";
-   
 }
 
-// Verificar se o email já está cadastrado no banco de dados
-if (empty($errors['email']) && empty($errors['confirma_email'])) {
-    $query_verifica_email = "SELECT COUNT(*) AS total FROM tbescola WHERE email = ?";
-    $stmt_verifica_email = $conn->prepare($query_verifica_email);
-    $stmt_verifica_email->bind_param("s", $email);
-    $stmt_verifica_email->execute();
-    $result_verifica_email = $stmt_verifica_email->get_result();
-    $row_verifica_email = $result_verifica_email->fetch_assoc();
-
-    if ($row_verifica_email['total'] > 0) {
-        $errors['email'] = "Email já cadastrado!";
-       
-    }
+// Verificar se o email já está cadastrado
+$query_verifica_email = "SELECT COUNT(*) AS total FROM tbescola WHERE email = ?";
+$stmt_verifica_email = $conn->prepare($query_verifica_email);
+$stmt_verifica_email->bind_param("s", $email);
+$stmt_verifica_email->execute();
+$result_verifica_email = $stmt_verifica_email->get_result();
+$row_verifica_email = $result_verifica_email->fetch_assoc();
+if ($row_verifica_email['total'] > 0) {
+    $errors['email'] = "Email já cadastrado!";
 }
 
-// Verificar se o telefone é um número válido
+// Verificar se o telefone é válido
 if (!empty($telefone) && !preg_match('/^(\(?\d{2}\)?\s?)?\d{5}-?\d{4}$/', $telefone)) {
-    $errors['telefone'] = "Telefone inválido! O formato deve ser (XX) 9XXXX-XXXX ou XX9XXXX-XXXX";
-   
+    $errors['telefone'] = "Telefone inválido!";
 }
 
-
-function validarCEP($cep) {
-    // Remove todos os caracteres não numéricos
-    $cep = preg_replace('/[^0-9]/', '', $cep);
-
-    // Verifica se o CEP possui exatamente 8 dígitos
-    if (strlen($cep) !== 8) {
-        return false;
-    }
-
-    // Verifica se todos os caracteres são números
-    if (!is_numeric($cep)) {
-        return false;
-    }
-
-    return true;
+// Verificar se o CEP é válido
+if (!empty($cep) && !validarCEP($cep)) {
+    $errors['cep'] = "CEP inválido! Deve conter 8 dígitos.";
 }
 
 // Se houver erros, armazene os erros e valores na sessão e redirecione de volta ao formulário
@@ -180,50 +170,30 @@ if (!empty($errors)) {
     exit();
 }
 
-/* Se não houver erros, prossiga com o cadastro*/
+// Se não houver erros, prossiga com a execução da consulta
 $query_cadastro = "INSERT INTO tbescola (nome_escola, tipoEscola, codigo_escola, cnpj, email, telefone, celular, endereco, bairro, numero, cep, cidade, estado, cadastrado_por, data_cadastro)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
-
-// Verificar a conexão com o banco de dados
-if ($conn === false) {
-    // Verificação da conexão antes de proceder
-    die("Erro na conexão com o banco de dados: " . mysqli_connect_error());
-}
-
-
-// Verificar se a preparação da consulta foi bem-sucedida
-$stmt = mysqli_prepare($conn, $query_cadastro);
-
-// Verificar se a preparação da consulta foi bem-sucedida
+$stmt = $conn->prepare($query_cadastro);
 if ($stmt === false) {
-    // Tratamento de erro para falha na preparação da consulta
-    die("Erro na preparação da consulta: " . mysqli_error($conn));
+    die("Erro na preparação da consulta: " . $conn->error);
 }
 
-$bind_result = mysqli_stmt_bind_param($stmt,"sssssssssssssss", $nome_escola, $tipoEscola, $codigo_escola, $cnpj, $email, $telefone, $celular, $endereco, $bairro, $numero, $cep, $cidade, $estado, $cadastrado_por, $data_cadastro);
-
-// Verificar se a vinculação dos parâmetros foi bem-sucedida
+$bind_result = $stmt->bind_param("sssssssssssssss", $nome_escola, $tipoEscola, $codigo_escola, $cnpj, $email, $telefone, $celular, $endereco, $bairro, $numero, $cep, $cidade, $estado, $cadastrado_por, $data_cadastro);
 if ($bind_result === false) {
-    // Tratamento de erro para falha na vinculação dos parâmetros
-    die("Erro ao vincular os parâmetros: " . mysqli_stmt_error($stmt));
+    die("Erro ao vincular os parâmetros: " . $stmt->error);
 }
 
-
-// Executar a consulta
-if (mysqli_stmt_execute($stmt)) {
-    // Exibir mensagem de sucesso
-    echo "<script type='text/javascript'>
-            alert('Escola cadastrada com sucesso!');
-            window.location.href = 'cadastrar_escola.php';
-          </script>";
+if ($stmt->execute()) {
+    sleep(5);
+    echo "<div class='alert' id='alert'>Cadastro realizado com sucesso!</div>";
+    header("Location: ../../../pagedev.php");
+    exit();
 } else {
-    // Tratamento de erro para falha na execução da consulta
-    die("Erro ao executar a consulta: " . mysqli_stmt_error($stmt));
+    die("Erro ao executar a consulta: " . $stmt->error);
 }
 
 // Fechar a declaração e a conexão
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
+$stmt->close();
+$conn->close();
 ?>
-

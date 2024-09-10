@@ -229,6 +229,7 @@ if ($result && $result->num_rows > 0) {
             display: flex;
             flex-direction: row;
             gap: 0 5px;
+           justify-content: start;
         }
         a{  
             
@@ -241,8 +242,7 @@ if ($result && $result->num_rows > 0) {
             border-radius: 8px;
             border: 2px solid rgba(0, 0, 0, 0.5);
             text-decoration: none;
-            text-align: center;
-            
+            text-align: center;            
             display:flex;
             justify-content: center;
             align-items: center;
@@ -264,6 +264,71 @@ if ($result && $result->num_rows > 0) {
             align-items: center; 
             
         }
+
+
+ .message{
+    padding: 10px 60px 19px 10px ;         
+    position: fixed;
+    text-align: center;
+    top: 20px;
+    right: 105px;
+    border-left : 8px solid var(--dark-grey);
+    box-shadow:  -5px 0px 0px 0px #8B0000; /*Borda interna vermelha vinho */    
+   
+    background-color: #fff;    
+    border-radius: 5px;
+    color: green; 
+    font-weight: 600;   
+    animation: slidein 0.5s cubic-bezier(0.25, 0.46, 0.45,0.94) both;
+   
+}
+
+@keyframes slidein {
+    0%{
+        transform: translateX(1000px);
+        opacity: 0;
+    }
+
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+        
+    }
+
+}
+
+
+.message::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 5px;   
+    background-color: green; 
+    animation: time 5s forwards;
+
+}
+
+@keyframes time {
+    0%{
+        width:0;
+    }
+
+    100%{
+        width:  100%;
+    }
+    
+}
+.message-content {
+  display: flex;
+  align-items: center;
+}
+.spacer {
+  width: 10px; /* Ajuste o valor para o espaço desejado */
+  
+}
+
 
         @media (max-width:465px) {
                     body{
@@ -333,6 +398,9 @@ if ($result && $result->num_rows > 0) {
                     align-items: center; 
                     
                 }
+
+
+                
         }
 
     </style>
@@ -505,9 +573,11 @@ if ($result && $result->num_rows > 0) {
                     
                   
                 </div>
-
+                <div class="alert" id="alert">
+                    
+                </div>            
                 <div class="container-btn">
-                <input type="submit" value="Enviar"><br>
+                <input type="submit" class="button" value="Enviar"><br>
                 
                  <a href="../../../pagedev.php"  class="voltar">Voltar</a>
                 
