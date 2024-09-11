@@ -111,6 +111,23 @@ if (empty($_SESSION['email'])) {
                     z-index: 1;
                 }
 
+                sidebar ul li a .setamenor {
+                    position: relative;
+                    display: block;
+                    min-width: 30px;
+                    height: 30px;
+                    text-align: center;
+                    line-height: 35px;
+                }
+
+                .sidebar ul li a .setamenor ion-icon {
+                    position: relative;
+                    font-size: 1rem;
+                    z-index: -1;
+                }
+
+                
+
                 .sidebar ul li a .title-navegation {
                     position: relative;
                     display: block;
@@ -118,10 +135,13 @@ if (empty($_SESSION['email'])) {
                     height: 60px;
                     line-height: 60px;
                     white-space: nowrap;
+                    
                 }
 
                 .sidebar ul li.active {
                     background: var(--primary-emphasis);
+                    
+                    
                 }
 
                 .sidebar ul li.active a::before {
@@ -134,6 +154,7 @@ if (empty($_SESSION['email'])) {
                     background: var(--off-black);
                     border-radius: 50%;
                     box-shadow: 15px 15px 0 var(--primary-emphasis);
+                    
                 }
 
                 .sidebar ul li.active a::after {
@@ -146,6 +167,7 @@ if (empty($_SESSION['email'])) {
                     background: var(--off-black);
                     border-radius: 50%;
                     box-shadow: 15px -15px 0 var(--primary-emphasis);
+                    
                 }
                                         
                     /* Inicialmente ocultar o dropdown */
@@ -170,7 +192,7 @@ if (empty($_SESSION['email'])) {
                         padding: 10px 0;
                         background-color: var(--primary-emphasis);   
                         width: 100%;
-                    
+                        
                         
                     }
 
@@ -446,7 +468,7 @@ if (empty($_SESSION['email'])) {
 <body>
 
     <header> 
-    <div class="sidebar">
+          <div class="sidebar">
             <ul>
                 <li class="list active">
                     <a href="pagedev.php">
@@ -454,22 +476,28 @@ if (empty($_SESSION['email'])) {
                     <span class="title-navegation">Inicio</span>
                     </a>
                 </li>
-                <li class="list">
-                    <a href="#">
-                    <span class="icon-sidebar"><ion-icon name="glasses-outline"></ion-icon></span>
-                    <span class="title-navegation">Lista ADM</span>
-                    </a>
+
+                <li class="list dropdown">
+                     <a href="#" class="dropdown-toggle">
+                     <span class="icon-sidebar"><ion-icon name="business-outline"></ion-icon></span>
+                     <span class="title-navegation">Listas</span>
+                         <span class="icon-sidebar setamenor"><ion-icon name="chevron-down-outline"></ion-icon></span>
+                     </a>
+                                 <ul class="dropdown-menu">
+                                 <li><a href="sidebarDev/lista/listaDev/lista_dev.php">Lista Dev</a></li>
+                                <li><a href="sidebarDev/cadastro/cadAdmin/cadastrar_admin.php">Lista Admin</a></li>
+                                <li><a href="sidebarDev/cadastro/cadEscola/cadastrar_escola.php">Lista Escola</a></li>
+                                </ul>
                 </li>
-                <li class="list">
-                    <a href="#">
-                    <span class="icon-sidebar"><ion-icon name="business-outline"></ion-icon></span>
-                    <span class="title-navegation">Lista Escola</span>
-                    </a>
-                </li>
+
+
+
+
                 <li class="list dropdown">
                      <a href="#" class="dropdown-toggle">
                          <span class="icon-sidebar"><ion-icon name="save-outline"></ion-icon></span>
-                         <span class="title-navegation">Cadastro</span>
+                         <span class="title-navegation">Cadastro </span>
+                         <span class="icon-sidebar setamenor"><ion-icon name="chevron-down-outline"></ion-icon></span>
                      </a>
                                  <ul class="dropdown-menu">
                                  <li><a href="sidebarDev/cadastro/cadDev/cadastrar_dev.php">Cadastrar Dev</a></li>
@@ -487,15 +515,10 @@ if (empty($_SESSION['email'])) {
                     <span class="title-navegation">Relatorio</span>
                     </a>
                 </li>
-                <li class="list">
-                    <a href="#">
-                    <span class="icon-sidebar"><ion-icon name="code-working-outline"></ion-icon></span>
-                    <span class="title-navegation">Devs</span>
-                    </a>
-                </li>
+               
                 
             </ul>
-    </div>
+          </div>
         <nav class="menu-nav">
         <div class="logo">
                 <p class="logoTitle">

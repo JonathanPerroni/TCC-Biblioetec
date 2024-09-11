@@ -125,6 +125,20 @@ if (empty($errors['cpf'])) {
     }
 }
 
+// Verificar se o código da escola já está em uso
+$query_verifica_codigo_escola = "SELECT COUNT(*) AS total FROM tbadmin WHERE codigo_escola = ?";
+$stmt_verifica_codigo_escola = $conn->prepare($query_verifica_codigo_escola);
+$stmt_verifica_codigo_escola->bind_param("s", $codigo_escola);
+$stmt_verifica_codigo_escola->execute();
+$result_verifica_codigo_escola = $stmt_verifica_codigo_escola->get_result();
+$row_verifica_codigo_escola = $result_verifica_codigo_escola->fetch_assoc();
+if ($row_verifica_codigo_escola['total'] > 0) {
+    $errors['codigo_escola'] = "Codigo escola já em uso por outro Admin!";
+}
+
+
+
+
 // Verificar se os e-mails são iguais
 if (!empty($email) && !empty($confirma_email) && $email !== $confirma_email) {
     $errors['confirma_email'] = "Os e-mails não são iguais!";
@@ -192,16 +206,13 @@ if ($bind_result === false) {
     die("Erro ao vincular os parâmetros: " . mysqli_stmt_error($stmt));
 }
 
-// Executar a consulta
-if (mysqli_stmt_execute($stmt)) {
-    // Exibir mensagem de sucesso
-    echo "<script type='text/javascript'>
-            alert('Admin cadastrado com sucesso!');
-            window.location.href = 'cadastrar_admin.php';
-          </script>";
+if ($stmt->execute()) {
+    sleep(5);
+    echo "<div class='alert' id='alert'>Cadastro realizado com sucesso!</div>";
+    header("Location: ../../../pagedev.php");
+    exit();
 } else {
-    // Tratamento de erro para falha na execução da consulta
-    die("Erro ao executar a consulta: " . mysqli_stmt_error($stmt));
+    die("Erro ao executar a consulta: " . $stmt->error);
 }
 
 // Fechar a declaração e a conexão

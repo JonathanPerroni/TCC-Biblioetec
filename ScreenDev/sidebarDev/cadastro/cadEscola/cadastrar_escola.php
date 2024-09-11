@@ -573,9 +573,8 @@ if ($result && $result->num_rows > 0) {
                     
                   
                 </div>
-                <div class="alert" id="alert">
-                    
-                </div>            
+                        <div class="alert" id="alert">                      
+                        </div>            
                 <div class="container-btn">
                 <input type="submit" class="button" value="Enviar"><br>
                 
