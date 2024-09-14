@@ -216,7 +216,9 @@ if (empty($_SESSION['email'])) {
 
                         
                     }
-
+                    .hrbarra{
+                       display:none;
+                    }
 
                                 
                 .menu-nav {    
@@ -232,20 +234,21 @@ if (empty($_SESSION['email'])) {
                 }
 
 
-                .menu-nav .logo {    
-                    
+                .menu-nav .logo {                      
                     max-width: 17%;
                     width: 100%;
                     display: flex;
                     justify-content: center;
-                    align-items: center;
-                    margin-left: 5px;
+                    align-items: center; 
+                    margin-left: 20px;                   
                     transition: transform 1.5s;
                 }
 
                 .sidebar:hover ~ .menu-nav .logo {
-                    transform: translateX(135px);
+                    transform: translateX(-135px);
+                    
                 }
+
                 .menu-nav .destaque{
                     color: var(--off-black);
                 }
@@ -254,8 +257,8 @@ if (empty($_SESSION['email'])) {
                     color: var(--primary-emphasis);
                     font-weight: bold;
                     font-size: clamp(18px, 4vw, 42px);
-                    letter-spacing: .1rem;
-                    
+                    letter-spacing: .1rem;                   
+                    display: flex
                 }
 
                 .menu-nav .perfil {
@@ -289,6 +292,7 @@ if (empty($_SESSION['email'])) {
                     font-size: clamp(10px, 1.5vw, 20px);
                     font-weight: bold;
                     width: 100%;
+                    
 
                 }
 
@@ -379,6 +383,9 @@ if (empty($_SESSION['email'])) {
                     color: var(--dark-grey);
                 }
 
+               
+
+
 
                 @media screen and (max-width: 1024px) {
                     .menu-nav .perfil{
@@ -388,11 +395,11 @@ if (empty($_SESSION['email'])) {
                     
                     }
                     .logoTitle{
-                        margin-left: 100px;
+                        margin-left: 110px;
                     }
 
                     .sidebar:hover ~ .menu-nav .logo {
-                        transform: translateX(135px);
+                        transform: translateX(-135px);
                     }
                 }
 
@@ -404,6 +411,12 @@ if (empty($_SESSION['email'])) {
                         width: 170px;
                         
                     }
+
+                    .logoTitle{
+                        margin-left: 130px;
+                    }
+
+
 
                 }
 
@@ -420,7 +433,7 @@ if (empty($_SESSION['email'])) {
                     }
 
                     .logoTitle{
-                        margin-left: 125px;
+                        margin-left: 135px;
                     }
                     .sidebar:hover ~ .menu-nav .logo {
                         transform: translateX(135px);
@@ -452,15 +465,75 @@ if (empty($_SESSION['email'])) {
                         width: 160px;
                     }
                     .logoTitle{
-                        margin-left: 140px;
+                        margin-left: 115px;
+                        font-size: 16px
                     }
+
+                    .sidebar{
+                        width: 60px;
+                    }
+
+                    .sidebar:hover {
+                    width: 180px; /* Expande o sidebar ao passar o mouse */
+                    
+                }
+
                 
                     .sidebar:hover ~ .menu-nav .logo {
                         transform: translateX(-100px);
                         
                     }
 
+                   
+                    .sidebar ul li a{
+                        
+                        justify-content: flex-start;
+                        gap: 0 15px;
+                        font-size: 12px;
+                    }
+
+                    .sidebar ul li a .icon-sidebar {
+                        min-width: 30px;
+                        font-size: 1.25rem;
+                        
+                    }
+
+
+                    .sidebar ul li a .icon-sidebar ion-icon{
+                        font-size: 1.25rem;
+                        
+                    }
+
+                    .sidebar ul li a .setamenor ion-icon {
+                     font-size: 0.9rem;
+                   
+                }
                 
+                }
+
+                @media screen and (width < 350px){
+                    .logoTitle{
+                        margin-left: 90px;
+                        font-size: 16px
+
+                    }
+
+                  
+                    #brand-title{
+                       display: flex;
+                       justify-content:center;
+                       flex-wrap: wrap;                      
+                        height: 55px ;
+                        alien-item:center;
+                    }
+                    
+                    .hrbarra{
+                        display: block;
+                        
+                        height:  2px;
+                        width: 80%;
+
+                    }
                 }
     </style>
 
@@ -522,7 +595,7 @@ if (empty($_SESSION['email'])) {
         <nav class="menu-nav">
         <div class="logo">
                 <p class="logoTitle">
-                    <h1 id="brand-title">Biblio<span class="destaque" >Etec</span></h1>
+                    <h1 id="brand-title">Biblio <hr class="hrbarra"><span class="destaque" >Etec</span></h1>
                 </p>
             </div>
 
