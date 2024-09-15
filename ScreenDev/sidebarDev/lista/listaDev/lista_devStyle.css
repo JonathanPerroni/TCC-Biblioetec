@@ -52,7 +52,7 @@ header {
 }
 
 .sidebar:hover {
-    width: 12.8125rem; /* Expande o sidebar ao passar o mouse */
+    width: 14.5rem; /* Expande o sidebar ao passar o mouse */
     
 }
 
@@ -99,7 +99,7 @@ header {
     z-index: 1;
 }
 
-sidebar ul li a .setamenor {
+.sidebar ul li a .setamenor {
     position: relative;
     display: block;
     min-width: 1.875rem;
@@ -217,23 +217,34 @@ sidebar ul li a .setamenor {
     padding: 0.625rem;
     box-shadow: 0.0625rem 0.0625rem 0.25rem rgba(0, 0, 0, .8);    
     padding-left: 6%;z-index: 1;
-}
-
-
-.menu-nav .logo {    
+    transition: padding 1.5s ease; /* Transição suave */
     
-    max-width: 17%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 0.3125rem;
-    transition: transform 1.5s;
 }
 
-.sidebar:hover ~ .menu-nav .logo {
-    transform: translateX(8.4375);
+
+.menu-nav .logo {          
+    display: flex;
+    transition: transform 1.5s ease;
+    
+    width: 100%;
+    
 }
+
+.menu-nav .Lleft {
+    margin-left:2.25rem;  
+    justify-content: flex-start;
+    } 
+.menu-nav .Lright {
+    margin-right:1.75rem;  
+    justify-content: flex-end;
+}
+
+.sidebar:hover ~ .menu-nav{
+    
+    padding: 0 25%; /* Mudança suave do espaçamento interno */
+   
+}
+
 .menu-nav .destaque{
     color: var(--off-black);
 }
@@ -243,6 +254,7 @@ sidebar ul li a .setamenor {
     font-weight: bold;
     font-size: clamp(1.125rem, 4vw, 2.625rem);
     letter-spacing: .1rem;
+    display: flex;
     
 }
 
@@ -253,7 +265,7 @@ sidebar ul li a .setamenor {
     width: 100%;
     min-height: 100vh;
     padding-left: 80px;
-    display: flex;    
+    display: flex;        
     justify-content: center;
     align-items: self-start;
     overflow: auto;
@@ -263,7 +275,7 @@ sidebar ul li a .setamenor {
 
 .container-table{
     margin-top: 1.25rem;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     max-width: 70rem;  
@@ -277,23 +289,22 @@ sidebar ul li a .setamenor {
 
 .user-dev{
 
-    width: 100%;   
     margin: 20px;     
     border: none;
     border-collapse: collapse;
    
 }
 
-
 .user-dev th, .user-dev td{
-    
-    
-    flex-wrap: nowrap;
-    padding: 10px;
-    text-align: center;    
-    font-weight: 600;
    
-}
+    padding: 0.625rem;
+    text-align: center;   
+    max-width: 1080px; 
+    width: 100%;
+    height: auto;
+   }
+
+
 
 .user-dev th{
     border-left: none;
@@ -301,24 +312,48 @@ sidebar ul li a .setamenor {
     border-top: none;
     border-bottom: 1px solid var(--Gainsboro);
     color: var(--primary-emphasis);
-       
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 600;
 }
 
+.user-dev td{
+    font-size: clamp(0.75rem, 10vw, 1rem);
+    font-weight: 400;
+    width: 100%;
+
+}
 
 .user-dev .areaAcao{
-    width: 140px;     
+    max-width: 8.75rem ;
+    width: 100%;     
+    
     
 }
 .user-dev tr .areaBtnAcao{
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 0.3125rem;
+    width: 100%;
 }
 
 .user-dev td{
     border: none;
     color: var(--dark-grey);
     transition: background-color 0.5s ease; /* Transição suave */
+}
+
+.user-dev .codigoNumerico{
+    width: 20px;
+    border: 1px solid red;
+}
+.user-dev  .encurtamento{
+
+    border: 1px solid red;
+    white-space: nowrap;    /* Impede o texto de quebrar em várias linhas */
+    overflow: hidden;       /* Esconde o conteúdo que excede o tamanho da coluna */
+    text-overflow: ellipsis; /* Adiciona "..." no final do texto quando ele for cortado */
+     width: 100%;     /* Certifique-se de que a largura da coluna seja flexível */
+    
 }
 
 .user-dev tbody tr:hover{
@@ -330,8 +365,11 @@ sidebar ul li a .setamenor {
 
 .user-dev a{
     text-decoration: none;
+    
 }
-
+dropdown-btn {
+    display: none;
+}
 .user-dev tr td .btn-acao{
     
     color: var(--white-suave);
@@ -517,5 +555,105 @@ sidebar ul li a .setamenor {
     width: 16px; /* Tamanho do ícone */
     height: 16px;
 }
+.dropdown-menu,
+.dropdown-btn{
+    display: none;
+    
+}
 
-/* teste */
+
+/* Oculta os botões individuais e exibe o botão "Ação" em telas menores que 768px */
+@media (max-width: 768px) {
+
+
+    .user-dev  .encurtamento{
+        max-width: 9.375rem;
+    }
+
+    .user-dev tr td .btn-acao{
+        display: none; /*esconde os botoes individuais*/
+    }
+
+.user-dev tr .dropdown-btn{
+    display: block; /*exibe o botao de ação*/
+    background-color: var(--primary-emphasis);
+    color: var(--off-white);
+    font-weight: 400;
+    border-radius: 5px;
+    height: 1.875rem;
+    width: 4.375rem;
+    cursor: pointer;
+    text-align: center;
+    
+}
+
+.user-dev td .dropdown-menu{
+    display: none; /*ppara esconder o dropdown inicialmente*/
+    position: absolute;
+    background-color: var(--white);
+    border: 1px solid var(--Gainsboro);
+    border-radius: 0.312rem;
+    padding-left: 1.562rem;
+    width: 8.73rem;
+    height: 10rem;
+    z-index: 10;
+    top: 13.5rem;
+    right: 2rem;
+}
+
+.user-dev td .dropdown-menu.show {
+    display: block; /*exibe o dropdown quando a classe 'show' for adicionada*/
+
+}
+
+.user-dev td .dropdown-menu li {
+    display: flex; /* Flexbox para alinhar ícone e texto */
+    
+    flex-wrap: nowrap;
+    align-items: center; /* Alinha verticalmente */   
+    justify-content: center;
+    border: 1px solid rgb(145, 255, 0);
+    width: 100px;
+    height: 40px;
+
+  
+}
+
+.user-dev td .dropdown-menu li .btnEdit,
+.user-dev td .dropdown-menu li .btnExcluir {
+    display: flex; /* Flexbox para o botão */
+    align-items: center; /* Alinha ícone e texto verticalmente */
+  
+    flex-direction: row;
+    border: 1px solid red;
+    
+}
+
+.user-dev td .dropdown-menu li {
+    display: flex; /* Flexbox para alinhar ícone e texto */
+    align-items: center; /* Alinha verticalmente o ícone e o texto */
+    justify-content: flex-start; /* Alinha à esquerda */
+    padding: 10px; /* Ajusta o espaçamento */
+    border: 1px solid rgb(145, 255, 0);
+    width: 100%;
+    height: auto;
+}
+
+.user-dev td .dropdown-menu li a {
+    display: flex; /* Flexbox no link */
+    align-items: center; /* Alinha verticalmente ícone e texto */
+    gap: 10px; /* Espaçamento entre ícone e texto */
+    text-decoration: none;
+    color: var(--dark-grey);
+    font-weight: 500;
+    font-size: 0.875rem; /* Ajusta o tamanho do texto */
+    border: 1px solid red;
+}
+
+
+.user-dev td .dropdown-menu li a:hover {
+    background-color: var(--Gainsboro);
+}
+
+
+}

@@ -249,6 +249,10 @@ if (empty($_SESSION['email'])) {
                     
                 }
 
+
+
+
+
                 .menu-nav .destaque{
                     color: var(--off-black);
                 }
@@ -400,6 +404,7 @@ if (empty($_SESSION['email'])) {
 
                     .sidebar:hover ~ .menu-nav .logo {
                         transform: translateX(-135px);
+                        
                     }
                 }
 
