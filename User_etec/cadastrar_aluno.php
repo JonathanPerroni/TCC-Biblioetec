@@ -151,8 +151,8 @@
                 </select>
             </div>
 
-            <button type="reset">Limpar</button>
-            <button type="submit">Cadastrar</button>
+            <button type="reset" class="btn btn-outline-secondary">Limpar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
     </div>
 

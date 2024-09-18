@@ -68,11 +68,7 @@
             </form>
         </div>
     </div>
-
-    <div class="bg-primary btn-primary text-primary link-primary">
-
-    </div>
-
+    
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
