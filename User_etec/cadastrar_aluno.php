@@ -22,47 +22,47 @@
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="d-flex flex-column gap-4">
         <div>
                 <label for="nome" class="form-label">Nome Completo:</label>
-                <input type="text" name="nome" placeholder="Nome Completo" required class="form-control">
+                <input type="text" name="nome" placeholder="Insira o nome completo" required class="form-control">
             </div>
             <div>
                 <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
-                <input type="date" name="data_nascimento" placeholder="Data de Nascimento" required class="form-control">
+                <input type="date" name="data_nascimento" placeholder="Insira a data de nascimento" required class="form-control">
             </div>
             <div>
                 <label for="endereco" class="form-label">Endereço:</label>
-                <input type="text" name="endereco" placeholder="Endereço" required class="form-control">
+                <input type="text" name="endereco" placeholder="Insira o endereço" required class="form-control">
             </div>
             <div>
                 <label for="cidade" class="form-label">Cidade:</label>
-                <input type="text" name="cidade" placeholder="Cidade" required class="form-control">
+                <input type="text" name="cidade" placeholder="Insira a cidade" required class="form-control">
             </div>
             <div>
                 <label for="estado" class="form-label">Estado:</label>
-                <input type="text" name="estado" placeholder="Estado" required class="form-control">
+                <input type="text" name="estado" placeholder="Insira o estado" required class="form-control">
             </div>
             <div>
                 <label for="cpf" class="form-label">CPF:</label>
-                <input type="text" name="cpf" placeholder="CPF" required class="form-control">
+                <input type="text" name="cpf" placeholder="Insira o CPF" required class="form-control">
             </div>
             <div>
                 <label for="celular" class="form-label">Celular:</label>
-                <input type="text" name="celular" placeholder="Celular" required class="form-control">
+                <input type="text" name="celular" placeholder="Insira o número de celular" required class="form-control">
             </div>
             <div>
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" name="email" placeholder="Email" required class="form-control">
+                <input type="email" name="email" placeholder="Insira o email" required class="form-control">
             </div>
             <div>
                 <label for="responsavel" class="form-label">Nome do responsável:</label>
-                <input type="text" name="responsavel" placeholder="Nome do responsável" required class="form-control">
+                <input type="text" name="responsavel" placeholder="Insira o nome do responsável" required class="form-control">
             </div>
             <div>
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" name="senha" placeholder="Senha" required class="form-control">
+                <input type="password" name="senha" placeholder="Insira o senha" required class="form-control">
             </div>
             <div>
                 <label for="senha2" class="form-label">Confirmar Senha:</label>
-                <input type="password" name="senha2" placeholder="Confirmar Senha" required class="form-control">
+                <input type="password" name="senha2" placeholder="Confirme a Senha" required class="form-control">
             </div>
             
             <div>
