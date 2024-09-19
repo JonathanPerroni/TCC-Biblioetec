@@ -70,6 +70,8 @@
     </div>
     
     <?php
+    include("../conexao_testes.php");
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -99,12 +101,6 @@
 
         // Criptografar a senha
         $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-        $conn = new mysqli("localhost", "root", "", "bdescola");
-
-        if ($conn->connect_error) {
-            die("Conexão falhou: " . $conn->connect_error);
-        }
 
         // Usando prepared statements para evitar SQL Injection
         $stmt = $conn->prepare("INSERT INTO tbadmin (nome, email, senha, telefone, celular, cpf, codigo_escola, acesso) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");

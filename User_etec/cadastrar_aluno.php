@@ -70,10 +70,8 @@
                 <select name="nome_escola" required class="form-select">
                     <option value="">Selecione a escola</option>
                     <?php
-                    $conn = new mysqli("localhost", "root", "", "bdescola");
-                    if ($conn->connect_error) {
-                        die("Conexão falhou: " . $conn->connect_error);
-                    }
+                    include '../conexao_testes.php';
+
                     $sql = "SELECT nome_escola FROM tbescola";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -114,10 +112,8 @@
                 <select name="nome_curso" required class="form-select">
                     <option value=""></option>
                     <?php
-                    $conn = new mysqli("localhost", "root", "", "bdescola");
-                    if ($conn->connect_error) {
-                        die("Conexão falhou: " . $conn->connect_error);
-                    }
+                    include '../conexao_testes.php';
+                    
                     $sql = "SELECT nome_curso FROM tbcursos";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {

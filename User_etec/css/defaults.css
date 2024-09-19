@@ -74,30 +74,31 @@ body {
 .btn-primary:focus {
   box-shadow: -3px 0px 0px var(--primary-light),
     0px -3px 0px var(--primary-light), 3px 0px 0px var(--primary-light),
-    0px 3px 0px var(--primary-light);
+    0px 3px 0px var(--primary-light) !important;
 }
 .btn-outline-secondary:focus {
+  color: var(--secondary) !important;
   box-shadow: -3px 0px 0px var(--light-grey), 0px -3px 0px var(--light-grey),
-    3px 0px 0px var(--light-grey), 0px 3px 0px var(--light-grey);
+    3px 0px 0px var(--light-grey), 0px 3px 0px var(--light-grey) !important;
 }
 
 /* Form configuration */
 .form-label {
   color: var(--secondary) !important;
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 .form-control,
 .form-select {
-  color: var(--secondary);
-  border-color: var(--light-grey);
+  color: var(--secondary) !important;
+  border-color: var(--light-grey) !important;
 }
 .form-control:focus,
 .form-select:focus {
-  color: var(--secondary);
-  border-color: var(--secondary);
+  color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
   box-shadow: -3px 0px 0px var(--light-grey), 0px -3px 0px var(--light-grey),
-    3px 0px 0px var(--light-grey), 0px 3px 0px var(--light-grey);
+    3px 0px 0px var(--light-grey), 0px 3px 0px var(--light-grey) !important;
 }
 .form-control::placeholder {
-  color: var(--grey);
+  color: var(--grey) !important;
 }
