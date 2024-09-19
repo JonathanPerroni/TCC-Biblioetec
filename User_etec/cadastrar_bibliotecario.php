@@ -4,34 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Bibliotecário</title>
+
+    <link rel="stylesheet" href="../src/output.css">
+    <link href="../src/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/defaults.css">
 </head>
 <body>
 
-    <div class="header">
-            <h1>Cadastrar Bibliotecário</h1>
-            <a href="index.php">Início</a>
-            <br><br>
-        </div>
+    <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
+        <a href="index.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            <span class="fw-medium">Início</span>
+        </a>
+        <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Bibliotecário</a>
+    </header>
 
-        <div class="form-cadastro">
-            <form action="" method="POST">
-                <input type="text" name="nome" placeholder="Nome Completo" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="senha" placeholder="Senha" required>
-                <input type="password" name="senha2" placeholder="Confirmar Senha" required>
-                <input type="text" name="telefone" placeholder="Telefone">
-                <input type="text" name="celular" placeholder="Celular" required>
-                <input type="text" name="cpf" placeholder="CPF" required>
-                <input type="text" name="codigo_escola" placeholder="Código Etec" required>
-                <div class="seletor">
-                    <select name="acesso" id="acesso" required>
+        <div class="container-sm my-4 bg-white shadow p-4 rounded-3">
+            <form action="" method="POST" class="d-flex flex-column gap-4">
+                <div>
+                    <label for="nome" class="form-label">Nome Completo:</label>
+                    <input type="text" name="nome" placeholder="Insira o nome completo" required class="form-control">
+                </div>
+                <div>
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" name="email" placeholder="Insira o email" required class="form-control">
+                </div>
+                <div>
+                    <label for="senha" class="form-label">Senha:</label>
+                    <input type="password" name="senha" placeholder="Insira a senha" required class="form-control">
+                </div>
+                <div>
+                    <label for="senha2" class="form-label">Confirmar Senha:</label>
+                    <input type="password" name="senha2" placeholder="Confirme a senha" required class="form-control">
+                </div>
+                <div>
+                    <label for="telefone" class="form-label">Telefone:</label>
+                    <input type="text" name="telefone" placeholder="Insira o telefone" class="form-control">
+                </div>
+                <div>
+                    <label for="celular" class="form-label">Celular:</label>
+                    <input type="text" name="celular" placeholder="Insira o número de celular" required class="form-control">
+                </div>
+                <div>
+                    <label for="cpf" class="form-label">CPF:</label>
+                    <input type="text" name="cpf" placeholder="Insira o CPF" required class="form-control">
+                </div>
+                <div>
+                    <label for="codigo_escola" class="form-label">Código Etec:</label>
+                    <input type="text" name="codigo_escola" placeholder="Insira o código da ETEC" required class="form-control">
+                </div>
+                <div>
+                    <label for="acesso" class="form-label">Confirme o tipo de acesso:</label>
+                    <select name="acesso" id="acesso" required class="form-select">
                         <option value="">Tipo de Acesso</option>
                         <option value="bibliotecario">Bibliotecário</option>
                     </select>
                 </div>
 
-                <button type="reset">Limpar</button>
-                <button type="submit">Cadastrar</button>
+                <button type="reset" class="btn btn-outline-secondary">Limpar</button>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
         </div>
 
