@@ -27,11 +27,8 @@
                 <select name="nome_escola" required class="form-select">
                     <option value="">Selecione a escola</option>
                     <?php
-                    $conn = new mysqli("localhost", "root", "", "bdescola", 8080);
-                    if ($conn->connect_error) {
-                        die("Conexão falhou: " . $conn->connect_error);
-                    }
-
+                    include '../conexao_testes.php';        
+                    
                     $sql = "SELECT nome_escola FROM tbescola";
                     $result = $conn->query($sql);
 
