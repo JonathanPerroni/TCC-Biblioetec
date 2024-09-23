@@ -79,13 +79,13 @@ mysqli_set_charset($conn, "utf8mb4");
     <section class="container-table">
         <table class="user-dev"  border="1">
             <thead>
-                <tr>
+            <tr class="trGeral">
                     
                     <th class="codigoNumerico">#</th>
-                    <th class="encurtamento">Status</th>
-                    <th class="encurtamento">Nome</th>
-                    <th class="encurtamento">Email</th>
-                    <th>Acesso</th>
+                    <th class="codigoStatus">Status</th>
+                    <th class="espacoCurto">Nome</th>
+                    <th class="espacoCurto">Email</th>
+                    <th  class="espacoCurto">Acesso</th>
                     <th class="areaAcao">Ações</th>
                 </tr>
             </thead>
@@ -113,12 +113,12 @@ mysqli_set_charset($conn, "utf8mb4");
 
 
                     ?>
-                    <tr>                         
+                    <tr class="trGeral">                         
                         <td class="codigoNumerico"><?php echo $linha++; ?></td>
-                        <td class="encurtamento"><?php echo $statusDevText; ?></td>
-                        <td class="encurtamento"><?php echo $nome; ?></td>
-                        <td class="encurtamento"><?php echo $email; ?></td>
-                        <td class="encurtamento"><?php echo $acesso; ?></td>
+                        <td class="codigoStatus"><?php echo $statusDevText; ?></td>
+                        <td class="espacoCurto"><?php echo $nome; ?></td>
+                        <td class="espacoCurto"><?php echo $email; ?></td>
+                        <td class="espacoCurto"><?php echo $acesso; ?></td>
                         
                         <td class="areaBtnAcao"> 
                             <div> <!-- Botão "Ação"  que o display dele fica visivel quando chega 768px-->
