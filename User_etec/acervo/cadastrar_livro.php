@@ -4,119 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Livro</title>
+    <link rel="stylesheet" href="../../src/output.css">
+    <link href="../../src/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/defaults.css">
 </head>
-<body>
-    <div class="header">
-        <h1>Cadastrar Livro</h1>        
-        <a href="../index.php">Início</a>
-        <br><br>
-    </div>
+<body class="w-100 h-auto d-flex flex-column align-items-center">
+    <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
+        <a href="./index_acervo.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            <span class="fw-medium">Início</span>
+        </a>
+        <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Livro</a>
+    </header>
 
-    <div class="form-cadastro">
-    <form action="" method="POST">
-        <select name="nome_escola" required>
-            <option value="">Selecione a escola</option>
-            <?php
-            // Função para conectar ao banco de dados
-            function conectarBanco() {
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "bdescola";
-                
-                // Criar a conexão
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                
-                // Verificar a conexão
-                if ($conn->connect_error) {
-                    die("Conexão falhou: " . $conn->connect_error);
-                }
-                return $conn;
-            }
+    <div class="container-sm my-4 bg-white shadow p-4 rounded-3">
+        <form action="" method="POST" class="d-flex flex-column gap-4">
+            <div>
+                <label for="nome_escola" class="form-label">Escola:</label>
+                <select name="nome_escola" required class="form-select">
+                    <option value="">Selecione a escola</option>
+                    <?php
+                    include '../../conexao_testes.php'; // Conexão externa
+                    
+                    // Buscar escolas
+                    $sql = "SELECT nome_escola FROM tbescola";
+                    $result = $conn->query($sql);
 
-            // Buscar escolas
-            $conn = conectarBanco();
-            $sql = "SELECT nome_escola FROM tbescola";
-            $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo '<option value="' . htmlspecialchars($row["nome_escola"]) . '">' . htmlspecialchars($row["nome_escola"]) . '</option>';
+                        }
+                    } else {
+                        echo '<option value="">Nenhuma escola encontrada</option>';
+                    }
+                    ?>
+                </select>
+            </div>
 
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo '<option value="' . htmlspecialchars($row["nome_escola"]) . '">' . htmlspecialchars($row["nome_escola"]) . '</option>';
-                }
-            } else {
-                echo '<option value="">Nenhuma escola encontrada</option>';
-            }
-            ?>
-        </select>
+            <div>
+                <label for="classe" class="form-label">Classe:</label>
+                <select name="classe" required class="form-select">
+                    <option value="">Selecione a classe</option>
+                    <?php
+                    // Buscar classes
+                    include '../../conexao_testes.php';
 
-        <select name="classe" required>
-            <option value="">Selecione a classe</option>
-            <?php
-            // Buscar classes
-            $sql = "SELECT classe FROM tbclasse";
-            $result = $conn->query($sql);
+                    $sql = "SELECT classe FROM tbclasse";
+                    $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo '<option value="' . htmlspecialchars($row["classe"]) . '">' . htmlspecialchars($row["classe"]) . '</option>';
-                }
-            } else {
-                echo '<option value="">Nenhuma classe encontrada</option>';
-            }
-            ?>
-        </select>
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo '<option value="' . htmlspecialchars($row["classe"]) . '">' . htmlspecialchars($row["classe"]) . '</option>';
+                        }
+                    } else {
+                        echo '<option value="">Nenhuma classe encontrada</option>';
+                    }
+                    ?>
+                </select>
+            </div>
 
-        <input type="text" name="titulo" placeholder="Título" required>
-        <input type="text" name="autor" placeholder="Autor(es)" required>
-        <input type="text" name="editora" placeholder="Editora" required>
-        <input type="number" name="ano_publicacao" placeholder="Ano de Publicação" required>
-        <input type="text" name="isbn" placeholder="ISBN" required>
-        <input type="text" name="genero" placeholder="Gênero" required>
-        <input type="number" name="num_paginas" placeholder="Nº Páginas" required>
-        <input type="text" name="idioma" placeholder="Idioma" required>
-        <input type="number" name="estante" placeholder="Estante" required>
-        <input type="number" name="prateleira" placeholder="Prateleira" required>
-        <input type="number" name="edicao" placeholder="Edição" required>
-        <input type="number" name="quantidade" placeholder="Quantidade" required>
+            <div>
+                <label for="titulo" class="form-label">Título:</label>
+                <input type="text" name="titulo" placeholder="Título" required class="form-control">
+            </div>
 
-        <button type="reset">Limpar</button>
-        <button type="submit" name="cadastrar">Cadastrar</button>
-    </form>
+            <div>
+                <label for="autor" class="form-label">Autor(es):</label>
+                <input type="text" name="autor" placeholder="Autor(es)" required class="form-control">
+            </div>
+
+            <div>
+                <label for="editora" class="form-label">Editora:</label>
+                <input type="text" name="editora" placeholder="Editora" required class="form-control">
+            </div>
+
+            <div>
+                <label for="ano_publicacao" class="form-label">Ano de Publicação:</label>
+                <input type="number" name="ano_publicacao" placeholder="Ano de Publicação" required class="form-control">
+            </div>
+
+            <div>
+                <label for="isbn" class="form-label">ISBN:</label>
+                <input type="text" name="isbn" placeholder="ISBN" required class="form-control">
+            </div>
+
+            <div>
+                <label for="genero" class="form-label">Gênero:</label>
+                <input type="text" name="genero" placeholder="Gênero" required class="form-control">
+            </div>
+
+            <div>
+                <label for="num_paginas" class="form-label">Número de Páginas:</label>
+                <input type="number" name="num_paginas" placeholder="Número de Páginas" required class="form-control">
+            </div>
+
+            <div>
+                <label for="idioma" class="form-label">Idioma:</label>
+                <input type="text" name="idioma" placeholder="Idioma" required class="form-control">
+            </div>
+
+            <div>
+                <label for="estante" class="form-label">Estante:</label>
+                <input type="number" name="estante" placeholder="Estante" required class="form-control">
+            </div>
+
+            <div>
+                <label for="prateleira" class="form-label">Prateleira:</label>
+                <input type="number" name="prateleira" placeholder="Prateleira" required class="form-control">
+            </div>
+
+            <div>
+                <label for="edicao" class="form-label">Edição:</label>
+                <input type="number" name="edicao" placeholder="Edição" required class="form-control">
+            </div>
+
+            <div>
+                <label for="quantidade" class="form-label">Quantidade:</label>
+                <input type="number" name="quantidade" placeholder="Quantidade" required class="form-control">
+            </div>
+
+            <button type="reset" class="btn btn-outline-secondary">Limpar</button>
+            <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
+        </form>
     </div>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
-        $nome_escola = $_POST['nome_escola'];
-        $classe = $_POST['classe'];
-        $titulo = $_POST['titulo'];
-        $autor = $_POST['autor'];
-        $editora = $_POST['editora'];
-        $ano_publicacao = $_POST['ano_publicacao'];
-        $isbn = $_POST['isbn'];
-        $genero = $_POST['genero'];
-        $num_paginas = $_POST['num_paginas'];
-        $idioma = $_POST['idioma'];
-        $estante = $_POST['estante'];
-        $prateleira = $_POST['prateleira'];
-        $edicao = $_POST['edicao'];
-        $quantidade = $_POST['quantidade'];
+        $nome_escola = filter_input(INPUT_POST, 'nome_escola', FILTER_SANITIZE_STRING);
+        $classe = filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
+        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
+        $autor = filter_input(INPUT_POST, 'autor', FILTER_SANITIZE_STRING);
+        $editora = filter_input(INPUT_POST, 'editora', FILTER_SANITIZE_STRING);
+        $ano_publicacao = filter_input(INPUT_POST, 'ano_publicacao', FILTER_SANITIZE_NUMBER_INT);
+        $isbn = filter_input(INPUT_POST, 'isbn', FILTER_SANITIZE_STRING);
+        $genero = filter_input(INPUT_POST, 'genero', FILTER_SANITIZE_STRING);
+        $num_paginas = filter_input(INPUT_POST, 'num_paginas', FILTER_SANITIZE_NUMBER_INT);
+        $idioma = filter_input(INPUT_POST, 'idioma', FILTER_SANITIZE_STRING);
+        $estante = filter_input(INPUT_POST, 'estante', FILTER_SANITIZE_NUMBER_INT);
+        $prateleira = filter_input(INPUT_POST, 'prateleira', FILTER_SANITIZE_NUMBER_INT);
+        $edicao = filter_input(INPUT_POST, 'edicao', FILTER_SANITIZE_NUMBER_INT);
+        $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
 
-        $conn = conectarBanco();
+        // Inserir os dados na tabela tblivros
+        include '../../conexao_testes.php';
         
-        // Usar prepared statements para evitar SQL injection
-        $stmt = $conn->prepare("INSERT INTO tblivros (nome_escola, classe, titulo, autor, editora, ano_publicacao, isbn, genero, num_paginas, idioma, estante, prateleira, edicao, quantidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $sql = "INSERT INTO tblivros (nome_escola, classe, titulo, autor, editora, ano_publicacao, isbn, genero, num_paginas, idioma, estante, prateleira, edicao, quantidade) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        // Preparar a declaração
+        $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssssssssiiss", $nome_escola, $classe, $titulo, $autor, $editora, $ano_publicacao, $isbn, $genero, $num_paginas, $idioma, $estante, $prateleira, $edicao, $quantidade);
 
+        // Executar a declaração
         if ($stmt->execute()) {
-            echo "Novo livro cadastrado com sucesso!";
+            echo "<p class='alert alert-success mt-4'>Novo livro cadastrado com sucesso!</p>";
         } else {
-            echo "Erro: " . $stmt->error;
+            echo "<p class='alert alert-danger mt-4'>Erro ao cadastrar livro: " . $stmt->error . "</p>";
         }
 
+        // Fechar o statement e a conexão
         $stmt->close();
         $conn->close();
     }
     ?>
 
+    <script src="../../src/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
