@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Mídia</title>
     <link rel="stylesheet" href="../../src/output.css">
-    <link href="../../src/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/defaults.css">
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
@@ -25,7 +25,7 @@
                     <option value="">Selecione a escola</option>
                     <?php
                     // Conectar ao banco de dados
-                    include '../../conexao_testes.php';
+                    include '../../conexao.php';
 
                     // Buscar escolas
                     $sql = "SELECT nome_escola FROM tbescola";
@@ -48,7 +48,7 @@
                     <option value="">Selecione a classe</option>
                     <?php
                     // Buscar classes
-                    include '../../conexao_testes.php';
+                    include '../../conexao.php';
 
                     $sql = "SELECT classe FROM tbclasse";
                     $result = $conn->query($sql);
@@ -125,7 +125,7 @@
         $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
 
         // Inserir os dados na tabela tbmidias
-        include '../../conexao_testes.php';
+        include '../../conexao.php';
 
         $sql = "INSERT INTO tbmidias (nome_escola, classe, titulo, data_lancamento, genero, diretor_artista, duracao, estante, prateleira, quantidade) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

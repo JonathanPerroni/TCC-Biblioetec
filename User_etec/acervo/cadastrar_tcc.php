@@ -6,7 +6,7 @@
     <title>Cadastro de TCC</title>
 
     <link rel="stylesheet" href="../../src/output.css">
-    <link href="../../src/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/defaults.css">
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
@@ -25,7 +25,7 @@
                 <select name="nome_escola" required class="form-select">
                     <option value="">Selecione a escola</option>
                     <?php
-                    include '../../conexao_testes.php'; // Conexão externa
+                    include '../../conexao.php'; // Conexão externa
                     
                     $sql = "SELECT nome_escola FROM tbescola";
                     $result = $conn->query($sql);
@@ -48,7 +48,7 @@
                 <select name="classe" required class="form-select">
                     <option value="">Selecione a classe</option>
                     <?php
-                    include '../../conexao_testes.php';
+                    include '../../conexao.php';
 
                     $sql = "SELECT classe FROM tbclasse";
                     $result = $conn->query($sql);
@@ -113,7 +113,7 @@
 
     <?php
     // Função de conexão incluída do arquivo externo
-    include '../../conexao_testes.php';
+    include '../../conexao.php';
 
     // Processar o formulário ao enviar
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
