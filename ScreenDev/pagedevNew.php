@@ -104,8 +104,76 @@
         </div>
     </nav>
 
-    <main>
+    <main class="m-16"> <!-- Sugestões de livro by Eduardo para mostrar como cards ficariam em um layout dinâmico -->
+        <div class="flex flex-col gap-8">
+            <div class="flex gap-8 justify-between">
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold">Clean Code</h2>
+                    <p class="mt-2 text-gray-600">Um guia sobre a arte de escrever código limpo e eficiente, por Robert C. Martin.</p>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Leia mais</a>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold">The Pragmatic Programmer</h2>
+                    <p class="mt-2 text-gray-600">Conselhos práticos e truques para programadores profissionais, por Andrew Hunt e David Thomas.</p>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Leia mais</a>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold">Design Patterns</h2>
+                    <p class="mt-2 text-gray-600">Soluções reutilizáveis para problemas comuns de design de software, por Erich Gamma e outros.</p>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Leia mais</a>
+                </div>
+            </div>
+            <div class="flex gap-8 justify-between">
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold">Refactoring</h2>
+                    <p class="mt-2 text-gray-600">Melhorando o design de código existente sem alterar o comportamento, por Martin Fowler.</p>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Leia mais</a>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold">You Don’t Know JS</h2>
+                    <p class="mt-2 text-gray-600">Uma imersão profunda no JavaScript moderno, por Kyle Simpson.</p>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Leia mais</a>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold">JavaScript: The Good Parts</h2>
+                    <p class="mt-2 text-gray-600">Explorando os melhores aspectos do JavaScript, por Douglas Crockford.</p>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Leia mais</a>
+                </div>
+            </div>
 
+            <div class="flex gap-8 justify-between">
+                <div class="w-1/3 p-6 bg-white rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold">Cadastro de Desenvolvedores</h2>
+                    <p class="mt-4 text-gray-600">O sistema já permite cadastrar e gerenciar desenvolvedores com suas habilidades e experiência. Adicione novos membros à equipe com poucos cliques.</p>
+                    <ul class="mt-4 list-disc pl-5 text-gray-600">
+                        <li>Cadastro rápido e intuitivo</li>
+                        <li>Filtragem por habilidades</li>
+                        <li>Histórico de projetos</li>
+                    </ul>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Ver mais detalhes</a>
+                </div>
+                <div class="w-1/3 p-6 bg-white rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold">Integração com Escolas</h2>
+                    <p class="mt-4 text-gray-600">O sistema já está integrado com diversas escolas, permitindo o cadastro de instituições e a conexão com alunos e professores de TI.</p>
+                    <ul class="mt-4 list-disc pl-5 text-gray-600">
+                        <li>Cadastro de escolas e cursos</li>
+                        <li>Integração com a plataforma de ensino</li>
+                        <li>Acompanhamento de desempenho</li>
+                    </ul>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Ver mais detalhes</a>
+                </div>
+                <div class="w-1/3 p-6 bg-white rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold">Painel Administrativo</h2>
+                    <p class="mt-4 text-gray-600">O painel administrativo está funcionando plenamente, permitindo o controle total dos usuários, permissões e funcionalidades do sistema.</p>
+                    <ul class="mt-4 list-disc pl-5 text-gray-600">
+                        <li>Gestão de usuários e permissões</li>
+                        <li>Acompanhamento de atividades</li>
+                        <li>Configuração do sistema</li>
+                    </ul>
+                    <a href="#" class="text-primary hover:underline mt-4 inline-block">Ver mais detalhes</a>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
