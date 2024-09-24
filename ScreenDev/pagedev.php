@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 ob_start();
 
@@ -13,7 +14,7 @@ if (empty($_SESSION['email'])) {
     $_SESSION['msg'] = "Faça o Login!!";
     header("Location: ../loginDev.php");
     exit();
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
