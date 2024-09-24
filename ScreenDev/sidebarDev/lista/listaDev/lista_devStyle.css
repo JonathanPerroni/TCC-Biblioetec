@@ -346,10 +346,8 @@ header {
 
 .user-dev .codigoNumerico{
     width: 20px;
-    border: 1px solid red;
-}
-.user-dev  .encurtamento{
-    
+    border: 1px solid red;}
+.user-dev  .encurtamento{    
     border: 1px solid rgb(21, 255, 0);
     white-space: nowrap;    /* Impede o texto de quebrar em várias linhas */
     overflow: hidden;       /* Esconde o conteúdo que excede o tamanho da coluna */
