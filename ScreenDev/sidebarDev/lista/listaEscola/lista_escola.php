@@ -14,7 +14,7 @@ mysqli_set_charset($conn, "utf8mb4");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista Dev</title>
     <link rel="stylesheet" href="../../../../style/defaults.css">
-    <link rel="stylesheet" href=" lista_devStyle.css">
+    <link rel="stylesheet" href=" lista_escolaStyle.css">
 </head>
 
 <body>
@@ -81,18 +81,19 @@ mysqli_set_charset($conn, "utf8mb4");
             <thead>
             <tr class="trGeral">
                     
-                    <th class="codigoNumerico">#</th>
-                    <th class="codigoStatus">Status</th>
+                   
+                    <th class="codigoStatus">Codigo</th>
                     <th class="espacoCurto">Nome</th>
-                    <th class="espacoCurto">Email</th>
-                    <th  class="espacoCurto">Acesso</th>
+                    <th class="espacoCurto">CNPJ</th>
+                    <th  class="espacoCurto">E-mail</th>
+                    <th  class="espacoCurto">Categoria</th>
                     <th class="areaAcao">Ações</th>
                 </tr>
             </thead>
             <tbody>
             <?php
             // Puxar os dados da tabela
-            $sqlRegistro = mysqli_query($conn, "SELECT codigo, statusDev, nome, email, acesso FROM tbdev ORDER BY codigo ASC");
+            $sqlRegistro = mysqli_query($conn, "SELECT codigo_escola, nome_escola, cnpj, email, tipoEscola FROM tbescola ORDER BY codigo_escola ASC");
 
             // Verifica se há resultados na consulta
             if ($sqlRegistro && mysqli_num_rows($sqlRegistro) > 0) {
@@ -100,25 +101,21 @@ mysqli_set_charset($conn, "utf8mb4");
              $linha = 1;
                 
                 while ($dadosDev = mysqli_fetch_assoc($sqlRegistro)) {
-                    $codigo = htmlspecialchars($dadosDev["codigo"]);
-                    $statusDev = htmlspecialchars($dadosDev["statusDev"]);
-                    $nome = htmlspecialchars($dadosDev["nome"], ENT_QUOTES, 'UTF-8');
+                    $codigo_escola = htmlspecialchars($dadosDev["codigo_escola"]);                    
+                    $nome_escola = htmlspecialchars($dadosDev["nome_escola"], ENT_QUOTES, 'UTF-8');
+                    $cnpj = htmlspecialchars($dadosDev["cnpj"]);
                     $email = htmlspecialchars($dadosDev["email"]);
-                    $acesso = htmlspecialchars($dadosDev["acesso"], ENT_QUOTES, 'UTF-8');
+                    $tipo_escola = htmlspecialchars($dadosDev["tipoEscola"], ENT_QUOTES, 'UTF-8');
 
-                    // verifica o status e define o botão correspondente
-                    $statusDevText = ($statusDev == 1) ? 'Ativado' : 'Bloqueado';
-                    $botaoDevText = ($statusDev == 1) ? 'On' : "Off";
-                    $novaAcaoDev = ($statusDev == 1) ? 0 : 1;
-
+                   
 
                     ?>
                     <tr class="trGeral">                         
-                        <td class="codigoNumerico"><?php echo $linha++; ?></td>
-                        <td class="codigoStatus"><?php echo $statusDevText; ?></td>
-                        <td class="espacoCurto"><?php echo $nome; ?></td>
+                        <td class="codigoNumerico"><?php echo $codigo_escola; ?></td>
+                        <td class="espacoCurto"><?php echo $nome_escola; ?></td>
+                        <td class="codigoStatus"><?php echo $cnpj; ?></td>
                         <td class="espacoCurto"><?php echo $email; ?></td>
-                        <td class="espacoCurto"><?php echo $acesso; ?></td>
+                        <td class="espacoCurto"><?php echo $tipo_escola; ?></td>
                         
                         <td class="areaBtnAcao"> 
                             <div> <!-- Botão "Ação"  que o display dele fica visivel quando chega 768px-->

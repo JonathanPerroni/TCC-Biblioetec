@@ -1,5 +1,5 @@
 <?php
-/*
+
 session_start();
 ob_start();
 
@@ -14,7 +14,7 @@ if (empty($_SESSION['email'])) {
     $_SESSION['msg'] = "Faça o Login!!";
     header("Location: ../loginDev.php");
     exit();
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -564,8 +564,8 @@ if (empty($_SESSION['email'])) {
                      </a>
                                  <ul class="dropdown-menu">
                                  <li><a href="sidebarDev/lista/listaDev/lista_dev.php">Lista Dev</a></li>
-                                <li><a href="sidebarDev/cadastro/cadAdmin/cadastrar_admin.php">Lista Admin</a></li>
-                                <li><a href="sidebarDev/cadastro/cadEscola/cadastrar_escola.php">Lista Escola</a></li>
+                                <li><a href="sidebarDev/">Lista Admin</a></li>
+                                <li><a href="sidebarDev/lista/listaEscola/lista_escola.php">Lista Escola</a></li>
                                 </ul>
                 </li>
 
@@ -646,7 +646,6 @@ if (empty($_SESSION['email'])) {
     <h2>hello world</h2>
 
     </main>
-
 
 
     <script>

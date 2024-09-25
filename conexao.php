@@ -1,7 +1,7 @@
 <?php
 $servidor = "localhost";
 $username = "root";
-$bdpassword = "root";
+$bdpassword = "";
 $bdname = "bdescola";
 
 // validação da conexão
