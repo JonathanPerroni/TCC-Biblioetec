@@ -530,7 +530,7 @@ if (empty($_SESSION['email'])) {
                        justify-content:center;
                        flex-wrap: wrap;                      
                         height: 55px ;
-                        alien-item:center;
+                        align-items:center;
                     }
                     
                     .hrbarra{
