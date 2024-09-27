@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
+-- version 4.4.12
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Set-2024 às 01:38
--- Versão do servidor: 10.4.21-MariaDB
--- versão do PHP: 8.0.10
+-- Generation Time: 28-Set-2024 às 01:47
+-- Versão do servidor: 5.6.25
+-- PHP Version: 5.5.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -18,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `bdescola`
+-- Database: `bdescola`
 --
 
 -- --------------------------------------------------------
@@ -27,11 +26,11 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `dados_etec`
 --
 
-CREATE TABLE `dados_etec` (
+CREATE TABLE IF NOT EXISTS `dados_etec` (
   `codigo` int(11) NOT NULL,
   `codigo_escola` varchar(50) NOT NULL,
   `unidadeEscola` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `dados_etec`
@@ -105,19 +104,19 @@ INSERT INTO `dados_etec` (`codigo`, `codigo_escola`, `unidadeEscola`) VALUES
 -- Estrutura da tabela `tbadmin`
 --
 
-CREATE TABLE `tbadmin` (
+CREATE TABLE IF NOT EXISTS `tbadmin` (
   `codigo` int(11) NOT NULL,
   `nome` text NOT NULL,
   `email` text NOT NULL,
   `password` text NOT NULL,
-  `telefone` text DEFAULT NULL,
+  `telefone` text,
   `celular` text NOT NULL,
   `cpf` char(11) NOT NULL,
   `codigo_escola` int(3) DEFAULT NULL,
-  `acesso` text DEFAULT NULL,
+  `acesso` text,
   `cadastrado_por` varchar(50) DEFAULT NULL,
   `data_cadastro` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbadmin`
@@ -133,7 +132,7 @@ INSERT INTO `tbadmin` (`codigo`, `nome`, `email`, `password`, `telefone`, `celul
 -- Estrutura da tabela `tbalunos`
 --
 
-CREATE TABLE `tbalunos` (
+CREATE TABLE IF NOT EXISTS `tbalunos` (
   `codigo` int(11) NOT NULL,
   `nome` text NOT NULL,
   `data_nascimento` date NOT NULL,
@@ -147,11 +146,11 @@ CREATE TABLE `tbalunos` (
   `responsavel` text NOT NULL,
   `nome_escola` text NOT NULL,
   `nome_curso` text NOT NULL,
-  `email` text DEFAULT NULL,
+  `email` text,
   `tipo_ensino` varchar(50) DEFAULT NULL,
   `senha` varchar(255) NOT NULL,
   `acesso` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbalunos`
@@ -166,17 +165,17 @@ INSERT INTO `tbalunos` (`codigo`, `nome`, `data_nascimento`, `endereco`, `cidade
 -- Estrutura da tabela `tbbibliotecario`
 --
 
-CREATE TABLE `tbbibliotecario` (
+CREATE TABLE IF NOT EXISTS `tbbibliotecario` (
   `codigo` int(11) NOT NULL,
-  `nome` text DEFAULT NULL,
-  `email` text DEFAULT NULL,
-  `senha` text DEFAULT NULL,
-  `telefone` text DEFAULT NULL,
-  `celular` text DEFAULT NULL,
-  `cpf` text DEFAULT NULL,
-  `codigo_escola` text DEFAULT NULL,
-  `acesso` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nome` text,
+  `email` text,
+  `senha` text,
+  `telefone` text,
+  `celular` text,
+  `cpf` text,
+  `codigo_escola` text,
+  `acesso` text
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbbibliotecario`
@@ -191,10 +190,10 @@ INSERT INTO `tbbibliotecario` (`codigo`, `nome`, `email`, `senha`, `telefone`, `
 -- Estrutura da tabela `tbclasse`
 --
 
-CREATE TABLE `tbclasse` (
+CREATE TABLE IF NOT EXISTS `tbclasse` (
   `codigo` int(11) NOT NULL,
   `classe` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbclasse`
@@ -214,12 +213,12 @@ INSERT INTO `tbclasse` (`codigo`, `classe`) VALUES
 -- Estrutura da tabela `tbcursos`
 --
 
-CREATE TABLE `tbcursos` (
+CREATE TABLE IF NOT EXISTS `tbcursos` (
   `codigo` int(11) NOT NULL,
-  `nome_escola` text DEFAULT NULL,
+  `nome_escola` text,
   `nome_curso` text NOT NULL,
   `tempo_curso` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbcursos`
@@ -245,7 +244,7 @@ INSERT INTO `tbcursos` (`codigo`, `nome_escola`, `nome_curso`, `tempo_curso`) VA
 -- Estrutura da tabela `tbdev`
 --
 
-CREATE TABLE `tbdev` (
+CREATE TABLE IF NOT EXISTS `tbdev` (
   `codigo` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `cpf` varchar(20) NOT NULL,
@@ -257,8 +256,8 @@ CREATE TABLE `tbdev` (
   `codigo_autenticacao` varchar(8) DEFAULT NULL,
   `chave_recuperar_senha` varchar(220) DEFAULT NULL,
   `data_codigo_autenticacao` datetime DEFAULT NULL,
-  `statusDev` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `statusDev` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbdev`
@@ -267,7 +266,7 @@ CREATE TABLE `tbdev` (
 INSERT INTO `tbdev` (`codigo`, `nome`, `cpf`, `email`, `password`, `telefone`, `celular`, `acesso`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
 (3, 'Felipe Ivasco de Almeida', '41373516860', 'ivascofelipe@gmail.com', '$2y$10$8E7Xo3Ab1WgHyJFdWv8SeuMJJ9gcCVOtIxbFRf5AD9QM3/UbaI1me', '18991599472', '18991599472', 'Desenvolvedor', NULL, NULL, NULL, 0),
 (8, 'Jonathan Perroni', '36844808860', 'jhow.zitos@gmail.com', '$2y$10$acOGKPYw00.2TXdxYnR26unHL3p55h2i5n8nojDLVM18SjfchouD.', '18996511409', '18996511409', 'Desenvolvedor', NULL, NULL, NULL, 1),
-(9, 'Fernanda  Stanislaw', '00959139044', 'fer.stanislaw.fs@gmail.com', '$2y$10$uit8efwwTtyLbO.Gz8jx6O4MpWGVBfXi5lLGnHbOZGJt/tD2guBbS', '(18) 99612-2396', '(18) 99612-2396', 'Desenvolvedor', NULL, NULL, NULL, 1),
+(9, 'Fernanda  Stanislaw', '00959139044', 'fer.stanislaw.fs@gmail.com', '$2y$10$uit8efwwTtyLbO.Gz8jx6O4MpWGVBfXi5lLGnHbOZGJt/tD2guBbS', '18996122396', '18996122396', 'Desenvolvedor', NULL, NULL, NULL, 1),
 (10, 'Jose Eduardo ', '10466400039', 'joseeduardo@gmail.com', '$2y$10$Tvxv78PFHdM9XYslGSL7zOEaKV0BDg210L9MqYTgG1fcHWFi8NIUm', '18998086573', '18991599472', 'Desenvolvedor', NULL, '$2y$10$lXRvYIfvb2hm9V8knIQKQetIhZ742icgTzZemCZjdYvM8CHxO9FgO', NULL, 1),
 (11, 'supremeDev', '93608124047', 'supremeDev@gmail.com', '$2y$10$mP5t4HdOlM/ooQqfr2zHNOIIgL/Tf3BoCIBK3iQk..eiyrjbPdzDS', '18996511409', '18996511409', 'Desenvolvedor', NULL, NULL, NULL, 0),
 (18, 'teste94', '16702118007', 'teste@teste.com', '$2y$10$sj0eIO6ke3atqLOLXtIPvOqYAtepND7wGzolwOWO5QTOEB5LeJogS', '18996511409', '18999999999', 'Desenvolvedor', NULL, NULL, NULL, 1);
@@ -278,7 +277,7 @@ INSERT INTO `tbdev` (`codigo`, `nome`, `cpf`, `email`, `password`, `telefone`, `
 -- Estrutura da tabela `tbescola`
 --
 
-CREATE TABLE `tbescola` (
+CREATE TABLE IF NOT EXISTS `tbescola` (
   `codigo` int(11) NOT NULL,
   `nome_escola` text NOT NULL,
   `tipoEscola` varchar(220) NOT NULL,
@@ -288,14 +287,14 @@ CREATE TABLE `tbescola` (
   `cidade` text NOT NULL,
   `estado` char(100) NOT NULL,
   `cnpj` char(14) NOT NULL,
-  `telefone` text DEFAULT NULL,
+  `telefone` text,
   `celular` text NOT NULL,
   `email` varchar(220) NOT NULL,
   `cep` int(10) NOT NULL,
   `numero` int(10) NOT NULL,
   `cadastrado_por` varchar(220) NOT NULL,
   `data_cadastro` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbescola`
@@ -316,17 +315,17 @@ INSERT INTO `tbescola` (`codigo`, `nome_escola`, `tipoEscola`, `codigo_escola`, 
 -- Estrutura da tabela `tbfuncionarios`
 --
 
-CREATE TABLE `tbfuncionarios` (
+CREATE TABLE IF NOT EXISTS `tbfuncionarios` (
   `codigo` int(11) NOT NULL,
-  `nome` text DEFAULT NULL,
-  `email` text DEFAULT NULL,
-  `senha` text DEFAULT NULL,
-  `telefone` text DEFAULT NULL,
-  `celular` text DEFAULT NULL,
-  `cpf` text DEFAULT NULL,
-  `codigo_escola` text DEFAULT NULL,
-  `acesso` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nome` text,
+  `email` text,
+  `senha` text,
+  `telefone` text,
+  `celular` text,
+  `cpf` text,
+  `codigo_escola` text,
+  `acesso` text
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbfuncionarios`
@@ -341,20 +340,20 @@ INSERT INTO `tbfuncionarios` (`codigo`, `nome`, `email`, `senha`, `telefone`, `c
 -- Estrutura da tabela `tbjogoseducativos`
 --
 
-CREATE TABLE `tbjogoseducativos` (
+CREATE TABLE IF NOT EXISTS `tbjogoseducativos` (
   `codigo` int(11) NOT NULL,
   `nome_escola` text NOT NULL,
   `classe` text NOT NULL,
   `titulo` text NOT NULL,
-  `categoria` text DEFAULT NULL,
+  `categoria` text,
   `idade_minima` int(11) DEFAULT NULL,
   `num_jogadores` int(11) DEFAULT NULL,
-  `fabricante` text DEFAULT NULL,
-  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estante` text DEFAULT NULL,
-  `prateleira` text DEFAULT NULL,
+  `fabricante` text,
+  `data_adicao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estante` text,
+  `prateleira` text,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbjogoseducativos`
@@ -369,21 +368,21 @@ INSERT INTO `tbjogoseducativos` (`codigo`, `nome_escola`, `classe`, `titulo`, `c
 -- Estrutura da tabela `tbjornal_revista`
 --
 
-CREATE TABLE `tbjornal_revista` (
+CREATE TABLE IF NOT EXISTS `tbjornal_revista` (
   `codigo` int(11) NOT NULL,
   `nome_escola` text NOT NULL,
   `classe` text NOT NULL,
   `titulo` text NOT NULL,
   `data_publicacao` date DEFAULT NULL,
-  `editora` text DEFAULT NULL,
-  `categoria` text DEFAULT NULL,
-  `issn` text DEFAULT NULL,
-  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estante` text DEFAULT NULL,
-  `prateleira` text DEFAULT NULL,
+  `editora` text,
+  `categoria` text,
+  `issn` text,
+  `data_adicao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estante` text,
+  `prateleira` text,
   `edicao` int(11) DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbjornal_revista`
@@ -399,24 +398,24 @@ INSERT INTO `tbjornal_revista` (`codigo`, `nome_escola`, `classe`, `titulo`, `da
 -- Estrutura da tabela `tblivros`
 --
 
-CREATE TABLE `tblivros` (
+CREATE TABLE IF NOT EXISTS `tblivros` (
   `codigo` int(11) NOT NULL,
-  `nome_escola` text DEFAULT NULL,
-  `classe` text DEFAULT NULL,
+  `nome_escola` text,
+  `classe` text,
   `titulo` text NOT NULL,
   `autor` text NOT NULL,
-  `editora` text DEFAULT NULL,
+  `editora` text,
   `ano_publicacao` year(4) DEFAULT NULL,
-  `isbn` text DEFAULT NULL,
-  `genero` text DEFAULT NULL,
+  `isbn` text,
+  `genero` text,
   `num_paginas` int(11) DEFAULT NULL,
-  `idioma` text DEFAULT NULL,
-  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estante` text DEFAULT NULL,
-  `prateleira` text DEFAULT NULL,
+  `idioma` text,
+  `data_adicao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estante` text,
+  `prateleira` text,
   `edicao` int(11) DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tblivros`
@@ -431,7 +430,7 @@ INSERT INTO `tblivros` (`codigo`, `nome_escola`, `classe`, `titulo`, `autor`, `e
 -- Estrutura da tabela `tbmidias`
 --
 
-CREATE TABLE `tbmidias` (
+CREATE TABLE IF NOT EXISTS `tbmidias` (
   `codigo` int(11) NOT NULL,
   `nome_escola` text NOT NULL,
   `classe` text NOT NULL,
@@ -439,12 +438,12 @@ CREATE TABLE `tbmidias` (
   `data_lancamento` date DEFAULT NULL,
   `genero` varchar(100) DEFAULT NULL,
   `diretor_artista` varchar(255) DEFAULT NULL,
-  `duracao` text DEFAULT NULL,
-  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estante` text DEFAULT NULL,
-  `prateleira` text DEFAULT NULL,
+  `duracao` text,
+  `data_adicao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estante` text,
+  `prateleira` text,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbmidias`
@@ -459,17 +458,17 @@ INSERT INTO `tbmidias` (`codigo`, `nome_escola`, `classe`, `titulo`, `data_lanca
 -- Estrutura da tabela `tbprofessores`
 --
 
-CREATE TABLE `tbprofessores` (
+CREATE TABLE IF NOT EXISTS `tbprofessores` (
   `codigo` int(11) NOT NULL,
-  `nome` text DEFAULT NULL,
-  `email` text DEFAULT NULL,
-  `senha` text DEFAULT NULL,
-  `telefone` text DEFAULT NULL,
-  `celular` text DEFAULT NULL,
-  `cpf` text DEFAULT NULL,
-  `codigo_escola` text DEFAULT NULL,
-  `acesso` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nome` text,
+  `email` text,
+  `senha` text,
+  `telefone` text,
+  `celular` text,
+  `cpf` text,
+  `codigo_escola` text,
+  `acesso` text
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbprofessores`
@@ -484,7 +483,7 @@ INSERT INTO `tbprofessores` (`codigo`, `nome`, `email`, `senha`, `telefone`, `ce
 -- Estrutura da tabela `tbtcc`
 --
 
-CREATE TABLE `tbtcc` (
+CREATE TABLE IF NOT EXISTS `tbtcc` (
   `codigo` int(11) NOT NULL,
   `nome_escola` text NOT NULL,
   `classe` text NOT NULL,
@@ -493,11 +492,11 @@ CREATE TABLE `tbtcc` (
   `orientador` text NOT NULL,
   `curso` text NOT NULL,
   `ano` year(4) NOT NULL,
-  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estante` text DEFAULT NULL,
-  `prateleira` text DEFAULT NULL,
+  `data_adicao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estante` text,
+  `prateleira` text,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbtcc`
@@ -507,194 +506,178 @@ INSERT INTO `tbtcc` (`codigo`, `nome_escola`, `classe`, `titulo`, `autor`, `orie
 (1, 'Prof Eudécio Luiz Vicente', 'Tcc', 'Tcc Teste', 'Felipe Ivasco', 'Professor André Luis', 'Desenvolvimento de Sistemas', 2024, '2024-07-04 00:45:48', '1', '2', 1);
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `dados_etec`
+-- Indexes for table `dados_etec`
 --
 ALTER TABLE `dados_etec`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbadmin`
+-- Indexes for table `tbadmin`
 --
 ALTER TABLE `tbadmin`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbalunos`
+-- Indexes for table `tbalunos`
 --
 ALTER TABLE `tbalunos`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbbibliotecario`
+-- Indexes for table `tbbibliotecario`
 --
 ALTER TABLE `tbbibliotecario`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbclasse`
+-- Indexes for table `tbclasse`
 --
 ALTER TABLE `tbclasse`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbcursos`
+-- Indexes for table `tbcursos`
 --
 ALTER TABLE `tbcursos`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbdev`
+-- Indexes for table `tbdev`
 --
 ALTER TABLE `tbdev`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbescola`
+-- Indexes for table `tbescola`
 --
 ALTER TABLE `tbescola`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbfuncionarios`
+-- Indexes for table `tbfuncionarios`
 --
 ALTER TABLE `tbfuncionarios`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbjogoseducativos`
+-- Indexes for table `tbjogoseducativos`
 --
 ALTER TABLE `tbjogoseducativos`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbjornal_revista`
+-- Indexes for table `tbjornal_revista`
 --
 ALTER TABLE `tbjornal_revista`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tblivros`
+-- Indexes for table `tblivros`
 --
 ALTER TABLE `tblivros`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbmidias`
+-- Indexes for table `tbmidias`
 --
 ALTER TABLE `tbmidias`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbprofessores`
+-- Indexes for table `tbprofessores`
 --
 ALTER TABLE `tbprofessores`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbtcc`
+-- Indexes for table `tbtcc`
 --
 ALTER TABLE `tbtcc`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `dados_etec`
+-- AUTO_INCREMENT for table `dados_etec`
 --
 ALTER TABLE `dados_etec`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=90;
 --
--- AUTO_INCREMENT de tabela `tbadmin`
+-- AUTO_INCREMENT for table `tbadmin`
 --
 ALTER TABLE `tbadmin`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de tabela `tbalunos`
+-- AUTO_INCREMENT for table `tbalunos`
 --
 ALTER TABLE `tbalunos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `tbbibliotecario`
+-- AUTO_INCREMENT for table `tbbibliotecario`
 --
 ALTER TABLE `tbbibliotecario`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `tbclasse`
+-- AUTO_INCREMENT for table `tbclasse`
 --
 ALTER TABLE `tbclasse`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de tabela `tbcursos`
+-- AUTO_INCREMENT for table `tbcursos`
 --
 ALTER TABLE `tbcursos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT de tabela `tbdev`
+-- AUTO_INCREMENT for table `tbdev`
 --
 ALTER TABLE `tbdev`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
--- AUTO_INCREMENT de tabela `tbescola`
+-- AUTO_INCREMENT for table `tbescola`
 --
 ALTER TABLE `tbescola`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
 --
--- AUTO_INCREMENT de tabela `tbfuncionarios`
+-- AUTO_INCREMENT for table `tbfuncionarios`
 --
 ALTER TABLE `tbfuncionarios`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `tbjogoseducativos`
+-- AUTO_INCREMENT for table `tbjogoseducativos`
 --
 ALTER TABLE `tbjogoseducativos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `tbjornal_revista`
+-- AUTO_INCREMENT for table `tbjornal_revista`
 --
 ALTER TABLE `tbjornal_revista`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de tabela `tblivros`
+-- AUTO_INCREMENT for table `tblivros`
 --
 ALTER TABLE `tblivros`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `tbmidias`
+-- AUTO_INCREMENT for table `tbmidias`
 --
 ALTER TABLE `tbmidias`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `tbprofessores`
+-- AUTO_INCREMENT for table `tbprofessores`
 --
 ALTER TABLE `tbprofessores`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `tbtcc`
+-- AUTO_INCREMENT for table `tbtcc`
 --
 ALTER TABLE `tbtcc`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
