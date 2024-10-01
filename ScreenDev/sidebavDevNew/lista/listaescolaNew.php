@@ -110,10 +110,10 @@
                 <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
                     <tr class="">
                         <th scope="col" class="px-6 py-3">Nome</th>
-                        <th scope="col" class="px-6 py-3">Código Etec</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3 text-center">Código Etec</th>
                         <th scope="col" class="px-6 py-3">Telefone</th>
-                        <th scope="col" class="px-6 py-3">CPF</th>
+                        <th scope="col" class="px-6 py-3">Endereço</th>
+                        <th scope="col" class="px-6 py-3">Cidade</th>
                         <th scope="col" class="px-6 py-3 text-center">Ações</th>
                     </tr>
                 </thead>
@@ -121,29 +121,33 @@
                 <?php
                     include("../../../conexao.php");
 
-                    $sql = "SELECT nome, email, telefone, codigo_escola, cpf FROM tbadmin";
+                    $sql = "SELECT nome_escola, endereco, bairro, cidade, estado, telefone, codigo_escola FROM tbescola";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
 
+                            $codigoEtecFormatado = substr($row["codigo_escola"], 0,3);
+                            $enderecoFormatado = $row["endereco"] . ", " . $row["bairro"];
+                            $cidadeEstado = $row["cidade"] . " - " . $row["estado"];
+
                             echo '
                             <tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">
-                                <th scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">
-                                    ' . htmlspecialchars($row["nome"]) . '
+                                <th scope="row" class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">
+                                    ' . htmlspecialchars($row["nome_escola"]) . '
                                 </th>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["codigo_escola"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["email"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
-                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["cpf"]) . ' </td>   
-                                <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
+                                <td class="px-2 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)] text-center">' . htmlspecialchars($codigoEtecFormatado) . '</td>
+                                <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
+                                <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($enderecoFormatado) . '</td>
+                                <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($cidadeEstado) . ' </td>   
+                                <td class="flex justify-between min-h-24 md:min-h-10 md:justify-evenly gap-1 px-4 py-1 md:px-6 md:py-4">
                                     <a href="#" class="font-medium text-blue-600 hover:underline">Editar</a>
                                     <a href="#" class="font-medium text-red-600 hover:underline">Excluir</a>
                                 </td>
                             </tr>';
                         }
                     } else {
-                        echo '<tr><td colspan="5" class="text-center px-6 py-4">Nenhum dado encontrado</td></tr>';
+                        echo '<tr><td colspan="5" class="text-center px-4 py-1 md:px-6 md:py-4">Nenhum dado encontrado</td></tr>';
                     }
 
                     mysqli_close($conn);
