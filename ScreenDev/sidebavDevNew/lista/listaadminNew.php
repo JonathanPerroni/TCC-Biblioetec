@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - Dev</title>
+    <title>Lista de Administradores</title>
 
-    <link rel="stylesheet" href="../User_etec/css/defaults.css">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../User_etec/css/defaults.css">
 </head>
 <body>
     <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
@@ -95,7 +95,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:rounded-b-md hover:bg-gray-100 dark:hover:bg-[var(--primary-emphasis)] dark:hover:text-white">
+                <a href="#" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:rounded-b-md hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
                     Sair
                 </a>
@@ -104,8 +104,56 @@
         </div>
     </nav>
 
+    <main class="mx-1 sm:mx-16 my-8">
+        <div class="relative overflow-x-auto shadow-lg rounded-lg">
+            <table class="min-w-full text-sm text-left rtl:text-right text-[var(--secondary)]">
+                <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
+                    <tr class="">
+                        <th scope="col" class="px-6 py-3">Nome</th>
+                        <th scope="col" class="px-6 py-3">Código Etec</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Telefone</th>
+                        <th scope="col" class="px-6 py-3">CPF</th>
+                        <th scope="col" class="px-6 py-3 text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="border border-[var(--grey)]">
+                <?php
+                    include("../../../conexao.php");
+
+                    $sql = "SELECT nome, email, telefone, codigo_escola, cpf FROM tbadmin";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+
+                            echo '
+                            <tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">
+                                <th scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">
+                                    ' . htmlspecialchars($row["nome"]) . '
+                                </th>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["codigo_escola"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["email"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
+                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["cpf"]) . ' </td>   
+                                <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
+                                    <a href="#" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                    <a href="#" class="font-medium text-red-600 hover:underline">Excluir</a>
+                                </td>
+                            </tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="5" class="text-center px-6 py-4">Nenhum dado encontrado</td></tr>';
+                    }
+
+                    mysqli_close($conn);
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-
 </body>
 </html>
