@@ -151,11 +151,11 @@ $conn->close();
 </head>
 <body class="w-screen h-screen flex flex-col items-center justify-center bg-[var(--off-white)]">
 
-    <main class="max-w-xs md:max-w-md flex flex-col gap-4 pb-2 md:pb-2 p-4 md:p-8 bg-white rounded-md shadow-md">
-        <header class="flex gap-2 items-center">
-            <h1 class="text-2xl font-semibold text-primary">Biblio<span class="text-secondary">etec</span></h1>
-            <span class="w-[2px] h-6 md:h-8  bg-secondary"></span>
-            <h1 class="text-2xl font-regular text-secondary">Senha</h1>
+    <main class="min-w-[320px] w-[320px] sm:w-[392px] flex flex-col gap-4 pb-2 sm:pb-2 p-4 sm:p-8 bg-white rounded-md shadow-md">
+        <header class="flex gap-2 justify-center items-center">
+            <h1 class="text-3xl sm:text-4xl font-semibold text-primary">Biblio<span class="text-secondary">etec</span></h1>
+            <span class="w-[2px] h-6 sm:h-8  bg-secondary"></span>
+            <h1 class="text-3xl sm:text-4xl font-regular text-secondary">Senha</h1>
         </header>
         <form action="" method="post" class="flex flex-col gap-4">
             <div class="min-w-full flex flex-col">
@@ -164,7 +164,7 @@ $conn->close();
             </div>
             <div class="formBtn">
                 <input type="submit" name="SendRecupSenha" value="Recuperar" class="w-full h-12 rounded shadow-sm bg-secondary text-2xl text-white font-semibold cursor-pointer"><br>
-                <a href="protect.php" name="SendLembrouSenha" class="text-secondary text-sm text-right underline">Lembrou a Senha?</a>
+                <a href="protect.php" name="SendLembrouSenha" class="text-secondary text-xs text-right underline float-right mt-1">Lembrou a Senha?</a>
             </div>
             <div class="mensagemErro">
                 <?php
