@@ -162,7 +162,7 @@ $conn->close();
                 <label class="text-secondary font-medium">E-mail:</label>
                 <input type="text" name="email" placeholder=""  required class="border-2 border-[var(--secondary)] rounded text-secondary placeholder:text-[var(--grey)]]">
             </div>
-            <div class="formBtn">
+            <div class="">
                 <input type="submit" name="SendRecupSenha" value="Recuperar" class="w-full h-12 rounded shadow-sm bg-secondary text-2xl text-white font-semibold cursor-pointer"><br>
                 <a href="protect.php" name="SendLembrouSenha" class="text-secondary text-xs text-right underline float-right mt-1">Lembrou a Senha?</a>
             </div>
