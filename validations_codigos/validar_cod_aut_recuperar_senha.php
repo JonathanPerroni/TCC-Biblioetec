@@ -139,239 +139,44 @@ $conn->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Senha</title>
-    <link rel="stylesheet" href="/biblioetec/Desenvolvedor/style/defaults.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../User_etec/css/defaults.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="w-screen h-screen flex flex-col items-center justify-center bg-[var(--off-white)]">
 
-<Style>
- body{
-        height: 90vh;
-        justify-content: center;
-        align-items: center;
-        }
-
-        main{
-    max-width:400px;   
-    width: 100%;
-    height: auto;
-    padding: 16px;
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.25 );
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-
-}
-header{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;    
-    text-align: center;
-}
-
-h1{
-    font-size: 25px;
-}
-
-.separation-line{
-    height: 2px;
-        width: 80%;
-        margin: 0px 16px;
-        background-color: var(--off-white);
-        color: var(--off-white);
-}
-
-
-
-#brand-title{
-    color:  var(--primary-emphasis);
-    font-weight: 600;   
-    width: 200px;
-}
-
-#cad-title{
-    color: var(--off-black);
-    font-weight: 400;   
-    width: 200px;
-}
-
-.formsContainer{
-    margin-top: 10px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    
-    
-}
-
-form{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;    
-    justify-content:  center;
-    align-items: center;  
-    
-}
-
-.form-row{
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around ;
-    align-items: center;
-    margin-bottom: 10px;
-    width: 100%;
-    min-width: 100%;
-    gap: 5px;
-   
-}
-.input-container {
-            margin-bottom: 15px;
-            position: relative;
-            flex-grow: 1;   
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-        }
-
-        .input-container label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .input-container input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .input-error {
-            border: 1px solid red;
-        }
-        .input-success {
-            border: 1px solid green;
-        }
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        input{
-    outline: none;
-    border: 1px solid;
-    width: 100%;
-    height: 32px;
-    padding: 0 8px;
-    border-radius: 8px;
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--secondary-emphasis);
-    caret-color: var(--secondary-emphasis);
-    background-color: var(--off-white);
-    font-family: 'Poppins', sans-serif;
-    
-}
-
-input:focus{
-    border: 2px solid var(--secondary-emphasis);
-    transition: ease-in .1s;
-}
-
-
-.placeholder{
-    position: absolute;
-    top: 4px;
-    left: 8px;
-    color: var(--secondary-emphasis);
-    font-weight: 500;    
-    transition: .3s;
-    pointer-events: none;
-}
-
-
-input:focus + .placeholder,
-input:not(:placeholder-shown) + .placeholder {
-    font-size: 12px;
-    top: -16px;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type="number"] {
-    appearance: textfield;
-}
-
-input[type="submit"]{
-    color: white;
-    background-color: var(--secondary-emphasis);
-    cursor: pointer;
-    transition: ease-in-out .2s;
-    margin-bottom: 5px;
-}
-input[type="submit"]:hover{
-    scale: 1.025;
-    background-color: #3B6603;
-}
-
-a{
-    text-decoration: none;
-    color: black;
-}
-
-a:hover {
-    color: #EFC340;
-}
-
-    </Style>
-<body>
-
-    <main class="container">
-    <header>
-        <h1 id="brand-title">Biblietec</h1>
-        <span class="separation-line"></span>
-        <h1 id="login-title">Código De Autenticação</h1>
-    </header>
-    <div class="formsContainer">
-  
-        <form action="" method="post">
-        <div class="form-row">
-        <div class="input-container">   
-                <input type="text" name="email" placeholder=""  required >
-                <label class="placeholder">E-mail:</label><br>
+    <main class="min-w-[320px] w-[320px] sm:w-[392px] flex flex-col gap-4 pb-2 sm:pb-2 p-4 sm:p-8 bg-white rounded-md shadow-md">
+        <header class="flex gap-2 justify-center items-center">
+            <h1 class="text-3xl sm:text-4xl font-semibold text-primary">Biblio<span class="text-secondary">etec</span></h1>
+            <span class="w-[2px] h-6 sm:h-8  bg-secondary"></span>
+            <h1 class="text-3xl sm:text-4xl font-regular text-secondary">Senha</h1>
+        </header>
+        <form action="" method="post" class="flex flex-col gap-4">
+            <div class="min-w-full flex flex-col">
+                <label class="text-secondary font-medium">E-mail:</label>
+                <input type="text" name="email" placeholder=""  required class="border-2 border-[var(--secondary)] rounded text-secondary placeholder:text-[var(--grey)]]">
             </div>
-        </div>
-        <div class="formBtn">
-            <input type="submit" name="SendRecupSenha" value="Recuperar" ><br>
-            <a href="protect.php" name="SendLembrouSenha">Lembrou a Senha?</a>
-        </div>
-        <div class="mensagemErro">
-            <?php
-            // Imprimir a mensagem da sessão
-            if (isset($_SESSION['msg'])) {
-                echo $_SESSION['msg'];
-                unset($_SESSION['msg']);
-            }
-            ?>
-        </div>
+            <div class="">
+                <input type="submit" name="SendRecupSenha" value="Recuperar" class="w-full h-12 rounded shadow-sm bg-secondary text-2xl text-white font-semibold cursor-pointer"><br>
+                <a href="protect.php" name="SendLembrouSenha" class="text-secondary text-xs text-right underline float-right mt-1">Lembrou a Senha?</a>
+            </div>
+            <div class="mensagemErro">
+                <?php
+                // Imprimir a mensagem da sessão
+                if (isset($_SESSION['msg'])) {
+                    echo $_SESSION['msg'];
+                    unset($_SESSION['msg']);
+                }
+                ?>
+            </div>
         </form>
-    </div>
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 </html>
