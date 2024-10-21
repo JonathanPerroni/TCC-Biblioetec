@@ -1,7 +1,19 @@
 <?php
 session_start();
+ob_start();
 include_once("../../../../conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
+
+// Validação de login, só entra se estiver logado
+if (empty($_SESSION['email'])) {
+    // echo  $_SESSION['nome'];
+    // echo  $_SESSION['acesso'];
+    $_SESSION['msg'] = "Faça o Login!!";
+    header("Location: ../../../../loginDev.php");
+    exit();
+}
+
+
 
 
 // Recupera os dados das escolas e puxando o nome da escola
