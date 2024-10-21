@@ -14,11 +14,11 @@
       <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="w-screen h-screen flex flex-col items-center justify-center bg-[var(--off-white)]">
-        <main class="max-w-xs md:max-w-md flex flex-col gap-4 items-center pb-2 md:pb-2 p-4 md:p-8 bg-white rounded-md shadow-md">
+        <main class="max-w-xs sm:max-w-md flex flex-col gap-4 items-center pb-2 sm:pb-2 p-4 sm:p-8 bg-white rounded-md shadow-md">
             <header class="flex gap-2 items-center">
-                <h1 class="text-2xl md:text-4xl font-semibold text-primary">Biblio<span class="text-secondary">etec</span></h1>
-                <span class="w-[2px] h-6 md:h-8  bg-secondary"></span>
-                <h1 class="text-2xl md:text-4xl font-regular text-secondary">Login Dev</h1>
+                <h1 class="text-2xl sm:text-4xl font-semibold text-primary">Biblio<span class="text-secondary">etec</span></h1>
+                <span class="w-[2px] h-6 sm:h-8  bg-secondary"></span>
+                <h1 class="text-2xl sm:text-4xl font-regular text-secondary">Login Dev</h1>
             </header>
 
             <form action="validations/validacao.php" method="post" class="flex flex-col items-center gap-4 min-w-full">
