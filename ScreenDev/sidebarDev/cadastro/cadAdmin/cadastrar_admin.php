@@ -514,8 +514,7 @@ if ($result && $result->num_rows > 0) {
                  <a href="../../../pagedev.php"  class="voltar">Voltar</a>
                 
                
-                </div>
-                
+                </div>                
                 <div class="erros-notification">
                 <span class="error-message"><?php echo isset($_SESSION['errors']['nome']) ? $_SESSION['errors']['nome'] : ''; ?></span> <br>
                 <span class="error-message"><?php echo isset($_SESSION['errors']['cpf']) ? $_SESSION['errors']['cpf'] : ''; ?></span>

@@ -151,7 +151,7 @@ if(empty($_SESSION['email'])){
                 <tbody class="border border-[var(--grey)]">
                 <?php
                    
-                    $sql = "SELECT nome, email, telefone, codigo_escola, cpf FROM tbadmin";
+                    $sql = "SELECT codigo, nome, email, telefone, codigo_escola, cpf FROM tbadmin";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -167,7 +167,7 @@ if(empty($_SESSION['email'])){
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
                                     <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["cpf"]) . ' </td>   
                                 <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                    <a href="../editar/editarAdmin.php?cod=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
                                     <a href="#" class="font-medium text-red-600 hover:underline">Excluir</a>
                                 </td>
                             </tr>';

@@ -1,0 +1,87 @@
+CODINÇÕES DE ERRO 
+if (!empty($password) && !empty($password2)) {
+    // Verifica se as senhas são diferentes
+    if ($password !== $password2) {
+        $errors['confirma_password'] = "As senhas não são iguais!";
+    }
+    
+    // Verifica se a senha tem pelo menos 6 caracteres
+    if (strlen($password) < 6) {
+        $errors['password'] = "A senha deve ter no mínimo 6 caracteres.";
+    }
+
+    // Verifica se a senha contém pelo menos uma letra maiúscula
+    if (!preg_match('/[A-Z]/', $password)) {
+        $errors['password'] = "A senha deve conter pelo menos uma letra maiúscula.";
+    }
+
+    // Verifica se a senha contém pelo menos uma letra minúscula
+    if (!preg_match('/[a-z]/', $password)) {
+        $errors['password'] = "A senha deve conter pelo menos uma letra minúscula.";
+    }
+
+    // Verifica se a senha contém pelo menos um número
+    if (!preg_match('/[0-9]/', $password)) {
+        $errors['password'] = "A senha deve conter pelo menos um número.";
+    }
+
+    // Verifica se a senha contém pelo menos um caractere especial
+    if (!preg_match('/[\W]/', $password)) { // \W é qualquer caractere não alfanumérico
+        $errors['password'] = "A senha deve conter pelo menos um caractere especial.";
+    }
+} else {
+    $errors['password'] = "Os campos de senha não podem estar vazios.";
+}
+
+
+// Normalizar o CPF removendo caracteres não numéricos
+$cpf = preg_replace('/[^0-9]/', '', $cpf);
+
+// Verificar se é um número de CPF válido
+if (!empty($cpf) && !validarCPF($cpf)) {
+    $errors['cpf'] = "CPF inválido!";
+}
+
+// Verificar se o CPF já está cadastrado no banco de dados
+if (empty($errors['cpf'])) {
+    $query_verifica_cpf = "SELECT COUNT(*) AS total FROM tbadmin WHERE cpf = ?";
+    $stmt_verifica_cpf = $conn->prepare($query_verifica_cpf);
+    $stmt_verifica_cpf->bind_param("s", $cpf);
+    $stmt_verifica_cpf->execute();
+    $result_verifica_cpf = $stmt_verifica_cpf->get_result();
+    $row_verifica_cpf = $result_verifica_cpf->fetch_assoc();
+
+    if ($row_verifica_cpf['total'] > 0) {
+        $errors['cpf'] = "CPF já cadastrado!";
+    }
+}
+
+// Verificar se o email é válido
+if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors['email'] = "Email inválido!";
+}
+
+// Verificar se o email já está cadastrado no banco de dados
+if (empty($errors['email'])) {
+    $query_verifica_email = "SELECT COUNT(*) AS total FROM tbadmin WHERE email = ?";
+    $stmt_verifica_email = $conn->prepare($query_verifica_email);
+    $stmt_verifica_email->bind_param("s", $email);
+    $stmt_verifica_email->execute();
+    $result_verifica_email = $stmt_verifica_email->get_result();
+    $row_verifica_email = $result_verifica_email->fetch_assoc();
+
+    if ($row_verifica_email['total'] > 0) {
+        $errors['email'] = "Email já cadastrado!";
+    }
+}
+
+// Verificar se o telefone é um número válido
+if (!empty($telefone) && !preg_match('/^(\(?\d{2}\)?\s?)?\d{5}-?\d{4}$/', $telefone)) {
+    $errors['telefone'] = "Telefone inválido! O formato deve ser (XX) 9XXXX-XXXX ou XX9XXXX-XXXX";
+}
+
+// Verificar se o telefone é um número válido
+if (!empty($celular) && !preg_match('/^(\(?\d{2}\)?\s?)?\d{5}-?\d{4}$/', $celular)) {
+    $errors['telefone'] = "Telefone inválido! O formato deve ser (XX) 9XXXX-XXXX ou XX9XXXX-XXXX";
+}?
+
