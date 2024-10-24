@@ -1,3 +1,34 @@
+<?php
+
+session_start();
+ob_start();
+
+date_default_timezone_set('America/Sao_Paulo');
+
+ include("../../../conexao/conexao.php");
+
+
+//Validação de login, só entra se estiver logado
+//verifica se o email nao sessão esta vazio, ou seja, se o usuario esta loga 
+if(empty($_SESSION['email'])){
+    //exibe o nome eo nivel de acesso do usuario
+    echo $_SESSION['nome'];
+    echo $_SESSION['acesso'];
+
+       
+            //mensagem e redirecionamento para pagina de login de desenvolvedor
+            $_SESSION['msg'] = "Faça o login!!";
+            header("Location: ../../loginDev.php");
+            exit();
+       
+        
+      
+             
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,7 +38,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../User_etec/css/defaults.css">
+    <link rel="stylesheet" href="../../DevCss/defaults.css">
 </head>
 <body>
     <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
@@ -22,7 +53,7 @@
             <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-[var(--primary-emphasis)]">
                 <ul class="space-y-2 font-medium">
                     <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
+                        <a href="../../DevScreen/pagedevNew.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                         <span class="ms-3">Início</span>
                         </a>
@@ -37,13 +68,13 @@
                         </button>
                         <ul id="dropdown-lista" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Devs</a>
+                                <a href="../list/listadevNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Devs</a>
                             </li>
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Admins</a>
+                                <a href="../list/listaadminNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Admins</a>
                             </li>
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escolas</a>
+                                <a href="../list/listaescolaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escolas</a>
                             </li>
                         </ul>
                     </li>
@@ -71,9 +102,9 @@
         </aside>
         <button id="dropdown-perfil" data-dropdown-toggle="dropdown" class="flex justify-between items-center max-h-12 pl-4 mr-4 bg-white border-2 border-solid border-[var(--secondary)] border-r-0 rounded-lg text-[var(--secondary)] text-left flex-nowrap text-nowrap" type="button">
             <div>
-                <span class="text-[var(--secondary)] font-medium">Eduardo Silva</span>
+             <span class="text-[var(--secondary)] font-medium"><?php echo $_SESSION['nome']; ?></span>
                 <hr>
-                <span class="text-xs text-[var(--secondary)]">Desenvolvedor</span>
+                <span class="text-xs text-[var(--secondary)]"><?php echo $_SESSION['acesso']; ?></span>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round translate-x-[1rem]"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
@@ -95,7 +126,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:rounded-b-md hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
+                <a href="../../DevScreen/logout.php" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:rounded-b-md hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
                     Sair
                 </a>
@@ -119,8 +150,7 @@
                 </thead>
                 <tbody class="border border-[var(--grey)]">
                 <?php
-                    include("../../../conexao/conexao.php");
-
+                   
                     $sql = "SELECT nome, email, telefone, codigo_escola, cpf FROM tbadmin";
                     $result = mysqli_query($conn, $sql);
 

@@ -6,7 +6,7 @@ ob_start(); // Limpar o buffer de saída
 // Fuso horário do lugar informado 
 date_default_timezone_set('America/Sao_Paulo');
 
-include_once("../conexao.php");
+include_once("../../conexao/conexao.php");
 
 // Verificar se a conexão está usando `mysqli`
 if ($conn instanceof mysqli) {
@@ -69,7 +69,7 @@ if ($conn instanceof mysqli) {
             $_SESSION['codigo_autenticacao'] = true;
 
             // Redirecionar o usuário 
-            header('Location: ../ScreenDev/pagedev.php');
+            header('Location: ../DevScreen/pagedevNew.php');
             exit();
 
         } else {
@@ -90,7 +90,7 @@ if ($conn instanceof mysqli) {
     <title>Validar Codigo de Acesso</title>
 
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../User_etec/css/defaults.css">
+    <link rel="stylesheet" href="../DevCss/defaults.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-screen h-screen flex flex-col items-center justify-center bg-[var(--off-white)]">

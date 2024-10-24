@@ -2,7 +2,7 @@
 session_start();
 
 ob_start(); // limpar o buff de saida 
-include_once("../conexao.php");
+include_once("../../conexao/conexao.php");
 
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -79,7 +79,7 @@ if ($conectar) {
                 $result_up_usuario->execute();
 
                 //incluir o composer
-                require '../lib/vendor/autoload.php';
+                require '../../lib/vendor/autoload.php';
                 
                 //cria o objeto e  instanciar  a classe  do PHPMailer
                 $mail = new PHPMailer(true);
@@ -122,7 +122,7 @@ if ($conectar) {
                     //enviar o email
                     $mail->send();
 
-                    header('Location: ../validations_codigos/validar_cod_autenticacao.php');
+                    header('Location: validar_cod_autenticacao.php');
 
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -136,7 +136,7 @@ if ($conectar) {
                     die("Erro ao executar a query: " . $result_up_usuario->error);
                 }
 
-                //header("Location: ../Screen/pagedev.php");
+                //header("Location: ../loginDev.php");
                 exit();
             } else {
                 $_SESSION['msg'] = "Senha incorreta!";

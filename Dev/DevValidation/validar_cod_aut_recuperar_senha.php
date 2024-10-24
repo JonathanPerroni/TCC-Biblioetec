@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\Exception;
 date_default_timezone_set('America/Sao_Paulo');
 
 // Inclui a conexão MySQLi
-include_once("../conexao.php");
+include_once("../../conexao/conexao.php");
 
 // Receber os dados do usuário 
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -55,10 +55,11 @@ if (!empty($dados['SendRecupSenha'])) {
                     // Executar a query
                     if ($stmt_up->execute()) {
                         // Gerar o link de recuperação de senha
-                        $link = "http://localhost/biblioetec/Desenvolvedor/ScreenDev/esqueceuSenha.php?chave=" . urlencode($chave_recuperar_senha);
+                        $link = "http://localhost/biblioetec/Desenvolvedor/Dev/DevScreen/esqueceuSenha.php?chave=" . urlencode($chave_recuperar_senha);
 
                         // Incluir o composer
-                        require '../lib/vendor/autoload.php';
+                        require '../../lib/vendor/autoload.php';
+                        
 
                         // Criar o objeto e instanciar a classe do PHPMailer
                         $mail = new PHPMailer(true);
@@ -146,7 +147,7 @@ $conn->close();
     <title>Recuperar Senha</title>
 
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../User_etec/css/defaults.css">
+    <link rel="stylesheet" href="../DevCss/defaults.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-screen h-screen flex flex-col items-center justify-center bg-[var(--off-white)]">
