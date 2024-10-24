@@ -50,7 +50,7 @@ $sql = "UPDATE tbadmin SET
 $conn->close();
 
 
-header("Location: editarAdmin.php");
+header("Location: editarAdmin.php?cod=" . urlencode($row["codigo"]));
 exit;
 } else {
 echo "Método de requisição inválido!";
