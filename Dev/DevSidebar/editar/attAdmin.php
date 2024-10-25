@@ -53,30 +53,16 @@ date_default_timezone_set('America/Sao_Paulo');
 
     if ($conn->query($sql) === TRUE) {
         echo "Registro atualizado com sucesso!";
-        header("Location editarAdmin.php");
+        header("Location: ./editarAdmin.php?codigo=" . urlencode($cod));
+        exit;
     } else {
         echo "Erro ao atualizar registro: " . $conn->error;
     }
 
     $conn->close();
     exit;
-}
 
-$conn->close();
 
-// USAR UM OU OUTRO
-
-// VOLTAR PARA PÁGINA DE EDITAR
-header("Location: ./editarAdmin.php?cod=" . urlencode($cod));
-
-// VOLTAR PARA PÁGINA LISTAR
-//header("Location: ../list/listaadminNew.php");
-
-exit;
-} else {
-echo "Método de requisição inválido!";
-exit;
-}
 
 
 ?>

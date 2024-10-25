@@ -56,60 +56,6 @@ if (empty($_SESSION['email'])) {
     </header>
     <div class="container-sm my-4 bg-white shadow p-4 rounded-3">
     <form action="attAdmin.php" method="POST" class="d-flex flex-column gap-4">
-<<<<<<< Updated upstream
-            <div>
-                <label for="codigo" class="form-label">Código do usuário:</label>
-                <input type="number" name="codigo" readonly class="form-control" value="<?php echo htmlspecialchars($row['codigo']);?>">
-            </div>
-            <div>
-                <label for="nome" class="form-label">Nome completo:</label>
-                <input type="text" name="nome" placeholder="Insira o nome completo" required class="form-control" value="<?php echo htmlspecialchars($row['nome']);?>">
-            </div>
-            <div>
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" name="email" placeholder="Insira o email" required class="form-control" value="<?php echo htmlspecialchars($row['email']);?>">
-            </div>
-            <div>
-                <label for="password" class="form-label">Senha:</label>
-                <?php
-                    $senha_visivel = htmlspecialchars(substr($row['password'], 0, 10));
-                ?>
-                <input type="password" name="password" placeholder="Insira a senha" required class="form-control" maxlength="10" value="<?php echo $senha_visivel; ?>">
-            </div>
-            <div>
-                <label for="password2" class="form-label">Confirme a Senha:</label>
-                <input type="password" name="password2" placeholder="Confirme a senha" required class="form-control" maxlength="10" value="<?php echo $senha_visivel; ?>">
-            </div>
-            <div class="breakable-row d-flex justify-between gap-4">
-                <div class="w-100">
-                    <label for="telefone" class="form-label">Telefone:</label>
-                    <input type="tel" name="telefone" placeholder="Insira o número de telefone" class="form-control" value="<?php echo htmlspecialchars($row['telefone']);?>">
-                </div>
-                <div class="w-100">
-                    <label for="celular" class="form-label">Celular:</label>
-                    <input type="tel" name="celular" placeholder="Insira o número de celular" required class="form-control" value="<?php echo htmlspecialchars($row['celular']);?>">
-                </div>
-            </div>
-            <div class="breakable-row d-flex justify-between gap-4">
-                <div class="w-100">
-                    <label for="cpf" class="form-label">CPF:</label>
-                    <input type="text" name="cpf" placeholder="Insira o CPF" required class="form-control" value="<?php echo htmlspecialchars($row['cpf']);?>">
-                </div>
-                <div class="w-50">
-                    <label for="codigo_escola" class="form-label">Código da ETEC:</label>
-                    <input type="text" name="codigo_escola" placeholder="Insira o código da ETEC" required class="form-control" value="<?php echo htmlspecialchars($row['codigo_escola']);?>">
-                </div>
-            </div>
-            <div>
-                <label for="acesso" class="form-label">Confirme o acesso:</label>
-                <select name="acesso" id="acesso" required class="form-select" >
-                    <option value="administrador"><?php echo htmlspecialchars($row['acesso']);?></option>
-                </select>
-            </div>
-            <button type="reset" class="btn btn-outline-secondary">Limpar</button>
-            <button type="submit" class="btn btn-primary">Atualizar</button>
-        </form>
-=======
     <input type="hidden" name="codigo" value="<?php echo htmlspecialchars($row['codigo']); ?>">
 
     <div>
@@ -167,7 +113,6 @@ if (empty($_SESSION['email'])) {
     <button type="reset" class="btn btn-outline-secondary">Limpar</button>
     <button type="submit" class="btn btn-primary">Atualizar</button>
 </form>
->>>>>>> Stashed changes
     </div>
 
    
