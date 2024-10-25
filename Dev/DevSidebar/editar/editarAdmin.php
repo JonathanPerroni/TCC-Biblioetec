@@ -57,6 +57,10 @@ if (empty($_SESSION['email'])) {
     <div class="container-sm my-4 bg-white shadow p-4 rounded-3">
     <form action="attAdmin.php" method="POST" class="d-flex flex-column gap-4">
             <div>
+                <label for="codigo" class="form-label">Código do usuário:</label>
+                <input type="number" name="codigo" readonly class="form-control" value="<?php echo htmlspecialchars($row['codigo']);?>">
+            </div>
+            <div>
                 <label for="nome" class="form-label">Nome completo:</label>
                 <input type="text" name="nome" placeholder="Insira o nome completo" required class="form-control" value="<?php echo htmlspecialchars($row['nome']);?>">
             </div>
