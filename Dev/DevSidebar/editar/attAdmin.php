@@ -3,22 +3,6 @@ session_start();
 include("../../../conexao/conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
 
-//recebe e filtra os dados do formulario
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
-<<<<<<< Updated upstream
-$cod = $_POST['codigo'];
-$nome = $_POST['nome'];
-$email = $_POST[ 'email'];
-$password = $_POST[ 'password'];
-$password2 = $_POST[ 'password2'];
-$telefone = $_POST[ 'telefone'];
-$celular = $_POST[ 'celular'];
-$cpf = $_POST[ 'cpf'];
-$codigo_escola = $_POST[ 'codigo_escola'];
-$acesso = $_POST[ 'acesso'];
-=======
->>>>>>> Stashed changes
-
     // Captura o código (chave primária) do registro que será atualizado
     if (isset($_POST['codigo']) && !empty($_POST['codigo'])) {
         $cod = $_POST['codigo'];
@@ -76,11 +60,7 @@ $acesso = $_POST[ 'acesso'];
 
     $conn->close();
     exit;
-} else {
-    echo "Método de requisição inválido!";
-    exit;
 }
-<<<<<<< Updated upstream
 
 $conn->close();
 
@@ -100,6 +80,3 @@ exit;
 
 
 ?>
-=======
-?>
->>>>>>> Stashed changes
