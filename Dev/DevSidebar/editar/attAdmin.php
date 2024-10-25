@@ -7,7 +7,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 //recebe e filtra os dados do formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-$cod = $_POST['cod'];
+$cod = $_POST['codigo'];
 $nome = $_POST['nome'];
 $email = $_POST[ 'email'];
 $password = $_POST[ 'password'];
@@ -49,8 +49,14 @@ $sql = "UPDATE tbadmin SET
 
 $conn->close();
 
+// USAR UM OU OUTRO
 
-header("Location: editarAdmin.php?cod=" . urlencode($cod));
+// VOLTAR PARA PÁGINA DE EDITAR
+header("Location: ./editarAdmin.php?cod=" . urlencode($cod));
+
+// VOLTAR PARA PÁGINA LISTAR
+//header("Location: ../list/listaadminNew.php");
+
 exit;
 } else {
 echo "Método de requisição inválido!";
