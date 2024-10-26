@@ -21,11 +21,8 @@ if(empty($_SESSION['email'])){
             header("Location: ../../loginDev.php");
             exit();
        
-        
-      
-             
-
 }
+
 
 ?>
 
@@ -41,6 +38,8 @@ if(empty($_SESSION['email'])){
     <link rel="stylesheet" href="../../DevCss/defaults.css">
 </head>
 <body>
+
+
     <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
         <div id="nav-left-side">
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 ms-3 bg-[var(--primary)] text-sm text-white rounded-lg hover:bg-[var(--primary-emphasis)] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:hover:bg-[var(--primary-emphasis)]">
@@ -167,7 +166,7 @@ if(empty($_SESSION['email'])){
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
                                     <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["cpf"]) . ' </td>   
                                 <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
-                                    <a href="../editar/editarAdmin.php?cod=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                    <a href="../editar/editarAdmin.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
                                     <form id="form-excluir" action="../excluir/excluirAdmin.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
                                 </td>
                             </tr>';
