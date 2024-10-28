@@ -19,8 +19,9 @@ $password2 = $_POST['password2'];
 $telefone = $_POST['telefone'];
 $celular = $_POST['celular'];
 $cpf = $_POST['cpf'];
-$codigo_escola = $_POST['codigo_escola'];
 $acesso = $_POST['acesso'];
+$statusDev = $_POST['statusDev'];
+
 
 // Protege contra SQL Injection
 $nome = $conn->real_escape_string($nome);
@@ -30,8 +31,8 @@ $password2 = $conn->real_escape_string($password2);
 $telefone = $conn->real_escape_string($telefone);
 $celular = $conn->real_escape_string($celular);
 $cpf = $conn->real_escape_string($cpf);
-$codigo_escola = $conn->real_escape_string($codigo_escola);
 $acesso = $conn->real_escape_string($acesso);
+$statusDev = $conn->real_escape_string($statusDev);
 
 // Variável para armazenar mensagens de erro
 $_SESSION['msg'] = '';
@@ -103,7 +104,7 @@ if ($cpfErro !== true) {
     $_SESSION['msg'] .= $cpfErro . "<br>";
 } else {
     // Verifica se o CPF já está cadastrado no banco
-    $queryCpf = "SELECT COUNT(*) FROM tbadmin WHERE cpf = ? AND codigo != ?";
+    $queryCpf = "SELECT COUNT(*) FROM tbdev WHERE cpf = ? AND codigo != ?";
     $stmtCpf = $conn->prepare($queryCpf);
     $stmtCpf->bind_param("si", $cpf, $codigo);
     $stmtCpf->execute();
@@ -120,7 +121,7 @@ if ($cpfErro !== true) {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['msg'] .= "O email informado é inválido.<br>";
 } else {
-    $queryEmail = "SELECT COUNT(*) FROM tbadmin WHERE email = ? AND codigo != ?";
+    $queryEmail = "SELECT COUNT(*) FROM tbdev WHERE email = ? AND codigo != ?";
     $stmtEmail = $conn->prepare($queryEmail);
     $stmtEmail->bind_param("si", $email, $codigo);
     $stmtEmail->execute();
@@ -135,31 +136,38 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 // Verifica se há mensagens de erro
 if (!empty($_SESSION['msg'])) {
-    header("Location: editarAdmin.php?codigo=" . urlencode($codigo));
+    header("Location: editarDev.php?codigo=" . urlencode($codigo));
     exit();
 }
 
 // Criptografa a senha
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
+$statusDev = isset($_POST['statusDev']) ? (int)$_POST['statusDev'] : 0; // Default para 0 se não estiver definido
 // Atualiza os dados no banco de dados
-$sql = "UPDATE tbadmin SET
-            nome = '$nome',
-            email = '$email',
-            password = '$hashedPassword',
-            telefone = '$telefone',
-            celular = '$celular',
-            cpf = '$cpf',
-            codigo_escola = '$codigo_escola',
-            acesso = '$acesso'
-            WHERE codigo = '$codigo'";
+$sql = "UPDATE tbdev SET
+            nome = ?, 
+            email = ?, 
+            password = ?, 
+            telefone = ?, 
+            celular = ?, 
+            cpf = ?, 
+            acesso = ?, 
+            statusDev = ? 
+        WHERE codigo = ?";
 
-if ($conn->query($sql) === TRUE) {
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ssssssssi", $nome, $email, $hashedPassword, $telefone, $celular, $cpf, $acesso, $statusDev, $codigo);
+
+if ($stmt->execute()) {
     $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
     // Redireciona para a página de edição
-    header("Location: editarAdmin.php?codigo=" . urlencode($codigo));
+    header("Location: editarDev.php?codigo=" . urlencode($codigo));
     exit();
-} 
+} else {
+    // Tratar possíveis erros aqui
+    echo "Erro ao atualizar o registro: " . $stmt->error;
+}
 
+$stmt->close();
 $conn->close();
 ?>

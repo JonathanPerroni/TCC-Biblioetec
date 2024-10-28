@@ -137,7 +137,7 @@ if(empty($_SESSION['email'])){
                         <th scope="col" class="px-6 py-3">Nome</th>
                         <th scope="col" class="px-6 py-3">Email</th>
                         <th scope="col" class="px-6 py-3">Telefone</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
+                       
                         <th scope="col" class="px-6 py-3 text-center">Ações</th>
                     </tr>
                 </thead>
@@ -145,12 +145,12 @@ if(empty($_SESSION['email'])){
                 <?php
                    
 
-                    $sql = "SELECT nome, email, telefone, statusDev FROM tbdev";
+                    $sql = "SELECT codigo, nome, email, telefone FROM tbdev";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
-                            $status = $row["statusDev"] == 1 ? "Ativo" : "Inativo";
+                           
 
                             echo '
                             <tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">
@@ -159,13 +159,9 @@ if(empty($_SESSION['email'])){
                                 </th>
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["email"]) . '</td>
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ' . ($status == 'Ativo' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800') . '">
-                                        ' . htmlspecialchars($status) . '
-                                    </span>
-                                </td>   
+                                
                                 <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                    <a href="../editar/editarDev.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
                                     <a href="#" class="font-medium text-red-600 hover:underline">Excluir</a>
                                 </td>
                             </tr>';
