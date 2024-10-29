@@ -162,7 +162,7 @@ if(empty($_SESSION['email'])){
                                 
                                 <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
                                     <a href="../editar/editarDev.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
-                                    <a href="#" class="font-medium text-red-600 hover:underline">Excluir</a>
+                                    <form id="form-excluir" action="../excluir/excluirDev.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
                                 </td>
                             </tr>';
                         }

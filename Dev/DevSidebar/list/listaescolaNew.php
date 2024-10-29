@@ -167,7 +167,7 @@ if(empty($_SESSION['email'])){
                                 <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($cidadeEstado) . ' </td>   
                                 <td class="flex justify-between min-h-24 md:min-h-10 md:justify-evenly gap-1 px-4 py-1 md:px-6 md:py-4">
                                     <a href="../editar/editarEscola.php?codigo= '. urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
-                                    <a href="#" class="font-medium text-red-600 hover:underline">Excluir</a>
+                                   <form id="form-excluir" action="../excluir/excluirEscola.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
                                 </td>
                             </tr>';
                         }

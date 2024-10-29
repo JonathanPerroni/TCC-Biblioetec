@@ -12,6 +12,7 @@ if (isset($_POST['codigo']) && !empty($_POST['codigo'])) {
 }
 
 // Captura e escapa os outros dados do formulário
+$nome_escola = isset($_POST['nome_escola']) ? $_POST['nome_escola'] : '';
 $tipoEscola = isset($_POST['tipoEscola']) ? $_POST['tipoEscola'] : '';
 $codigo_escola = isset($_POST['codigo_escola']) ? $_POST['codigo_escola'] : '';
 $endereco = isset($_POST['endereco']) ? $_POST['endereco'] : '';
@@ -25,6 +26,7 @@ $email = isset($_POST['email']) ? $_POST['email'] : '';
 $cnpj = isset($_POST['cnpj']) ? $_POST['cnpj'] : '';
 
 // Protege contra SQL Injection
+$nome_escola = $conn->real_escape_string($nome_escola);
 $tipoEscola = $conn->real_escape_string($tipoEscola);
 $codigo_escola = $conn->real_escape_string($codigo_escola);
 $endereco = $conn->real_escape_string($endereco);
@@ -76,6 +78,7 @@ if (!empty($_SESSION['msg'])) {
 
 // Atualiza os dados no banco de dados
 $sql = "UPDATE tbescola SET
+            nome_escola = ?,
             codigo_escola = ?, 
             tipoEscola = ?, 
             endereco = ?, 
@@ -90,7 +93,7 @@ $sql = "UPDATE tbescola SET
         WHERE codigo = ?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssississsss", $codigo_escola, $tipoEscola, $endereco, $numero, $bairro, $estado, $cep, $telefone, $celular, $email, $cnpj, $codigo);
+$stmt->bind_param("ssssississsss", $nome_escola, $codigo_escola, $tipoEscola, $endereco, $numero, $bairro, $estado, $cep, $telefone, $celular, $email, $cnpj, $codigo);
 
 if ($stmt->execute()) {
     $_SESSION['sucesso'] = "Registro atualizado com sucesso!";

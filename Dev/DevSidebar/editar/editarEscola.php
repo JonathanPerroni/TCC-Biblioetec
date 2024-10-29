@@ -74,18 +74,25 @@ if (isset($_SESSION['sucesso'])) {
     <form action="attEscola.php" method="POST" class="d-flex flex-column gap-4">
     <input type="hidden" name="codigo" value="<?php echo htmlspecialchars($row['codigo']); ?>">
 
-    <div>
-        <label for="codigo_escola" class="form-label">Nome da Escola:</label>
-        <input type="text" name="codigo_escola" placeholder="nome da escola" required class="form-control" maxlength="14" value="<?php echo htmlspecialchars($row['nome_escola']);?>">
+    <div class="breakable-row d-flex justify-between gap-4">
+            <div class="w-100">
+                <label for="nome_escola" class="form-label">Nome da Escola:</label>
+                <input type="text" name="nome_escola" placeholder="nome da escola" required class="form-control" maxlength="14" value="<?php echo htmlspecialchars($row['nome_escola']);?>">
+            </div>
+        
+            <div class="w-100">
+                <label for="codigo_escola" class="form-label">Codigo Etec:</label>
+                <input type="text" name="codigo_escola" placeholder="codigo_escola " required class="form-control"  value="<?php echo htmlspecialchars($row['codigo_escola']); ?>">
+            </div>
     </div>
-
+   
     <div>
         <label for="tipoEscola" class="form-label">Tipo de Escola:</label>
         <input type="text" name="tipoEscola" placeholder="Qual o tipo de Escola" required class="form-control" value="<?php echo htmlspecialchars($row['tipoEscola']);?>">
     </div>
 
     <div class="breakable-row d-flex justify-between gap-4">
-        <div class="w-100">
+            <div class="w-100">
                  <label for="endereco" class="form-label">Endereo:</label>        
                 <input type="text" name="endereco" placeholder="endereco" required class="form-control"  value="<?php echo htmlspecialchars($row['endereco']); ?>">   
             </div>
@@ -93,13 +100,13 @@ if (isset($_SESSION['sucesso'])) {
             <div class="w-100">
                 <label for="numero" class="form-label">Nº:</label>
                 <input type="text" name="numero" placeholder="numero da escola" required class="form-control"  value="<?php echo htmlspecialchars($row['numero']); ?>">
-        </div>
+             </div>
 
       
-        <div class="w-100">
+             <div class="w-100">
                 <label for="bairro" class="form-label">Bairro:</label>
                 <input type="text" name="bairro" placeholder="Bairro da escola" required class="form-control"  value="<?php echo htmlspecialchars($row['bairro']); ?>">
-        </div>
+            </div>
     </div> 
 
     <div class="breakable-row d-flex justify-between gap-4">
