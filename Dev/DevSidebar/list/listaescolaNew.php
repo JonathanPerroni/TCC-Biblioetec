@@ -146,7 +146,7 @@ if(empty($_SESSION['email'])){
                 <?php
                   
 
-                    $sql = "SELECT nome_escola, endereco, bairro, cidade, estado, telefone, codigo_escola FROM tbescola";
+                    $sql = "SELECT codigo, nome_escola, endereco, bairro, cidade, estado, telefone, codigo_escola FROM tbescola";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -166,8 +166,8 @@ if(empty($_SESSION['email'])){
                                 <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($enderecoFormatado) . '</td>
                                 <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($cidadeEstado) . ' </td>   
                                 <td class="flex justify-between min-h-24 md:min-h-10 md:justify-evenly gap-1 px-4 py-1 md:px-6 md:py-4">
-                                    <a href="#" class="font-medium text-blue-600 hover:underline">Editar</a>
-                                    <a href="#" class="font-medium text-red-600 hover:underline">Excluir</a>
+                                    <a href="../editar/editarEscola.php?codigo= '. urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                   <form id="form-excluir" action="../excluir/excluirEscola.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
                                 </td>
                             </tr>';
                         }

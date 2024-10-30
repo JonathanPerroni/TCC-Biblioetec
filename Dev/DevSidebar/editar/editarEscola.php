@@ -9,7 +9,7 @@ if (isset($_GET['codigo'])) {
     $codigo = $_GET['codigo'];
     $codigo = $conn->real_escape_string($codigo);
 
-    $sql = "SELECT * FROM tbadmin WHERE codigo = $codigo";
+    $sql = "SELECT * FROM tbescola WHERE codigo = $codigo";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -41,13 +41,15 @@ if (isset($_SESSION['sucesso'])) {
     unset($_SESSION['sucesso']);
 }
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Admin</title>
+    <title>Dados Escola</title>
     <link rel="stylesheet" href="../src/output.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../DevCss/defaults.css">
@@ -55,11 +57,11 @@ if (isset($_SESSION['sucesso'])) {
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
     <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-        <a href="../list/listaadminNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+        <a href="../list/listaescolaNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             <span class="fw-medium">Voltar</span>
         </a>
-        <a href="" class="nav-link fs-3 fw-medium text-primary">Editar Cadastro</a>
+        <a href="" class="nav-link fs-3 fw-medium text-primary">Dados Escola</a>
     </header>
     <div class="container-sm my-4 bg-white shadow p-4 rounded-3">
  <p class="text-primary">   <?php
@@ -69,31 +71,55 @@ if (isset($_SESSION['sucesso'])) {
                 }
                 ?></p>
 
-    <form action="attAdmin.php" method="POST" class="d-flex flex-column gap-4">
+    <form action="attEscola.php" method="POST" class="d-flex flex-column gap-4">
     <input type="hidden" name="codigo" value="<?php echo htmlspecialchars($row['codigo']); ?>">
 
+    <div class="breakable-row d-flex justify-between gap-4">
+            <div class="w-100">
+                <label for="nome_escola" class="form-label">Nome da Escola:</label>
+                <input type="text" name="nome_escola" placeholder="nome da escola" required class="form-control" maxlength="14" value="<?php echo htmlspecialchars($row['nome_escola']);?>">
+            </div>
+        
+            <div class="w-100">
+                <label for="codigo_escola" class="form-label">Codigo Etec:</label>
+                <input type="text" name="codigo_escola" placeholder="codigo_escola " required class="form-control"  value="<?php echo htmlspecialchars($row['codigo_escola']); ?>">
+            </div>
+    </div>
+   
     <div>
-        <label for="nome" class="form-label">Nome completo:</label>
-        <input type="text" name="nome" placeholder="Insira o nome completo" required class="form-control" value="<?php echo htmlspecialchars($row['nome']);?>">
+        <label for="tipoEscola" class="form-label">Tipo de Escola:</label>
+        <input type="text" name="tipoEscola" placeholder="Qual o tipo de Escola" required class="form-control" value="<?php echo htmlspecialchars($row['tipoEscola']);?>">
     </div>
 
-    <div>
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" name="email" placeholder="Insira o email" required class="form-control" value="<?php echo htmlspecialchars($row['email']);?>">
-    </div>
+    <div class="breakable-row d-flex justify-between gap-4">
+            <div class="w-100">
+                 <label for="endereco" class="form-label">Endereo:</label>        
+                <input type="text" name="endereco" placeholder="endereco" required class="form-control"  value="<?php echo htmlspecialchars($row['endereco']); ?>">   
+            </div>
+        
+            <div class="w-100">
+                <label for="numero" class="form-label">Nº:</label>
+                <input type="text" name="numero" placeholder="numero da escola" required class="form-control"  value="<?php echo htmlspecialchars($row['numero']); ?>">
+             </div>
 
-    <div>
-        <label for="password" class="form-label">Senha:</label>
-        <?php
-            $senha_visivel = htmlspecialchars($row['password']);
-        ?>
-        <input type="password" name="password" placeholder="Insira a senha" required class="form-control"  value="<?php echo $senha_visivel; ?>">
-    </div>
+      
+             <div class="w-100">
+                <label for="bairro" class="form-label">Bairro:</label>
+                <input type="text" name="bairro" placeholder="Bairro da escola" required class="form-control"  value="<?php echo htmlspecialchars($row['bairro']); ?>">
+            </div>
+    </div> 
 
-    <div>
-        <label for="password2" class="form-label">Confirme a Senha:</label>
-        <input type="password" name="password2" placeholder="Confirme a senha" required class="form-control"  value="<?php echo $senha_visivel; ?>">
-    </div>
+    <div class="breakable-row d-flex justify-between gap-4">
+        <div class="w-100">
+                <label for="estado" class="form-label">Estado:</label>
+                <input type="text" name="estado" placeholder="estado da escola" required class="form-control"  value="<?php echo htmlspecialchars($row['estado']); ?>">
+            </div>
+      
+        <div class="w-100">
+                <label for="cep" class="form-label">CEP:</label>
+                <input type="text" name="cep" placeholder="cep da escola" required class="form-control"  value="<?php echo htmlspecialchars($row['cep']); ?>">
+        </div>
+    </div> 
 
     <div class="breakable-row d-flex justify-between gap-4">
         <div class="w-100">
@@ -107,22 +133,18 @@ if (isset($_SESSION['sucesso'])) {
     </div>
 
     <div class="breakable-row d-flex justify-between gap-4">
+    <div class="w-100">
+            <label for="email" class="form-label">Email:</label>
+            <input type="text" name="email" placeholder="Insira o email" required class="form-control" value="<?php echo htmlspecialchars($row['email']);?>">
+        </div>
         <div class="w-100">
-            <label for="cpf" class="form-label">CPF:</label>
-            <input type="text" name="cpf" placeholder="Insira o CPF" required class="form-control" value="<?php echo htmlspecialchars($row['cpf']);?>">
+            <label for="cnpj" class="form-label">CNPJ:</label>
+            <input type="text" name="cnpj" placeholder="Insira o cnpj" required class="form-control" value="<?php echo htmlspecialchars($row['cnpj']);?>">
         </div>
-        <div class="w-50">
-            <label for="codigo_escola" class="form-label">Código da ETEC:</label>
-            <input type="text" name="codigo_escola" placeholder="Insira o código da ETEC" required class="form-control" value="<?php echo htmlspecialchars($row['codigo_escola']);?>">
-        </div>
+   
     </div>
 
-    <div>
-        <label for="acesso" class="form-label">Confirme o acesso:</label>
-        <select name="acesso" id="acesso" required class="form-select">
-            <option value="administrador"><?php echo htmlspecialchars($row['acesso']);?></option>
-        </select>
-    </div>
+    
    
     <button type="submit" class="btn btn-primary">Atualizar</button>
   

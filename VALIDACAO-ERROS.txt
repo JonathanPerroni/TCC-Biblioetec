@@ -85,3 +85,74 @@ if (!empty($celular) && !preg_match('/^(\(?\d{2}\)?\s?)?\d{5}-?\d{4}$/', $celula
     $errors['telefone'] = "Telefone inválido! O formato deve ser (XX) 9XXXX-XXXX ou XX9XXXX-XXXX";
 }?
 
+
+
+function validarCPF($cpf) {
+        // Normalizar o CPF removendo caracteres não numéricos
+        $cpf = preg_replace('/[^0-9]/', '', $cpf);
+    
+        // Verifica se o CPF possui exatamente 11 dígitos
+        if (strlen($cpf) != 11) {
+            $_SESSION['msg'] = "O CPF deve conter 11 dígitos.";
+           
+        }
+    
+        // Verificar se todos os dígitos são iguais (CPF inválido)
+        if (preg_match('/(\d)\1{10}/', $cpf)) {
+            $_SESSION['msg'] = "O CPF informado é inválido (não deve conter todos os dígitos iguais).";
+           
+        }
+    
+        // Extrair os primeiros 9 dígitos e os dois últimos
+        $digitos_iniciais = substr($cpf, 0, 9);
+        $digito_verificador = substr($cpf, -2);
+    
+        // Calcula o primeiro dígito verificador
+        $soma = 0;
+        for ($i = 0; $i < 9; $i++) {
+            $soma += $digitos_iniciais[$i] * (10 - $i);
+        }
+        $primeiro_digito = ($soma % 11) < 2 ? 0 : 11 - ($soma % 11);
+    
+        // Calcula o segundo dígito verificador
+        $soma = 0;
+        for ($i = 0; $i < 9; $i++) {
+            $soma += $digitos_iniciais[$i] * (11 - $i);
+        }
+        $soma += $primeiro_digito * 2;
+        $segundo_digito = ($soma % 11) < 2 ? 0 : 11 - ($soma % 11);
+    
+        // Verifica se os dígitos calculados correspondem aos dois últimos
+        if ($digito_verificador == ($primeiro_digito . $segundo_digito)) {
+            return true;
+        } else {
+            $_SESSION['msg'] = "O CPF informado é inválido. Verifique e tente novamente.";
+           
+        }
+
+        header("Location: editarAdmin.php?codigo=" . $codigo );
+        exit();
+    }
+    
+   
+    
+    // Verifica a validade do CPF
+    if (!empty($cpf) && !validarCPF($cpf)) {
+        // Mensagem de erro já definida na função validarCPF
+    } else {
+        // Verificar se o CPF já está cadastrado no banco de dados
+        $query_verifica_cpf = "SELECT COUNT(*) AS total FROM tbadmin WHERE cpf = ?";
+        $stmt_verifica_cpf = $conn->prepare($query_verifica_cpf);
+        $stmt_verifica_cpf->bind_param("s", $cpf);
+        $stmt_verifica_cpf->execute();
+        $result_verifica_cpf = $stmt_verifica_cpf->get_result();
+        $row_verifica_cpf = $result_verifica_cpf->fetch_assoc();
+    
+        if ($row_verifica_cpf['total'] > 0) {
+            $_SESSION['msg'] = "CPF já cadastrado!";
+        }
+
+        header("Location: editarAdmin.php?codigo=" . $codigo );
+          exit();
+ 
+    }

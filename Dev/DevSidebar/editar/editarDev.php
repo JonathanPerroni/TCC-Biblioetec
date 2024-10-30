@@ -9,7 +9,7 @@ if (isset($_GET['codigo'])) {
     $codigo = $_GET['codigo'];
     $codigo = $conn->real_escape_string($codigo);
 
-    $sql = "SELECT * FROM tbadmin WHERE codigo = $codigo";
+    $sql = "SELECT * FROM tbdev WHERE codigo = $codigo";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -41,6 +41,8 @@ if (isset($_SESSION['sucesso'])) {
     unset($_SESSION['sucesso']);
 }
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -55,7 +57,7 @@ if (isset($_SESSION['sucesso'])) {
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
     <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-        <a href="../list/listaadminNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+        <a href="../list/listadevNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             <span class="fw-medium">Voltar</span>
         </a>
@@ -69,7 +71,7 @@ if (isset($_SESSION['sucesso'])) {
                 }
                 ?></p>
 
-    <form action="attAdmin.php" method="POST" class="d-flex flex-column gap-4">
+    <form action="attDev.php" method="POST" class="d-flex flex-column gap-4">
     <input type="hidden" name="codigo" value="<?php echo htmlspecialchars($row['codigo']); ?>">
 
     <div>
@@ -111,18 +113,20 @@ if (isset($_SESSION['sucesso'])) {
             <label for="cpf" class="form-label">CPF:</label>
             <input type="text" name="cpf" placeholder="Insira o CPF" required class="form-control" value="<?php echo htmlspecialchars($row['cpf']);?>">
         </div>
+   
         <div class="w-50">
-            <label for="codigo_escola" class="form-label">Código da ETEC:</label>
-            <input type="text" name="codigo_escola" placeholder="Insira o código da ETEC" required class="form-control" value="<?php echo htmlspecialchars($row['codigo_escola']);?>">
+           <label for="acesso" class="form-label">Acesso:</label>
+           <input type="text" name="acesso" id="acesso" required class="form-control" value="<?php echo htmlspecialchars($row['acesso']); ?>" placeholder="Digite o nível de acesso">
         </div>
     </div>
-
-    <div>
-        <label for="acesso" class="form-label">Confirme o acesso:</label>
-        <select name="acesso" id="acesso" required class="form-select">
-            <option value="administrador"><?php echo htmlspecialchars($row['acesso']);?></option>
-        </select>
-    </div>
+    <div >
+    <label for="statusDev" class="form-label">Status:</label>
+    <select name="statusDev" id="statusDev" class="form-control " onchange="this.form.submit()">
+        <option value="1" <?php echo ($row['statusDev'] == '1') ? 'selected' : ''; ?>>Acesso Ativo</option>
+        <option value="0" <?php echo ($row['statusDev'] == '0') ? 'selected' : ''; ?>>Acesso Bloqueado</option>
+    </select>
+</div>
+    
    
     <button type="submit" class="btn btn-primary">Atualizar</button>
   
