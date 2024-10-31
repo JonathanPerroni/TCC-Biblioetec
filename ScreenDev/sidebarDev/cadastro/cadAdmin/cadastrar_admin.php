@@ -1,7 +1,7 @@
 <?php
 session_start();
 ob_start();
-include_once("../../../../conexao.php");
+include_once("../../../../conexao/conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
 
 // Validação de login, só entra se estiver logado

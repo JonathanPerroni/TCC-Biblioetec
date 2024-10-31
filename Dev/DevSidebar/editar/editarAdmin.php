@@ -24,6 +24,8 @@ if (isset($_GET['codigo'])) {
 }
 
 
+
+
 // Validação de login, só entra se estiver logado
 if (empty($_SESSION['email'])) {
     // echo  $_SESSION['nome'];
@@ -131,5 +133,5 @@ if (isset($_SESSION['sucesso'])) {
 
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzc"> </script>
-        
+
     </body>
