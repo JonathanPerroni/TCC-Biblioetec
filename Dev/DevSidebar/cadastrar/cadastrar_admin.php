@@ -24,7 +24,18 @@
  
          // Variável para armazenar mensagens de erro
          $_SESSION['msg'] = '';
- 
+        
+        
+         
+
+         
+
+         
+      
+
+
+
+
          
  // Função para validar se é um número de CPF válido
  function validarCPF($cpf) {
@@ -171,25 +182,52 @@
  
  
  
-         // Usando a conexão do arquivo 'conexao_testes.php'
-         $stmt = $conn->prepare("INSERT INTO tbadmin (nome, cpf, email, password, telefone, celular, codigo_escola, acesso, cadastrado_por, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-         $stmt->bind_param("ssssssssss", $nome, $cpf, $email, $password_hash, $telefone, $celular, $codigo_escola, $acesso, $cadastrado_por, $data_cadastro);
- 
-         if ($stmt->execute()) {
-             $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
-             // Redireciona para a página de edição   
-             header("Location: cadastrar_admin.php");
-             exit(); 
-         } else {
-              // Tratar possíveis erros aqui
-             echo "Erro ao atualizar o registro: " . $stmt->error;
-         }
-         
-     $stmt->close();
-     $conn->close();
+    // Usando a conexão do arquivo 'conexao_testes.php'
+    $conn->begin_transaction();
+
+    try {
+        $stmt = $conn->prepare("INSERT INTO tbadmin (nome, cpf, email, password, telefone, celular, codigo_escola, acesso, cadastrado_por, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
-     }
- 
+        if (!$stmt) {
+            throw new Exception("Erro ao preparar a consulta: " . $conn->error);
+        }
+        
+        $stmt->bind_param("ssssssssss", $nome, $cpf, $email, $password_hash, $telefone, $celular, $codigo_escola, $acesso, $cadastrado_por, $data_cadastro);
+    
+        // Função para registrar histórico
+        function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
+            $stmt = $conn->prepare("INSERT INTO historico_usuarios (historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora) VALUES (?, ?, ?, ?, ?)");
+            if (!$stmt) {
+                throw new Exception("Erro ao preparar a consulta de histórico: " . $conn->error);
+            }
+            $stmt->bind_param("sssss", $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora);
+            $stmt->execute();
+            $stmt->close();
+        }
+    
+        if ($stmt->execute()) {
+            if (empty($_SESSION['msg'])) {
+                registraHistorico($conn, "cadastrar", $_SESSION['nome'], $nome, $acesso, $data_cadastro);
+            }
+            $conn->commit();
+            $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
+            // Redireciona para a página de edição
+            header("Location: cadastrar_admin.php");
+            exit();
+        } else {
+            // Tratar possíveis erros aqui
+            throw new Exception("Erro ao atualizar o registro: " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        $conn->rollback();
+        echo $e->getMessage();
+    }
+    
+    $stmt->close();
+    $conn->close();
+
+
+}
          // Validação de login, só entra se estiver logado
      if (empty($_SESSION['email'])) {
          // echo  $_SESSION['nome'];

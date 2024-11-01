@@ -15,26 +15,31 @@ if(empty($_SESSION['email'])){
     echo $_SESSION['nome'];
     echo $_SESSION['acesso'];
 
-    //mensagem e redirecionamento para pagina de login de desenvolvedor
-    $_SESSION['msg'] = "Faça o login!!";
-    header("Location: ../../loginDev.php");
-    exit();
-
+       
+            //mensagem e redirecionamento para pagina de login de desenvolvedor
+            $_SESSION['msg'] = "Faça o login!!";
+            header("Location: ../../loginDev.php");
+            exit();
+       
 }
 
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Desenvolvedores</title>
+    <title>Lista de Administradores</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../User_etec/css/defaults.css">
+    <link rel="stylesheet" href="../../DevCss/defaults.css">
 </head>
 <body>
+
+
     <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
         <div id="nav-left-side">
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 ms-3 bg-[var(--primary)] text-sm text-white rounded-lg hover:bg-[var(--primary-emphasis)] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:hover:bg-[var(--primary-emphasis)]">
@@ -95,7 +100,7 @@ if(empty($_SESSION['email'])){
             </div>
         </aside>
         <button id="dropdown-perfil" data-dropdown-toggle="dropdown" class="flex justify-between items-center max-h-12 pl-4 mr-4 bg-white border-2 border-solid border-[var(--secondary)] border-r-0 rounded-lg text-[var(--secondary)] text-left flex-nowrap text-nowrap" type="button">
-        <div>
+            <div>
              <span class="text-[var(--secondary)] font-medium"><?php echo $_SESSION['nome']; ?></span>
                 <hr>
                 <span class="text-xs text-[var(--secondary)]"><?php echo $_SESSION['acesso']; ?></span>
@@ -134,36 +139,32 @@ if(empty($_SESSION['email'])){
             <table class="min-w-full text-sm text-left rtl:text-right text-[var(--secondary)]">
                 <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
                     <tr class="">
-                        <th scope="col" class="px-6 py-3">Nome</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">Telefone</th>
-                       
-                        <th scope="col" class="px-6 py-3 text-center">Ações</th>
+                        <th scope="col" class="px-6 py-3">Ação Feita</th>
+                        <th scope="col" class="px-6 py-3">Responsavel</th>
+                        <th scope="col" class="px-6 py-3">Usuario</th>
+                        <th scope="col" class="px-6 py-3">Acesso</th>
+                        <th scope="col" class="px-6 py-3">Modificado</th>                     
                     </tr>
                 </thead>
                 <tbody class="border border-[var(--grey)]">
                 <?php
                    
-
-                    $sql = "SELECT codigo, nome, email, telefone FROM tbdev";
+                    $sql = "SELECT historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora FROM historico_usuarios";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
-                           
 
                             echo '
                             <tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">
                                 <th scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">
-                                    ' . htmlspecialchars($row["nome"]) . '
+                                    ' . htmlspecialchars($row["historico_acao"]) . '
                                 </th>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["email"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_responsavel"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_usuario"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_acesso"]) . '</td>
+                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_data_hora"]) . ' </td>   
                                 
-                                <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
-                                    <a href="../editar/editarDev.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
-                                    <form id="form-excluir" action="../excluir/excluirDev.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
-                                </td>
                             </tr>';
                         }
                     } else {
@@ -177,7 +178,6 @@ if(empty($_SESSION['email'])){
         </div>
 
     </main>
-
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 </html>
