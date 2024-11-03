@@ -151,20 +151,46 @@ if (empty($_SESSION['msg'])) {
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 
-
-        // Usando a conexão do arquivo 'conexao_testes.php'
-        $stmt = $conn->prepare("INSERT INTO tbdev (nome, cpf, email, password, telefone, celular, acesso) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $nome, $cpf, $email, $password_hash, $telefone, $celular, $acesso);
-
-        if ($stmt->execute()) {
-            $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
-            // Redireciona para a página de edição   
-            header("Location: cadastrar_dev.php");
-            exit(); 
-        } else {
-             // Tratar possíveis erros aqui
-            echo "Erro ao atualizar o registro: " . $stmt->error;
-        }
+            try {
+                // Usando a conexão do arquivo 'conexao_testes.php'
+                $stmt = $conn->prepare("INSERT INTO tbdev (nome, cpf, email, password, telefone, celular, acesso) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            
+                if (!$stmt) {
+                    throw new Exception("Erro ao preparar a consulta: " . $conn->error);
+                }
+            
+                $stmt->bind_param("sssssss", $nome, $cpf, $email, $password_hash, $telefone, $celular, $acesso);
+            
+                // Função para registrar histórico
+                function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
+                    $stmt = $conn->prepare("INSERT INTO historico_usuarios (historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora) VALUES (?, ?, ?, ?, ?)");
+                    if (!$stmt) {
+                        throw new Exception("Erro ao preparar a consulta de histórico: " . $conn->error);
+                    }
+                    $stmt->bind_param("sssss", $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora);
+                    $stmt->execute();
+                    $stmt->close();
+                }
+            
+                if ($stmt->execute()) {
+                    if (empty($_SESSION['msg'])) {
+                        registraHistorico($conn, "cadastrar", $_SESSION['nome'], $nome, $acesso, date('Y-m-d H:i:s'));
+                    }
+                    $conn->commit();
+                    $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
+                    
+                    // Redireciona para a página de edição
+                    header("Location: cadastrar_dev.php");
+                    exit();
+                } else {
+                    // Tratar possíveis erros aqui
+                    throw new Exception("Erro ao atualizar o registro: " . $stmt->error);
+                }
+            } catch (Exception $e) {
+                $conn->rollback();
+                echo $e->getMessage();
+            }
+            
         
     $stmt->close();
     $conn->close();

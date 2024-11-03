@@ -55,18 +55,46 @@
             $_SESSION['msg'] = "<p>CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX.</p>";
         }
 
-        // Usando prepared statements para evitar SQL Injection
-        $stmt = $conn->prepare("INSERT INTO tbescola (nome_escola, tipoEscola, codigo_escola, endereco, numero, bairro, cidade, cep, estado, cnpj, telefone, celular, cadastrado_por, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssssssssss", $nome_escola, $tipoEscola, $codigo_escola, $endereco, $bairro, $numero, $cidade, $cep, $estado, $cnpj, $telefone, $celular, $cadastrado_por, $data_cadastro);
-
-        if ($stmt->execute()) {
-            $stmt->close();
-            $conn->close();
-            header("Location: ../../DevScreen/pagedevNew.php  ");
-            exit();
-        } else {
-            $_SESSION['msg'] = "<p>Ocorreu um erro ao cadastrar a ETEC.</p>";
+        try {
+            // Usando prepared statements para evitar SQL Injection
+            $stmt = $conn->prepare("INSERT INTO tbescola (nome_escola, tipoEscola, codigo_escola, endereco, numero, bairro, cidade, cep, estado, cnpj, telefone, celular, cadastrado_por, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            if (!$stmt) {
+                throw new Exception("Erro ao preparar a consulta: " . $conn->error);
+            }
+        
+            $stmt->bind_param("ssssssssssssss", $nome_escola, $tipoEscola, $codigo_escola, $endereco, $numero, $bairro, $cidade, $cep, $estado, $cnpj, $telefone, $celular, $cadastrado_por, $data_cadastro);
+        
+            // Função para registrar histórico
+            function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
+                $stmt = $conn->prepare("INSERT INTO historico_usuarios (historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora) VALUES (?, ?, ?, ?, ?)");
+                if (!$stmt) {
+                    throw new Exception("Erro ao preparar a consulta de histórico: " . $conn->error);
+                }
+                $stmt->bind_param("sssss", $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora);
+                $stmt->execute();
+                $stmt->close();
+            }
+        
+            if ($stmt->execute()) {
+                if (empty($_SESSION['msg'])) {
+                    registraHistorico($conn, "cadastrar", $_SESSION['nome'], $nome_escola, "Escola", date('Y-m-d H:i:s'));
+                }
+                $conn->commit();
+                $_SESSION['sucesso'] = "Escola cadastrada com sucesso!";
+                
+                // Redireciona para a página desejada
+                header("Location: cadastrar_escola.php");
+                exit();
+            } else {
+                // Tratar possíveis erros aqui
+                throw new Exception("Erro ao cadastrar a escola: " . $stmt->error);
+            }
+        } catch (Exception $e) {
+            $conn->rollback();
+            echo $e->getMessage();
         }
+        
 
         $conn->close();
     }

@@ -136,7 +136,9 @@ if(empty($_SESSION['email'])){
 
     <main class="mx-1 sm:mx-16 my-8">
         <div class="relative overflow-x-auto shadow-lg rounded-lg">
+                
             <table class="min-w-full text-sm text-left rtl:text-right text-[var(--secondary)]">
+             
                 <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
                     <tr class="">
                         <th scope="col" class="px-6 py-3">Ação Feita</th>
@@ -175,7 +177,9 @@ if(empty($_SESSION['email'])){
                 ?>
                 </tbody>
             </table>
-        </div>
+
+            
+        </div>        
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
