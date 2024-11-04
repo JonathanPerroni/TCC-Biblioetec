@@ -31,16 +31,16 @@ mysqli_set_charset($conn, "utf8mb4");
         <a href="#" class="text-2xl  xl:text-4xl xl:mx-4 text-primary font-semibold" tabindex="-1">Biblio<span class="text-secondary">etec</span></a>
         <h1 class="text-2xl font-light text-primary">ACERVOS CADASTRADOS</h1>
     </header>  
-    <main class="mt-4 mx-4 w-full flex flex-col items-center gap-4 ">
-        <form name="pesquisa" action="tela_aluno.php" method="get" class="w-[75%] flex items-center justify-between gap-2 px-2 py-2 bg-white rounded-md shadow">
-            <div class="w-full flex gap-2 items-center">
+    <main class="mt-1 mx-1 md:mt-4 md:mx-4 w-full flex flex-col items-center gap-4 ">
+        <form name="pesquisa" action="tela_aluno.php" method="get" class="w-full md:w-[75%] flex flex-column md:flex-row items-center justify-between gap-2 px-2 py-2 bg-white rounded-md shadow">
+            <div class="w-full flex flex-column justify-center gap-2 items-center">
                 <label for="pesquise" class="font-medium text-secondary text-nowrap">Pesquisa de livros:</label>
                 <input type="text" name="pesquisa" value="<?php echo htmlspecialchars($pesquisa); ?>" class="w-full border border-secondary rounded text-secondary placeholder:text-secondary px-2 py-1">
             </div>
             <input type="submit" value="Pesquisar" class="bg-secondary text-white rounded shadow h-full px-4">
         </form>
 
-        <div class="relative overflow-x-auto shadow-lg rounded-lg">
+        <div class="w-full md:w-[75%] relative overflow-x-auto shadow-lg rounded-lg">
             <table class="min-w-full text-sm text-left rtl:text-right text-[var(--secondary)]">
                 <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
                     <tr class="">
@@ -76,13 +76,13 @@ mysqli_set_charset($conn, "utf8mb4");
                             $prateleira = htmlspecialchars($row['prateleira']);
                             $quantidade = htmlspecialchars($row['quantidade']);
                             echo '<tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">$codigo</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">$nome_escola</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">$titulo</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">$autor</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">$estante</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">$prateleira</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">$quantidade</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $codigo .  '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $nome_escola . '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $titulo . '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $autor . '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $estante . '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $prateleira . '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $quantidade . '</td>';
                             echo "</tr>";
                         }
                     } else {
