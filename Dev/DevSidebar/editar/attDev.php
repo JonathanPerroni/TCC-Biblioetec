@@ -144,29 +144,56 @@ if (!empty($_SESSION['msg'])) {
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 $statusDev = isset($_POST['statusDev']) ? (int)$_POST['statusDev'] : 0; // Default para 0 se não estiver definido
 // Atualiza os dados no banco de dados
-$sql = "UPDATE tbdev SET
-            nome = ?, 
-            email = ?, 
-            password = ?, 
-            telefone = ?, 
-            celular = ?, 
-            cpf = ?, 
-            acesso = ?, 
-            statusDev = ? 
-        WHERE codigo = ?";
+try {
+    $sql = "UPDATE tbdev SET
+                nome = ?, 
+                email = ?, 
+                password = ?, 
+                telefone = ?, 
+                celular = ?, 
+                cpf = ?, 
+                acesso = ?, 
+                statusDev = ? 
+            WHERE codigo = ?";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssi", $nome, $email, $hashedPassword, $telefone, $celular, $cpf, $acesso, $statusDev, $codigo);
+    $stmt = $conn->prepare($sql);
 
-if ($stmt->execute()) {
-    $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
-    // Redireciona para a página de edição
-    header("Location: editarDev.php?codigo=" . urlencode($codigo));
-    exit();
-} else {
-    // Tratar possíveis erros aqui
-    echo "Erro ao atualizar o registro: " . $stmt->error;
+    if (!$stmt) {
+        throw new Exception("Erro ao preparar a consulta: " . $conn->error);
+    }
+
+    $stmt->bind_param("ssssssssi", $nome, $email, $hashedPassword, $telefone, $celular, $cpf, $acesso, $statusDev, $codigo);
+
+    // Função para registrar histórico
+    function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
+        $stmt = $conn->prepare("INSERT INTO historico_usuarios (historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora) VALUES (?, ?, ?, ?, ?)");
+        if (!$stmt) {
+            throw new Exception("Erro ao preparar a consulta de histórico: " . $conn->error);
+        }
+        $stmt->bind_param("sssss", $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    if ($stmt->execute()) {
+        if (empty($_SESSION['msg'])) {
+            registraHistorico($conn, "editar", $_SESSION['nome'], $nome, $acesso, date('Y-m-d H:i:s'));
+        }
+        $conn->commit();
+        $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
+        
+        // Redireciona para a página de edição
+        header("Location: editarDev.php?codigo=" . urlencode($codigo));
+        exit();
+    } else {
+        // Tratar possíveis erros aqui
+        throw new Exception("Erro ao atualizar o registro: " . $stmt->error);
+    }
+} catch (Exception $e) {
+    $conn->rollback();
+    echo $e->getMessage();
 }
+
 
 $stmt->close();
 $conn->close();

@@ -151,20 +151,46 @@ if (empty($_SESSION['msg'])) {
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 
-
-        // Usando a conexão do arquivo 'conexao_testes.php'
-        $stmt = $conn->prepare("INSERT INTO tbdev (nome, cpf, email, password, telefone, celular, acesso) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $nome, $cpf, $email, $password_hash, $telefone, $celular, $acesso);
-
-        if ($stmt->execute()) {
-            $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
-            // Redireciona para a página de edição   
-            header("Location: cadastrar_dev.php");
-            exit(); 
-        } else {
-             // Tratar possíveis erros aqui
-            echo "Erro ao atualizar o registro: " . $stmt->error;
-        }
+            try {
+                // Usando a conexão do arquivo 'conexao_testes.php'
+                $stmt = $conn->prepare("INSERT INTO tbdev (nome, cpf, email, password, telefone, celular, acesso) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            
+                if (!$stmt) {
+                    throw new Exception("Erro ao preparar a consulta: " . $conn->error);
+                }
+            
+                $stmt->bind_param("sssssss", $nome, $cpf, $email, $password_hash, $telefone, $celular, $acesso);
+            
+                // Função para registrar histórico
+                function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
+                    $stmt = $conn->prepare("INSERT INTO historico_usuarios (historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora) VALUES (?, ?, ?, ?, ?)");
+                    if (!$stmt) {
+                        throw new Exception("Erro ao preparar a consulta de histórico: " . $conn->error);
+                    }
+                    $stmt->bind_param("sssss", $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora);
+                    $stmt->execute();
+                    $stmt->close();
+                }
+            
+                if ($stmt->execute()) {
+                    if (empty($_SESSION['msg'])) {
+                        registraHistorico($conn, "cadastrar", $_SESSION['nome'], $nome, $acesso, date('Y-m-d H:i:s'));
+                    }
+                    $conn->commit();
+                    $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
+                    
+                    // Redireciona para a página de edição
+                    header("Location: cadastrar_dev.php");
+                    exit();
+                } else {
+                    // Tratar possíveis erros aqui
+                    throw new Exception("Erro ao atualizar o registro: " . $stmt->error);
+                }
+            } catch (Exception $e) {
+                $conn->rollback();
+                echo $e->getMessage();
+            }
+            
         
     $stmt->close();
     $conn->close();
@@ -203,11 +229,11 @@ if (empty($_SESSION['msg'])) {
     <link rel="stylesheet" href="../src/output.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../DevCss/defaults.css">
-    <link rel="stylesheet" href="./css/cadastrar_dev.css">
+    
 </head>
 <body class="w-100 h-auto d-flex flex-column align-itens-center">
     <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-        <a href="index.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+        <a href="../../DevScreen/pagedevNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             <span class="fw-medium">Início</span>
         </a>

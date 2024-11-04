@@ -1,0 +1,102 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --primary: #b20000;
+  --primary-emphasis: #8e0000;
+  --primary-light: #f0bebe;
+  --secondary: #3a5461;
+  --secondary-emphasis: #23323a;
+  --light-grey: #d8dddf;
+  --grey: #9daab0;
+  --dark-grey: #273336;
+  --off-black: #141617;
+  --off-white: #efefef;
+}
+
+* {
+  box-sizing: border-box !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+body {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+
+  background-color: var(--off-white) !important;
+}
+
+/* BOOTSTRAP OVERRIDE */
+
+/* Primary color configuration */
+.text-primary {
+  color: var(--primary) !important;
+}
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+.btn-primary {
+  background-color: var(--primary) !important;
+  border-color: var(--primary-emphasis) !important;
+}
+.btn-primary:hover {
+  background-color: var(--primary-emphasis) !important;
+  border-color: var(--primary-emphasis) !important;
+}
+
+/* Secondary color configuration */
+.text-secondary {
+  color: var(--secondary) !important;
+}
+.bg-secondary {
+  background-color: var(--secondary) !important;
+}
+.btn-secondary {
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary-emphasis) !important;
+}
+.btn-outline-secondary {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border-color: var(--secondary) !important;
+  color: var(--secondary);
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-emphasis) !important;
+  border-color: var(--secondary-emphasis) !important;
+}
+.btn-outline-secondary:hover {
+  background-color: var(--secondary) !important;
+  border-color: var(--secondary-emphasis) !important;
+}
+.btn-primary:focus {
+  box-shadow: -3px 0px 0px var(--primary-light),
+    0px -3px 0px var(--primary-light), 3px 0px 0px var(--primary-light),
+    0px 3px 0px var(--primary-light) !important;
+}
+.btn-outline-secondary:focus {
+  color: var(--secondary) !important;
+  box-shadow: -3px 0px 0px var(--light-grey), 0px -3px 0px var(--light-grey),
+    3px 0px 0px var(--light-grey), 0px 3px 0px var(--light-grey) !important;
+}
+
+/* Form configuration */
+.form-label {
+  color: var(--secondary) !important;
+  font-weight: 500 !important;
+}
+.form-control,
+.form-select {
+  color: var(--secondary) !important;
+  border-color: var(--light-grey) !important;
+}
+.form-control:focus,
+.form-select:focus {
+  color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
+  box-shadow: -3px 0px 0px var(--light-grey), 0px -3px 0px var(--light-grey),
+    3px 0px 0px var(--light-grey), 0px 3px 0px var(--light-grey) !important;
+}
+.form-control::placeholder {
+  color: var(--grey) !important;
+}

@@ -76,31 +76,67 @@ if (!empty($_SESSION['msg'])) {
 }
 
 
-// Atualiza os dados no banco de dados
-$sql = "UPDATE tbescola SET
-            nome_escola = ?,
-            codigo_escola = ?, 
-            tipoEscola = ?, 
-            endereco = ?, 
-            numero = ?, 
-            bairro = ?, 
-            estado = ?, 
-            cep = ?,
-            telefone = ?, 
-            celular = ?, 
-            email = ?, 
-            cnpj = ?          
-        WHERE codigo = ?";
+try {
+    // Inicia a transação
+    $conn->begin_transaction();
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssississsss", $nome_escola, $codigo_escola, $tipoEscola, $endereco, $numero, $bairro, $estado, $cep, $telefone, $celular, $email, $cnpj, $codigo);
+    // Atualiza os dados no banco de dados
+    $sql = "UPDATE tbescola SET
+                nome_escola = ?,
+                codigo_escola = ?, 
+                tipoEscola = ?, 
+                endereco = ?, 
+                numero = ?, 
+                bairro = ?, 
+                estado = ?, 
+                cep = ?,
+                telefone = ?, 
+                celular = ?, 
+                email = ?, 
+                cnpj = ?          
+            WHERE codigo = ?";
 
-if ($stmt->execute()) {
-    $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
-    header("Location: editarEscola.php?codigo=" . urlencode($codigo));
-    exit();
-} else {
-    echo "Erro ao atualizar o registro: " . $stmt->error;
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        throw new Exception("Erro ao preparar a consulta: " . $conn->error);
+    }
+
+    $stmt->bind_param("ssssississsss", $nome_escola, $codigo_escola, $tipoEscola, $endereco, $numero, $bairro, $estado, $cep, $telefone, $celular, $email, $cnpj, $codigo);
+
+    // Função para registrar histórico
+    function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
+        $stmt = $conn->prepare("INSERT INTO historico_usuarios (historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora) VALUES (?, ?, ?, ?, ?)");
+        if (!$stmt) {
+            throw new Exception("Erro ao preparar a consulta de histórico: " . $conn->error);
+        }
+        $stmt->bind_param("sssss", $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    // Executa a atualização
+    if ($stmt->execute()) {
+        // Verifica se há uma sessão ativa para registrar no histórico
+        if (empty($_SESSION['msg'])) {
+            registraHistorico($conn, "editar", $_SESSION['nome'], $nome_escola, "Escola", date('Y-m-d H:i:s'));
+        }
+
+        // Confirma a transação
+        $conn->commit();
+
+        $_SESSION['sucesso'] = "Registro atualizado com sucesso!";
+        
+        // Redireciona para a página de edição
+        header("Location: editarEscola.php?codigo=" . urlencode($codigo));
+        exit();
+    } else {
+        throw new Exception("Erro ao atualizar o registro: " . $stmt->error);
+    }
+} catch (Exception $e) {
+    // Reverte a transação em caso de erro
+    $conn->rollback();
+    echo $e->getMessage();
 }
 
 $stmt->close();
