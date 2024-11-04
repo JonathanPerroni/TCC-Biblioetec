@@ -6,14 +6,10 @@ include_once("../../conexao/conexao.php");
 
 date_default_timezone_set('America/Sao_Paulo');
 
-
 //importa as classe do phpmailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
-
-
 
 $conectar = filter_input(INPUT_POST, 'conectar', FILTER_SANITIZE_STRING);
 if ($conectar) {
@@ -23,13 +19,20 @@ if ($conectar) {
     // Pesquisar o usuário no banco de dados
     if (!empty($email) && !empty($password)) {
         // Usando prepared statements para evitar SQL Injection
-        $stmt = $conn->prepare("SELECT codigo, nome, cpf, email, password, telefone, celular, acesso FROM tbdev WHERE email = ? LIMIT 1");
+        $stmt = $conn->prepare("SELECT codigo, nome, cpf, email, password, telefone, celular, acesso, statusDev FROM tbdev WHERE email = ? LIMIT 1");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $resultado_usuario = $stmt->get_result();
 
         if ($resultado_usuario && $resultado_usuario->num_rows > 0) {
             $row_usuario = $resultado_usuario->fetch_assoc();
+
+            // Verificar se o usuário está bloqueado
+            if ($row_usuario['statusDev'] == 0) {
+                $_SESSION['msg'] = "Usuário bloqueado!";
+                header("Location: ../loginDev.php");
+                exit();
+            }
             
             // Verifique se a senha está sendo comparada corretamente
             if (password_verify($password, $row_usuario['password'])) {
@@ -128,9 +131,6 @@ if ($conectar) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     $_SESSION['msg'] = "<p styler='color: #f00;'> ErRo: Email nao enviado!</p>";
                 }
-
-
-                
 
                 if ($result_up_usuario === false) {
                     die("Erro ao executar a query: " . $result_up_usuario->error);
