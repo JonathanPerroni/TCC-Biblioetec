@@ -44,7 +44,7 @@
                         <div class="input-group min-w-full flex flex-col">    
                             <label for="password" id="labelPassword" class="text-secondary font-medium">Senha</label>
                             <input type="password" name="password" id="password" placeholder="Insira sua senha" required class="border-2 border-[var(--secondary)] rounded text-secondary placeholder:text-[var(--grey)]">
-                            <a href="./DevValidation/validar_cod_aut_recuperar_senha.php" class="text-secondary text-sm text-right underline">Esqueci minha senha</a>
+                            <a href="../Validation/validar_cod_aut_recuperar_senha.php" class="text-secondary text-sm text-right underline">Esqueci minha senha</a>
                         </div>
 
                         

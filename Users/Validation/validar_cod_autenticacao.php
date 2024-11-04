@@ -56,7 +56,7 @@ if ($conn instanceof mysqli) {
                 // Redirecionar conforme o tipo de acesso
                 switch ($_SESSION['acesso']) {
                     case 'administrador':
-                        header('Location: pagina_admin.php');
+                        header('Location: ../pageUser/admin/pageAdmin.php');
                         break;
                     case 'funcionario':
                         header('Location: pagina_funcionario.php');
