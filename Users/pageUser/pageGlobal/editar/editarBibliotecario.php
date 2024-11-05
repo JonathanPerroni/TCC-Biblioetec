@@ -2,14 +2,14 @@
 session_start();
 
 ob_start(); // Inicia o buffer de saída
-include("../../../conexao/conexao.php");
+include("../../../../conexao/conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
 
 if (isset($_GET['codigo'])) {
     $codigo = $_GET['codigo'];
     $codigo = $conn->real_escape_string($codigo);
 
-    $sql = "SELECT * FROM tbdev WHERE codigo = $codigo";
+    $sql = "SELECT * FROM tbbibliotecario WHERE codigo = $codigo";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -22,6 +22,8 @@ if (isset($_GET['codigo'])) {
     echo "ID não fornecido!";
     exit;
 }
+
+
 
 
 // Validação de login, só entra se estiver logado
@@ -41,8 +43,6 @@ if (isset($_SESSION['sucesso'])) {
     unset($_SESSION['sucesso']);
 }
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -52,12 +52,12 @@ if (isset($_SESSION['sucesso'])) {
     <title>Cadastro de Admin</title>
     <link rel="stylesheet" href="../src/output.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../DevCss/defaults.css">
-    <link rel="stylesheet" href="../../DevCss/cadastrar_admin.css">
+    <link rel="stylesheet" href="../../../UserCss/defaults.css">
+   
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
     <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-        <a href="../list/listadevNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+        <a href="../list/listaadminNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             <span class="fw-medium">Voltar</span>
         </a>
@@ -71,7 +71,7 @@ if (isset($_SESSION['sucesso'])) {
                 }
                 ?></p>
 
-    <form action="attDev.php" method="POST" class="d-flex flex-column gap-4">
+    <form action="attBibliotecario.php" method="POST" class="d-flex flex-column gap-4">
     <input type="hidden" name="codigo" value="<?php echo htmlspecialchars($row['codigo']); ?>">
 
     <div>
@@ -113,20 +113,29 @@ if (isset($_SESSION['sucesso'])) {
             <label for="cpf" class="form-label">CPF:</label>
             <input type="text" name="cpf" placeholder="Insira o CPF" required class="form-control" value="<?php echo htmlspecialchars($row['cpf']);?>">
         </div>
-   
         <div class="w-50">
-           <label for="acesso" class="form-label">Acesso:</label>
-           <input type="text" name="acesso" id="acesso" required class="form-control" value="<?php echo htmlspecialchars($row['acesso']); ?>" placeholder="Digite o nível de acesso">
+            <label for="codigo_escola" class="form-label">Código da ETEC:</label>
+            <input type="text" name="codigo_escola" placeholder="Insira o código da ETEC" required class="form-control" value="<?php echo htmlspecialchars($row['codigo_escola']);?>">
         </div>
     </div>
-    <div >
-                <label for="statusDev" class="form-label">Status:</label>
-                <select name="statusDev" id="statusDev" class="form-control " onchange="this.form.submit()">
-                    <option value="1" <?php echo ($row['statusDev'] == '1') ? 'selected' : ''; ?>>Acesso Ativo</option>
-                    <option value="0" <?php echo ($row['statusDev'] == '0') ? 'selected' : ''; ?>>Acesso Bloqueado</option>
-                </select>
+    <div class="breakable-row d-flex justify-between gap-4">
+        <div class="w-50">
+            <label for="acesso" class="form-label">Confirme o acesso:</label>
+            <select name="acesso" id="acesso" required class="form-select">
+                <option value="administrador"><?php echo htmlspecialchars($row['acesso']);?></option>
+            </select>  
+        </div>
+        <div class="w-50">
+            <label for="status" class="form-label">Status:</label>
+                <select name="status" id="status" class="form-control " onchange="this.form.submit()">
+                    <option value="1" <?php echo ($row['status'] == '1') ? 'selected' : ''; ?>>Acesso Ativo</option>
+                    <option value="0" <?php echo ($row['status'] == '0') ? 'selected' : ''; ?>>Acesso Bloqueado</option>
+                </select> 
+        </div>
     </div>
-    
+
+   
+
    
     <button type="submit" class="btn btn-primary">Atualizar</button>
   
@@ -135,5 +144,5 @@ if (isset($_SESSION['sucesso'])) {
 
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzc"> </script>
-        
+
     </body>
