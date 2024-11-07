@@ -24,7 +24,7 @@
                 <select name="nome_escola" required class="form-select">
                     <option value="">Selecione a escola</option>
                     <?php
-                    include '../../conexao.php'; // Conexão externa
+                    include '../../conexao/conexao.php'; // Conexão externa
                     
                     // Buscar escolas
                     $sql = "SELECT nome_escola FROM tbescola";

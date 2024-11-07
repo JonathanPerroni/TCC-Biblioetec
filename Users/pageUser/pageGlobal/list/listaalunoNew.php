@@ -31,7 +31,7 @@ if(empty($_SESSION['email'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Administradores</title>
+    <title>Lista de Aluno</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
@@ -52,10 +52,35 @@ if(empty($_SESSION['email'])){
             <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-[var(--primary-emphasis)]">
                 <ul class="space-y-2 font-medium">
                     <li>
-                        <a href="../../DevScreen/pagedevNew.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                        <span class="ms-3">Início</span>
-                        </a>
+                        <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
+                            <?php
+                                        
+
+                                        // Verifica o tipo de acesso do usuário
+                                        $acesso = $_SESSION['acesso'] ?? ''; // Define o valor de acesso na sessão, caso não exista
+
+                                        // Define o link de redirecionamento com base no tipo de acesso
+                                        switch ($acesso) {
+                                            case 'administrador':
+                                                $pagina_inicial = "../../admin/pageAdmin.php";
+                                                break;
+                                            case 'bibliotecario':
+                                                $pagina_inicial = "../../bibliotecario/pageBibliotecario.php";
+                                                break;
+                                             default:
+                                                // Redireciona para uma página padrão, caso o acesso não seja identificado
+                                                $pagina_inicial = "../../../login/login.php";
+                                                break;
+                                        }
+                            ?>
+
+                            <a href="<?php echo $pagina_inicial; ?>" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house">
+                                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+                                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                </svg>
+                                <span class="ms-3">Início</span>
+                            </a>
                     </li>
                     <li>
                         <button type="button" class="flex w-full items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-lista" data-collapse-toggle="dropdown-lista">
@@ -67,13 +92,13 @@ if(empty($_SESSION['email'])){
                         </button>
                         <ul id="dropdown-lista" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="../list/listaadminNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Admin</a>
+                                <a href="../list/listaadminNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Admins</a>
                             </li>
                             <li>
-                                <a href="../list/listaescolaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escola</a>
+                                <a href="../list/listaescolaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escolas</a>
                             </li>
                             <li>
-                                <a href="../list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Bibliotecario</a>
+                                <a href="../list/listadevNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Devs</a>
                             </li>
                         </ul>
                     </li>
@@ -86,19 +111,19 @@ if(empty($_SESSION['email'])){
                         </button>
                         <ul id="dropdown-cadastro" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="../cadastrar/cadastrar_admin.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Admin</a>
+                                <a href="../cadastrar/cadastrar_dev.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Devs</a>
                             </li>
                             <li>
-                                <a href="../cadastrar/cadastrar_escola.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Escola</a>
+                                <a href="../cadastrar/cadastrar_admin.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Admins</a>
                             </li>
                             <li>
-                                <a href="../cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecario</a>
+                                <a href="../cadastrar/cadastrar_escola.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Escolas</a>
                             </li>
                         </ul>
                     </li>
                     <!-- Link para Relatório -->
             <li>
-                <a href=" historico.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
+                <a href="../Relatorio/historico.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text mr-2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                         <polyline points="14 2 14 8 20 8"/>
@@ -149,22 +174,21 @@ if(empty($_SESSION['email'])){
 
     <main class="mx-1 sm:mx-16 my-8">
         <div class="relative overflow-x-auto shadow-lg rounded-lg">
-                
             <table class="min-w-full text-sm text-left rtl:text-right text-[var(--secondary)]">
-             
                 <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
                     <tr class="">
-                        <th scope="col" class="px-6 py-3">Ação Feita</th>
-                        <th scope="col" class="px-6 py-3">Responsavel</th>
-                        <th scope="col" class="px-6 py-3">Usuario</th>
-                        <th scope="col" class="px-6 py-3">Acesso</th>
-                        <th scope="col" class="px-6 py-3">Modificado</th>                     
+                        <th scope="col" class="px-6 py-3">Nome</th>
+                        <th scope="col" class="px-6 py-3">responsavel</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Nome da Etec</th>
+                        <th scope="col" class="px-6 py-3">Nome Curso</th>
+                        <th scope="col" class="px-6 py-3 text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody class="border border-[var(--grey)]">
                 <?php
                    
-                    $sql = "SELECT historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora FROM historico_usuarios";
+                    $sql = "SELECT codigo, nome, email, nome_escola, responsavel, nome_curso FROM tbalunos";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -173,13 +197,16 @@ if(empty($_SESSION['email'])){
                             echo '
                             <tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">
                                 <th scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">
-                                    ' . htmlspecialchars($row["historico_acao"]) . '
+                                    ' . htmlspecialchars($row["nome"]) . '
                                 </th>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_responsavel"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_usuario"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_acesso"]) . '</td>
-                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["historico_data_hora"]) . ' </td>   
-                                
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["responsavel"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["email"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["nome_escola"]) . '</td>
+                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["nome_curso"]) . ' </td>   
+                                <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
+                                    <a href="../editar/editarAluno.php ?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                    <form id="form-excluir" action="../excluir/excluirAdmin.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
+                                </td>
                             </tr>';
                         }
                     } else {
@@ -190,9 +217,7 @@ if(empty($_SESSION['email'])){
                 ?>
                 </tbody>
             </table>
-
-            
-        </div>        
+        </div>
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>

@@ -18,17 +18,22 @@ if ($conectar) {
 
     // Função para verificar o login em uma tabela específica e retornar os dados do usuário
     function verificarLogin($conn, $email, $password, $tabela, $acessoTipo) {
-        $stmt = $conn->prepare("SELECT codigo, nome, cpf, email, password, telefone, celular, acesso, statusDev FROM $tabela WHERE email = ? LIMIT 1");
+        $stmt = $conn->prepare("SELECT codigo, nome, cpf, email, password, telefone, celular, acesso, status FROM $tabela WHERE email = ? LIMIT 1");
+        
+        if ($stmt === false) {
+            die("Erro ao preparar a consulta: " . $conn->error); // Exibe o erro específico
+        }
+    
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $resultado_usuario = $stmt->get_result();
-
+    
         if ($resultado_usuario && $resultado_usuario->num_rows > 0) {
             $row_usuario = $resultado_usuario->fetch_assoc();
             
-            if ($row_usuario['statusDev'] == 0) {
+            if ($row_usuario['status'] == 0) {
                 $_SESSION['msg'] = "Usuário bloqueado!";
-                header("Location: ../loginDev.php");
+                header("Location: ../login/login.php");
                 exit();
             }
             
@@ -40,7 +45,7 @@ if ($conectar) {
                 $_SESSION['telefone'] = $row_usuario['telefone'];
                 $_SESSION['celular'] = $row_usuario['celular'];
                 $_SESSION['acesso'] = $acessoTipo;
-
+    
                 return $row_usuario; // Retorna os dados do usuário
             }
         }

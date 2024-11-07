@@ -25,7 +25,7 @@
                     <option value="">Selecione a escola</option>
                     <?php
                     // Conectar ao banco de dados
-                    include '../../conexao.php';
+                    include '../../conexao/conexao.php';
 
                     // Buscar escolas
                     $sql = "SELECT nome_escola FROM tbescola";

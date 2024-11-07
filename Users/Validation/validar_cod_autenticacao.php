@@ -62,7 +62,7 @@ if ($conn instanceof mysqli) {
                         header('Location: pagina_funcionario.php');
                         break;
                     case 'bibliotecario':
-                        header('Location: pagina_bibliotecario.php');
+                        header('Location: ../pageUser/bibliotecario/pagebibliotecario.php');
                         break;
                     case 'professor':
                         header('Location: pagina_professor.php');

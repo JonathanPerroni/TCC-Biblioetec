@@ -94,7 +94,7 @@ if(empty($_SESSION['email'])){
                                 <a href="../list/listaescolaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escolas</a>
                             </li>
                             <li>
-                                <a href="../list/listadevNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Devs</a>
+                                <a href="../list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Bibliotecario</a>
                             </li>
                         </ul>
                     </li>
@@ -107,13 +107,13 @@ if(empty($_SESSION['email'])){
                         </button>
                         <ul id="dropdown-cadastro" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="../cadastrar/cadastrar_dev.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Devs</a>
-                            </li>
-                            <li>
                                 <a href="../cadastrar/cadastrar_admin.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Admins</a>
                             </li>
                             <li>
                                 <a href="../cadastrar/cadastrar_escola.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Escolas</a>
+                            </li>
+                            <li>
+                                <a href="../cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecário</a>
                             </li>
                         </ul>
                     </li>

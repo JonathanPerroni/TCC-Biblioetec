@@ -26,11 +26,11 @@
                             <label for="acesso" class="text-secondary font-medium">Tipo de acesso:</label>
                             <select name="acesso" id="acesso" required class="border-2 border-[var(--secondary)] rounded text-secondary">
                                 <option value="" disabled selected>Escolha uma opção</option>
-                                <option value="administrador">administrador</option>
-                                <option value="funcionario">funcionário</option>
-                                <option value="bibliotecario">fibliotecário</option>
-                                <option value="professor">professor</option>
-                                <option value="aluno">aluno</option>
+                                <option value="administrador">Administrador</option>
+                                <option value="funcionario">Funcionário</option>
+                                <option value="bibliotecario">Bibliotecário</option>
+                                <option value="professor">Professor</option>
+                                <option value="aluno">Aluno</option>
                                 
                             </select>
                         </div>
