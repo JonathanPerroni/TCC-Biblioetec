@@ -17,7 +17,7 @@ if (!empty($dados['SendRecupSenha'])) {
     // Valida o tipo de acesso
     $acesso = $dados['tipo_acesso'];
     $tabelasAcesso = [
-        'admin' => 'tbadmin',
+        'administrador' => 'tbadmin',
         'funcionario' => 'tbfuncionarios',
         'bibliotecario' => 'tbbibliotecario',
         'professor' => 'tbprofessores',
@@ -142,7 +142,7 @@ $conn->close();
                 <label class="text-secondary font-medium">Tipo de Acesso:</label>
                 <select name="tipo_acesso" required class="border-2 border-[var(--secondary)] rounded text-secondary">
                     <option value="">Selecione</option>
-                    <option value="admin">Administrador</option>
+                    <option value="administrador">Administrador</option>
                     <option value="funcionario">Funcionário</option>
                     <option value="bibliotecario">Bibliotecário</option>
                     <option value="professor">Professor</option>
@@ -151,7 +151,7 @@ $conn->close();
             </div>
             <div>
                 <input type="submit" name="SendRecupSenha" value="Recuperar" class="w-full h-12 rounded shadow-sm bg-secondary text-2xl text-white font-semibold cursor-pointer"><br>
-                <a href="protect.php" name="SendLembrouSenha" class="text-secondary text-xs text-right underline float-right mt-1">Lembrou a Senha?</a>
+                <a href="../login/logout.php" name="SendLembrouSenha" class="text-secondary text-xs text-right underline float-right mt-1">Lembrou a Senha?</a>
             </div>
             <div class="mensagemErro">
                 <?php

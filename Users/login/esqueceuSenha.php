@@ -1,46 +1,51 @@
 <?php
 session_start();
-ob_start();
-date_default_timezone_set('America/Sao_Paulo');
-
 include_once "../../conexao/conexao.php";
 
-// Recebendo a chave
-$chave_recuperar_senha = filter_input(INPUT_GET, 'chave', FILTER_DEFAULT);
+// Verifica se os dados foram enviados via POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-if (empty($chave_recuperar_senha)) {
-    $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Link Inválido!!!</p>";
-    header('Location: ../../logout.php');
-    exit();
-} else {
-    // Inicializa a variável $tipo_acesso
-    $tipo_acesso = null;
+    // Recebe os dados do formulário
+    $codigo_usuario = filter_input(INPUT_POST, 'codigo_usuario', FILTER_VALIDATE_INT);
+    $chave_recuperar_senha = filter_input(INPUT_POST, 'chave_recuperar_senha', FILTER_DEFAULT);
+    $nova_senha = filter_input(INPUT_POST, 'nova_senha', FILTER_DEFAULT);
+    $confirmar_senha = filter_input(INPUT_POST, 'confirmar_senha', FILTER_DEFAULT);
 
-    // Verificar qual tipo de usuário está usando o link de recuperação com base no tipo de acesso
-    $query_usuario = "SELECT codigo, tipo_acesso FROM tbdev WHERE chave_recuperar_senha = ? LIMIT 1";
-    $stmt = $conn->prepare($query_usuario);
+    // Valida se as senhas coincidem
+    if ($nova_senha !== $confirmar_senha) {
+        $_SESSION['msg'] = "<p style='color: #f00;'>Erro: As senhas não coincidem!</p>";
+        header("Location: ../../app/redefinir-senha.php?chave=$chave_recuperar_senha");
+        exit();
+    }
+
+    // Valida a força da senha (mínimo 8 caracteres, pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial)
+    if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $nova_senha)) {
+        $_SESSION['msg'] = "<p style='color: #f00;'>Erro: A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial.</p>";
+        header("Location: ../../app/redefinir-senha.php?chave=$chave_recuperar_senha");
+        exit();
+    }
+
+    // Atualiza a senha no banco de dados
+    $query = "UPDATE $tabela_usuario SET senha = ? WHERE codigo = ? AND chave_recuperar_senha = ?";
+    $stmt = $conn->prepare($query);
 
     if ($stmt) {
-        $stmt->bind_param('s', $chave_recuperar_senha);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows === 0) {
-            $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Link Inválido!!!</p>";
-            header('Location: ../../logout.php');
-            exit();
+        // Criptografa a nova senha
+        $senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
+        
+        // Executa a atualização
+        $stmt->bind_param('sis', $senha_hash, $codigo_usuario, $chave_recuperar_senha);
+        if ($stmt->execute()) {
+            $_SESSION['msg'] = "<p style='color: #0a0;'>Senha redefinida com sucesso!</p>";
+            header("Location: ../../login.php"); // Redireciona para a página de login
         } else {
-            $stmt->bind_result($codigo_usuario, $tipo_acesso);
-            $stmt->fetch();
+            $_SESSION['msg'] = "<p style='color: #f00;'>Erro ao redefinir a senha. Tente novamente!</p>";
         }
-
         $stmt->close();
+    } else {
+        $_SESSION['msg'] = "<p style='color: #f00;'>Erro ao preparar a consulta. Tente novamente!</p>";
     }
 }
-
-// Define a tabela com base no tipo de acesso do usuário
-$tabela_usuario = ($tipo_acesso === 'administrador') ? 'tbadmin' : 'tbdev';
-
 ?>
 
 <!DOCTYPE html>

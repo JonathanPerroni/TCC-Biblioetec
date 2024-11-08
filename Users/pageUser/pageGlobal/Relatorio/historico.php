@@ -51,11 +51,36 @@ if(empty($_SESSION['email'])){
         <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full " aria-label="Sidebar">
             <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-[var(--primary-emphasis)]">
                 <ul class="space-y-2 font-medium">
-                    <li>
-                        <a href="../../DevScreen/pagedevNew.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                        <span class="ms-3">Início</span>
-                        </a>
+                <li>
+                        <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
+                            <?php
+                                        
+
+                                        // Verifica o tipo de acesso do usuário
+                                        $acesso = $_SESSION['acesso'] ?? ''; // Define o valor de acesso na sessão, caso não exista
+
+                                        // Define o link de redirecionamento com base no tipo de acesso
+                                        switch ($acesso) {
+                                            case 'administrador':
+                                                $pagina_inicial = "../../admin/pageAdmin.php";
+                                                break;
+                                            case 'bibliotecario':
+                                                $pagina_inicial = "../../bibliotecario/pageBibliotecario.php";
+                                                break;
+                                             default:
+                                                // Redireciona para uma página padrão, caso o acesso não seja identificado
+                                                $pagina_inicial = "../../../login/login.php";
+                                                break;
+                                        }
+                            ?>
+
+                            <a href="<?php echo $pagina_inicial; ?>" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house">
+                                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+                                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                </svg>
+                                <span class="ms-3">Início</span>
+                            </a>
                     </li>
                     <li>
                         <button type="button" class="flex w-full items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-lista" data-collapse-toggle="dropdown-lista">
@@ -67,13 +92,13 @@ if(empty($_SESSION['email'])){
                         </button>
                         <ul id="dropdown-lista" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="../list/listaadminNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Admin</a>
-                            </li>
-                            <li>
                                 <a href="../list/listaescolaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escola</a>
                             </li>
                             <li>
                                 <a href="../list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Bibliotecario</a>
+                            </li>
+                            <li>
+                                <a href="../list/listaalunoNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Aluno</a>
                             </li>
                         </ul>
                     </li>
@@ -86,13 +111,13 @@ if(empty($_SESSION['email'])){
                         </button>
                         <ul id="dropdown-cadastro" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="../cadastrar/cadastrar_admin.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Admin</a>
-                            </li>
-                            <li>
                                 <a href="../cadastrar/cadastrar_escola.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Escola</a>
                             </li>
                             <li>
                                 <a href="../cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecario</a>
+                            </li>
+                            <li>
+                                <a href="../cadastrar/cadastrar_aluno.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Aluno</a>
                             </li>
                         </ul>
                     </li>

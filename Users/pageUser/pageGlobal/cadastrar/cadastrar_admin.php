@@ -261,9 +261,9 @@
     <link rel="stylesheet" href="../../DevCss/cadastrar_admin.css">
 </head>
 <body class="w-100 h-auto d-flex flex-column align-itens-center">
-        <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-             <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
-             <?php
+    <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
+                <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
+                <?php
                                         
 
                                         // Verifica o tipo de acesso do usuário
@@ -290,7 +290,7 @@
                 <span class="fw-medium">Início</span>
             </a>
             <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Administrador</a>
-        </header>
+    </header>
         <div class="container-sm my-4 bg-white shadow p-4 rounded-3">
         <p class="text-primary">   <?php
                 if (isset($_SESSION['msg'])) {

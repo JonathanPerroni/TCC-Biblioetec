@@ -31,7 +31,7 @@ if (empty($_SESSION['email'])) {
     // echo  $_SESSION['nome'];
     // echo  $_SESSION['acesso'];
     $_SESSION['msg'] = "Faça o Login!!";
-    header("Location:  ../../../../loginDev.php");
+    header("Location:  ../../../../../login/login.php");
     exit();
 }
 
@@ -49,15 +49,15 @@ if (isset($_SESSION['sucesso'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Admin</title>
-    <link rel="stylesheet" href="../src/output.css">
+    <title>Cadastro de Bibliotecario</title>
+    <link rel="stylesheet" href="../../../../../src/output.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../../UserCss/defaults.css">
    
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
     <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-        <a href="../list/listaadminNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+        <a href="../list/listabibliotecarioNew.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             <span class="fw-medium">Voltar</span>
         </a>

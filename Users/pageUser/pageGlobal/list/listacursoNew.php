@@ -15,14 +15,12 @@ if(empty($_SESSION['email'])){
     echo $_SESSION['nome'];
     echo $_SESSION['acesso'];
 
-       
-            //mensagem e redirecionamento para pagina de login de desenvolvedor
-            $_SESSION['msg'] = "Faça o login!!";
-            header("Location: ../../loginDev.php");
-            exit();
-       
-}
+       //mensagem e redirecionamento para pagina de login de desenvolvedor
+       $_SESSION['msg'] = "Faça o login!!";
+       header("Location: ../../loginDev.php");
+       exit();
 
+}
 
 ?>
 
@@ -31,15 +29,13 @@ if(empty($_SESSION['email'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Administradores</title>
+    <title>Lista do Cursos</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../../UserCss/defaults.css">
 </head>
 <body>
-
-
     <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
         <div id="nav-left-side">
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 ms-3 bg-[var(--primary)] text-sm text-white rounded-lg hover:bg-[var(--primary-emphasis)] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:hover:bg-[var(--primary-emphasis)]">
@@ -48,7 +44,7 @@ if(empty($_SESSION['email'])){
             </button>
             <a href="#" class="text-4xl mx-4 text-primary font-semibold hidden md:inline" tabindex="-1">Biblio<span class="text-secondary">etec</span></a>
         </div>
-<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full" aria-label="Sidebar">
+        <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full" aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-[var(--primary-emphasis)]">
         <ul class="space-y-2 font-medium">
         <li>
@@ -146,12 +142,11 @@ if(empty($_SESSION['email'])){
     </div>
 </aside>
         <button id="dropdown-perfil" data-dropdown-toggle="dropdown" class="flex justify-between items-center max-h-12 pl-4 mr-4 bg-white border-2 border-solid border-[var(--secondary)] border-r-0 rounded-lg text-[var(--secondary)] text-left flex-nowrap text-nowrap" type="button">
-            <div>
+        <div>
              <span class="text-[var(--secondary)] font-medium"><?php echo $_SESSION['nome']; ?></span>
                 <hr>
                 <span class="text-xs text-[var(--secondary)]"><?php echo $_SESSION['acesso']; ?></span>
             </div>
-
             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round translate-x-[1rem]"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
         </button>
 
@@ -185,40 +180,38 @@ if(empty($_SESSION['email'])){
             <table class="min-w-full text-sm text-left rtl:text-right text-[var(--secondary)]">
                 <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
                     <tr class="">
-                        <th scope="col" class="px-6 py-3">Nome</th>
-                        <th scope="col" class="px-6 py-3">Código Etec</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">Telefone</th>
-                        <th scope="col" class="px-6 py-3">CPF</th>
+                        <th scope="col" class="px-6 py-3">Nome Curso</th>
+                        <th scope="col" class="px-6 py-3 text-center">Tempo do Curso</th>                        
                         <th scope="col" class="px-6 py-3 text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody class="border border-[var(--grey)]">
                 <?php
-                   
-                    $sql = "SELECT codigo, nome, email, telefone, codigo_escola, cpf FROM tbbibliotecario";
+                  
+
+                    $sql = "SELECT codigo, nome_curso, tempo_curso FROM tbcursos";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
 
+                            $nome_curso = $row["nome_curso"];
+                            $tempo_curso = $row["tempo_curso"];
+                           
                             echo '
                             <tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">
-                                <th scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">
-                                    ' . htmlspecialchars($row["nome"]) . '
-                                </th>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["codigo_escola"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["email"]) . '</td>
-                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["telefone"]) . '</td>
-                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["cpf"]) . ' </td>   
-                                <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
-                                    <a href="../editar/editarBibliotecario.php ?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
-                                    <form id="form-excluir" action="../excluir/excluirAdmin.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
+                              
+                                <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($row["nome_curso"]) . '</td>                                
+                                <td class="px-4 py-1 md:px-6 md:py-4 min-h-24 md:min-h-10 border-r border-[var(--grey)]">' . htmlspecialchars($row["tempo_curso"]) . '</td>
+                           
+                                <td class="flex justify-between min-h-24 md:min-h-10 md:justify-evenly gap-1 px-4 py-1 md:px-6 md:py-4">
+                                    <a href="../editar/editarCurso.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                   <form id="form-excluir" action="../excluir/excluirEscola.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
                                 </td>
                             </tr>';
                         }
                     } else {
-                        echo '<tr><td colspan="5" class="text-center px-6 py-4">Nenhum dado encontrado</td></tr>';
+                        echo '<tr><td colspan="5" class="text-center px-4 py-1 md:px-6 md:py-4">Nenhum dado encontrado</td></tr>';
                     }
 
                     mysqli_close($conn);
@@ -228,6 +221,7 @@ if(empty($_SESSION['email'])){
         </div>
 
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 </html>
