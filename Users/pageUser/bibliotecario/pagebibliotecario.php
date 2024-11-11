@@ -52,10 +52,10 @@ if(empty($_SESSION['email'])){
                                         // Define o link de redirecionamento com base no tipo de acesso
                                         switch ($acesso) {
                                             case 'administrador':
-                                                $pagina_inicial = "../../admin/pageAdmin.php";
+                                                $pagina_inicial = "../admin/pageAdmin.php";
                                                 break;
                                             case 'bibliotecario':
-                                                $pagina_inicial = "../../bibliotecario/pageBibliotecario.php";
+                                                $pagina_inicial = "../bibliotecario/pagebibliotecario.php";
                                                 break;
                                              default:
                                                 // Redireciona para uma página padrão, caso o acesso não seja identificado
@@ -85,14 +85,12 @@ if(empty($_SESSION['email'])){
                         <a href="../pageGlobal/cadastrar/cadastrar_aluno.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Aluno</a>
                     </li>
                     <li>
+                        <a href="../pageGlobal/cadastrar/cadastrar_funcionario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Funcionario</a>
+                    </li>
+                    <li>
                         <a href="../pageGlobal/cadastrar/cadastrar_professor.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Professor</a>
                     </li>
-                    <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_curso.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Curso</a>
-                    </li>
-                    <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_escola.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Escolas</a>
-                    </li>
+                   
                 </ul>
             </li>
             <li>

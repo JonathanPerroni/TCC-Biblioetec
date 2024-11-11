@@ -100,7 +100,7 @@
 
                     // Verificar se o CPF já está cadastrado no banco de dados
                     if (empty($_SESSION['msg'])) {
-                        $query_verifica_cpf = "SELECT COUNT(*) AS total FROM tbprofessores WHERE cpf = ?";
+                        $query_verifica_cpf = "SELECT COUNT(*) AS total FROM tbfuncionarios WHERE cpf = ?";
                         $stmt_verifica_cpf = $conn->prepare($query_verifica_cpf);
                         $stmt_verifica_cpf->bind_param("s", $cpf);
                         $stmt_verifica_cpf->execute();
@@ -124,7 +124,7 @@
 
             // Verificar se o email já está cadastrado no banco de dados
             if (empty($errors['email']) && empty($errors['confirma_email'])) {
-                $query_verifica_email = "SELECT COUNT(*) AS total FROM tbprofessores WHERE email = ?";
+                $query_verifica_email = "SELECT COUNT(*) AS total FROM tbfuncionarios WHERE email = ?";
                 $stmt_verifica_email = $conn->prepare($query_verifica_email);
                 $stmt_verifica_email->bind_param("s", $email);
                 $stmt_verifica_email->execute();
@@ -142,7 +142,7 @@
 
         try {
                         // Usando prepared statements para evitar SQL Injection
-                $stmt = $conn->prepare("INSERT INTO tbprofessores (nome, cpf, telefone, celular, codigo_escola, nome_escola, email, acesso, password, cadastrado_por, data_cadastro, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO tbfuncionarios (nome, cpf, telefone, celular, codigo_escola, nome_escola, email, acesso, password, cadastrado_por, data_cadastro, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 if (!$stmt) {
                     throw new Exception("Erro ao preparar a consulta: " . $conn->error);
@@ -176,17 +176,17 @@
         
             if ($stmt->execute()) {
                 if (empty($_SESSION['msg'])) {
-                    registraHistorico($conn, "cadastrar", $_SESSION['nome'], $nome, "Professores", date('Y-m-d H:i:s'));
+                    registraHistorico($conn, "cadastrar", $_SESSION['nome'], $nome, "Funcionario", date('Y-m-d H:i:s'));
                 }
                 $conn->commit();
                 $_SESSION['sucesso'] = "Professor cadastrada com sucesso!";
                 
                 // Redireciona para a página desejada
-                header("Location: cadastrar_professor.php");
+                header("Location: cadastrar_funcionario.php");
                 exit();
             } else {
                 // Tratar possíveis erros aqui
-                throw new Exception("Erro ao cadastrar a professores: " . $stmt->error);
+                throw new Exception("Erro ao cadastrar a funcionario: " . $stmt->error);
             }
         } catch (Exception $e) {
             $conn->rollback();
@@ -270,7 +270,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
                 <span class="fw-medium">Início</span>
             </a>
-        <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Professor</a>
+        <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Funcionario</a>
     </header>
 
     <div class="container-sm my-4 bg-white shadow p-4 rounded-3 w-50">
@@ -337,7 +337,7 @@
                             <label for="acesso" class="form-label">Confirme o acesso:</label>
                             <select name="acesso" id="acesso" required class="form-select">
                                 <option value="">Tipo de Acesso</option>
-                                <option value="aluno">Professor</option>
+                                <option value="aluno">Funcionario</option>
                             </select>
                         </div>
                         <div class="w-100">
