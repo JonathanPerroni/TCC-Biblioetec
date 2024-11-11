@@ -48,7 +48,7 @@ if(empty($_SESSION['email'])){
             </button>
             <a href="#" class="text-4xl mx-4 text-primary font-semibold hidden md:inline" tabindex="-1">Biblio<span class="text-secondary">etec</span></a>
         </div>
-        <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full" aria-label="Sidebar">
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full" aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-[var(--primary-emphasis)]">
         <ul class="space-y-2 font-medium">
         <li>
@@ -65,11 +65,11 @@ if(empty($_SESSION['email'])){
                                                 $pagina_inicial = "../../admin/pageAdmin.php";
                                                 break;
                                             case 'bibliotecario':
-                                                $pagina_inicial = "../../bibliotecario/pageBibliotecario.php";
+                                                $pagina_inicial = "../../bibliotecario/pagebibliotecario.php";
                                                 break;
                                              default:
                                                 // Redireciona para uma página padrão, caso o acesso não seja identificado
-                                                $pagina_inicial = "../../../login/login.php";
+                                                $pagina_inicial = "../../../../login/login.php";
                                                 break;
                                         }
                             ?>
@@ -92,17 +92,18 @@ if(empty($_SESSION['email'])){
                 </button>
                 <ul id="dropdown-cadastro" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_admin.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Admins</a>
+                        <a href="../cadastrar/cadastrar_aluno.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Aluno</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecario</a>
+                        <a href="../cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecario</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_curso.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Curso</a>
+                        <a href="../cadastrar/cadastrar_funcionario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Funcionario</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_escola.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Escolas</a>
+                        <a href="../cadastrar/cadastrar_professor.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Professor</a>
                     </li>
+                   
                 </ul>
             </li>
             <li>
@@ -114,24 +115,26 @@ if(empty($_SESSION['email'])){
                     </svg>
                 </button>
                 <ul id="dropdown-lista" class="hidden py-2 space-y-2">
+                   
                     <li>
-                        <a href="../pageGlobal/list/listaadminNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Admin</a>
+                        <a href="../list/listaalunoNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Aluno</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista bibliotecario</a>
+                        <a href="../list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista bibliotecario</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/list/listacursoNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Curso</a>
+                        <a href="../list/listafuncionarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Funcionario</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/list/listaescolaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escolas</a>
+                        <a href="/list/listaprofessorNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Professor</a>
                     </li>
+                   
                 </ul>
             </li>
            
             <!-- Link para Relatório -->
             <li>
-                <a href="../pageGlobal/Relatorio/historico.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
+                <a href="../Relatorio/historico.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text mr-2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                         <polyline points="14 2 14 8 20 8"/>
