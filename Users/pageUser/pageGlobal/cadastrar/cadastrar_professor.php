@@ -337,7 +337,7 @@
                             <label for="acesso" class="form-label">Confirme o acesso:</label>
                             <select name="acesso" id="acesso" required class="form-select">
                                 <option value="">Tipo de Acesso</option>
-                                <option value="aluno">Professor</option>
+                                <option value="professor">Professor</option>
                             </select>
                         </div>
                         <div class="w-100">

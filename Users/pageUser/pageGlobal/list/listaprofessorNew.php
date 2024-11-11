@@ -5,31 +5,41 @@ ob_start();
 
 date_default_timezone_set('America/Sao_Paulo');
 
-include_once("../../../conexao/conexao.php");
+ include("../../../../conexao/conexao.php");
+
 
 //Validação de login, só entra se estiver logado
+//verifica se o email nao sessão esta vazio, ou seja, se o usuario esta loga 
 if(empty($_SESSION['email'])){
+    //exibe o nome eo nivel de acesso do usuario
     echo $_SESSION['nome'];
     echo $_SESSION['acesso'];
 
-    $_SESSION['msg'] = "Faça o Login!!";
-    header("Location: ../../login/login.php ");
-    exit();
+       
+            //mensagem e redirecionamento para pagina de login de desenvolvedor
+            $_SESSION['msg'] = "Faça o login!!";
+            header("Location: ../../loginDev.php");
+            exit();
+       
 }
 
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - Admin</title>
+    <title>Lista de Professor</title>
 
-    <link rel="stylesheet" href="../../UserCss/defaults.css">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../UserCss/defaults.css">
 </head>
 <body>
+
+
     <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
         <div id="nav-left-side">
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 ms-3 bg-[var(--primary)] text-sm text-white rounded-lg hover:bg-[var(--primary-emphasis)] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:hover:bg-[var(--primary-emphasis)]">
@@ -52,10 +62,10 @@ if(empty($_SESSION['email'])){
                                         // Define o link de redirecionamento com base no tipo de acesso
                                         switch ($acesso) {
                                             case 'administrador':
-                                                $pagina_inicial = "../admin/pageAdmin.php";
+                                                $pagina_inicial = "../../admin/pageAdmin.php";
                                                 break;
                                             case 'bibliotecario':
-                                                $pagina_inicial = "../bibliotecario/pagebibliotecario.php";
+                                                $pagina_inicial = "../../bibliotecario/pageBibliotecario.php";
                                                 break;
                                              default:
                                                 // Redireciona para uma página padrão, caso o acesso não seja identificado
@@ -82,18 +92,17 @@ if(empty($_SESSION['email'])){
                 </button>
                 <ul id="dropdown-cadastro" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_aluno.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Aluno</a>
+                        <a href="../pageGlobal/cadastrar/cadastrar_admin.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Admins</a>
                     </li>
                     <li>
                         <a href="../pageGlobal/cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecario</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_funcionario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Funcionario</a>
+                        <a href="../pageGlobal/cadastrar/cadastrar_curso.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Curso</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/cadastrar/cadastrar_professor.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Professor</a>
+                        <a href="../pageGlobal/cadastrar/cadastrar_escola.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Escolas</a>
                     </li>
-                   
                 </ul>
             </li>
             <li>
@@ -105,20 +114,18 @@ if(empty($_SESSION['email'])){
                     </svg>
                 </button>
                 <ul id="dropdown-lista" class="hidden py-2 space-y-2">
-                   
                     <li>
-                        <a href="../pageGlobal/list/listaalunoNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Aluno</a>
+                        <a href="../pageGlobal/list/listaadminNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Admin</a>
                     </li>
                     <li>
                         <a href="../pageGlobal/list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista bibliotecario</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/list/listafuncionarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Funcionario</a>
+                        <a href="../pageGlobal/list/listacursoNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Curso</a>
                     </li>
                     <li>
-                        <a href="../pageGlobal/list/listaprofessorNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Professor</a>
+                        <a href="../pageGlobal/list/listaescolaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Escolas</a>
                     </li>
-                   
                 </ul>
             </li>
            
@@ -138,10 +145,9 @@ if(empty($_SESSION['email'])){
         </ul>
     </div>
 </aside>
-
         <button id="dropdown-perfil" data-dropdown-toggle="dropdown" class="flex justify-between items-center max-h-12 pl-4 mr-4 bg-white border-2 border-solid border-[var(--secondary)] border-r-0 rounded-lg text-[var(--secondary)] text-left flex-nowrap text-nowrap" type="button">
             <div>
-                <span class="text-[var(--secondary)] font-medium"><?php echo $_SESSION['nome']; ?></span>
+             <span class="text-[var(--secondary)] font-medium"><?php echo $_SESSION['nome']; ?></span>
                 <hr>
                 <span class="text-xs text-[var(--secondary)]"><?php echo $_SESSION['acesso']; ?></span>
             </div>
@@ -153,23 +159,19 @@ if(empty($_SESSION['email'])){
         <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-[184px] dark:bg-white">
             <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-perfil">
             <li>
-                 
-                <a href="../DevSidebar/editar/editarDev.php?codigo=<?php ' . urlencode($row["codigo"]) . '; ?>" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:rounded-t-md hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round">
-                        <circle cx="12" cy="8" r="5"/>
-                        <path d="M20 21a8 8 0 0 0-16 0"/>
-                    </svg>    
+                <a href="#" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)]  hover:rounded-t-md hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>    
                     Perfil
                 </a>
             </li>
             <li>
-                <a href="" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
+                <a href="#" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-help"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
                     Ajuda
                 </a>
             </li>
             <li>
-                <a href="../../login/logout.php" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:rounded-b-md hover:bg-gray-100 dark:hover:bg-[var(--primary-emphasis)] dark:hover:text-white">
+                <a href="../../DevScreen/logout.php" class="flex gap-4 justify-start items-center px-4 py-2 text-[var(--secondary)] hover:rounded-b-md hover:bg-gray-100 dark:hover:bg-[var(--secondary)] dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
                     Sair
                 </a>
@@ -178,8 +180,54 @@ if(empty($_SESSION['email'])){
         </div>
     </nav>
 
+    <main class="mx-1 sm:mx-16 my-8">
+        <div class="relative overflow-x-auto shadow-lg rounded-lg">
+            <table class="min-w-full text-sm text-left rtl:text-right text-[var(--secondary)]">
+                <thead class="text-sm text-white uppercase bg-[var(--primary)] border border-[var(--primary-emphasis)]">
+                    <tr class="">
+                        <th scope="col" class="px-6 py-3">Nome</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Nome Escola</th>
+                        <th scope="col" class="px-6 py-3">CPF</th>
+                        <th scope="col" class="px-6 py-3">Acesso</th>
+                        <th scope="col" class="px-6 py-3 text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="border border-[var(--grey)]">
+                <?php
+                   
+                    $sql = "SELECT codigo, nome, email, nome_escola, cpf, acesso FROM tbprofessores";
+                    $result = mysqli_query($conn, $sql);
 
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+
+                            echo '
+                            <tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">
+                                <th scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">
+                                    ' . htmlspecialchars($row["nome"]) . '
+                                </th>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["email"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["nome_escola"]) . '</td>
+                                <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["cpf"]) . '</td>
+                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["acesso"]) . ' </td>   
+                                <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
+                                    <a href="../editar/editarProfessor.php ?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                    <form id="form-excluir" action="../excluir/excluirAdmin.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
+                                </td>
+                            </tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="5" class="text-center px-6 py-4">Nenhum dado encontrado</td></tr>';
+                    }
+
+                    mysqli_close($conn);
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-
 </body>
 </html>

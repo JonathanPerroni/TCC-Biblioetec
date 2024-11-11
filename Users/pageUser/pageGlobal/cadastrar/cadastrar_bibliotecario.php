@@ -359,7 +359,7 @@
                     <label for="acesso" class="form-label">Confirme o acesso:</label>
                     <select name="acesso" id="acesso" required class="form-select">
                         <option value="">Tipo de Acesso</option>
-                        <option value="administrador">Administrador</option>
+                        <option value="bibliotecario">Bibliotecario</option>
                     </select>
                 </div>
                 <button type="reset" class="btn btn-outline-secondary">Limpar</button>
