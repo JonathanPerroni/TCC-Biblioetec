@@ -66,7 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
             }
 
             // Registrar histórico de cadastro
-            registraHistorico($conn, "cadastrar", $_SESSION['nome'], $titulo, $cadastrado_por, $data_cadastro);
+            registraHistorico($conn, "cadastrar", $_SESSION['nome'], $titulo, "livro", $data_cadastro);
+            
 
             $conn->commit();
             $_SESSION["msg"] = "<p class='alert alert-success mt-4'>Novo livro cadastrado com sucesso!</p>";
@@ -121,10 +122,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
     <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-        <a href="../../../bibliotecario/pagebibliotecario.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
-            <span class="fw-medium">Início</span>
-        </a>
+          <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
+          <?php
+                                        
+
+                                        // Verifica o tipo de acesso do usuário
+                                        $acesso = $_SESSION['acesso'] ?? ''; // Define o valor de acesso na sessão, caso não exista
+
+                                        // Define o link de redirecionamento com base no tipo de acesso
+                                        switch ($acesso) {
+                                            case 'administrador':
+                                                $pagina_inicial = "../../../admin/pageAdmin.php";
+                                                break;
+                                            case 'bibliotecario':
+                                                $pagina_inicial = "../../../bibliotecario/pageBibliotecario.php";
+                                                break;
+                                             default:
+                                                // Redireciona para uma página padrão, caso o acesso não seja identificado
+                                                $pagina_inicial = "../../../../login/login.php";
+                                                break;
+                                        }
+             ?>
+
+        
+        <a href="<?php echo $pagina_inicial; ?>" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                <span class="fw-medium">Início</span>
+            </a>
         <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Livro</a>
     </header>
 

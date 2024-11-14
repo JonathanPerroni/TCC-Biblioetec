@@ -139,16 +139,16 @@ if(empty($_SESSION['email'])){
                                                                                             <a href="../pageGlobal/cadastrar/acervo/cadastrar_livro.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Livro</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Jornal/Revista</a>
+                                                                                            <a href="../pageGlobal/cadastrar/acervo/cadastrar_jornal_revista.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Jornal/Revista</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Midia</a>
+                                                                                            <a href="../pageGlobal/cadastrar/acervo/cadastrar_midia.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Midia</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Jogo</a>
+                                                                                            <a href="../pageGlobal/cadastrar/acervo/cadastrar_jogos.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Jogo</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar TCC</a>
+                                                                                            <a href="../pageGlobal/cadastrar/acervo/cadastrar_tcc.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar TCC</a>
                                                                                         </li>
                                                                                     </ul>
                                                                                 </li>  
@@ -168,13 +168,13 @@ if(empty($_SESSION['email'])){
                                                                                     </button>
                                                                                     <ul id="dropdown-listaacervo" class="hidden py-2 space-y-2">
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Livro</a>
+                                                                                            <a href="../pageGlobal/list/acervo/listalivroNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Livro</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Jornal/Revista</a>
+                                                                                            <a href="../pageGlobal/list/acervo/listajornalrevistaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Jornal/Revista</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Midia</a>
+                                                                                            <a href="../pageGlobal/list/acervo/listamidiaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Midia</a>
                                                                                         </li>
                                                                                         <li>
                                                                                             <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Jogo</a>

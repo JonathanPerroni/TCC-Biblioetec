@@ -1,38 +1,177 @@
+<?php
+session_start();
+include '../../../../../conexao/conexao.php'; // Conexão externa
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
+    $codigo_escola = filter_input(INPUT_POST, 'codigo_escola', FILTER_SANITIZE_STRING);
+    $classe = filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
+    $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
+    $data_publicacao = filter_input(INPUT_POST, 'data_publicacao', FILTER_SANITIZE_NUMBER_INT);
+    $editora = filter_input(INPUT_POST, 'editora', FILTER_SANITIZE_STRING);
+    $categoria = filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_STRING);
+    $issn = filter_input(INPUT_POST, 'issn', FILTER_SANITIZE_STRING);
+    $data_edicao = filter_input(INPUT_POST, 'data_edicao', FILTER_SANITIZE_STRING) ;   
+    $estante = filter_input(INPUT_POST, 'estante', FILTER_SANITIZE_NUMBER_INT);
+    $prateleira = filter_input(INPUT_POST, 'prateleira', FILTER_SANITIZE_NUMBER_INT);
+    $edicao = filter_input(INPUT_POST, 'edicao', FILTER_SANITIZE_NUMBER_INT);
+    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+    
+    $cadastrado_por = $_SESSION['nome']; // Usuário logado que cadastrou o item
+    $data_cadastro = date("Y-m-d H:i:s"); // Data e hora do cadastro
+
+  
+
+    try {
+        // Iniciar transação
+        $conn->begin_transaction();
+
+        // Verificar se já existe um livro com o mesmo issn no mesmo código de escola
+        $sql_check = "SELECT * FROM tbjornal_revista WHERE issn = ? AND codigo_escola = ?";
+        $stmt_check = $conn->prepare($sql_check);
+        if (!$stmt_check) {
+            throw new Exception("Erro ao preparar a consulta de verificação: " . $conn->error);
+        }
+        $stmt_check->bind_param("ss", $issn, $codigo_escola);
+        $stmt_check->execute();
+        $result = $stmt_check->get_result();
+
+        if ($result->num_rows > 0) {
+            $_SESSION["msg"] = "<p class='alert alert-warning mt-4'>Este issn já está cadastrado para essa escola.</p>";
+            $conn->rollback();
+            header("Location: cadastrar_jornal_revista.php");
+            exit();
+        }
+
+        // Inserir os dados na tabela tbjornal_revista
+        $sql = "INSERT INTO tbjornal_revista (codigo_escola, classe, titulo, editora, data_publicacao, categoria, issn, estante, prateleira, edicao, quantidade, cadastrado_por, data_cadastro) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            throw new Exception("Erro ao preparar a consulta de inserção: " . $conn->error);
+        }
+        $stmt->bind_param("ssssssssssiis", $codigo_escola, $classe, $titulo, $editora, $data_publicacao, $categoria, $issn, $estante, $prateleira, $edicao, $quantidade, $cadastrado_por, $data_cadastro);
+
+        if ($stmt->execute()) {
+            // Função para registrar histórico
+            function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
+                $stmt_hist = $conn->prepare("INSERT INTO historico_usuarios (historico_acao, historico_responsavel, historico_usuario, historico_acesso, historico_data_hora) VALUES (?, ?, ?, ?, ?)");
+                if (!$stmt_hist) {
+                    throw new Exception("Erro ao preparar a consulta de histórico: " . $conn->error);
+                }
+                $stmt_hist->bind_param("sssss", $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora);
+                $stmt_hist->execute();
+                $stmt_hist->close();
+            }
+
+            // Registrar histórico de cadastro
+            registraHistorico($conn, "cadastrar", $_SESSION['nome'], $titulo, "livro", $data_cadastro);
+            
+
+            $conn->commit();
+            $_SESSION["msg"] = "<p class='alert alert-success mt-4'>Novo livro cadastrado com sucesso!</p>";
+            header("Location: cadastrar_jornal_revista.php");
+            exit();
+        } else {
+            throw new Exception("Erro ao executar o cadastro: " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        $conn->rollback();
+        $_SESSION["msg"] = "<p class='alert alert-danger mt-4'>" . $e->getMessage() . "</p>";
+        header("Location: cadastrar_jornal_revista.php");
+        exit();
+    } finally {
+        $stmt_check->close();
+        if (isset($stmt)) {
+            $stmt->close();
+        }
+        $conn->close();
+    }
+}
+
+      // Validação de login, só entra se estiver logado
+      if (empty($_SESSION['email'])) {
+        // echo  $_SESSION['nome'];
+        // echo  $_SESSION['acesso'];
+        $_SESSION['msg'] = "Faça o Login!!";
+        header("Location:  ../../../../../loginDev.php");
+        exit();
+    }
+
+    // Verifica se há mensagem na sessão
+    if (isset($_SESSION['sucesso'])) {
+        $sucesso = htmlspecialchars($_SESSION['sucesso'], ENT_QUOTES, 'UTF-8');
+        echo "<script>alert('$sucesso');</script>";
+        // Limpa a mensagem da sessão
+        unset($_SESSION['sucesso']);
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Publicações Periódicas</title>
-    <link rel="stylesheet" href="../../src/output.css">
+    <title>Cadastro de Livro</title>
+    <link rel="stylesheet" href="../../../../../src/output.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/defaults.css">
+    <link rel="stylesheet" href="../../../../UserCss/defaults.css">
 </head>
 <body class="w-100 h-auto d-flex flex-column align-items-center">
     <header class="container-fluid d-flex justify-content-center align-items-center bg-white py-2 px-4 shadow">
-        <a href="./index_acervo.php" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
-            <span class="fw-medium">Início</span>
-        </a>
-        <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Publicação Periódica</a>
+          <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
+          <?php
+                                        
+
+                                        // Verifica o tipo de acesso do usuário
+                                        $acesso = $_SESSION['acesso'] ?? ''; // Define o valor de acesso na sessão, caso não exista
+
+                                        // Define o link de redirecionamento com base no tipo de acesso
+                                        switch ($acesso) {
+                                            case 'administrador':
+                                                $pagina_inicial = "../../../admin/pageAdmin.php";
+                                                break;
+                                            case 'bibliotecario':
+                                                $pagina_inicial = "../../../bibliotecario/pageBibliotecario.php";
+                                                break;
+                                             default:
+                                                // Redireciona para uma página padrão, caso o acesso não seja identificado
+                                                $pagina_inicial = "../../../../login/login.php";
+                                                break;
+                                        }
+             ?>
+
+        
+        <a href="<?php echo $pagina_inicial; ?>" class="d-flex align-items-center position-absolute start-0 ms-4 nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                <span class="fw-medium">Início</span>
+            </a>
+        <a href="#" class="nav-link fs-3 fw-medium text-primary">Cadastrar Livro</a>
     </header>
 
-    <div class="container-sm my-4 bg-white shadow p-4 rounded-3">
+    <div class="container-sm w-50 my-4 bg-white shadow p-4 rounded-3">
+    <p class="text-primary d-flex flex-column">   <?php
+                if (isset($_SESSION['msg'])) {
+                    echo $_SESSION['msg'];
+                    unset($_SESSION['msg']);
+                }
+                ?></p>
         <form action="" method="POST" class="d-flex flex-column gap-4">
             <div>
-                <label for="nome_escola" class="form-label">Escola:</label>
-                <select name="nome_escola" required class="form-select">
+                <label for="codigo_escola" class="form-label">Escola:</label>
+                <select name="codigo_escola" required class="form-select">
                     <option value="">Selecione a escola</option>
                     <?php
-                    include '../../conexao.php'; // Conexão externa
-
+                   
+                    
                     // Buscar escolas
-                    $sql = "SELECT nome_escola FROM tbescola";
+                    $sql = "SELECT codigo_escola FROM tbescola";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            echo '<option value="' . htmlspecialchars($row["nome_escola"]) . '">' . htmlspecialchars($row["nome_escola"]) . '</option>';
+                            echo '<option value="' . htmlspecialchars($row["codigo_escola"]) . '">' . htmlspecialchars($row["codigo_escola"]) . '</option>';
                         }
                     } else {
                         echo '<option value="">Nenhuma escola encontrada</option>';
@@ -46,8 +185,7 @@
                 <select name="classe" required class="form-select">
                     <option value="">Selecione a classe</option>
                     <?php
-                    include '../../conexao.php';
-                    // Buscar classes
+                   
                     $sql = "SELECT classe FROM tbclasse";
                     $result = $conn->query($sql);
 
@@ -67,25 +205,23 @@
                 <input type="text" name="titulo" placeholder="Título" required class="form-control">
             </div>
 
+         
+
             <div>
                 <label for="editora" class="form-label">Editora:</label>
                 <input type="text" name="editora" placeholder="Editora" required class="form-control">
             </div>
 
             <div>
-                <label for="data_publicacao" class="form-label">Data de Publicação:</label>
-                <input type="date" name="data_publicacao" required class="form-control">
+                <label for="data_publicacao"categoria, class="form-label">Data de Publicação:</label>
+                <input type="date" name="data_publicacao"categoria, placeholder="Ano de Publicação" required class="form-control">
             </div>
 
             <div>
-                <label for="categoria" class="form-label">Categoria:</label>
-                <input type="text" name="categoria" placeholder="Categoria" required class="form-control">
+                <label for="issn" class="form-label">issn:</label>
+                <input type="text" name="issn" placeholder="issn" required class="form-control">
             </div>
 
-            <div>
-                <label for="issn" class="form-label">ISSN:</label>
-                <input type="text" name="issn" placeholder="ISSN" required class="form-control">
-            </div>
 
             <div>
                 <label for="estante" class="form-label">Estante:</label>
@@ -112,43 +248,9 @@
         </form>
     </div>
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
-        $nome_escola = filter_input(INPUT_POST, 'nome_escola', FILTER_SANITIZE_STRING);
-        $classe = filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
-        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
-        $editora = filter_input(INPUT_POST, 'editora', FILTER_SANITIZE_STRING);
-        $data_publicacao = filter_input(INPUT_POST, 'data_publicacao', FILTER_SANITIZE_STRING);
-        $categoria = filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_STRING);
-        $issn = filter_input(INPUT_POST, 'issn', FILTER_SANITIZE_STRING);
-        $estante = filter_input(INPUT_POST, 'estante', FILTER_SANITIZE_NUMBER_INT);
-        $prateleira = filter_input(INPUT_POST, 'prateleira', FILTER_SANITIZE_NUMBER_INT);
-        $edicao = filter_input(INPUT_POST, 'edicao', FILTER_SANITIZE_NUMBER_INT);
-        $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
 
-        // Inserir os dados na tabela tbjornal_revista
-        include '../../conexao.php';
-        
-        $sql = "INSERT INTO tbjornal_revista (nome_escola, classe, titulo, editora, data_publicacao, categoria, issn, estante, prateleira, edicao, quantidade) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        // Preparar a declaração
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssiiiss", $nome_escola, $classe, $titulo, $editora, $data_publicacao, $categoria, $issn, $estante, $prateleira, $edicao, $quantidade);
 
-        // Executar a declaração
-        if ($stmt->execute()) {
-            echo "<p class='alert alert-success mt-4'>Nova publicação cadastrada com sucesso!</p>";
-        } else {
-            echo "<p class='alert alert-danger mt-4'>Erro ao cadastrar publicação: " . $stmt->error . "</p>";
-        }
 
-        // Fechar o statement e a conexão
-        $stmt->close();
-        $conn->close();
-    }
-    ?>
-
-    <script src="../../src/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5j7p2Ak7e4BEm9vNT3d4mDa3dFic01d7U2Twk8lJQ" crossorigin="anonymous"></script>
+    <script src="../../src/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
