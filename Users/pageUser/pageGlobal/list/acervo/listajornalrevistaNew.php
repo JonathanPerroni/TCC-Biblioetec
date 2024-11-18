@@ -60,19 +60,19 @@ if(empty($_SESSION['email'])){
                                         // Verifica o tipo de acesso do usuário
                                         $acesso = $_SESSION['acesso'] ?? ''; // Define o valor de acesso na sessão, caso não exista
 
-                                        // Define o link de redirecionamento com base no tipo de acesso
-                                        switch ($acesso) {
-                                            case 'administrador':
-                                                $pagina_inicial = "../../admin/pageAdmin.php";
-                                                break;
-                                            case 'bibliotecario':
-                                                $pagina_inicial = "../../bibliotecario/pagebibliotecario.php";
-                                                break;
-                                             default:
-                                                // Redireciona para uma página padrão, caso o acesso não seja identificado
-                                                $pagina_inicial = "../../../../login/login.php";
-                                                break;
-                                        }
+                                       // Define o link de redirecionamento com base no tipo de acesso
+                                       switch ($acesso) {
+                                        case 'administrador':
+                                            $pagina_inicial = "../../../admin/pageAdmin.php";
+                                            break;
+                                        case 'bibliotecario':
+                                            $pagina_inicial = "../../../bibliotecario/pagebibliotecario.php";
+                                            break;
+                                         default:
+                                            // Redireciona para uma página padrão, caso o acesso não seja identificado
+                                            $pagina_inicial = "../../../../../login/login.php";
+                                            break;
+                                    }
                             ?>
 
                             <a href="<?php echo $pagina_inicial; ?>" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
@@ -218,7 +218,7 @@ if(empty($_SESSION['email'])){
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["issn"]) . '</td>
                                     <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["codigo_escola"]) . ' </td>   
                                 <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
-                                    <a href="../editar/editarAluno.php ?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
+                                    <a href="../../editar/acervo/jornal/editarJornal.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
                                     <form id="form-excluir" action="../excluir/excluirAdmin.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
                                 </td>
                             </tr>';

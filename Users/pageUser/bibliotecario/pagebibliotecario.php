@@ -177,10 +177,10 @@ if(empty($_SESSION['email'])){
                                                                                             <a href="../pageGlobal/list/acervo/listamidiaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Midia</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Jogo</a>
+                                                                                            <a href="../pageGlobal/list/acervo/listajogosNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Jogo</a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de TCC</a>
+                                                                                            <a href="../pageGlobal/list/acervo/listatccNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de TCC</a>
                                                                                         </li>
                                                                                     </ul>
                                                                                 </li>        
