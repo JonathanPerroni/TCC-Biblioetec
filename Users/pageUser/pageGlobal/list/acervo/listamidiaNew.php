@@ -219,7 +219,7 @@ if(empty($_SESSION['email'])){
                                       <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["codigo_escola"]) . '</td>
                                 <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
                                     <a href=../../editar/acervo/midia/editarMidia.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
-                                    <form id="form-excluir" action="../excluir/excluirAdmin.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
+                                    <form id="form-excluir" action="../../excluir/acervo/midia.php " method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>
                                 </td>
                             </tr>';
                         }

@@ -2,7 +2,7 @@
 session_start();
 
 ob_start(); // Inicia o buffer de saída
-include("../../../../../conexao/conexao.php");
+include("../../../../conexao/conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
 
 if (isset($_GET['codigo'])) {

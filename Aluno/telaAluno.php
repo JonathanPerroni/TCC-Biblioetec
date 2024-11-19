@@ -56,7 +56,7 @@ mysqli_set_charset($conn, "utf8mb4");
                 <tbody class="border border-[var(--grey)]">
                     <?php
                     // Consulta com filtro de pesquisa
-                    $sql = "SELECT codigo, nome_escola, titulo, autor, estante, prateleira, quantidade
+                    $sql = "SELECT codigo, codigo_escola, titulo, autor, estante, prateleira, quantidade
                             FROM tblivros
                             WHERE titulo LIKE '%$pesquisa_escapada%'
                             ORDER BY codigo";
@@ -69,7 +69,7 @@ mysqli_set_charset($conn, "utf8mb4");
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $codigo = htmlspecialchars($row['codigo']);
-                            $nome_escola = htmlspecialchars($row['nome_escola']);
+                            $codigo_escola = htmlspecialchars($row['codigo_escola']);
                             $titulo = htmlspecialchars($row['titulo']);
                             $autor = htmlspecialchars($row['autor']);
                             $estante = htmlspecialchars($row['estante']);
@@ -77,7 +77,7 @@ mysqli_set_charset($conn, "utf8mb4");
                             $quantidade = htmlspecialchars($row['quantidade']);
                             echo '<tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $codigo .  '</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $nome_escola . '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $codigo_escola . '</td>';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $titulo . '</td>';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $autor . '</td>';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $estante . '</td>';
