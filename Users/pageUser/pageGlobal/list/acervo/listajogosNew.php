@@ -49,106 +49,170 @@ if(empty($_SESSION['email'])){
             </button>
             <a href="#" class="text-4xl mx-4 text-primary font-semibold hidden md:inline" tabindex="-1">Biblio<span class="text-secondary">etec</span></a>
         </div>
-<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full" aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-[var(--primary-emphasis)]">
-        <ul class="space-y-2 font-medium">
-        <li>
-                        <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
-                            <?php
+        <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full" aria-label="Sidebar">
+                                    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-[var(--primary-emphasis)]">
+                                    <ul class="space-y-2 font-medium">
+                                    <li>
+                                                    <!-- ira verificar qual  usuario esta logado para voltar para pagina especifica do tipo do acesso  -->
+                                                    <?php
+                                                                
+
+                                                                // Verifica o tipo de acesso do usuário
+                                                                $acesso = $_SESSION['acesso'] ?? ''; // Define o valor de acesso na sessão, caso não exista
+
+                                                                // Define o link de redirecionamento com base no tipo de acesso
+                                                                switch ($acesso) {
+                                                                    case 'administrador':
+                                                                        $pagina_inicial = "../../../../admin/pageAdmin.php";
+                                                                        break;
+                                                                    case 'bibliotecario':
+                                                                        $pagina_inicial = "../../../bibliotecario/pagebibliotecario.php";
+                                                                        break;
+                                                                    default:
+                                                                        // Redireciona para uma página padrão, caso o acesso não seja identificado
+                                                                        $pagina_inicial = "../../../../../login/login.php";
+                                                                        break;
+                                                                }
+                                                    ?>
+
+                                                    <a href="<?php echo $pagina_inicial; ?>" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house">
+                                                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+                                                            <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                                        </svg>
+                                                        <span class="ms-3">Início</span>
+                                                    </a>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="flex w-full items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-cadastro" data-collapse-toggle="dropdown-cadastro">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-plus"><path d="M11 12H3"/><path d="M16 6H3"/><path d="M16 18H3"/><path d="M18 9v6"/><path d="M21 12h-6"/></svg>
+                                                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Cadastrar</span>
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                                    </svg>
+                                                </button>
+                                                <ul id="dropdown-cadastro" class="hidden py-2 space-y-2">
+                                                    <li>
+                                                        <a href="../../cadastrar/cadastrar_aluno.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Aluno</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="../../pageGlobal/cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecario</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="../../pageGlobal/cadastrar/cadastrar_funcionario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Funcionario</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="../../pageGlobal/cadastrar/cadastrar_professor.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Professor</a>
+                                                    </li>
+                                                                                                    
+                                                                
+                                                </ul>
+                                            </li>
+                                    <li>
+                                        <button type="button" class="flex w-full items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-lista" data-collapse-toggle="dropdown-lista">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-list"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><path d="M14 4h7"/><path d="M14 9h7"/><path d="M14 15h7"/><path d="M14 20h7"/></svg>
+                                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Listas</span>
+                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                            </svg>
+                                        </button>
+                                        <ul id="dropdown-lista" class="hidden py-2 space-y-2">
                                         
+                                            <li>
+                                                <a href="../../../pageGlobal/list/listaalunoNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Aluno</a>
+                                            </li>
+                                            <li>
+                                                <a href="../../../pageGlobal/list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista bibliotecario</a>
+                                            </li>
+                                            <li>
+                                                <a href="../../../pageGlobal/list/listafuncionarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Funcionario</a>
+                                            </li>
+                                            <li>
+                                                <a href="../../../pageGlobal/list/listaprofessorNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Professor</a>
+                                            </li>
+                                        
+                                        </ul>
+                                    </li>
+                                                                                <!-- acervo cadastrar -->
+                                                                                <li>
+                                                                                    <button type="button" class="flex w-full items-center p-2  text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-acervo" data-collapse-toggle="dropdown-acervo">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book">
+                                                                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                                                                        <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/>
+                                                                                    </svg>
+                                                                                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Registrar Acervo</span>
+                                                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                                                                    </svg>
+                                                                                    </button>
+                                                                                    <ul id="dropdown-acervo" class="hidden py-2 space-y-2">
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/cadastrar/acervo/cadastrar_livro.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Livro</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/cadastrar/acervo/cadastrar_jornal_revista.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Jornal/Revista</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/cadastrar/acervo/cadastrar_midia.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Midia</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/cadastrar/acervo/cadastrar_jogos.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar Jogo</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/cadastrar/acervo/cadastrar_tcc.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Registrar TCC</a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </li>  
+                                                                                <!-- acervo lista -->
+                                                                                <li>
+                                                                                    <button type="button" class="flex w-full items-center p-2  text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-listaacervo" data-collapse-toggle="dropdown-listaacervo">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-library-big">
+                                                                                            <rect width="8" height="18" x="3" y="3" rx="1"/>
+                                                                                            <path d="M7 3v18"/>
+                                                                                            <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z"/>
+                                                                                        </svg>
+                                                                                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Catalogo Acervo</span>
+                                                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                                                                        </svg>
 
-                                        // Verifica o tipo de acesso do usuário
-                                        $acesso = $_SESSION['acesso'] ?? ''; // Define o valor de acesso na sessão, caso não exista
-
-                                        // Define o link de redirecionamento com base no tipo de acesso
-                                        switch ($acesso) {
-                                            case 'administrador':
-                                                $pagina_inicial = "../../../admin/pageAdmin.php";
-                                                break;
-                                            case 'bibliotecario':
-                                                $pagina_inicial = "../../../bibliotecario/pagebibliotecario.php";
-                                                break;
-                                             default:
-                                                // Redireciona para uma página padrão, caso o acesso não seja identificado
-                                                $pagina_inicial = "../../../../../login/login.php";
-                                                break;
-                                        }
-                            ?>
-
-                            <a href="<?php echo $pagina_inicial; ?>" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house">
-                                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
-                                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                                                                    </button>
+                                                                                    <ul id="dropdown-listaacervo" class="hidden py-2 space-y-2">
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/list/acervo/listalivroNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Livro</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/list/acervo/listajornalrevistaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Jornal/Revista</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/list/acervo/listamidiaNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Midia</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/list/acervo/listajogosNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de Jogo</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../../../pageGlobal/list/acervo/listatccNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de TCC</a>
+                                                                                        </li>
+                                                                                                </ul>
+                                                                                            </li>        
+                    
+                        <!-- Link para Relatório -->
+                        <li>
+                            <a href="../../Relatorio/historico.php" class="flex items-center p-2  text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text mr-2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <line x1="10" y1="9" x2="8" y2="9"/>
                                 </svg>
-                                <span class="ms-3">Início</span>
+                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Relatório</span>
                             </a>
-                    </li>
-            <li>
-                <button type="button" class="flex w-full items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-cadastro" data-collapse-toggle="dropdown-cadastro">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-plus"><path d="M11 12H3"/><path d="M16 6H3"/><path d="M16 18H3"/><path d="M18 9v6"/><path d="M21 12h-6"/></svg>
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Cadastrar</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                    </svg>
-                </button>
-                <ul id="dropdown-cadastro" class="hidden py-2 space-y-2">
-                    <li>
-                        <a href="../cadastrar/cadastrar_aluno.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Aluno</a>
-                    </li>
-                    <li>
-                        <a href="../cadastrar/cadastrar_bibliotecario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Bibliotecario</a>
-                    </li>
-                    <li>
-                        <a href="../cadastrar/cadastrar_funcionario.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Funcionario</a>
-                    </li>
-                    <li>
-                        <a href="../cadastrar/cadastrar_professor.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Cadastrar Professor</a>
-                    </li>
-                   
-                </ul>
-            </li>
-            <li>
-                <button type="button" class="flex w-full items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group" aria-controls="dropdown-lista" data-collapse-toggle="dropdown-lista">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-list"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><path d="M14 4h7"/><path d="M14 9h7"/><path d="M14 15h7"/><path d="M14 20h7"/></svg>
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Listas</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                    </svg>
-                </button>
-                <ul id="dropdown-lista" class="hidden py-2 space-y-2">
-                   
-                    <li>
-                        <a href="../list/listaalunoNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Aluno</a>
-                    </li>
-                    <li>
-                        <a href="../list/listabibliotecarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista bibliotecario</a>
-                    </li>
-                    <li>
-                        <a href="../list/listafuncionarioNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Funcionario</a>
-                    </li>
-                    <li>
-                        <a href="/list/listaprofessorNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista Professor</a>
-                    </li>
-                   
-                </ul>
-            </li>
-           
-            <!-- Link para Relatório -->
-            <li>
-                <a href="../Relatorio/historico.php" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[var(--primary)] dark:hover:bg-[var(--primary)] group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text mr-2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <line x1="10" y1="9" x2="8" y2="9"/>
-                    </svg>
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Relatório</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</aside>
+                        </li>
+
+                    </ul>
+                    </div>
+        </aside>
         <button id="dropdown-perfil" data-dropdown-toggle="dropdown" class="flex justify-between items-center max-h-12 pl-4 mr-4 bg-white border-2 border-solid border-[var(--secondary)] border-r-0 rounded-lg text-[var(--secondary)] text-left flex-nowrap text-nowrap" type="button">
             <div>
              <span class="text-[var(--secondary)] font-medium"><?php echo $_SESSION['nome']; ?></span>
