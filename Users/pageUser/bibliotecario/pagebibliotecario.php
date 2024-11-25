@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 ob_start();
 
@@ -7,17 +6,129 @@ date_default_timezone_set('America/Sao_Paulo');
 
 include_once("../../../conexao/conexao.php");
 
-//Validação de login, só entra se estiver logado
-if(empty($_SESSION['email'])){
-    echo $_SESSION['nome'];
-    echo $_SESSION['acesso'];
+// Inicialize mensagens e variáveis de controle
+$msg = "";
+$etapa = isset($_POST['etapa']) ? $_POST['etapa'] : 1;
 
+// Validação de login, só entra se estiver logado
+if (empty($_SESSION['email'])) {
     $_SESSION['msg'] = "Faça o Login!!";
-    header("Location: ../../login/login.php ");
+    header("Location: ../../login/login.php");
     exit();
 }
 
+// Etapa 1: Buscar Aluno
+if ($etapa == 1 && isset($_POST['buscar_cpf'])) {
+    $cpf = $_POST['cpf'];
+
+    // Consulta para buscar aluno
+    $query_aluno = "SELECT nome, nome_escola, nome_curso, acesso FROM tbalunos WHERE cpf = ?";
+    $stmt = $conn->prepare($query_aluno);
+
+    if ($stmt) {
+        $stmt->bind_param("s", $cpf);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $_SESSION['aluno'] = $result->fetch_assoc(); // Salva os dados na sessão
+            $_SESSION['aluno']['cpf'] = $cpf; // Adiciona o CPF ao array
+            $etapa = 2; // Avança para a próxima etapa
+        } else {
+            $msg = "Aluno não encontrado!";
+        }
+    } else {
+        $msg = "Erro ao preparar consulta de aluno: " . $conn->error;
+    }
+}
+
+// Etapa 2: Buscar Livro
+if ($etapa == 2 && isset($_POST['buscar_livro'])) {
+    $isbn = $_POST['isbn'];
+    $titulo = $_POST['titulo'];
+
+    // Consulta para buscar livro
+    $query_livro = "SELECT isbn, titulo, quantidade FROM tblivros WHERE isbn = ? OR titulo = ?";
+    $stmt = $conn->prepare($query_livro);
+
+    if ($stmt) {
+        $stmt->bind_param("ss", $isbn, $titulo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $_SESSION['livro'] = $result->fetch_assoc(); // Salva os dados do livro na sessão
+            $etapa = 3; // Avança para a próxima etapa
+        } else {
+            $msg = "Livro não encontrado!";
+        }
+    } else {
+        $msg = "Erro ao preparar consulta de livro: " . $conn->error;
+    }
+}
+
+// Etapa 3: Confirmar Empréstimo
+if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
+    // Obtenha os dados do aluno e do livro da sessão
+    $aluno = $_SESSION['aluno'];
+    $livro = $_SESSION['livro'];
+
+    // Verifique a quantidade total e emprestada
+    $query_quantidade = "SELECT quantidade, 
+                            (SELECT COUNT(*) FROM tbemprestimos WHERE isbn_livro = ? AND status = 'emprestado') AS emprestados 
+                         FROM tblivros WHERE isbn = ?";
+    $stmt = $conn->prepare($query_quantidade);
+
+    if ($stmt) {
+        $stmt->bind_param("ss", $livro['isbn'], $livro['isbn']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $dados_livro = $result->fetch_assoc();
+            $quantidade_total = $dados_livro['quantidade'];
+            $quantidade_emprestada = $dados_livro['emprestados'];
+            $disponiveis = $quantidade_total - $quantidade_emprestada;
+
+            // Verifica se há apenas 1 exemplar restante
+            if ($disponiveis <= 1) {
+                echo "<script>
+                        alert('Apenas 1 exemplar disponível. Deve haver pelo menos uma cópia na biblioteca.');
+                        window.location.href = 'http://localhost/biblioetec/Desenvolvedor/Users/pageUser/bibliotecario/pagebibliotecario.php';
+                      </script>";
+            } else {
+                // Registra o empréstimo
+                $query_emprestimo = "INSERT INTO tbemprestimos (cpf_aluno, isbn_livro, data_emprestimo, status) VALUES (?, ?, NOW(), 'emprestado')";
+                $stmt = $conn->prepare($query_emprestimo);
+
+                if ($stmt) {
+                    $stmt->bind_param("ss", $aluno['cpf'], $livro['isbn']);
+
+                    if ($stmt->execute()) {
+                        echo "<script>
+                                alert('Livro emprestado com sucesso!');
+                                window.location.href = 'http://localhost/biblioetec/Desenvolvedor/Users/pageUser/bibliotecario/pagebibliotecario.php';
+                              </script>";
+                        // Limpa os dados da sessão
+                        unset($_SESSION['aluno']);
+                        unset($_SESSION['livro']);
+                    } else {
+                        $msg = "Erro ao registrar o empréstimo: " . $stmt->error;
+                    }
+                } else {
+                    $msg = "Erro ao preparar consulta de empréstimo: " . $conn->error;
+                }
+            }
+        } else {
+            $msg = "Erro ao verificar a disponibilidade do livro!";
+        }
+    } else {
+        $msg = "Erro ao preparar consulta de quantidade: " . $conn->error;
+    }
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -241,9 +352,57 @@ if(empty($_SESSION['email'])){
             </ul>
         </div>
     </nav>
+    <main class="mx-1 sm:mx-16 my-8">
+    <div class="container-sm w-50 my-4 bg-white shadow p-4 rounded-3">
+        <p class="text-primary"><?php echo $msg; ?></p>
+        <form action="" method="POST" class="d-flex flex-column gap-4">
+            <input type="hidden" name="etapa" value="<?php echo $etapa; ?>">
 
+            <!-- Etapa 1: Buscar Aluno -->
+            <?php if ($etapa == 1): ?>
+                <div>
+                    <label for="cpf" class="form-label">CPF do Aluno:</label>
+                    <input type="text" name="cpf" placeholder="CPF do aluno" required class="form-control">
+                    <button type="submit" name="buscar_cpf" class="btn btn-secondary mt-2">Buscar Aluno</button>
+                </div>
+            <?php endif; ?>
+
+            <!-- Etapa 2: Buscar Livro -->
+            <?php if ($etapa == 2): ?>
+                <div>
+                    <label for="isbn" class="form-label">ISBN do Livro:</label>
+                    <input type="text" name="isbn" placeholder="ISBN do livro"  class="form-control">
+                    <label for="titulo" class="form-label mt-3">Título do Livro:</label>
+                    <input type="text" name="titulo" placeholder="Título do livro" class="form-control">
+                    <button type="submit" name="buscar_livro" class="btn btn-secondary mt-2">Buscar Livro</button>
+                </div>
+            <?php endif; ?>
+
+            <!-- Etapa 3: Confirmar Empréstimo -->
+            <?php if ($etapa == 3): ?>
+                <h5>Dados do Aluno</h5>
+                <p><strong>Nome:</strong> <?php echo htmlspecialchars($_SESSION['aluno']['nome']); ?></p>
+                <p><strong>Escola:</strong> <?php echo htmlspecialchars($_SESSION['aluno']['nome_escola']); ?></p>
+                <p><strong>Curso:</strong> <?php echo htmlspecialchars($_SESSION['aluno']['nome_curso']); ?></p>
+
+                <h5>Dados do Livro</h5>
+                <p><strong>ISBN:</strong> <?php echo htmlspecialchars($_SESSION['livro']['isbn']); ?></p>
+                <p><strong>Título:</strong> <?php echo htmlspecialchars($_SESSION['livro']['titulo']); ?></p>
+                <p><strong>Quantidade:</strong> <?php echo htmlspecialchars($_SESSION['livro']['quantidade']); ?></p>
+
+                <button type="submit" name="confirmar_emprestimo" class="px-6 py-3  bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 active:bg-blue-800">
+  Confirmar Empréstimo
+</button>
+
+            <?php endif; ?>
+        </form>
+    </div>
+</main>
+
+
+                                                  
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-
+                
 </body>
 </html>

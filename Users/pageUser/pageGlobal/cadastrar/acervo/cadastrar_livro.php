@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
     </header>
 
     <div class="container-sm w-50 my-4 bg-white shadow p-4 rounded-3">
-    <p class="text-primary d-flex flex-column">   <?php
+        <p class="text-primary d-flex flex-column">   <?php
                 if (isset($_SESSION['msg'])) {
                     echo $_SESSION['msg'];
                     unset($_SESSION['msg']);

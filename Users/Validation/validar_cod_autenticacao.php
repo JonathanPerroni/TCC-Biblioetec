@@ -59,16 +59,16 @@ if ($conn instanceof mysqli) {
                         header('Location: ../pageUser/admin/pageAdmin.php');
                         break;
                     case 'funcionario':
-                        header('Location: pagina_funcionario.php');
+                        header('Location: ../pageUser/funcionario/pagefuncionario.php');
                         break;
                     case 'bibliotecario':
                         header('Location: ../pageUser/bibliotecario/pagebibliotecario.php');
                         break;
                     case 'professor':
-                        header('Location: pagina_professor.php');
+                        header('Location: ../pageUser/professor/pageprofessor.php');
                         break;
                     case 'aluno':
-                        header('Location: pagina_aluno.php');
+                        header('Location: ../pageUser/aluno/pagealuno.php');
                         break;
                     default:
                         $_SESSION['msg'] = "Tipo de acesso inválido!";
