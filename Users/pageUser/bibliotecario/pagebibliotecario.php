@@ -363,7 +363,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                 <div>
                     <label for="cpf" class="form-label">CPF do Aluno:</label>
                     <input type="text" name="cpf" placeholder="CPF do aluno" required class="form-control">
-                    <button type="submit" name="buscar_cpf" class="btn btn-secondary mt-2">Buscar Aluno</button>
+                    <button type="submit" name="buscar_cpf" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">Buscar Aluno</button>
                 </div>
             <?php endif; ?>
 
@@ -374,7 +374,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                     <input type="text" name="isbn" placeholder="ISBN do livro"  class="form-control">
                     <label for="titulo" class="form-label mt-3">Título do Livro:</label>
                     <input type="text" name="titulo" placeholder="Título do livro" class="form-control">
-                    <button type="submit" name="buscar_livro" class="btn btn-secondary mt-2">Buscar Livro</button>
+                    <button type="submit" name="buscar_livro" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">Buscar Livro</button>
                 </div>
             <?php endif; ?>
 
@@ -390,7 +390,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                 <p><strong>Título:</strong> <?php echo htmlspecialchars($_SESSION['livro']['titulo']); ?></p>
                 <p><strong>Quantidade:</strong> <?php echo htmlspecialchars($_SESSION['livro']['quantidade']); ?></p>
 
-                <button type="submit" name="confirmar_emprestimo" class="px-6 py-3  bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 active:bg-blue-800">
+                <button type="submit" name="confirmar_emprestimo" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">
   Confirmar Empréstimo
 </button>
 
