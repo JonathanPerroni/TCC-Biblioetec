@@ -22,7 +22,7 @@ if ($conn instanceof mysqli) {
     if (!empty($dados['ValCodigo'])) {
         // Para cada tabela, verificamos se o usuário existe e o tipo de acesso
         foreach ($tabelasAcesso as $tabela => $acesso) {
-            $query_usuario = "SELECT codigo, nome, cpf, email, password, telefone, celular, acesso, data_codigo_autenticacao
+            $query_usuario = "SELECT codigo, nome, cpf, email, password, celular, acesso, data_codigo_autenticacao
                               FROM $tabela
                               WHERE codigo = ? AND email = ? AND codigo_autenticacao = ?
                               LIMIT 1";

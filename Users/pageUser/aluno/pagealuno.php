@@ -111,7 +111,7 @@ mysqli_set_charset($conn, "utf8mb4");
                 <tbody>
                     <?php
                     // Consulta no banco com filtro
-                    $sql = "SELECT codigo, codigo_escola, titulo, autor, estante, prateleira, quantidade, isbn
+                    $sql = "SELECT codigo, nome_escola, titulo, autor, estante, prateleira, quantidade, isbn
                             FROM tblivros
                             WHERE titulo LIKE '%$pesquisa_escapada%'
                             ORDER BY codigo";
@@ -125,7 +125,7 @@ mysqli_set_charset($conn, "utf8mb4");
                             echo '<tr class="border-b">';
                             // A célula de código está oculta
                             echo '<td class="px-6 py-4" style="display: none;">' . htmlspecialchars($row['codigo']) . '</td>';
-                            echo '<td class="px-6 py-4">' . htmlspecialchars($row['codigo_escola']) . '</td>';
+                            echo '<td class="px-6 py-4">' . htmlspecialchars($row['nome_escola']) . '</td>';
                             echo '<td class="px-6 py-4">' . htmlspecialchars($row['isbn']) . '</td>';
                             echo '<td class="px-6 py-4">' . htmlspecialchars($row['titulo']) . '</td>';
                             echo '<td class="px-6 py-4">' . htmlspecialchars($row['autor']) . '</td>';

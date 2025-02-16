@@ -107,7 +107,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                     if ($stmt->execute()) {
                         echo "<script>
                                 alert('Livro emprestado com sucesso!');
-                                window.location.href = 'http://localhost/biblioetec/Desenvolvedor/Users/pageUser/bibliotecario/pagebibliotecario.php';
+                                window.location.href = <?php echo '../bibliotecario/pagebibliotecario.php'; ?>;
                               </script>";
                         // Limpa os dados da sessão
                         unset($_SESSION['aluno']);
@@ -141,7 +141,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
+<nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
         <div id="nav-left-side">
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 ms-3 bg-[var(--primary)] text-sm text-white rounded-lg hover:bg-[var(--primary-emphasis)] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:hover:bg-[var(--primary-emphasis)]">
                 <span class="sr-only">Open sidebar</span>
@@ -351,52 +351,60 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
             </li>
             </ul>
         </div>
-    </nav>
-    <main class="mx-1 sm:mx-16 my-8">
+</nav>
+   <main class="mx-1 sm:mx-16 my-8">
     <div class="container-sm w-50 my-4 bg-white shadow p-4 rounded-3">
         <p class="text-primary"><?php echo $msg; ?></p>
         <form action="" method="POST" class="d-flex flex-column gap-4">
-            <input type="hidden" name="etapa" value="<?php echo $etapa; ?>">
+        <input type="hidden" name="etapa" value="<?php echo $etapa; ?>">
 
-            <!-- Etapa 1: Buscar Aluno -->
-            <?php if ($etapa == 1): ?>
-                <div>
-                    <label for="cpf" class="form-label">CPF do Aluno:</label>
-                    <input type="text" name="cpf" placeholder="CPF do aluno" required class="form-control">
-                    <button type="submit" name="buscar_cpf" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">Buscar Aluno</button>
-                </div>
-            <?php endif; ?>
+        <!-- Etapa 1: Buscar Aluno -->
+        <?php if ($etapa == 1): ?>
+            <div>
+                <label for="cpf" class="form-label">CPF do Aluno:</label>
+                <input type="text" name="cpf" placeholder="CPF do aluno" required class="form-control">
+                <button type="submit" name="buscar_cpf" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">Buscar Aluno</button>
+            </div>
+        <?php endif; ?>
 
-            <!-- Etapa 2: Buscar Livro -->
-            <?php if ($etapa == 2): ?>
-                <div>
-                    <label for="isbn" class="form-label">ISBN do Livro:</label>
-                    <input type="text" name="isbn" placeholder="ISBN do livro"  class="form-control">
-                    <label for="titulo" class="form-label mt-3">Título do Livro:</label>
-                    <input type="text" name="titulo" placeholder="Título do livro" class="form-control">
-                    <button type="submit" name="buscar_livro" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">Buscar Livro</button>
-                </div>
-            <?php endif; ?>
+        <!-- Etapa 2: Buscar Livro -->
+        <?php if ($etapa == 2): ?>
+            <div>
+                <label for="isbn" class="form-label">ISBN do Livro:</label>
+                <input type="text" name="isbn" placeholder="ISBN do livro"  class="form-control">
+                <label for="titulo" class="form-label mt-3">Título do Livro:</label>
+                <input type="text" name="titulo" placeholder="Título do livro" class="form-control">
+                <button type="submit" name="buscar_livro" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">Buscar Livro</button>
+            </div>
+        <?php endif; ?>
 
-            <!-- Etapa 3: Confirmar Empréstimo -->
-            <?php if ($etapa == 3): ?>
-                <h5>Dados do Aluno</h5>
+        <!-- Etapa 3: Confirmar Empréstimo -->
+        <?php if ($etapa == 3): ?>
+            <h5>Dados do Aluno</h5>
+            <?php if (isset($_SESSION['aluno'])): ?>
                 <p><strong>Nome:</strong> <?php echo htmlspecialchars($_SESSION['aluno']['nome']); ?></p>
                 <p><strong>Escola:</strong> <?php echo htmlspecialchars($_SESSION['aluno']['nome_escola']); ?></p>
                 <p><strong>Curso:</strong> <?php echo htmlspecialchars($_SESSION['aluno']['nome_curso']); ?></p>
+            <?php else: ?>
+                <p>Dados do aluno não encontrados.</p>
+            <?php endif; ?>
 
-                <h5>Dados do Livro</h5>
+            <h5>Dados do Livro</h5>
+            <?php if (isset($_SESSION['livro'])): ?>
                 <p><strong>ISBN:</strong> <?php echo htmlspecialchars($_SESSION['livro']['isbn']); ?></p>
                 <p><strong>Título:</strong> <?php echo htmlspecialchars($_SESSION['livro']['titulo']); ?></p>
                 <p><strong>Quantidade:</strong> <?php echo htmlspecialchars($_SESSION['livro']['quantidade']); ?></p>
-
-                <button type="submit" name="confirmar_emprestimo" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">
-  Confirmar Empréstimo
-</button>
-
+            <?php else: ?>
+                <p>Dados do livro não encontrados.</p>
             <?php endif; ?>
+
+            <button type="submit" name="confirmar_emprestimo" class="btn btn-secondary mt-2 py-2 px-4 text-white rounded-sm shadow-sm">
+                Confirmar Empréstimo
+            </button>
+        <?php endif; ?>
         </form>
     </div>
+
 </main>
 
 

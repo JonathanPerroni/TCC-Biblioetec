@@ -264,7 +264,7 @@ if(empty($_SESSION['email'])){
                 <tbody class="border border-[var(--grey)]">
                 <?php
                    
-                    $sql = "SELECT codigo, titulo, genero, isbn, autor, codigo_escola FROM tblivros";
+                    $sql = "SELECT codigo, titulo, genero, isbn, autor, nome_escola FROM tblivros";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -278,7 +278,7 @@ if(empty($_SESSION['email'])){
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["autor"]) . '</td>
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["genero"]) . '</td>
                                 <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["isbn"]) . '</td>
-                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["codigo_escola"]) . ' </td>   
+                                    <td class="px-6 py-4 border-r border-[var(--grey)]">' . htmlspecialchars($row["nome_escola"]) . ' </td>   
                                 <td class="flex justify-between md:justify-evenly gap-1 px-6 py-4">
                                     <a href="../../editar/acervo/livro/editarlivro.php?codigo=' . urlencode($row["codigo"]) . '" class="font-medium text-blue-600 hover:underline">Editar</a>
                                     <form id="form-excluir" action="../../excluir/acervo/livro.php" method="POST"><input value=' . urlencode($row["codigo"]) . ' readonly name="codigo" class="hidden"/> <button type="submit" class="font-medium text-red-600 hover:underline">Excluir</button></form>

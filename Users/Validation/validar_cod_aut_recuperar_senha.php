@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+//para limpar o buffer de saida
+ob_start();
+
 // Importa as classes do PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -43,6 +46,7 @@ if (!empty($dados['SendRecupSenha'])) {
                 $result_usuario = $stmt->get_result();
                 if ($result_usuario->num_rows > 0) {
                     $row_usuario = $result_usuario->fetch_assoc();
+                    //gerar a cahve para recuperar a senha 
                     $chave_recuperar_senha = password_hash($row_usuario['codigo'] . $row_usuario['email'], PASSWORD_DEFAULT);
 
                     // Atualiza a chave de recuperação de senha
@@ -52,38 +56,58 @@ if (!empty($dados['SendRecupSenha'])) {
                                          LIMIT 1";
 
                     if ($stmt_up = $conn->prepare($query_up_usuario)) {
+
+                        //substitui o link da query pelo valor que vem do formulario
                         $stmt_up->bind_param('si', $chave_recuperar_senha, $row_usuario['codigo']);
 
                         if ($stmt_up->execute()) {
                             // Gera o link de recuperação de senha
-                            $link = "http://localhost/biblioetec/Desenvolvedor/Users/login/esqueceuSenha.php?chave=" . urlencode($chave_recuperar_senha);
+                            $link = "http://localhost/TCC-Biblioetec/Users/login/esqueceuSenha.php?chave=" . urlencode($chave_recuperar_senha) . "&tipo=" . urlencode($acesso);
 
+                            //incluir o composer
                             require '../../lib/vendor/autoload.php';
 
                             $mail = new PHPMailer(true);
 
                             try {
+                                // definir os erros com debug
                                 $mail->SMTPDebug = SMTP::DEBUG_OFF;
+                               //indico que tenho carcter especial
                                 $mail->CharSet = 'UTF-8';
+                                //
                                 $mail->isSMTP();
+                                  // servidor do envio do email
                                 $mail->Host       = 'sandbox.smtp.mailtrap.io';
+                                // indica que é nescessario autentircar
                                 $mail->SMTPAuth   = true;
+                                //usuario  para enviar o email
                                 $mail->Username   = '83b76c3790613b';
+                                  // senha  do email para utiliar o envio
                                 $mail->Password   = '62ae586ad2ecb3';
+                                  // ativar  criptografia
                                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                               // porta para o envio do email
                                 $mail->Port       = 465;
 
+                                //email do remetente
                                 $mail->setFrom('DevBiblioEtec@devs.com', 'Atendimento');
+                                //email do usuario e nome DESTINATARIO
                                 $mail->addAddress($row_usuario['email'], $row_usuario['nome']);
 
                                 $mail->isHTML(true);
+                                //TITULO DO EMAIL
                                 $mail->Subject = 'Recuperar Senha';
+                                // CONTEUDO EM HTML
                                 $mail->Body    = "Olá " . $row_usuario['nome'] . ", clique no link para recuperar sua senha: <a href='$link'>$link</a>";
+                                // CONTEUDO EM TEXTO
                                 $mail->AltBody = "Olá " . $row_usuario['nome'] . ", copie e cole o link no navegador para recuperar sua senha: $link";
 
+                                //ENVIAR EMAIL 
                                 $mail->send();
                                 $_SESSION['msg'] = "<p style='color: green;'> Confira seu email, link enviado </p>";
                                 header('Location: ../login/login.php');
+
+                                //AREA DE ERROS COM ALERTS 
                             } catch (Exception $e) {
                                 echo "Erro ao enviar o email: {$mail->ErrorInfo}";
                                 $_SESSION['msg'] = "<p style='color: #f00;'> Erro: Email não enviado!</p>";

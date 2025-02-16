@@ -2,44 +2,78 @@
 session_start();
 include_once "../../conexao/conexao.php";
 
+// Obtém os parâmetros da URL
+$chave = $_GET['chave'] ?? '';
+$tipo_acesso = $_GET['tipo'] ?? '';
+$chave_recuperar_senha = $chave;
+
+// Verifica se o tipo de acesso é válido
+$tabelasAcesso = [
+    'administrador' => 'tbadmin',
+    'funcionario' => 'tbfuncionarios',
+    'bibliotecario' => 'tbbibliotecario',
+    'professor' => 'tbprofessores',
+    'aluno' => 'tbalunos'
+];
+
+if (isset($tabelasAcesso[$tipo_acesso])) {
+    $tabela_usuario = $tabelasAcesso[$tipo_acesso];
+
+    // Busca o usuário na tabela correta
+    $query_usuario = "SELECT codigo FROM $tabela_usuario WHERE chave_recuperar_senha = ? LIMIT 1";
+    $stmt = $conn->prepare($query_usuario);
+    $stmt->bind_param('s', $chave);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row_usuario = $result->fetch_assoc();
+        $codigo_usuario = $row_usuario['codigo'];
+    } else {
+        echo "Chave inválida ou expirada!";
+        exit();
+    }
+} else {
+    echo "Tipo de acesso inválido!";
+    exit();
+}
+
 // Verifica se os dados foram enviados via POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $codigo_usuario = isset($_POST['codigo_usuario']) ? (int) $_POST['codigo_usuario'] : null;
+    $chave_recuperar_senha = $_POST['chave_recuperar_senha'] ?? '';
+    $nova_senha = $_POST['nova_senha'] ?? '';
+    $confirmar_senha = $_POST['confirmar_senha'] ?? '';
 
-    // Recebe os dados do formulário
-    $codigo_usuario = filter_input(INPUT_POST, 'codigo_usuario', FILTER_VALIDATE_INT);
-    $chave_recuperar_senha = filter_input(INPUT_POST, 'chave_recuperar_senha', FILTER_DEFAULT);
-    $nova_senha = filter_input(INPUT_POST, 'nova_senha', FILTER_DEFAULT);
-    $confirmar_senha = filter_input(INPUT_POST, 'confirmar_senha', FILTER_DEFAULT);
-
-    // Valida se as senhas coincidem
-    if ($nova_senha !== $confirmar_senha) {
-        $_SESSION['msg'] = "<p style='color: #f00;'>Erro: As senhas não coincidem!</p>";
-        header("Location: ../../app/redefinir-senha.php?chave=$chave_recuperar_senha");
+    if (!$codigo_usuario) {
+        $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Código do usuário inválido!</p>";
         exit();
     }
 
-    // Valida a força da senha (mínimo 8 caracteres, pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial)
+    if ($nova_senha !== $confirmar_senha) {
+        $_SESSION['msg'] = "<p style='color: #f00;'>Erro: As senhas não coincidem!</p>";
+        exit();
+    }
+
     if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $nova_senha)) {
         $_SESSION['msg'] = "<p style='color: #f00;'>Erro: A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial.</p>";
-        header("Location: ../../app/redefinir-senha.php?chave=$chave_recuperar_senha");
         exit();
     }
 
     // Atualiza a senha no banco de dados
-    $query = "UPDATE $tabela_usuario SET senha = ? WHERE codigo = ? AND chave_recuperar_senha = ?";
+    $query = "UPDATE $tabela_usuario SET password = ? WHERE codigo = ? AND chave_recuperar_senha = ?";
     $stmt = $conn->prepare($query);
 
     if ($stmt) {
-        // Criptografa a nova senha
         $senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
-        
-        // Executa a atualização
         $stmt->bind_param('sis', $senha_hash, $codigo_usuario, $chave_recuperar_senha);
+
         if ($stmt->execute()) {
             $_SESSION['msg'] = "<p style='color: #0a0;'>Senha redefinida com sucesso!</p>";
-            header("Location: ../../login.php"); // Redireciona para a página de login
+            header("Location: ./login.php");
+            exit();
         } else {
-            $_SESSION['msg'] = "<p style='color: #f00;'>Erro ao redefinir a senha. Tente novamente!</p>";
+            $_SESSION['msg'] = "<p style='color: #f00;'>Erro ao redefinir a senha. Motivo: " . $stmt->error . "</p>";
         }
         $stmt->close();
     } else {
@@ -47,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -325,10 +360,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h1 id="cad-title">Recuperar Senha</h1>
         </header>
         <div class="EsqueceuSenha">
-            <form method="POST" action="../../app/redefinir-senha.php">
+            <form method="POST" action="">
                 <div class="form-row">
-                    <input type="hidden" name="codigo_usuario" value="<?php echo $codigo_usuario; ?>">
-                    <input type="hidden" name="chave_recuperar_senha" value="<?php echo $chave_recuperar_senha; ?>">
+                    <input type="hidden" name="codigo_usuario" value="<?php echo isset($codigo_usuario) ? $codigo_usuario : ''; ?>">               
+                    <input type="hidden" name="chave_recuperar_senha" value="<?php echo $chave; ?>">
                 </div>
                 <div class="form-row">
                     <div class="input-container">

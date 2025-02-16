@@ -11,7 +11,7 @@ $chave_recuperar_senha = filter_input(INPUT_GET, 'chave', FILTER_DEFAULT);
 
 if (empty($chave_recuperar_senha)) {
     $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Link Inválido!!!</p>";
-    header('Location: ../../logout.php');
+     header('Location: ../../logout.php');
     exit();
 } else {
     $query_usuario = "SELECT codigo FROM tbdev WHERE chave_recuperar_senha = ? LIMIT 1";
