@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Nov-2024 às 22:48
--- Versão do servidor: 10.4.21-MariaDB
--- versão do PHP: 8.0.10
+-- Tempo de geração: 19/02/2025 às 00:41
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,17 +24,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `dados_etec`
+-- Estrutura para tabela `dados_etec`
 --
 
 CREATE TABLE `dados_etec` (
   `codigo` int(11) NOT NULL,
   `codigo_escola` varchar(50) NOT NULL,
   `unidadeEscola` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `dados_etec`
+-- Despejando dados para a tabela `dados_etec`
 --
 
 INSERT INTO `dados_etec` (`codigo`, `codigo_escola`, `unidadeEscola`) VALUES
@@ -102,7 +102,7 @@ INSERT INTO `dados_etec` (`codigo`, `codigo_escola`, `unidadeEscola`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `historico_usuarios`
+-- Estrutura para tabela `historico_usuarios`
 --
 
 CREATE TABLE `historico_usuarios` (
@@ -112,10 +112,10 @@ CREATE TABLE `historico_usuarios` (
   `historico_usuario` text NOT NULL,
   `historico_acesso` text NOT NULL,
   `historico_data_hora` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `historico_usuarios`
+-- Despejando dados para a tabela `historico_usuarios`
 --
 
 INSERT INTO `historico_usuarios` (`id`, `historico_responsavel`, `historico_acao`, `historico_usuario`, `historico_acesso`, `historico_data_hora`) VALUES
@@ -135,12 +135,34 @@ INSERT INTO `historico_usuarios` (`id`, `historico_responsavel`, `historico_acao
 (14, 'Jonathan Perroni', 'excluir', '44', 'Escola', '2024-11-03 19:31:36'),
 (15, 'Jonathan Perroni', 'excluir', 'Etec La Noda', 'Escola', '2024-11-03 19:35:49'),
 (16, 'Jonathan Perroni', 'excluir', 'zitos', 'Escola', '2024-11-03 19:35:56'),
-(17, 'Jonathan Granado Perroni', 'cadastrar', 'Jonathan Henrique Granado Perroni', 'administrador', '2024-11-04 01:23:37');
+(17, 'Jonathan Granado Perroni', 'cadastrar', 'Jonathan Henrique Granado Perroni', 'administrador', '2024-11-04 01:23:37'),
+(18, 'Funcionário Teste', 'editar', 'Funcionário Teste', 'bibliotecario', '2025-02-16 06:12:56'),
+(19, 'Jonathan Granado Perroni', 'cadastrar', 'Dev user test final', 'desenvolvedor', '2025-02-16 15:21:37'),
+(20, 'Jonathan Granado Perroni', 'cadastrar', 'adminteste@gmail.com', 'administrador', '2025-02-16 15:23:50'),
+(21, 'Jonathan Granado Perroni', 'cadastrar', 'Etec zitos', 'Escola', '2025-02-16 15:25:53'),
+(22, 'Funcionário Teste', 'editar', 'Dev user test finall', 'desenvolvedor', '2025-02-16 15:52:38'),
+(23, 'Funcionário Teste', 'excluir', 'Dev user test finall', 'desenvolvedor', '2025-02-16 15:53:15'),
+(24, 'Funcionário Teste', 'editar', 'admintestee@gmail.com', 'administrador', '2025-02-16 15:54:24'),
+(25, 'Funcionário Teste', 'excluir', 'admintestee@gmail.com', 'administrador', '2025-02-16 15:54:44'),
+(26, 'Funcionário Teste', 'editar', 'Etec zitosss', 'Escola', '2025-02-16 15:55:27'),
+(27, 'Funcionário Teste', 'excluir', 'Etec zitosss', 'Escola', '2025-02-16 15:55:39'),
+(28, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Felipe ', 'administrador', '2025-02-16 15:59:22'),
+(29, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'ivasco', 'administrador', '2025-02-16 16:01:40'),
+(30, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'ivasco', 'bibliotecario', '2025-02-16 17:08:49'),
+(31, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Desenvolvimento web', 'Curso', '2025-02-16 17:20:05'),
+(32, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Figma UX', 'Curso', '2025-02-16 17:27:34'),
+(33, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'UX & XD', 'Curso', '2025-02-16 17:48:41'),
+(34, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Curso X', 'Curso', '2025-02-16 17:49:36'),
+(35, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Teste Curso', 'Curso', '2025-02-16 17:54:03'),
+(36, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'aa', 'Curso', '2025-02-16 17:58:58'),
+(37, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'a', 'Curso', '2025-02-16 18:00:33'),
+(38, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'a', 'Curso', '2025-02-16 18:00:49'),
+(39, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'adasdasdasdasd', 'Curso', '2025-02-16 18:05:08');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbadmin`
+-- Estrutura para tabela `tbadmin`
 --
 
 CREATE TABLE `tbadmin` (
@@ -159,19 +181,20 @@ CREATE TABLE `tbadmin` (
   `chave_recuperar_senha` varchar(220) DEFAULT NULL,
   `data_codigo_autenticacao` datetime DEFAULT NULL,
   `statusDev` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbadmin`
+-- Despejando dados para a tabela `tbadmin`
 --
 
 INSERT INTO `tbadmin` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(16, 'Jonathan Henrique Granado Perroni', 'jhow.zitos@gmail.com', '$2y$10$TlJa4hIWCJDLHno8ULWRQOEGMtULv973czMVMbQ1JJv6q5PhqjcYm', '18996511409', '18996511409', '36844808860', 8, 'administrador', 'Jonathan Granado Perroni', '2024-11-03 22:23:37', NULL, '$2y$10$PpWY6Ku2kFA4KMd88qZYvemCIKrJkCm0xo2fZIiPPGrVDSActu9G.', NULL, 1);
+(16, 'Jonathan Henrique Granado Perroni', 'jhow.zitos@gmail.com', '$2y$10$TlJa4hIWCJDLHno8ULWRQOEGMtULv973czMVMbQ1JJv6q5PhqjcYm', '18996511409', '18996511409', '36844808860', 8, 'administrador', 'Jonathan Granado Perroni', '2024-11-03 22:23:37', NULL, '$2y$10$PpWY6Ku2kFA4KMd88qZYvemCIKrJkCm0xo2fZIiPPGrVDSActu9G.', NULL, 1),
+(18, 'Felipe ', 'felipe@gmail.com', '$2y$10$wY2pNlQuR9F42e4Amiq0V./HS6qhQfIkyOktqJnhfMWZ5Eh2CJfmy', '18996511409', '18996511409', '25810827047', 11, 'administrador', 'Jonathan Henrique Granado Perroni', '2025-02-16 12:59:22', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbalunos`
+-- Estrutura para tabela `tbalunos`
 --
 
 CREATE TABLE `tbalunos` (
@@ -197,20 +220,20 @@ CREATE TABLE `tbalunos` (
   `codigo_autenticacao` varchar(8) DEFAULT NULL,
   `chave_recuperar_senha` varchar(220) DEFAULT NULL,
   `data_codigo_autenticacao` datetime DEFAULT NULL,
-  `statusDev` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbalunos`
+-- Despejando dados para a tabela `tbalunos`
 --
 
-INSERT INTO `tbalunos` (`codigo`, `nome`, `data_nascimento`, `endereco`, `cidade`, `estado`, `cpf`, `celular`, `periodo`, `situacao`, `responsavel`, `nome_escola`, `nome_curso`, `email`, `tipo_ensino`, `password`, `acesso`, `cadastrado_por`, `data_cdadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(1, 'Aluno Teste da Silva', '1994-11-22', 'Rua Teste, 552', 'Adamantina', 'SP', '413.735.168', '18991599472', 'noite', 'a cursar', 'Maria Teste', 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', 'aluno@teste.com', 'tecnico', '$2y$10$WzjtDMaL0J/2vHdMx1mfiePOpTZhqGKkY6YpRTbW3CtiwKk8sw/LG', 'aluno', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tbalunos` (`codigo`, `nome`, `data_nascimento`, `endereco`, `cidade`, `estado`, `cpf`, `celular`, `periodo`, `situacao`, `responsavel`, `nome_escola`, `nome_curso`, `email`, `tipo_ensino`, `password`, `acesso`, `cadastrado_por`, `data_cdadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `status`) VALUES
+(1, 'Aluno Teste da Silva', '1994-11-22', 'Rua Teste, 552', 'Adamantina', 'SP', '413.735.168', '18991599472', 'noite', 'a cursar', 'Maria Teste', 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', 'aluno@teste.com', 'tecnico', '$2y$10$JcSCQzzMKtXK17nGTogu2epkBt4/Ic9kNlvXTeiDBqg0zHmtbXyhC', 'aluno', NULL, NULL, 'IXGzNg', '$2y$10$uUi0xSOFyGZ62SDzmCe.m.H7K6qXpYqjiQ2TSvnSOMjAMxarWcnIu', '2025-02-16 02:27:58', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbbibliotecario`
+-- Estrutura para tabela `tbbibliotecario`
 --
 
 CREATE TABLE `tbbibliotecario` (
@@ -229,28 +252,29 @@ CREATE TABLE `tbbibliotecario` (
   `chave_recuperar_senha` varchar(220) DEFAULT NULL,
   `data_codigo_autenticacao` datetime DEFAULT NULL,
   `statusDev` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbbibliotecario`
+-- Despejando dados para a tabela `tbbibliotecario`
 --
 
 INSERT INTO `tbbibliotecario` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(1, 'Funcionário Teste', 'teste@email.com', '$2y$10$2v8Rw0H.iv.2m0fIjJPGle2jfEBHjv9.WzwJaAzUp27viBSnvNm9W', '', '18991599472', '46533043862', '055', 'bibliotecario', '', NULL, NULL, NULL, NULL, NULL);
+(1, 'Funcionário Teste', 'teste@email.com', '$2y$10$BTtaKIcjmqiK4NyxdHHClud/kF8buhEREEcugDDYWxuzHqLzs5aPu', '', '18991599472', '46533043862', '055', 'bibliotecario', '', NULL, NULL, '$2y$10$KkYBuaTj.WDuTgqrFMAXz.S6wjg1Q/ZTCTDshKEarkdshCG2i9leq', NULL, NULL),
+(2, 'ivasco', 'ivasco@gmail.com', '$2y$10$O9bevSswR5q0CffZndJRfuXISvCxrz/FuJoq1mayfONZ67j.xEU0e', '18996511409', '18996511409', '62949020020', '015', 'bibliotecario', 'Jonathan Henrique Granado Perroni', '2025-02-16 14:08:49', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbclasse`
+-- Estrutura para tabela `tbclasse`
 --
 
 CREATE TABLE `tbclasse` (
   `codigo` int(11) NOT NULL,
   `classe` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbclasse`
+-- Despejando dados para a tabela `tbclasse`
 --
 
 INSERT INTO `tbclasse` (`codigo`, `classe`) VALUES
@@ -264,38 +288,49 @@ INSERT INTO `tbclasse` (`codigo`, `classe`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbcursos`
+-- Estrutura para tabela `tbcursos`
 --
 
 CREATE TABLE `tbcursos` (
   `codigo` int(11) NOT NULL,
-  `nome_escola` text DEFAULT NULL,
+  `nome_escola` text NOT NULL,
   `nome_curso` text NOT NULL,
-  `tempo_curso` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `tempo_curso` text NOT NULL,
+  `cadastrado_por` varchar(255) NOT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbcursos`
+-- Despejando dados para a tabela `tbcursos`
 --
 
-INSERT INTO `tbcursos` (`codigo`, `nome_escola`, `nome_curso`, `tempo_curso`) VALUES
-(1, 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', '3 semestres'),
-(2, 'Prof Eudécio Luiz Vicente', 'Açúcar e Álcool', '3 semestres'),
-(3, 'Prof Eudécio Luiz Vicente', 'Administração', '3 semestres'),
-(4, 'Prof Eudécio Luiz Vicente', 'Contabilidade', '3 semestres'),
-(5, 'Prof Eudécio Luiz Vicente', 'Enfermagem', '4 semestres'),
-(6, 'Prof Eudécio Luiz Vicente', 'Ensino Médio', '6 semestres'),
-(7, 'Prof Eudécio Luiz Vicente', 'Ensino Médio Integrado', '6 semestres'),
-(8, 'Prof Eudécio Luiz Vicente', 'Informática para Internet', '3 semestres'),
-(9, 'Prof Eudécio Luiz Vicente', 'Logística', '3 semestres'),
-(10, 'Prof Eudécio Luiz Vicente', 'Mecânica', '3 semestres'),
-(11, 'Prof Eudécio Luiz Vicente', 'Secretariado - EAD', '2 semestres'),
-(12, 'Prof Eudécio Luiz Vicente', 'Segurança do Trabalho', '3 semestres');
+INSERT INTO `tbcursos` (`codigo`, `nome_escola`, `nome_curso`, `tempo_curso`, `cadastrado_por`, `data_cadastro`) VALUES
+(1, 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', '3 semestres', '', '2025-02-16 17:20:00'),
+(2, 'Prof Eudécio Luiz Vicente', 'Açúcar e Álcool', '3 semestres', '', '2025-02-16 17:20:00'),
+(3, 'Prof Eudécio Luiz Vicente', 'Administração', '3 semestres', '', '2025-02-16 17:20:00'),
+(4, 'Prof Eudécio Luiz Vicente', 'Contabilidade', '3 semestres', '', '2025-02-16 17:20:00'),
+(5, 'Prof Eudécio Luiz Vicente', 'Enfermagem', '4 semestres', '', '2025-02-16 17:20:00'),
+(6, 'Prof Eudécio Luiz Vicente', 'Ensino Médio', '6 semestres', '', '2025-02-16 17:20:00'),
+(7, 'Prof Eudécio Luiz Vicente', 'Ensino Médio Integrado', '6 semestres', '', '2025-02-16 17:20:00'),
+(8, 'Prof Eudécio Luiz Vicente', 'Informática para Internet', '3 semestres', '', '2025-02-16 17:20:00'),
+(9, 'Prof Eudécio Luiz Vicente', 'Logística', '3 semestres', '', '2025-02-16 17:20:00'),
+(10, 'Prof Eudécio Luiz Vicente', 'Mecânica', '3 semestres', '', '2025-02-16 17:20:00'),
+(11, 'Prof Eudécio Luiz Vicente', 'Secretariado - EAD', '2 semestres', '', '2025-02-16 17:20:00'),
+(12, 'Prof Eudécio Luiz Vicente', 'Segurança do Trabalho', '3 semestres', '', '2025-02-16 17:20:00'),
+(13, '', 'Desenvolvimento web', '2', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:20:05'),
+(14, '', 'Figma UX', '2 semestres ', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:27:34'),
+(15, '', 'UX & XD', '2 semestre', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:48:41'),
+(16, '', 'Curso X', '1 semestre', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:49:36'),
+(17, '', 'Teste Curso', '1 semestre', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:54:03'),
+(18, '', 'aa', '1 ', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:58:58'),
+(19, '', 'a', '1', 'Jonathan Henrique Granado Perroni', '2025-02-16 18:00:33'),
+(20, '', 'a', 'a', 'Jonathan Henrique Granado Perroni', '2025-02-16 18:00:49'),
+(21, 'Etec Lauro Gomes', 'adasdasdasdasd', '2', 'Jonathan Henrique Granado Perroni', '2025-02-16 18:05:08');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbdev`
+-- Estrutura para tabela `tbdev`
 --
 
 CREATE TABLE `tbdev` (
@@ -311,23 +346,44 @@ CREATE TABLE `tbdev` (
   `chave_recuperar_senha` varchar(220) DEFAULT NULL,
   `data_codigo_autenticacao` datetime DEFAULT NULL,
   `statusDev` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbdev`
+-- Despejando dados para a tabela `tbdev`
 --
 
 INSERT INTO `tbdev` (`codigo`, `nome`, `cpf`, `email`, `password`, `telefone`, `celular`, `acesso`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(8, 'Jonathan Granado Perroni', '36844808860', 'jhow.zitos@gmail.com', '$2y$10$G.hBeC5dPDDWoJHvIJ6fLewKDGvwv1kb3wKip5dhtGGlM.XvnFIX.', '18996511409', '18996511409', 'Desenvolvedor', NULL, NULL, NULL, 1),
+(8, 'Jonathan Granado Perroni', '36844808860', 'jhow.zitos@gmail.com', '$2y$10$lrTMlf2V3I8DFDNJ.vkwieXTr.rh2dK/p/weBZsSgLkX0wCZzOsdS', '18996511409', '18996511409', 'Desenvolvedor', NULL, NULL, NULL, 1),
 (9, 'Fernanda  Stanislaw', '00959139044', 'fer.stanislaw.fs@gmail.com', '$2y$10$uit8efwwTtyLbO.Gz8jx6O4MpWGVBfXi5lLGnHbOZGJt/tD2guBbS', '(18) 99612-2396', '(18) 99612-2396', 'Desenvolvedor', NULL, NULL, NULL, 1),
 (11, 'supremeDev', '93608124047', 'supremeDev@gmail.com', '$2y$10$mP5t4HdOlM/ooQqfr2zHNOIIgL/Tf3BoCIBK3iQk..eiyrjbPdzDS', '18996511409', '18996511409', 'Desenvolvedor', NULL, NULL, NULL, 0),
-(18, 'teste94', '16702118007', 'teste@teste.com', '$2y$10$sj0eIO6ke3atqLOLXtIPvOqYAtepND7wGzolwOWO5QTOEB5LeJogS', '18996511409', '18999999999', 'Desenvolvedor', NULL, NULL, NULL, 1),
+(18, 'teste94', '16702118007', 'teste@teste.com', '$2y$10$ih8U1g9GHHZSwDt.O24/z.iGNPfoyVEoTrN1805dMF2kWe1op63YS', '18996511409', '18999999999', 'Desenvolvedor', NULL, NULL, NULL, 1),
 (24, 'Felipe Ivasco', '41373516860', 'felipeivasco@gmail.com', '$2y$10$TJ2sPBt6uyW7crwVtI/3aOu1v9Q1ux5c1gGQLDajoSEmUitBK9p0a', '18996511409', '18996511409', 'desenvolvedor', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbescola`
+-- Estrutura para tabela `tbemprestimos`
+--
+
+CREATE TABLE `tbemprestimos` (
+  `id` int(11) NOT NULL,
+  `cpf_aluno` varchar(14) NOT NULL,
+  `isbn_livro` varchar(20) NOT NULL,
+  `data_emprestimo` datetime DEFAULT current_timestamp(),
+  `status` enum('emprestado','devolvido') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbemprestimos`
+--
+
+INSERT INTO `tbemprestimos` (`id`, `cpf_aluno`, `isbn_livro`, `data_emprestimo`, `status`) VALUES
+(4, '413.735.168', '123456', '2025-02-16 02:56:34', 'emprestado');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbescola`
 --
 
 CREATE TABLE `tbescola` (
@@ -347,10 +403,10 @@ CREATE TABLE `tbescola` (
   `numero` varchar(100) NOT NULL,
   `cadastrado_por` varchar(220) NOT NULL,
   `data_cadastro` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbescola`
+-- Despejando dados para a tabela `tbescola`
 --
 
 INSERT INTO `tbescola` (`codigo`, `nome_escola`, `tipoEscola`, `codigo_escola`, `endereco`, `bairro`, `cidade`, `estado`, `cnpj`, `telefone`, `celular`, `email`, `cep`, `numero`, `cadastrado_por`, `data_cadastro`) VALUES
@@ -363,7 +419,7 @@ INSERT INTO `tbescola` (`codigo`, `nome_escola`, `tipoEscola`, `codigo_escola`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbfuncionarios`
+-- Estrutura para tabela `tbfuncionarios`
 --
 
 CREATE TABLE `tbfuncionarios` (
@@ -382,19 +438,19 @@ CREATE TABLE `tbfuncionarios` (
   `chave_recuperar_senha` varchar(220) DEFAULT NULL,
   `data_codigo_autenticacao` datetime DEFAULT NULL,
   `statusDev` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbfuncionarios`
+-- Despejando dados para a tabela `tbfuncionarios`
 --
 
 INSERT INTO `tbfuncionarios` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(1, 'Funcionário Teste', 'funcionario@email.com', '$2y$10$uhYMPZ./bkkDWNYhqHduteEpwAcWiBj3wniIf4V8VNYViGdCY9QdK', '', '18997005573', '06968841358', '055', 'funcionario', NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'Funcionário Teste', 'funcionario@email.com', '$2y$10$uhYMPZ./bkkDWNYhqHduteEpwAcWiBj3wniIf4V8VNYViGdCY9QdK', '', '18997005573', '06968841358', '055', 'funcionario', NULL, NULL, 'IXGzNg', NULL, '2025-02-16 02:27:58', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbjogoseducativos`
+-- Estrutura para tabela `tbjogoseducativos`
 --
 
 CREATE TABLE `tbjogoseducativos` (
@@ -410,10 +466,10 @@ CREATE TABLE `tbjogoseducativos` (
   `estante` text DEFAULT NULL,
   `prateleira` text DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbjogoseducativos`
+-- Despejando dados para a tabela `tbjogoseducativos`
 --
 
 INSERT INTO `tbjogoseducativos` (`codigo`, `nome_escola`, `classe`, `titulo`, `categoria`, `idade_minima`, `num_jogadores`, `fabricante`, `data_adicao`, `estante`, `prateleira`, `quantidade`) VALUES
@@ -422,7 +478,7 @@ INSERT INTO `tbjogoseducativos` (`codigo`, `nome_escola`, `classe`, `titulo`, `c
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbjornal_revista`
+-- Estrutura para tabela `tbjornal_revista`
 --
 
 CREATE TABLE `tbjornal_revista` (
@@ -439,10 +495,10 @@ CREATE TABLE `tbjornal_revista` (
   `prateleira` text DEFAULT NULL,
   `edicao` int(11) DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbjornal_revista`
+-- Despejando dados para a tabela `tbjornal_revista`
 --
 
 INSERT INTO `tbjornal_revista` (`codigo`, `nome_escola`, `classe`, `titulo`, `data_publicacao`, `editora`, `categoria`, `issn`, `data_adicao`, `estante`, `prateleira`, `edicao`, `quantidade`) VALUES
@@ -452,7 +508,7 @@ INSERT INTO `tbjornal_revista` (`codigo`, `nome_escola`, `classe`, `titulo`, `da
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tblivros`
+-- Estrutura para tabela `tblivros`
 --
 
 CREATE TABLE `tblivros` (
@@ -472,19 +528,39 @@ CREATE TABLE `tblivros` (
   `prateleira` text DEFAULT NULL,
   `edicao` int(11) DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tblivros`
+-- Despejando dados para a tabela `tblivros`
 --
 
 INSERT INTO `tblivros` (`codigo`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `genero`, `num_paginas`, `idioma`, `data_adicao`, `estante`, `prateleira`, `edicao`, `quantidade`) VALUES
-(1, 'Prof Eudécio Luiz Vicente', 'Livro', 'Livro Teste', 'Autor Teste', 'Editora Teste', 2002, '123456', 'Educacional', 102, 'Português', '2024-07-04 00:43:52', '1', '1', 5, 2);
+(1, 'Prof Eudécio Luiz Vicente', 'Livro', 'Livro Teste', 'Autor Teste', 'Editora Teste', '2002', '1234567890123', 'Educacional', 102, 'Português', '2024-07-04 00:43:52', '1', '1', 5, 2),
+(2, 'Escola Exemplo', '1º Ano', 'A História do Mundo', 'Autor Exemplo', 'Editora Exemplo', '2024', '978-3-16-148410-0', 'História', 200, 'Português', '2025-02-16 06:43:34', 'A1', 'Prateleira 3', 0, 10),
+(3, 'Escola Exemplo', '2º Ano', 'O Mundo da Ciência', 'Outro Autor', 'Outra Editora', '2023', '978-1-23-456789-0', 'Ciência', 250, 'Inglês', '2025-02-16 06:43:34', 'B2', 'Prateleira 5', 0, 15),
+(4, 'Escola Exemplo', '3º Ano', 'Matemática para Todos', 'Mais um Autor', 'Mais uma Editora', '2022', '978-0-12-345678-9', 'Matemática', 180, 'Español', '2025-02-16 06:43:34', 'C3', 'Prateleira 7', 0, 20),
+(5, 'Escola Exemplo', '4º Ano', 'Geografia do Mundo', 'Autor Geográfico', 'Editora Mundo', '2021', '978-9-87-654321-0', 'Geografia', 300, 'Português', '2025-02-16 06:43:34', 'D4', 'Prateleira 1', 0, 5),
+(6, 'Escola Exemplo', '5º Ano', 'Física Experimental', 'Físico Cientista', 'Editora Ciência', '2020', '978-1-23-987654-3', 'Física', 320, 'Inglês', '2025-02-16 06:43:34', 'E5', 'Prateleira 6', 0, 12),
+(7, 'Escola Exemplo', '6º Ano', 'Química Fácil', 'Químico Exemplo', 'Editora Química', '2019', '978-0-98-765432-1', 'Química', 250, 'Português', '2025-02-16 06:43:34', 'F6', 'Prateleira 2', 0, 7),
+(8, 'Escola Exemplo', '7º Ano', 'Literatura Brasileira', 'Autor Literário', 'Editora Brasil', '2018', '978-0-12-345678-5', 'Literatura', 180, 'Português', '2025-02-16 06:43:34', 'G7', 'Prateleira 4', 0, 10),
+(9, 'Escola Exemplo', '8º Ano', 'Psicologia e Educação', 'Psicólogo Educacional', 'Editora Psico', '2017', '978-0-56-987654-3', 'Psicologia', 220, 'Português', '2025-02-16 06:43:34', 'H8', 'Prateleira 8', 0, 8),
+(10, 'Escola Exemplo', '9º Ano', 'Cultura e Sociedade', 'Autor Sociológico', 'Editora Cultura', '2016', '978-1-24-567890-1', 'Sociologia', 210, 'Português', '2025-02-16 06:43:34', 'I9', 'Prateleira 9', 0, 14),
+(11, 'Escola Exemplo', '1º Ano', 'Introdução à Filosofia', 'Filósofo Moderno', 'Editora Filosofia', '2020', '978-2-13-456789-2', 'Filosofia', 230, 'Inglês', '2025-02-16 06:43:34', 'J1', 'Prateleira 3', 0, 20),
+(12, 'Escola Exemplo', '2º Ano', 'Arte e Criatividade', 'Artista Exemplar', 'Editora Arte', '2015', '978-1-99-876543-2', 'Arte', 150, 'Inglês', '2025-02-16 06:43:34', 'K2', 'Prateleira 5', 0, 6),
+(13, 'Escola Exemplo', '3º Ano', 'História da Arte', 'Historiador Artístico', 'Editora História', '2018', '978-0-87-654321-5', 'História', 280, 'Português', '2025-02-16 06:43:34', 'L3', 'Prateleira 7', 0, 12),
+(14, 'Escola Exemplo', '4º Ano', 'Astronomia e o Universo', 'Astrônomo Grande', 'Editora Espaço', '2017', '978-3-14-567890-2', 'Astronomia', 200, 'Português', '2025-02-16 06:43:34', 'M4', 'Prateleira 2', 0, 9),
+(15, 'Escola Exemplo', '5º Ano', 'Filosofia Contemporânea', 'Filosofador Atual', 'Editora Pensamento', '2022', '978-9-87-654987-3', 'Filosofia', 220, 'Português', '2025-02-16 06:43:34', 'N5', 'Prateleira 4', 0, 15),
+(16, 'Escola Exemplo', '6º Ano', 'Biologia Marinha', 'Biólogo Marinho', 'Editora Oceano', '2023', '978-1-25-678901-2', 'Biologia', 250, 'Português', '2025-02-16 06:43:34', 'O6', 'Prateleira 6', 0, 18),
+(17, 'Escola Exemplo', '7º Ano', 'Economia Básica', 'Economista Iniciante', 'Editora Economia', '2024', '978-2-56-789012-3', 'Economia', 180, 'Português', '2025-02-16 06:43:34', 'P7', 'Prateleira 1', 0, 10),
+(18, 'Escola Exemplo', '8º Ano', 'Tecnologia e Inovação', 'Tecnólogo Futurista', 'Editora Tech', '2020', '978-3-21-654987-0', 'Tecnologia', 290, 'Inglês', '2025-02-16 06:43:34', 'Q8', 'Prateleira 9', 0, 8),
+(19, 'Escola Exemplo', '9º Ano', 'Geopolítica Global', 'Autor Geopolítico', 'Editora Global', '2021', '978-1-21-543210-9', 'Geopolítica', 250, 'Português', '2025-02-16 06:43:34', 'R9', 'Prateleira 2', 0, 10),
+(20, 'Escola Exemplo', '1º Ano', 'Geografia do Brasil', 'Geógrafo Brasileiro', 'Editora Brasil', '2019', '978-2-13-987654-0', 'Geografia', 200, 'Português', '2025-02-16 06:43:34', 'S1', 'Prateleira 3', 0, 7),
+(21, 'Escola Exemplo', '2º Ano', 'Literatura Inglesa', 'Autor Britânico', 'Editora Londrina', '2018', '978-0-32-456789-4', 'Literatura', 300, 'Inglês', '2025-02-16 06:43:34', 'T2', 'Prateleira 4', 0, 11);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbmidias`
+-- Estrutura para tabela `tbmidias`
 --
 
 CREATE TABLE `tbmidias` (
@@ -500,10 +576,10 @@ CREATE TABLE `tbmidias` (
   `estante` text DEFAULT NULL,
   `prateleira` text DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbmidias`
+-- Despejando dados para a tabela `tbmidias`
 --
 
 INSERT INTO `tbmidias` (`codigo`, `nome_escola`, `classe`, `titulo`, `data_lancamento`, `genero`, `diretor_artista`, `duracao`, `data_adicao`, `estante`, `prateleira`, `quantidade`) VALUES
@@ -512,7 +588,7 @@ INSERT INTO `tbmidias` (`codigo`, `nome_escola`, `classe`, `titulo`, `data_lanca
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbprofessores`
+-- Estrutura para tabela `tbprofessores`
 --
 
 CREATE TABLE `tbprofessores` (
@@ -531,19 +607,19 @@ CREATE TABLE `tbprofessores` (
   `chave_recuperar_senha` varchar(220) DEFAULT NULL,
   `data_codigo_autenticacao` datetime DEFAULT NULL,
   `statusDev` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbprofessores`
+-- Despejando dados para a tabela `tbprofessores`
 --
 
 INSERT INTO `tbprofessores` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(1, 'Professor Teste', 'professor@teste.com', '$2y$10$vgDrWrxGXFLMhKdJlwoJcu.DBDEXxSgaYDwMSviPBkfCv0uaWfUiG', '', '18991599472', '09739704805', '055', 'professor', NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'Professor Teste', 'professor@teste.com', '$2y$10$vgDrWrxGXFLMhKdJlwoJcu.DBDEXxSgaYDwMSviPBkfCv0uaWfUiG', '', '18991599472', '09739704805', '055', 'professor', NULL, NULL, 'IXGzNg', NULL, '2025-02-16 02:27:58', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbtcc`
+-- Estrutura para tabela `tbtcc`
 --
 
 CREATE TABLE `tbtcc` (
@@ -559,117 +635,123 @@ CREATE TABLE `tbtcc` (
   `estante` text DEFAULT NULL,
   `prateleira` text DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tbtcc`
+-- Despejando dados para a tabela `tbtcc`
 --
 
 INSERT INTO `tbtcc` (`codigo`, `nome_escola`, `classe`, `titulo`, `autor`, `orientador`, `curso`, `ano`, `data_adicao`, `estante`, `prateleira`, `quantidade`) VALUES
-(1, 'Prof Eudécio Luiz Vicente', 'Tcc', 'Tcc Teste', 'Felipe Ivasco', 'Professor André Luis', 'Desenvolvimento de Sistemas', 2024, '2024-07-04 00:45:48', '1', '2', 1);
+(1, 'Prof Eudécio Luiz Vicente', 'Tcc', 'Tcc Teste', 'Felipe Ivasco', 'Professor André Luis', 'Desenvolvimento de Sistemas', '2024', '2024-07-04 00:45:48', '1', '2', 1);
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `dados_etec`
+-- Índices de tabela `dados_etec`
 --
 ALTER TABLE `dados_etec`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `historico_usuarios`
+-- Índices de tabela `historico_usuarios`
 --
 ALTER TABLE `historico_usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tbadmin`
+-- Índices de tabela `tbadmin`
 --
 ALTER TABLE `tbadmin`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbalunos`
+-- Índices de tabela `tbalunos`
 --
 ALTER TABLE `tbalunos`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbbibliotecario`
+-- Índices de tabela `tbbibliotecario`
 --
 ALTER TABLE `tbbibliotecario`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbclasse`
+-- Índices de tabela `tbclasse`
 --
 ALTER TABLE `tbclasse`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbcursos`
+-- Índices de tabela `tbcursos`
 --
 ALTER TABLE `tbcursos`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbdev`
+-- Índices de tabela `tbdev`
 --
 ALTER TABLE `tbdev`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbescola`
+-- Índices de tabela `tbemprestimos`
+--
+ALTER TABLE `tbemprestimos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `tbescola`
 --
 ALTER TABLE `tbescola`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbfuncionarios`
+-- Índices de tabela `tbfuncionarios`
 --
 ALTER TABLE `tbfuncionarios`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbjogoseducativos`
+-- Índices de tabela `tbjogoseducativos`
 --
 ALTER TABLE `tbjogoseducativos`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbjornal_revista`
+-- Índices de tabela `tbjornal_revista`
 --
 ALTER TABLE `tbjornal_revista`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tblivros`
+-- Índices de tabela `tblivros`
 --
 ALTER TABLE `tblivros`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbmidias`
+-- Índices de tabela `tbmidias`
 --
 ALTER TABLE `tbmidias`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbprofessores`
+-- Índices de tabela `tbprofessores`
 --
 ALTER TABLE `tbprofessores`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `tbtcc`
+-- Índices de tabela `tbtcc`
 --
 ALTER TABLE `tbtcc`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -682,13 +764,13 @@ ALTER TABLE `dados_etec`
 -- AUTO_INCREMENT de tabela `historico_usuarios`
 --
 ALTER TABLE `historico_usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de tabela `tbadmin`
 --
 ALTER TABLE `tbadmin`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `tbalunos`
@@ -700,7 +782,7 @@ ALTER TABLE `tbalunos`
 -- AUTO_INCREMENT de tabela `tbbibliotecario`
 --
 ALTER TABLE `tbbibliotecario`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbclasse`
@@ -712,19 +794,25 @@ ALTER TABLE `tbclasse`
 -- AUTO_INCREMENT de tabela `tbcursos`
 --
 ALTER TABLE `tbcursos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `tbdev`
 --
 ALTER TABLE `tbdev`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de tabela `tbemprestimos`
+--
+ALTER TABLE `tbemprestimos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tbescola`
 --
 ALTER TABLE `tbescola`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de tabela `tbfuncionarios`
@@ -748,7 +836,7 @@ ALTER TABLE `tbjornal_revista`
 -- AUTO_INCREMENT de tabela `tblivros`
 --
 ALTER TABLE `tblivros`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `tbmidias`

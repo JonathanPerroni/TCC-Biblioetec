@@ -17,7 +17,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $password2 = $_POST['password2'];
 $telefone = $_POST['telefone'];
-$celular = $_POST['celular'];
+$celular = $_POST['celular'];   
 $cpf = $_POST['cpf'];
 $codigo_escola = $_POST['codigo_escola'];
 $acesso = $_POST['acesso'];
@@ -175,6 +175,10 @@ try {
         $stmt->close();
     }
 
+
+
+
+
     if ($stmt->execute()) {
         if (empty($_SESSION['msg'])) {
             registraHistorico($conn, "editar", $_SESSION['nome'], $nome, $acesso, date('Y-m-d H:i:s'));
@@ -193,6 +197,19 @@ try {
     $conn->rollback();
     echo $e->getMessage();
 }
+
+// Consulta para buscar os dados das ETECs
+$sqlEtec = "SELECT codigo_escola, unidadeEscola FROM dados_etec";
+$resultEtec = $conn->query($sqlEtec);
+
+$dadosEtec = [];
+if ($resultEtec && $resultEtec->num_rows > 0) {
+    while ($rowEtec = $resultEtec->fetch_assoc()) {
+        $dadosEtec[] = $rowEtec;
+    }
+}
+
+
 
 
 $conn->close();
