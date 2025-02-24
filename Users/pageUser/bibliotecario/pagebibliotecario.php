@@ -6,11 +6,11 @@ date_default_timezone_set('America/Sao_Paulo');
 
 include_once("../../../conexao/conexao.php");
 
-// Inicialize mensagens e variáveis de controle
+// Inicializa mensagens e variáveis de controle
 $msg = "";
-$etapa = isset($_POST['etapa']) ? $_POST['etapa'] : 1;
+$etapa = $_POST['etapa'] ?? 1;
 
-// Validação de login, só entra se estiver logado
+// Verifica se o usuário está logado
 if (empty($_SESSION['email'])) {
     $_SESSION['msg'] = "Faça o Login!!";
     header("Location: ../../login/login.php");
@@ -19,9 +19,8 @@ if (empty($_SESSION['email'])) {
 
 // Etapa 1: Buscar Aluno
 if ($etapa == 1 && isset($_POST['buscar_cpf'])) {
-    $cpf = $_POST['cpf'];
+    $cpf = trim($_POST['cpf']);
 
-    // Consulta para buscar aluno
     $query_aluno = "SELECT nome, nome_escola, nome_curso, acesso FROM tbalunos WHERE cpf = ?";
     $stmt = $conn->prepare($query_aluno);
 
@@ -31,12 +30,13 @@ if ($etapa == 1 && isset($_POST['buscar_cpf'])) {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $_SESSION['aluno'] = $result->fetch_assoc(); // Salva os dados na sessão
-            $_SESSION['aluno']['cpf'] = $cpf; // Adiciona o CPF ao array
-            $etapa = 2; // Avança para a próxima etapa
+            $_SESSION['aluno'] = $result->fetch_assoc();
+            $_SESSION['aluno']['cpf'] = $cpf;
+            $etapa = 2;
         } else {
             $msg = "Aluno não encontrado!";
         }
+        $stmt->close();
     } else {
         $msg = "Erro ao preparar consulta de aluno: " . $conn->error;
     }
@@ -44,10 +44,9 @@ if ($etapa == 1 && isset($_POST['buscar_cpf'])) {
 
 // Etapa 2: Buscar Livro
 if ($etapa == 2 && isset($_POST['buscar_livro'])) {
-    $isbn = $_POST['isbn'];
-    $titulo = $_POST['titulo'];
+    $isbn = trim($_POST['isbn']);
+    $titulo = trim($_POST['titulo']);
 
-    // Consulta para buscar livro
     $query_livro = "SELECT isbn, titulo, quantidade FROM tblivros WHERE isbn = ? OR titulo = ?";
     $stmt = $conn->prepare($query_livro);
 
@@ -57,11 +56,12 @@ if ($etapa == 2 && isset($_POST['buscar_livro'])) {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $_SESSION['livro'] = $result->fetch_assoc(); // Salva os dados do livro na sessão
-            $etapa = 3; // Avança para a próxima etapa
+            $_SESSION['livro'] = $result->fetch_assoc();
+            $etapa = 3;
         } else {
             $msg = "Livro não encontrado!";
         }
+        $stmt->close();
     } else {
         $msg = "Erro ao preparar consulta de livro: " . $conn->error;
     }
@@ -69,65 +69,70 @@ if ($etapa == 2 && isset($_POST['buscar_livro'])) {
 
 // Etapa 3: Confirmar Empréstimo
 if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
-    // Obtenha os dados do aluno e do livro da sessão
-    $aluno = $_SESSION['aluno'];
-    $livro = $_SESSION['livro'];
+    // Verifique se os dados estão na sessão
+    if (!isset($_SESSION['aluno']) || !isset($_SESSION['livro'])) {
+        $msg = "Erro: Dados do aluno ou livro ausentes!";
+    } else {
+        $aluno = $_SESSION['aluno'];
+        $livro = $_SESSION['livro'];
 
-    // Verifique a quantidade total e emprestada
-    $query_quantidade = "SELECT quantidade, 
-                            (SELECT COUNT(*) FROM tbemprestimos WHERE isbn_livro = ? AND status = 'emprestado') AS emprestados 
-                         FROM tblivros WHERE isbn = ?";
-    $stmt = $conn->prepare($query_quantidade);
+        // Verifique a quantidade total e emprestada
+        $query_quantidade = "SELECT quantidade, 
+                                (SELECT COUNT(*) FROM tbemprestimos WHERE isbn_livro = ? AND status = 'emprestado') AS emprestados 
+                             FROM tblivros WHERE isbn = ?";
+        $stmt = $conn->prepare($query_quantidade);
 
-    if ($stmt) {
-        $stmt->bind_param("ss", $livro['isbn'], $livro['isbn']);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        if ($stmt) {
+            $stmt->bind_param("ss", $livro['isbn'], $livro['isbn']);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $dados_livro = $result->fetch_assoc();
-            $quantidade_total = $dados_livro['quantidade'];
-            $quantidade_emprestada = $dados_livro['emprestados'];
-            $disponiveis = $quantidade_total - $quantidade_emprestada;
+            if ($result->num_rows > 0) {
+                $dados_livro = $result->fetch_assoc();
+                $quantidade_total = $dados_livro['quantidade'];
+                $quantidade_emprestada = $dados_livro['emprestados'];
+                $disponiveis = $quantidade_total - $quantidade_emprestada;
 
-            // Verifica se há apenas 1 exemplar restante
-            if ($disponiveis <= 1) {
-                echo "<script>
-                        alert('Apenas 1 exemplar disponível. Deve haver pelo menos uma cópia na biblioteca.');
-                        window.location.href = 'http://localhost/biblioetec/Desenvolvedor/Users/pageUser/bibliotecario/pagebibliotecario.php';
-                      </script>";
-            } else {
-                // Registra o empréstimo
-                $query_emprestimo = "INSERT INTO tbemprestimos (cpf_aluno, isbn_livro, data_emprestimo, status) VALUES (?, ?, NOW(), 'emprestado')";
-                $stmt = $conn->prepare($query_emprestimo);
-
-                if ($stmt) {
-                    $stmt->bind_param("ss", $aluno['cpf'], $livro['isbn']);
-
-                    if ($stmt->execute()) {
-                        echo "<script>
-                                alert('Livro emprestado com sucesso!');
-                                window.location.href = <?php echo '../bibliotecario/pagebibliotecario.php'; ?>;
-                              </script>";
-                        // Limpa os dados da sessão
-                        unset($_SESSION['aluno']);
-                        unset($_SESSION['livro']);
-                    } else {
-                        $msg = "Erro ao registrar o empréstimo: " . $stmt->error;
-                    }
+                // Verifica se há apenas 1 exemplar restante
+                if ($disponiveis <= 1) {
+                    echo "<script>
+                            alert('Apenas 1 exemplar disponível. Deve haver pelo menos uma cópia na biblioteca.');
+                            window.location.href = 'http://localhost/biblioetec/Desenvolvedor/Users/pageUser/bibliotecario/pagebibliotecario.php';
+                          </script>";
                 } else {
-                    $msg = "Erro ao preparar consulta de empréstimo: " . $conn->error;
+                    // Registra o empréstimo
+                    $query_emprestimo = "INSERT INTO tbemprestimos (cpf_aluno, isbn_livro, data_emprestimo, status) VALUES (?, ?, NOW(), 'emprestado')";
+                    $stmt = $conn->prepare($query_emprestimo);
+
+                    if ($stmt) {
+                        $stmt->bind_param("ss", $aluno['cpf'], $livro['isbn']);
+
+                        if ($stmt->execute()) {
+                            echo "<script>
+                                    alert('Livro emprestado com sucesso!');
+                                    window.location.href = '../bibliotecario/pagebibliotecario.php';
+                                  </script>";
+                            // Limpa os dados da sessão
+                            unset($_SESSION['aluno']);
+                            unset($_SESSION['livro']);
+                        } else {
+                            $msg = "Erro ao registrar o empréstimo: " . $stmt->error;
+                        }
+                    } else {
+                        $msg = "Erro ao preparar consulta de empréstimo: " . $conn->error;
+                    }
                 }
+            } else {
+                $msg = "Erro ao verificar a disponibilidade do livro!";
             }
         } else {
-            $msg = "Erro ao verificar a disponibilidade do livro!";
+            $msg = "Erro ao preparar consulta de quantidade: " . $conn->error;
         }
-    } else {
-        $msg = "Erro ao preparar consulta de quantidade: " . $conn->error;
     }
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -292,6 +297,9 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                                                                                         </li>
                                                                                         <li>
                                                                                             <a href="../pageGlobal/list/acervo/listatccNew.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Catalogo de TCC</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="../bibliotecario/lista_emprestimos.php" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-[var(--primary)] dark:text-white dark:hover:bg-[var(--primary)]">Lista de Emprestimo</a>
                                                                                         </li>
                                                                                                 </ul>
                                                                                             </li>        

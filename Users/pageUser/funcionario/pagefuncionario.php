@@ -40,8 +40,8 @@ mysqli_set_charset($conn, "utf8mb4");
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="w-screen h-screen flex flex-col items-center bg-[var(--off-white)]">
-    <header class="min-w-full bg-white py-1 flex flex-row justify-between items-center shadow-md overflow-hidden ">
+<body class="w-screen min-h-screen flex flex-col items-center bg-[var(--off-white)]">
+    <header class="min-w-full   bg-white py-1 flex flex-row justify-between items-center shadow-md overflow-hidden ">
         <a href="#" class="text-2xl  xl:text-4xl xl:mx-4 text-primary font-semibold" tabindex="-1">Biblio<span class="text-secondary">etec</span></a>
         <h1 class="text-2xl font-light text-primary">ACERVOS CADASTRADOS</h1>
         <button id="dropdown-perfil" data-dropdown-toggle="dropdown" class="flex justify-between items-center max-h-12 pl-4 mr-4 bg-white border-2 border-solid border-[var(--secondary)] border-r-0 rounded-lg text-[var(--secondary)] text-left flex-nowrap text-nowrap" type="button">
@@ -107,7 +107,7 @@ mysqli_set_charset($conn, "utf8mb4");
                 <tbody class="border border-[var(--grey)]">
                     <?php
                     // Consulta com filtro de pesquisa
-                    $sql = "SELECT codigo, codigo_escola, titulo, autor, estante, prateleira, quantidade
+                    $sql = "SELECT codigo, nome_escola, titulo, autor, estante, prateleira, quantidade
                             FROM tblivros
                             WHERE titulo LIKE '%$pesquisa_escapada%'
                             ORDER BY codigo";
@@ -120,7 +120,7 @@ mysqli_set_charset($conn, "utf8mb4");
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $codigo = htmlspecialchars($row['codigo']);
-                            $codigo_escola = htmlspecialchars($row['codigo_escola']);
+                            $nome_escola = htmlspecialchars($row['nome_escola']);
                             $titulo = htmlspecialchars($row['titulo']);
                             $autor = htmlspecialchars($row['autor']);
                             $estante = htmlspecialchars($row['estante']);
@@ -128,7 +128,7 @@ mysqli_set_charset($conn, "utf8mb4");
                             $quantidade = htmlspecialchars($row['quantidade']);
                             echo '<tr class="odd:bg-white even:bg-[var(--off-white)] border-b border-[var(--grey)]">';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $codigo .  '</td>';
-                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $codigo_escola . '</td>';
+                            echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $nome_escola . '</td>';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $titulo . '</td>';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $autor . '</td>';
                             echo    '<td scope="row" class="px-6 py-4 font-medium text-[var(--secondary)] whitespace-nowrap border-r border-[var(--grey)]">' .  $estante . '</td>';
