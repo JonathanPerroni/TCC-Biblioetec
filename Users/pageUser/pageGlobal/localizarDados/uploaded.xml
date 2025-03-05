@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>JONATHAN HENRIQUE GRANADO PERRONI</Author>
+  <LastAuthor>JONATHAN HENRIQUE GRANADO PERRONI</LastAuthor>
+  <Created>2025-03-04T18:52:14Z</Created>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>7185</WindowHeight>
+  <WindowWidth>20490</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Aptos Narrow" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"
+    ss:ReadingOrder="LeftToRight"/>
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Size="12" ss:Color="#404040"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s65">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Times New Roman" x:Family="Roman" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s67">
+   <Alignment ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Times New Roman" x:Family="Roman" ss:Size="11"
+    ss:Color="#000000"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Planilha1">
+  <Table ss:ExpandedColumnCount="2" ss:ExpandedRowCount="31" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Column ss:Width="345"/>
+   <Column ss:Width="296.25"/>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Titulo</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Editora</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">DA DOIS MIL ANOS: EPIDÓDIOS DA HISTÓRIA DO CRYSTIA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">PZB</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">OS FUNDAMENTOS DA FÍSICA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">MODEZHA</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">CURSO DE FÍSICA – MANUAL DO PROFESSOR</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SCEPIONE</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">DISOSSARDOS</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">TERANDA CULTURAL EDITORA E DISTRIBUIDORA</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">MANUAL DE PROCEDIMENTOS PARA ESTÁGIO EM ENTREMAÇÕES</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">MARINHAKI</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">GUIA COMPLETO DE PROCEDIMENTOS E COMPETÊNCIA: DE R</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">ELSEVIER</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">GUIA DE EXAME FÍSICO PARA ENFERMAGEM</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">ELSEVIER</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">ENFERMAÇÕES PEDIÁTICAS</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">MARINHAKI</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">NOVA VIRTUDE MATRICA DA SAÚDE: POSTINGULGA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">COMEÇANTIA EDITORA NACIONAL</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">BRAS, BRXIGA E BARBA RUNHA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">BRAS EDITORIAL</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">MEMÓRIAS PÓSTUMAS DE BRAS CUBAS</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">ESCOLA EDUCACIONAL</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">A MULHER DO VIZINHO</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">RECORD</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">OTILO, O MUNDO DE VENEZA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SHIPTOW</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">DOM CASMEBO / MACHAÃO DE ASSIS</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">ESCOLA EDUCACIONAL</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">BAGAGEM</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">RECORD</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">21 LIÇÕES PARA O SÉCULO 21</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">COMPANHIA DAS LEITAS PRINCIPIAS</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">O CHAMADO DE CHEULHU E OUTROS CONTOS</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">OBJETIVA</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">AS CEM MELHORES CRÔNICAS BRASILEIRAS</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">INFRAVESCA</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">A MENINA QUE RODEAVA LIVROS</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">LABOUSSE DO BRASIL</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SABER SE MOTIVAR NA VIDA E NO TRABALHO</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">LABOUSSE DO BRASIL</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SABER RELAXAR NA VIDA E NO TRABALHO</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">FRANCISCO ALVES</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SIMBIOSE E AMBIQUIDADE</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SIMMUS</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">FENOMENOLOGIA E GESTALT-TERAPIA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SIMMUS</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">CONCEITO DE MUNDO E DE PESSOA EM GESTALT-TERAPIA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SIMMUS</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">RELAÇÃO E CURA EM GESTALT-TERAPIA</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SIMMUS</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">SABER ADMINISTRAR O REFRESSE NA VIDA E NO TRABALHO</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">LABOUSSE DO BRASIL</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">MENTES COM MEDO: DA COMPETÊNCIA A SUPERAÇÃO</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">INFRAVERA</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">COMO CONQUISTAR, FALANDO</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">EPIDURA</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">O CORCUNDA DE HOTRE DAME</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">BRANCIDE3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s67"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.31496062000000002"/>
+    <Footer x:Margin="0.31496062000000002"/>
+    <PageMargins x:Bottom="0.78740157499999996" x:Left="0.511811024"
+     x:Right="0.511811024" x:Top="0.78740157499999996"/>
+   </PageSetup>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>7</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
