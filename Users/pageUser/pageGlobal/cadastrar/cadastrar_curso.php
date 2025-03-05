@@ -1,11 +1,27 @@
 <?php
-    session_start();
-    include '../../../../conexao/conexao.php'; // Inclui o arquivo de conexão
-    date_default_timezone_set('America/Sao_Paulo');
+        session_start();
+        include '../../../../conexao/conexao.php'; // Inclui o arquivo de conexão
+        date_default_timezone_set('America/Sao_Paulo');
+
+        // Variável para armazenar mensagens de erro
+        $_SESSION['msg'] = '';
+
+        // Conexão e consulta para dados das escolas
+        $sql = "SELECT codigo_escola, unidadeEscola FROM dados_etec";
+        $result = $conn->query($sql);
+
+        $dadosEtec = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $dadosEtec[] = $row;
+            }
+        } 
 
      // Captura o usuário logado
      $cadastrado_por = $_SESSION['nome']; // Presumindo que o nome do usuário logado está na sessão
+     
 
+     
      // Captura a data e hora do cadastro
      $data_cadastro = date('Y-m-d H:i:s'); // Formato padrão do MySQL para DATETIME
 
@@ -17,6 +33,15 @@
         $tempo_curso = filter_input(INPUT_POST, 'tempo_curso', FILTER_SANITIZE_STRING);       
         $cadastrado_por = filter_input(INPUT_POST, 'cadastrado_por', FILTER_SANITIZE_STRING);
          $data_cadastro = filter_input(INPUT_POST, 'data_cadastro', FILTER_SANITIZE_STRING);
+         $nome_escola = filter_input(INPUT_POST, 'nome_escola', FILTER_SANITIZE_STRING);
+
+            // Verifica se o campo nome_escola não está vazio
+            if (empty($nome_escola)) {
+                $_SESSION['msg'] = "O nome da escola é obrigatório!";
+                header("Location: cadastrar_curso.php");
+                exit();
+            }
+
  
         // Captura o usuário logado
             $cadastrado_por = $_SESSION['nome']; // Presumindo que o nome do usuário logado está na sessão
@@ -30,13 +55,13 @@
 
         try {
             // Usando prepared statements para evitar SQL Injection
-            $stmt = $conn->prepare("INSERT INTO tbcursos (nome_curso, tempo_curso, cadastrado_por, data_cadastro) VALUES ( ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO tbcursos (nome_curso, tempo_curso, cadastrado_por, data_cadastro, nome_escola) VALUES (?, ?, ?, ?, ?)");
             
             if (!$stmt) {
                 throw new Exception("Erro ao preparar a consulta: " . $conn->error);
             }
         
-            $stmt->bind_param("ssss", $nome_curso, $tempo_curso, $cadastrado_por, $data_cadastro);
+            $stmt->bind_param("sssss", $nome_curso, $tempo_curso, $cadastrado_por, $data_cadastro, $nome_escola);
         
             // Função para registrar histórico
             function registraHistorico($conn, $historico_acao, $historico_responsavel, $historico_usuario, $historico_acesso, $historico_data_hora) {
@@ -146,13 +171,39 @@
                 }
                 ?></p>
         <form action="" method="POST" class="d-flex flex-column gap-4">
-            <div>
-                <label for="nome_curso" class="form-label">Nome do Curso :</label>
-                <input type="text" name="nome_curso" placeholder="Insira o nome do curso" required class="form-control">
+            <div class="breakable-row d-flex justify-between gap-4">
+                    <div class="w-100">
+                    <label for="nome_curso" class="form-label">Nome do Curso :</label>
+                    <input type="text" name="nome_curso" placeholder="Insira o nome do curso" required class="form-control">
+           
+                    </div>
+                   <div class="w-100">
+                            <label for="tempo_curso" class="form-label">Tempo do Curso:</label>
+                            <input type="text" name="tempo_curso" placeholder="Insira o tempo do curso" required class="form-control">
+                 </div>
             </div>
-            <div>
-                <label for="tempo_curso" class="form-label">Tempo do Curso:</label>
-                <input type="text" name="tempo_curso" placeholder="Insira o tempo do curso" required class="form-control">
+            
+            <div class="breakable-row d-flex justify-between gap-4">
+            <div class="w-20">
+                        <label for="codigo_escola" class="form-label">Codigo Etec:</label>
+                        <!-- Campo para o código da ETEC -->
+                        <input type="text" id="codigo_escola" name="codigo_escola" list="codigos" placeholder="Código Etec" required class="form-control" onchange="updateNomeEscola()">
+
+                        <!-- Datalist com opções -->
+                        <datalist id="codigos">
+                            <?php foreach ($dadosEtec as $escola): ?>
+                                <?php $codigo = $escola['codigo_escola']; ?>
+                                <?php $nome = $escola['unidadeEscola']; ?>
+                                <option value="<?php echo "$codigo"; ?>" data-nome="<?php echo "$nome"; ?>"><?php echo "$codigo - $nome"; ?></option>
+                            <?php endforeach; ?>
+                        </datalist>  
+                    </div>
+                    <div class="w-100">
+                       <!-- Campo para mostrar o nome da escola selecionada -->
+                       <label for="nome_escola" class="form-label">Nome Etec:</label>
+                       <input type="text" id="nome_escola" name="nome_escola" placeholder="Nome da Etec"  class="form-control">
+                    </div>
+                       
             </div>
             <div class="breakable-row d-flex justify-between gap-4">
             <div class="w-100">
@@ -175,5 +226,26 @@
   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                const codigoEscolaInput = document.getElementById('codigo_escola');
+                const nomeEscolaInput = document.getElementById('nome_escola');
+                const codigosDatalist = document.getElementById('codigos');
+
+                codigoEscolaInput.addEventListener('input', function() {
+                    const codigoSelecionado = this.value.trim();
+                    
+                    // Encontra a opção correspondente ao código selecionado
+                    const option = Array.from(codigosDatalist.options).find(opt => opt.value === codigoSelecionado);
+                    
+                    if (option) {
+                        nomeEscolaInput.value = option.textContent.split(' - ')[1] || '';
+                    } else {
+                        nomeEscolaInput.value = '';
+                    }
+                });
+            });
+
+    </script>                                        
 </body>
 </html>

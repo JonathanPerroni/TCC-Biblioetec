@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     session_start();
     include_once("../../../../conexao/conexao.php");
     date_default_timezone_set('America/Sao_Paulo');
@@ -8,8 +9,8 @@
          $cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
          $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
          $confirma_email = filter_input(INPUT_POST, 'confirma_email', FILTER_SANITIZE_EMAIL);        
-         $password = $_POST['password'];  // Senha não precisa de sanitização
-         $password2 = $_POST['password2'];  // Senha não precisa de sanitização
+         $password = trim($_POST['password']);
+         $password2 = trim($_POST['password2']);
          $telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
          $celular = filter_input(INPUT_POST, 'celular', FILTER_SANITIZE_STRING);
          $codigo_escola = filter_input(INPUT_POST, 'codigo_escola', FILTER_SANITIZE_STRING);
@@ -128,15 +129,18 @@
                  }
              }
                             // Verificar se o código da escola já está em uso
-                $query_verifica_codigo_escola = "SELECT COUNT(*) AS total FROM tbbibliotecario WHERE codigo_escola = ?";
-                $stmt_verifica_codigo_escola = $conn->prepare($query_verifica_codigo_escola);
-                $stmt_verifica_codigo_escola->bind_param("s", $codigo_escola);
-                $stmt_verifica_codigo_escola->execute();
-                $result_verifica_codigo_escola = $stmt_verifica_codigo_escola->get_result();
-                $row_verifica_codigo_escola = $result_verifica_codigo_escola->fetch_assoc();
-                if ($row_verifica_codigo_escola['total'] > 0) {
-                    $_SESSION['msg'] .= "Codigo escola já em uso por outro Admin!";
-                }
+                            if (!empty($codigo_escola)) {
+                                $query_verifica_codigo_escola = "SELECT COUNT(*) AS total FROM tbbibliotecario WHERE codigo_escola = ?";
+                                $stmt_verifica_codigo_escola = $conn->prepare($query_verifica_codigo_escola);
+                                $stmt_verifica_codigo_escola->bind_param("s", $codigo_escola);
+                                $stmt_verifica_codigo_escola->execute();
+                                $result_verifica_codigo_escola = $stmt_verifica_codigo_escola->get_result();
+                                $row_verifica_codigo_escola = $result_verifica_codigo_escola->fetch_assoc();
+                            
+                                if ($row_verifica_codigo_escola['total'] > 0) {
+                                    $_SESSION['msg'] .= "Codigo escola já em uso por outro Admin!";
+                                }
+                            }
              
              // Verificar se o telefone é um número válido
              if (!empty($telefone) && !preg_match('/^(\(?\d{2}\)?\s?)?\d{5}-?\d{4}$/', $telefone)) {
@@ -174,7 +178,7 @@
     $conn->begin_transaction();
 
     try {
-        $stmt = $conn->prepare("INSERT INTO tbbibliotecario (nome, cpf, email, password, telefone, celular, codigo_escola, acesso, cadastrado_por, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO tbbibliotecario  (nome, cpf, email, password, telefone, celular, codigo_escola, acesso, cadastrado_por, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
         if (!$stmt) {
             throw new Exception("Erro ao preparar a consulta: " . $conn->error);
@@ -244,7 +248,7 @@
             }
         }
  
- 
+        ob_end_flush();
  
      ?>
  
@@ -335,18 +339,18 @@
                         <input type="text" name="cpf" placeholder="Insira o CPF" required class="form-control">
                     </div>
                     <div class="w-20">
-                    <label for="codigo_escola" class="form-label">Codigo Etec:</label>
-                                                <!-- Campo para o código da ETEC -->
-                        <input type="text" id="codigo_escola" name="codigo_escola" list="codigos"  placeholder="Código Etec" required class="form-control">                       
+                        <label for="codigo_escola" class="form-label">Codigo Etec:</label>
+                        <!-- Campo para o código da ETEC -->
+                        <input type="text" id="codigo_escola" name="codigo_escola" list="codigos" placeholder="Código Etec" required class="form-control" onchange="updateNomeEscola()">
 
                         <!-- Datalist com opções -->
                         <datalist id="codigos">
                             <?php foreach ($dadosEtec as $escola): ?>
                                 <?php $codigo = $escola['codigo_escola']; ?>
                                 <?php $nome = $escola['unidadeEscola']; ?>
-                                <option value="<?php echo "$codigo"; ?>"><?php echo "$codigo - $nome"; ?></option>
+                                <option value="<?php echo "$codigo"; ?>" data-nome="<?php echo "$nome"; ?>"><?php echo "$codigo - $nome"; ?></option>
                             <?php endforeach; ?>
-                        </datalist>       
+                        </datalist>  
                     </div>
                     <div class="w-50">
                        <!-- Campo para mostrar o nome da escola selecionada -->
@@ -371,24 +375,24 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-            document.addEventListener('DOMContentLoaded', function() {
-    const codigoEscolaInput = document.getElementById('codigo_escola');
-    const nomeEscolaInput = document.getElementById('nome_escola');
-    const codigosDatalist = document.getElementById('codigos');
+                        document.addEventListener('DOMContentLoaded', function() {
+                const codigoEscolaInput = document.getElementById('codigo_escola');
+                const nomeEscolaInput = document.getElementById('nome_escola');
+                const codigosDatalist = document.getElementById('codigos');
 
-    codigoEscolaInput.addEventListener('input', function() {
-        const codigoSelecionado = this.value.trim();
-        
-        // Encontra a opção correspondente ao código selecionado
-        const option = Array.from(codigosDatalist.options).find(opt => opt.value === codigoSelecionado);
-        
-        if (option) {
-            nomeEscolaInput.value = option.textContent.split(' - ')[1] || '';
-        } else {
-            nomeEscolaInput.value = '';
-        }
-    });
-});
+                codigoEscolaInput.addEventListener('input', function() {
+                    const codigoSelecionado = this.value.trim();
+                    
+                    // Encontra a opção correspondente ao código selecionado
+                    const option = Array.from(codigosDatalist.options).find(opt => opt.value === codigoSelecionado);
+                    
+                    if (option) {
+                        nomeEscolaInput.value = option.textContent.split(' - ')[1] || '';
+                    } else {
+                        nomeEscolaInput.value = '';
+                    }
+                });
+            });
 
     </script>
 </body>

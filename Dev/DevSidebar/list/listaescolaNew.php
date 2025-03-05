@@ -33,7 +33,7 @@ if(empty($_SESSION['email'])){
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../User_etec/css/defaults.css">
+    <link rel="stylesheet" href="../../DevCss/defaults.css">
 </head>
 <body>
     <nav class="flex justify-between items-center py-2 px-4 bg-white shadow-md">
