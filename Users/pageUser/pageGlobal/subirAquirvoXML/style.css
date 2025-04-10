@@ -103,14 +103,12 @@ button:hover {
 }
 
 .visualizar {
-    
     background-color: #9E8C00;
 }
+
 .visualizar:hover {
     background-color: #8D7C00;
 }
-
-
 
 /* Botão de exclusão */
 .delete-button {
@@ -122,10 +120,9 @@ button:hover {
 }
 
 /* Botão e Salvar: ocupam a largura total */
- .salvar {
+.salvar {
     width: 100%;
     margin: 10px 0;
-
 }
 
 /* Caixa de mensagens */
@@ -140,15 +137,27 @@ button:hover {
 }
 
 /* Estilização da tabela na visualização */
+.visualizacao {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+    padding-bottom: 15px; /* Espaço para a barra de rolagem */
+}
+
 .visualizacao table {
     width: 100%;
+    min-width: 800px; /* Largura mínima para garantir scroll em telas menores */
     border-collapse: collapse;
     margin-top: 20px;
+    white-space: nowrap; /* Evita quebra de texto nas células */
 }
 
 .visualizacao thead {
     background-color: var(--primary-color);
     color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .visualizacao th,
@@ -164,6 +173,25 @@ button:hover {
 
 .visualizacao tbody tr:hover {
     background-color: #f1f1f1;
+}
+
+/* Estilização da barra de rolagem */
+.visualizacao::-webkit-scrollbar {
+    height: 8px;
+}
+
+.visualizacao::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.visualizacao::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.visualizacao::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
 }
 
 /* Responsividade */

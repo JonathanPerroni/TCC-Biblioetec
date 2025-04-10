@@ -2,107 +2,213 @@
 session_start();
 include_once 'api.php';  // Supondo que as funções de API já estão aqui
 
-$xmlFile = 'uploaded.xml';
+// Verificar se o parâmetro 'file' foi passado na URL
+if (!isset($_GET['file'])) {
+    header('Location: index.php');
+    exit;
+}
+
+// Caminho do arquivo XML
+$xmlFile = "arquivoXML/" . basename($_GET['file']);
 if (!file_exists($xmlFile)) {
-    die("Arquivo XML não encontrado.");
+    $_SESSION['error'] = "Arquivo XML não encontrado.";
+    header('Location: index.php');
+    exit;
 }
 
 $xml = simplexml_load_file($xmlFile);
 if ($xml === false) {
-    die("Erro ao carregar o arquivo XML.");
+    $_SESSION['error'] = "Erro ao carregar o arquivo XML.";
+    header('Location: index.php');
+    exit;
 }
 
-$xml->registerXPathNamespace('ss', 'urn:schemas-microsoft-com:office:spreadsheet');
-$rows = $xml->xpath('//ss:Worksheet/ss:Table/ss:Row');
+// Processamento do XML
+$_SESSION['livros'] = processarXML($xml);
+header('Location: index.php');
+exit;
 
-if (empty($rows)) {
-    die("Nenhuma linha encontrada no XML.");
-}
+// Função para processar o XML e extrair os livros
+function processarXML($xml) {
+    $livros = [];
+    $livrosCompletos = [];
+    $livrosComFaltando = [];
+    $totalLivros = 0;
+    $totalCompletos = 0;
+    $colunas = [];
 
-$livros = [];
-$livrosCompletos = [];
-$livrosComFaltando = [];
-$totalLivros = 0;
-$totalCompletos = 0;
+    // Definir os campos obrigatórios
+    $camposObrigatorios = [
+        'TOMBO', 'ISBN', 'AQUISIÇÃO', 'TITULO', 'GENERO', 
+        'AUTOR', 'EDITORA', 'ANO DE PUBLICAÇÃO', 'NUMERO DE PAGINAS', 
+        'CDD/CUTTER', 'IDIOMA'
+    ];
 
-for ($i = 1; $i < count($rows); $i++) {
-    $cells = $rows[$i]->xpath('ss:Cell/ss:Data');
-    if (count($cells) >= 2) {
-        $titulo = (string) $cells[0]; // Assume que o título está na primeira célula
-        $editora = (string) $cells[1]; // Assume que a editora está na segunda célula
+    // Registrar o namespace do XML
+    $xml->registerXPathNamespace('ss', 'urn:schemas-microsoft-com:office:spreadsheet');
+    $rows = $xml->xpath('//ss:Worksheet/ss:Table/ss:Row');
 
-        // Adiciona o livro ao array geral
-        $livros[] = [
-            'titulo' => $titulo,
-            'editora' => $editora
-        ];
-
-        // Verifica se o livro tem todos os campos válidos
-        if ($titulo && $editora && $titulo !== 'undefined' && $editora !== 'undefined' && 
-            $titulo !== 'null' && $editora !== 'null' && 
-            $titulo !== 'desconhecido' && $editora !== 'desconhecido' && 
-            $titulo !== 'N/A' && $editora !== 'N/A') {
-            $livrosCompletos[] = [
-                'titulo' => $titulo,
-                'editora' => $editora
-            ];
-            $totalCompletos++;
-        } else {
-            $livrosComFaltando[] = [
-                'titulo' => $titulo,
-                'editora' => $editora
-            ];
-        }
-        $totalLivros++;
+    if (empty($rows)) {
+        die("Nenhuma linha encontrada no XML.");
     }
+
+    // Percorrer as linhas do XML
+    foreach ($rows as $index => $row) {
+        $cells = $row->xpath('ss:Cell/ss:Data');
+
+        if ($index === 0) {
+            // Primeira linha contém os nomes das colunas
+            foreach ($cells as $cell) {
+                $colunas[] = trim((string)$cell);
+            }
+        } else {
+            // Demais linhas são os dados dos livros
+            $livro = [];
+            foreach ($cells as $key => $cell) {
+                $coluna = $colunas[$key] ?? "Coluna_$key";
+                $livro[$coluna] = trim((string)$cell); // Usa o nome da coluna ou um nome genérico
+            }
+            $livros[] = $livro;
+
+            // Verifica se o livro tem todas as informações preenchidas
+            $livroCompleto = true;
+
+            foreach ($camposObrigatorios as $campo) {
+                if (!isset($livro[$campo]) || empty($livro[$campo]) || in_array(strtolower($livro[$campo]), ['n/a', 'desconhecido', 'undefined', 'null'])) {
+                    $livroCompleto = false;
+                    break;
+                }
+            }
+
+            // Classifica o livro como completo ou com informações faltando
+            if ($livroCompleto) {
+                $livrosCompletos[] = $livro;
+                $totalCompletos++;
+            } else {
+                $livrosComFaltando[] = $livro;
+            }
+
+            $totalLivros++;
+        }
+    }
+
+    // Armazenar na sessão os livros completos e com falta de informações
+    $_SESSION['livrosCompletos'] = $livrosCompletos;
+    $_SESSION['livrosComFaltando'] = $livrosComFaltando;
+    $_SESSION['totalLivros'] = $totalLivros;
+    $_SESSION['totalCompletos'] = $totalCompletos;
+    
+    return $livros;
 }
-
-$_SESSION['livros'] = $livros;
-
-// Exibir as contagens
-echo "<p>Total de livros: $totalLivros</p>";
-echo "<p>Total de livros com todas as informações: $totalCompletos</p>";
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livros - Lista</title>
+    <title>Livros Importados</title>
+    <style>
+        .tabs {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .tab {
+            padding: 10px;
+            cursor: pointer;
+            background: #ddd;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background: #bbb;
+        }
+        .table-container {
+            display: none;
+        }
+        .table-container.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <h1>Livros com Todas as Informações</h1>
-    <table border="1">
-        <tr>
-            <th>Título</th>
-            <th>Editora</th>
-        </tr>
-        <?php foreach ($livrosCompletos as $livro): ?>
-            <tr>
-                <td><?php echo $livro['titulo']; ?></td>
-                <td><?php echo $livro['editora']; ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('todos')">Todos os Dados</div>
+        <div class="tab" onclick="showTab('completos')">Dados Completos</div>
+        <div class="tab" onclick="showTab('incompletos')">Dados Incompletos</div>
+    </div>
 
-    <h1>Livros com Informações Faltando</h1>
-    <table border="1">
-        <tr>
-            <th>Título</th>
-            <th>Editora</th>
-        </tr>
-        <?php foreach ($livrosComFaltando as $livro): ?>
+    <!-- Todos os Dados -->
+    <div id="todos" class="table-container active">
+        <h2>Todos os Livros</h2>
+        <table>
             <tr>
-                <td><?php echo $livro['titulo']; ?></td>
-                <td><?php echo $livro['editora']; ?></td>
+                <?php foreach ($_SESSION['livros'][0] as $coluna => $valor) echo "<th>" . htmlspecialchars($coluna) . "</th>"; ?>
             </tr>
-        <?php endforeach; ?>
-    </table>
+            <?php foreach ($_SESSION['livros'] as $livro) { 
+                echo "<tr>";
+                foreach ($livro as $valor) {
+                    echo "<td>" . htmlspecialchars($valor) . "</td>";
+                }
+                echo "</tr>";
+            } ?>
+        </table>
+        <form action="buscar_isbn.php" method="POST">
+            <button type="submit">Buscar ISBN para Todos</button>
+        </form>
+    </div>
 
-    <!-- Botão para buscar ISBN para todos os livros -->
-    <form action="buscar_isbn.php" method="POST">
-        <button type="submit">Buscar ISBN para Todos</button>
-    </form>
+    <!-- Dados Completos -->
+    <div id="completos" class="table-container">
+        <h2>Livros Completos</h2>
+        <table>
+            <tr>
+                <?php foreach ($_SESSION['livrosCompletos'][0] as $coluna => $valor) echo "<th>" . htmlspecialchars($coluna) . "</th>"; ?>
+            </tr>
+            <?php foreach ($_SESSION['livrosCompletos'] as $livro) { 
+                echo "<tr>";
+                foreach ($livro as $valor) {
+                    echo "<td>" . htmlspecialchars($valor) . "</td>";
+                }
+                echo "</tr>";
+            } ?>
+        </table>
+    </div>
+
+    <!-- Dados Incompletos -->
+    <div id="incompletos" class="table-container">
+        <h2>Livros Incompletos</h2>
+        <table>
+            <tr>
+                <?php foreach ($_SESSION['livrosComFaltando'][0] as $coluna => $valor) echo "<th>" . htmlspecialchars($coluna) . "</th>"; ?>
+            </tr>
+            <?php foreach ($_SESSION['livrosComFaltando'] as $livro) { 
+                echo "<tr>";
+                foreach ($livro as $valor) {
+                    echo "<td>" . htmlspecialchars($valor) . "</td>";
+                }
+                echo "</tr>";
+            } ?>
+        </table>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Ocultar todas as abas
+            document.querySelectorAll('.table-container').forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            // Exibir a aba selecionada
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
 </body>
 </html>

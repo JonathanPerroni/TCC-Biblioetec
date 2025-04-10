@@ -1,41 +1,43 @@
 <?php
 session_start();
 
-// Verificar se a sessão contém os resultados
-if (isset($_SESSION['resultados']) && !empty($_SESSION['resultados'])) {
-    $livros = $_SESSION['resultados'];
-
-    // Definir os cabeçalhos para download do arquivo XML
-    header('Content-Type: text/xml');
-    header('Content-Disposition: attachment; filename="livros.xml"');
-
-    // Criar o objeto DOMDocument
-    $xml = new DOMDocument('1.0', 'UTF-8');
-    $xml->formatOutput = true;  // Formatar o XML para ficar legível
-
-    // Criar o nó raiz do XML
-    $root = $xml->createElement('livros');
-    $xml->appendChild($root);
-
-    // Adicionar cada livro como um nó filho
-    foreach ($livros as $livro) {
-        $livroNode = $xml->createElement('livro');
-
-        // Adicionar as propriedades de cada livro
-        foreach ($livro as $chave => $valor) {
-            $element = $xml->createElement($chave, htmlspecialchars($valor));  // Usar htmlspecialchars para evitar problemas com caracteres especiais
-            $livroNode->appendChild($element);
-        }
-
-        $root->appendChild($livroNode);
-    }
-
-    // Exibir o XML
-    echo $xml->saveXML();
-
+if (!isset($_SESSION['livros']) || empty($_SESSION['livros'])) {
+    header('Location: index.php');
     exit;
-} else {
-    // Caso não tenha dados para exportar
-    echo "Nenhum dado encontrado para exportar.";
 }
+
+// Criar o XML
+$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"></Workbook>');
+
+// Criar worksheet
+$worksheet = $xml->addChild('Worksheet');
+$worksheet->addAttribute('Name', 'Livros');
+
+// Criar tabela
+$table = $worksheet->addChild('Table');
+
+// Adicionar cabeçalhos
+$headerRow = $table->addChild('Row');
+foreach (array_keys($_SESSION['livros'][0]) as $header) {
+    $cell = $headerRow->addChild('Cell');
+    $cell->addChild('Data', htmlspecialchars($header));
+}
+
+// Adicionar dados
+foreach ($_SESSION['livros'] as $livro) {
+    $row = $table->addChild('Row');
+    foreach ($livro as $valor) {
+        $cell = $row->addChild('Cell');
+        $cell->addChild('Data', htmlspecialchars($valor));
+    }
+}
+
+// Configurar headers para download
+header('Content-Type: application/xml');
+header('Content-Disposition: attachment; filename="biblioteca_export_' . date('Y-m-d_H-i-s') . '.xml"');
+header('Cache-Control: max-age=0');
+
+// Outputar XML
+echo $xml->asXML();
+exit;
 ?>
