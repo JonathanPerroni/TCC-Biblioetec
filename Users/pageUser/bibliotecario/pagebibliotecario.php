@@ -361,7 +361,237 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
         </div>
 </nav>
    <main class="mx-1 sm:mx-16 my-8">
-   
+     <div class ="main-container">
+            <!-- araa de informação do bd, botões redirecionados -->                                                          
+        <div class="info">
+              <a href="emprestimo">
+                  <div><img src="../icon/books.svg" alt=""></div>
+                  EMPRESTIMO                                               
+              </a>
+              <a href="pedido">
+                <div><img src="../icon/pedidos.svg" alt=""></div>
+              <?php 
+                            $tabela = 'tbpedidos';
+
+                            $sql = "SELECT COUNT(*) As total FROM $tabela";
+                            $resultado = $conn->query($sql);
+
+                            if($resultado){
+                                $linha = $resultado->fetch_assoc();
+                                echo "PEDIDOS: " . $linha['total'];
+                            }else{
+                                echo "Erro na consulta: " . $conn->error;
+                            }
+                            
+                          
+                        ?>
+
+              </a>
+              <a href="livros">
+                    <div><img src="../icon/livros.svg" alt=""></div>
+                    <?php 
+                            $tabela = 'tblivros';
+
+                            $sql = "SELECT COUNT(*) As total FROM $tabela";
+                            $resultado = $conn->query($sql);
+
+                            if($resultado){
+                                $linha = $resultado->fetch_assoc();
+                                echo "LIVROS: " . $linha['total'];
+                            }else{
+                                echo "Erro na consulta: " . $conn->error;
+                            }
+                            
+                          
+                        ?>
+              </a>
+              <a href="usuarios">
+                <img src="../icon/estudante.svg" alt="">
+              <?php 
+                       if ($conn->connect_error) {
+                        die("Conexão falhou: " . $conn->connect_error);
+                    }
+                
+                    $tabela = 'tbalunos';
+                    $sql = "SELECT COUNT(*) As total FROM $tabela";
+                    $resultado = $conn->query($sql);
+                
+                    if($resultado){
+                        $linha = $resultado->fetch_assoc();
+                        echo "ALUNOS: " . $linha['total'];
+                    }else{
+                        echo "Erro na consulta: " . $conn->error;
+                    }
+                
+                    
+                ?>
+              </a>                                                  
+        </div>
+
+        
+          <!-- grafiso e ranks -->                                                        
+        <div class="info">
+            <div class="container-grafico">
+
+
+                    <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
+                    <?php
+                        $conn->query("SET lc_time_names = 'pt_BR'");
+                        // INSERÇÃO DE DADOS
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $data = $_POST['data_registro'];
+                            $quantidade = $_POST['quantidade'];
+
+                            $verifica = $conn->prepare("SELECT id_fluxo FROM tb_fluxo_biblioteca WHERE data_registro = ?");
+                            $verifica->bind_param("s", $data);
+                            $verifica->execute();
+                            $verifica->store_result();
+
+                            if ($verifica->num_rows > 0) {
+                                echo "<script>alert('Já existe um registro para essa data.'); window.history.back();</script>";
+                            } else {
+                                $stmt = $conn->prepare("INSERT INTO tb_fluxo_biblioteca (data_registro, quantidade) VALUES (?, ?)");
+                                $stmt->bind_param("si", $data, $quantidade);
+
+                                if ($stmt->execute()) {
+                                    echo "<script>alert('Registro salvo com sucesso!'); window.location.href='pagebibliotecario.php';</script>";
+                                } else {
+                                    echo "Erro ao salvar: " . $stmt->error;
+                                }
+
+                                $stmt->close();
+                            }
+
+                            $verifica->close();
+                        }
+
+                           // BUSCA DOS DADOS PARA O GRÁFICO
+                            $meses = [];
+                            $valores = [];
+
+                            $query = "SELECT DATE_FORMAT(data_registro, '%M/%Y') AS mes, SUM(quantidade) as total 
+                                    FROM tb_fluxo_biblioteca 
+                                    GROUP BY mes 
+                                    ORDER BY STR_TO_DATE(CONCAT('01/', mes), '%d/%M/%Y')";
+
+                            $result = $conn->query($query);
+
+                            while ($row = $result->fetch_assoc()) {
+                                $meses[] = ucfirst(strtolower($row['mes'])); // opcional: para garantir a capitalização correta
+                                $valores[] = (int)$row['total'];
+                            }
+
+                        $conn->close();
+                        ?>
+
+                        <!-- HTML -->
+                        <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
+
+                            <!-- Gráfico -->
+                            <canvas id="graficoFluxo" style="margin-bottom: 20px;"></canvas>
+
+                            <!-- Botão que abre o modal -->
+                            <button onclick="abrirModal()" style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;">
+                                Inserir fluxo
+                            </button>
+
+                            <!-- Modal escondido por padrão -->
+                            <div id="modalFluxo" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border-radius:8px; box-shadow:0 0 10px #999; z-index: 1000;">
+                                <h3>Registrar fluxo de entrada</h3>
+                                <form method="POST" action="">
+                                    <label>Data:</label><br>
+                                    <input type="date" name="data_registro" required><br><br>
+
+                                    <label>Quantidade:</label><br>
+                                    <input type="number" name="quantidade" min="1" required><br><br>
+
+                                    <button type="submit" style="padding:8px 15px;">Confirmar</button>
+                                    <button type="button" onclick="fecharModal()" style="padding:8px 15px;">Cancelar</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <!-- Scripts para Modal -->
+                        <script>
+                        function abrirModal() {
+                            document.getElementById('modalFluxo').style.display = 'block';
+                        }
+                        function fecharModal() {
+                            document.getElementById('modalFluxo').style.display = 'none';
+                        }
+                        </script>
+
+                        <!-- Chart.js -->
+ <!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// Dados vindos do PHP
+const ctx = document.getElementById('graficoFluxo').getContext('2d');
+
+const grafico = new Chart(ctx, {
+    type: 'bar', // gráfico de barras
+    data: {
+        labels: <?php echo json_encode($meses); ?>,
+        datasets: [{
+            label: 'Quantidade Registrada',
+            data: <?php echo json_encode($valores); ?>,
+            backgroundColor: '#10b981', // verde esmeralda
+            borderRadius: 5,
+            barPercentage: 0.6,
+            categoryPercentage: 0.6
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false // oculta legenda se só tiver uma barra
+            },
+            title: {
+                display: true,
+                text: 'Entradas por Mês',
+                font: {
+                    size: 18
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.parsed.y + ' entradas';
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    maxRotation: 45,
+                    minRotation: 45
+                }
+            },
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 200 // ajuste conforme escala dos seus dados
+                }
+            }
+        }
+    }
+});
+</script>
+
+                    </div>
+                <div class="grafico 2"></div>
+            </div> 
+            <div class="container-rank">
+                <div class="ranks 1"></div>
+                <div class="ranks 2"></div>
+            </div>
+        </div>
+
+    </div>
 
 </main>
 
