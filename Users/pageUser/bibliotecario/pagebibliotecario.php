@@ -434,7 +434,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
             <div class="container-grafico">
 
 
-                    <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
+            <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
                     <?php
                         $conn->query("SET lc_time_names = 'pt_BR'");
                         // INSERÇÃO DE DADOS
@@ -459,10 +459,10 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                                     echo "Erro ao salvar: " . $stmt->error;
                                 }
 
-                                $stmt->close();
+                               
                             }
 
-                            $verifica->close();
+                            
                         }
 
                            // BUSCA DOS DADOS PARA O GRÁFICO
@@ -481,7 +481,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                                 $valores[] = (int)$row['total'];
                             }
 
-                        $conn->close();
+                       
                         ?>
 
                         <!-- HTML -->
@@ -513,77 +513,172 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                         </div>
 
                         <!-- Scripts para Modal -->
-                        <script>
+                    <script>
                         function abrirModal() {
                             document.getElementById('modalFluxo').style.display = 'block';
                         }
                         function fecharModal() {
                             document.getElementById('modalFluxo').style.display = 'none';
                         }
-                        </script>
+                </script>
 
-                        <!-- Chart.js -->
- <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        
+                    <!-- Chart.js -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-// Dados vindos do PHP
-const ctx = document.getElementById('graficoFluxo').getContext('2d');
+                    <script>
+                    // Dados vindos do PHP
+                    const ctx = document.getElementById('graficoFluxo').getContext('2d');
 
-const grafico = new Chart(ctx, {
-    type: 'bar', // gráfico de barras
-    data: {
-        labels: <?php echo json_encode($meses); ?>,
-        datasets: [{
-            label: 'Quantidade Registrada',
-            data: <?php echo json_encode($valores); ?>,
-            backgroundColor: '#10b981', // verde esmeralda
-            borderRadius: 5,
-            barPercentage: 0.6,
-            categoryPercentage: 0.6
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false // oculta legenda se só tiver uma barra
-            },
-            title: {
-                display: true,
-                text: 'Entradas por Mês',
-                font: {
-                    size: 18
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        return context.parsed.y + ' entradas';
-                    }
-                }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    maxRotation: 45,
-                    minRotation: 45
-                }
-            },
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    stepSize: 200 // ajuste conforme escala dos seus dados
-                }
-            }
-        }
-    }
-});
-</script>
+                    const grafico = new Chart(ctx, {
+                        type: 'bar', // gráfico de barras
+                        data: {
+                            labels: <?php echo json_encode($meses); ?>,
+                            datasets: [{
+                                label: 'Quantidade Registrada',
+                                data: <?php echo json_encode($valores); ?>,
+                                backgroundColor: '#10b981', // verde esmeralda
+                                borderRadius: 5,
+                                barPercentage: 0.6,
+                                categoryPercentage: 0.6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false // oculta legenda se só tiver uma barra
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Entradas por Mês',
+                                    font: {
+                                        size: 18
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.parsed.y + ' entradas';
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    ticks: {
+                                        maxRotation: 45,
+                                        minRotation: 45
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 200 // ajuste conforme escala dos seus dados
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
 
+            </div>
+
+                <div class="grafico 2" style="width: 100%; max-width: 800px; margin: auto;">
+                    <div class="grafico-emprestimo "  style="width: 100%; max-width: 800px; margin: auto;">
+                        <?php
+                            $conn->query("SET lc_time_names = 'pt_BR'");
+
+                            // BUSCA DOS DADOS PARA O GRÁFICO
+                            $meses = [];
+                            $valores = [];
+
+                            $query = "SELECT DATE_FORMAT(data_emprestimo, '%M/%Y') AS mes, SUM(qntd_livros) as total 
+                                    FROM tbemprestimos 
+                                    GROUP BY mes 
+                                    ORDER BY STR_TO_DATE(CONCAT('01/', mes), '%d/%M/%Y')";
+
+                            $result = $conn->query($query);
+
+                            while ($row = $result->fetch_assoc()) {
+                                $meses[] = ucfirst(strtolower($row['mes']));
+                                $valores[] = (int)$row['total'];
+                            }
+                           
+                            
+                        ?>
+                        <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
+                                    <canvas id="graficoEmprestimo" style="margin-bottom: 20px; height: 400px;"></canvas>
+                                </div>
+
+                                <!-- Chart.js -->
+                           <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const ctx2 = document.getElementById('graficoEmprestimo').getContext('2d');
+
+                                const graficoEmprestimo = new Chart(ctx2, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: <?php echo json_encode($meses); ?>,
+                                        datasets: [{
+                                            label: 'Entradas por Mês',
+                                            data: <?php echo json_encode($valores); ?>,
+                                            backgroundColor: '#10b981', // Verde como no exemplo
+                                            borderRadius: 5,
+                                            barPercentage: 0.6,
+                                            categoryPercentage: 0.6
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        plugins: {
+                                            legend: {
+                                                display: false
+                                            },
+                                            title: {
+                                                display: true,
+                                                text: 'Entradas por Mês',
+                                                font: {
+                                                    size: 16
+                                                }
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function(context) {
+                                                        return context.parsed.y + ' entradas';
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        scales: {
+                                            x: {
+                                                ticks: {
+                                                    maxRotation: 45,
+                                                    minRotation: 45
+                                                },
+                                                grid: {
+                                                    display: false
+                                                }
+                                            },
+                                            y: {
+                                                beginAtZero: true,
+                                                grid: {
+                                                    color: '#e5e7eb' // cinza claro
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                            </script>
+                        
                     </div>
-                <div class="grafico 2"></div>
+
+
+
+                    <div class="grafico-cad-livro"></div>
+
+                </div>
             </div> 
             <div class="container-rank">
                 <div class="ranks 1"></div>
