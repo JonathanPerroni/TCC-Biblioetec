@@ -435,193 +435,336 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
 
 
             <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
-                    <?php
-                        $conn->query("SET lc_time_names = 'pt_BR'");
-                        // INSERÇÃO DE DADOS
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            $data = $_POST['data_registro'];
-                            $quantidade = $_POST['quantidade'];
+            <?php
+                // INSERÇÃO DE DADOS
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $data = $_POST['data_registro'];
+                    $quantidade = $_POST['quantidade'];
 
-                            $verifica = $conn->prepare("SELECT id_fluxo FROM tb_fluxo_biblioteca WHERE data_registro = ?");
-                            $verifica->bind_param("s", $data);
-                            $verifica->execute();
-                            $verifica->store_result();
+                    $verifica = $conn->prepare("SELECT id_fluxo FROM tb_fluxo_biblioteca WHERE data_registro = ?");
+                    $verifica->bind_param("s", $data);
+                    $verifica->execute();
+                    $verifica->store_result();
 
-                            if ($verifica->num_rows > 0) {
-                                echo "<script>alert('Já existe um registro para essa data.'); window.history.back();</script>";
-                            } else {
-                                $stmt = $conn->prepare("INSERT INTO tb_fluxo_biblioteca (data_registro, quantidade) VALUES (?, ?)");
-                                $stmt->bind_param("si", $data, $quantidade);
+                    if ($verifica->num_rows > 0) {
+                        echo "<script>alert('Já existe um registro para essa data.'); window.history.back();</script>";
+                    } else {
+                        $stmt = $conn->prepare("INSERT INTO tb_fluxo_biblioteca (data_registro, quantidade) VALUES (?, ?)");
+                        $stmt->bind_param("si", $data, $quantidade);
 
-                                if ($stmt->execute()) {
-                                    echo "<script>alert('Registro salvo com sucesso!'); window.location.href='pagebibliotecario.php';</script>";
-                                } else {
-                                    echo "Erro ao salvar: " . $stmt->error;
-                                }
-
-                               
-                            }
-
-                            
+                        if ($stmt->execute()) {
+                            echo "<script>alert('Registro salvo com sucesso!'); window.location.href='pagebibliotecario.php';</script>";
+                        } else {
+                            echo "Erro ao salvar: " . $stmt->error;
                         }
+                    }
+                }
 
-                           // BUSCA DOS DADOS PARA O GRÁFICO
-                            $meses = [];
-                            $valores = [];
+                // --- Definir o ano dinamicamente ---
+                $ano = date('Y');
 
-                            $query = "SELECT DATE_FORMAT(data_registro, '%M/%Y') AS mes, SUM(quantidade) as total 
-                                    FROM tb_fluxo_biblioteca 
-                                    GROUP BY mes 
-                                    ORDER BY STR_TO_DATE(CONCAT('01/', mes), '%d/%M/%Y')";
+                // --- Mapear meses em português ---
+                $nomes_meses = [
+                    1  => 'Janeiro',   2  => 'Fevereiro', 3  => 'Março',    4  => 'Abril',
+                    5  => 'Maio',      6  => 'Junho',     7  => 'Julho',    8  => 'Agosto',
+                    9  => 'Setembro', 10  => 'Outubro',  11  => 'Novembro', 12 => 'Dezembro',
+                ];
 
-                            $result = $conn->query($query);
+                // --- Inicializa todos os meses com zero ---
+                $valores_fluxo = [];
+                foreach ($nomes_meses as $num => $nome) {
+                    $valores_fluxo["{$nome}/{$ano}"] = 0;
+                }
 
-                            while ($row = $result->fetch_assoc()) {
-                                $meses[] = ucfirst(strtolower($row['mes'])); // opcional: para garantir a capitalização correta
-                                $valores[] = (int)$row['total'];
-                            }
+                // --- Query usando o número do mês e ano dinâmico ---
+                $query = "
+                    SELECT
+                        MONTH(data_registro) AS mes_num,
+                        SUM(quantidade)       AS total
+                    FROM tb_fluxo_biblioteca
+                    WHERE YEAR(data_registro) = {$ano}
+                    GROUP BY mes_num
+                    ORDER BY mes_num
+                ";
 
-                       
-                        ?>
+                $result = $conn->query($query);
+                if ($result === false) {
+                    die("Erro na consulta de fluxo: " . $conn->error);
+                }
 
-                        <!-- HTML -->
-                        <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
+                // --- Preenche os dados reais nos meses correspondentes ---
+                while ($row = $result->fetch_assoc()) {
+                    $mes_num = (int)$row['mes_num'];
+                    if (isset($nomes_meses[$mes_num])) {
+                        $label = $nomes_meses[$mes_num] . "/{$ano}";
+                        $valores_fluxo[$label] = (int)$row['total'];
+                    }
+                }
 
-                            <!-- Gráfico -->
-                            <canvas id="graficoFluxo" style="margin-bottom: 20px;"></canvas>
+                // --- Prepara os arrays finais para o gráfico ---
+                $meses   = array_keys($valores_fluxo);
+                $valores = array_values($valores_fluxo);
+                ?>
 
-                            <!-- Botão que abre o modal -->
-                            <button onclick="abrirModal()" style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;">
-                                Inserir fluxo
-                            </button>
+                <!-- HTML -->
+                <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
 
-                            <!-- Modal escondido por padrão -->
-                            <div id="modalFluxo" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border-radius:8px; box-shadow:0 0 10px #999; z-index: 1000;">
-                                <h3>Registrar fluxo de entrada</h3>
-                                <form method="POST" action="">
-                                    <label>Data:</label><br>
-                                    <input type="date" name="data_registro" required><br><br>
+                    <!-- Gráfico -->
+                    <canvas id="graficoFluxo" style="margin-bottom: 20px;"></canvas>
 
-                                    <label>Quantidade:</label><br>
-                                    <input type="number" name="quantidade" min="1" required><br><br>
+                    <!-- Botão que abre o modal -->
+                    <button onclick="abrirModal()" style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;">
+                        Inserir fluxo
+                    </button>
 
-                                    <button type="submit" style="padding:8px 15px;">Confirmar</button>
-                                    <button type="button" onclick="fecharModal()" style="padding:8px 15px;">Cancelar</button>
-                                </form>
-                            </div>
+                    <!-- Modal escondido por padrão -->
+                    <div id="modalFluxo" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border-radius:8px; box-shadow:0 0 10px #999; z-index:1000;">
+                        <h3>Registrar fluxo de entrada</h3>
+                        <form method="POST" action="">
+                            <label>Data:</label><br>
+                            <input type="date" name="data_registro" required><br><br>
 
-                        </div>
+                            <label>Quantidade:</label><br>
+                            <input type="number" name="quantidade" min="1" required><br><br>
 
-                        <!-- Scripts para Modal -->
-                    <script>
-                        function abrirModal() {
-                            document.getElementById('modalFluxo').style.display = 'block';
-                        }
-                        function fecharModal() {
-                            document.getElementById('modalFluxo').style.display = 'none';
-                        }
+                            <button type="submit" style="padding:8px 15px;">Confirmar</button>
+                            <button type="button" onclick="fecharModal()" style="padding:8px 15px;">Cancelar</button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- Scripts para Modal -->
+                <script>
+                function abrirModal() {
+                    document.getElementById('modalFluxo').style.display = 'block';
+                }
+                function fecharModal() {
+                    document.getElementById('modalFluxo').style.display = 'none';
+                }
                 </script>
 
-                        
-                    <!-- Chart.js -->
+                <!-- Chart.js -->
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                // Dados vindos do PHP
+                const ctx = document.getElementById('graficoFluxo').getContext('2d');
 
-                    <script>
-                    // Dados vindos do PHP
-                    const ctx = document.getElementById('graficoFluxo').getContext('2d');
-
-                    const grafico = new Chart(ctx, {
-                        type: 'bar', // gráfico de barras
-                        data: {
-                            labels: <?php echo json_encode($meses); ?>,
-                            datasets: [{
-                                label: 'Quantidade Registrada',
-                                data: <?php echo json_encode($valores); ?>,
-                                backgroundColor: '#10b981', // verde esmeralda
-                                borderRadius: 5,
-                                barPercentage: 0.6,
-                                categoryPercentage: 0.6
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    display: false // oculta legenda se só tiver uma barra
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Entradas por Mês',
-                                    font: {
-                                        size: 18
-                                    }
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function(context) {
-                                            return context.parsed.y + ' entradas';
-                                        }
-                                    }
+                const grafico = new Chart(ctx, {
+                    type: 'bar', // gráfico de barras
+                    data: {
+                        labels: <?php echo json_encode($meses); ?>,
+                        datasets: [{
+                            label: 'Visita Na Biblioteca',
+                            data: <?php echo json_encode($valores); ?>,
+                            backgroundColor: '#10b981', // verde esmeralda
+                            borderRadius: 5,
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false // oculta legenda se só tiver uma barra
+                            },
+                            title: {
+                                display: true,
+                                text: 'Visita Na Biblioteca',
+                                font: {
+                                    size: 18
                                 }
                             },
-                            scales: {
-                                x: {
-                                    ticks: {
-                                        maxRotation: 45,
-                                        minRotation: 45
-                                    }
-                                },
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 200 // ajuste conforme escala dos seus dados
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y + ' entradas';
                                     }
                                 }
                             }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 200 // ajuste conforme escala dos seus dados
+                                }
+                            }
                         }
-                    });
+                    }
+                });
                 </script>
 
             </div>
 
                 <div class="grafico 2" style="width: 100%; max-width: 800px; margin: auto;">
-                    <div class="grafico-emprestimo "  style="width: 100%; max-width: 800px; margin: auto;">
-                        <?php
-                            $conn->query("SET lc_time_names = 'pt_BR'");
+                <div class="grafico-emprestimo" style="width:100%;max-width:800px;margin:auto;">
+                <?php
+// --- 1) Definir o ano dinamicamente ---
+$ano = date('Y');
 
-                            // BUSCA DOS DADOS PARA O GRÁFICO
-                            $meses = [];
-                            $valores = [];
+// --- 2) Mapear os meses em português ---
+$nomes_meses = [
+    1  => 'Janeiro',   2  => 'Fevereiro', 3  => 'Março',    4  => 'Abril',
+    5  => 'Maio',      6  => 'Junho',     7  => 'Julho',    8  => 'Agosto',
+    9  => 'Setembro', 10  => 'Outubro',  11 => 'Novembro', 12 => 'Dezembro',
+];
 
-                            $query = "SELECT DATE_FORMAT(data_emprestimo, '%M/%Y') AS mes, SUM(qntd_livros) as total 
-                                    FROM tbemprestimos 
-                                    GROUP BY mes 
-                                    ORDER BY STR_TO_DATE(CONCAT('01/', mes), '%d/%M/%Y')";
+// --- 3) Inicializar todos os meses com zero ---
+$valores_emprestimos = [];
+foreach ($nomes_meses as $num => $nome) {
+    $valores_emprestimos["{$nome}/{$ano}"] = 0;
+}
 
-                            $result = $conn->query($query);
+// --- 4) Montar e executar a query ---
+$sql = "
+    SELECT
+        MONTH(data_emprestimo) AS mes_num,
+        SUM(qntd_livros)       AS total
+    FROM tbemprestimos
+    WHERE YEAR(data_emprestimo) = {$ano}
+    GROUP BY mes_num
+    ORDER BY mes_num
+";
 
-                            while ($row = $result->fetch_assoc()) {
-                                $meses[] = ucfirst(strtolower($row['mes']));
-                                $valores[] = (int)$row['total'];
-                            }
-                           
-                            
-                        ?>
+// se der erro, interrompe a execução e exibe a mensagem
+$result = $conn->query($sql);
+if ($result === false) {
+    die("Erro na consulta de empréstimos: " . $conn->error);
+}
+
+// --- 5) Preencher o array apenas nos meses com registros ---
+while ($row = $result->fetch_assoc()) {
+    $mes_num  = (int)$row['mes_num'];
+    $total    = (int)$row['total'];
+    if (isset($nomes_meses[$mes_num])) {
+        $label = $nomes_meses[$mes_num] . "/{$ano}";
+        $valores_emprestimos[$label] = $total;
+    }
+}
+
+// --- 6) Preparar arrays para o Chart.js ---
+$meses  = array_keys($valores_emprestimos);
+$valores = array_values($valores_emprestimos);
+?>
+<!-- ------------------- HTML do Gráfico ------------------- -->
+<div class="grafico-emprestimo" style="width:100%;max-width:800px;margin:auto;">
+    <canvas id="graficoEmprestimo" style="height:400px;"></canvas>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('graficoEmprestimo').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <?php echo json_encode($meses, JSON_UNESCAPED_UNICODE); ?>,
+            datasets: [{
+                label: 'Empréstimos em <?php echo $ano; ?>',
+                data: <?php echo json_encode($valores); ?>,
+                backgroundColor: '#10b981',
+                borderRadius: 5,
+                barPercentage: 0.6,
+                categoryPercentage: 0.6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Empréstimos de Livros por Mês',
+                    font: { size: 16 }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ctx.parsed.y + ' empréstimos'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 45
+                    },
+                    grid: { display: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#e5e7eb' }
+                }
+            }
+        }
+    });
+});
+</script>
+</div>
+
+
+
+
+                    <div class="grafico-cad-livro"  style="width: 100%; max-width: 800px; margin: auto;">
+                    <?php
+// Lista de nomes dos meses em português
+$nomes_meses = [
+    1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril',
+    5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto',
+    9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'
+];
+
+// Inicializa os valores com zero
+$valores_por_mes = [];
+foreach ($nomes_meses as $num => $nome) {
+    $valores_por_mes["$nome/2024"] = 0;
+}
+
+// Query para obter os dados reais
+$query = "SELECT 
+    MONTH(data_aquisicao) AS mes_num,
+    COUNT(*) AS total
+    FROM tblivros
+    WHERE YEAR(data_aquisicao) = 2024
+    GROUP BY mes_num
+    ORDER BY mes_num";
+
+$result = $conn->query($query);
+
+while ($row = $result->fetch_assoc()) {
+    $mes_nome = $nomes_meses[(int)$row['mes_num']] . "/2024";
+    $valores_por_mes[$mes_nome] = (int)$row['total'];
+}
+
+// Arrays finais para o gráfico
+$meses = array_keys($valores_por_mes);
+$valores = array_values($valores_por_mes);
+?>
+
                         <div class="grafico-1" style="width: 100%; max-width: 800px; margin: auto;">
-                                    <canvas id="graficoEmprestimo" style="margin-bottom: 20px; height: 400px;"></canvas>
+                                    <canvas id="cadastrolivro" style="margin-bottom: 20px; height: 400px;"></canvas>
                                 </div>
 
                                 <!-- Chart.js -->
                            <script>
                             document.addEventListener("DOMContentLoaded", function() {
-                                const ctx2 = document.getElementById('graficoEmprestimo').getContext('2d');
+                                const ctx2 = document.getElementById('cadastrolivro').getContext('2d');
 
-                                const graficoEmprestimo = new Chart(ctx2, {
+                                const cadastrolivro = new Chart(ctx2, {
                                     type: 'bar',
                                     data: {
                                         labels: <?php echo json_encode($meses); ?>,
                                         datasets: [{
-                                            label: 'Entradas por Mês',
+                                            label: 'Cadastro De Livro',
                                             data: <?php echo json_encode($valores); ?>,
                                             backgroundColor: '#10b981', // Verde como no exemplo
                                             borderRadius: 5,
@@ -637,7 +780,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                                             },
                                             title: {
                                                 display: true,
-                                                text: 'Entradas por Mês',
+                                                text: 'Cadastro De Livro',
                                                 font: {
                                                     size: 16
                                                 }
@@ -671,12 +814,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                                 });
                             });
                             </script>
-                        
-                    </div>
-
-
-
-                    <div class="grafico-cad-livro"></div>
+                            </div>
 
                 </div>
             </div> 
