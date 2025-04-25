@@ -364,7 +364,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
      <div class ="main-container">
             <!-- araa de informação do bd, botões redirecionados -->                                                          
         <div class="info">
-              <a href="emprestimo">
+              <a href="./emprestimo/emprestimo.php">
                   <div><img src="../icon/books.svg" alt=""></div>
                   EMPRESTIMO                                               
               </a>
@@ -601,7 +601,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                     }
                 });
                 </script>
-
+<button>Relatorio de Fluxo de alunos </button>
             </div>
 
                 <div class="grafico 2" style="width: 100%; max-width: 800px; margin: auto;">
@@ -709,6 +709,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<button>Relatorio de  Emprestimo de livros</button>
 </div>
 
 
@@ -815,12 +816,92 @@ $valores = array_values($valores_por_mes);
                             });
                             </script>
                             </div>
+                            <button>Relatorio de  Cadastro de livros</button>
 
                 </div>
             </div> 
             <div class="container-rank">
-                <div class="ranks 1"></div>
-                <div class="ranks 2"></div>
+            <div class="ranks-1">
+    <h2>🏅 Alunos que mais emprestaram</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+        <thead style="background-color: #10b981; color: white;">
+
+     
+            <tr>
+                <th>Posição</th>
+                <th>Nome do Aluno</th>
+                <th>RA do Aluno</th>
+                <th>Total de Empréstimos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $sqlAlunos = "SELECT 
+                            a.nome,
+                            a.ra_aluno,
+                            COUNT(e.id_emprestimo) AS total_emprestimos
+                        FROM tbemprestimos e
+                        JOIN tbalunos a ON e.ra_aluno = a.ra_aluno
+                        GROUP BY a.ra_aluno
+                        ORDER BY total_emprestimos DESC
+                        LIMIT 10";
+
+            $resultAlunos = $conn->query($sqlAlunos);
+            $pos = 1;
+            while ($row = $resultAlunos->fetch_assoc()) {
+                echo "<tr>
+                        <td>$pos</td>
+                        <td>{$row['nome']}</td>
+                        <td>{$row['ra_aluno']}</td>
+                        <td>{$row['total_emprestimos']}</td>
+                    </tr>";
+                $pos++;
+            }
+            ?>
+        </tbody>
+    </table>
+    <button>Rank de Alunos</button>
+</div>
+                <div class="ranks 2">
+                <h2>📚 Livros mais emprestados</h2>
+<table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead style="background-color: #10b981; color: white;">
+        <tr>
+            <th>Posição</th>
+            <th>Título do Livro</th>
+            <th>ISBN do Livro</th>
+            <th>Total de Empréstimos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $sqlLivros = "SELECT 
+                        l.titulo,
+                        e.isbn_falso,
+                        COUNT(e.id_emprestimo) AS total_emprestimos
+                    FROM tbemprestimos e
+                    JOIN tblivros l ON e.isbn_falso = l.isbn_falso
+                    GROUP BY l.isbn_falso
+                    ORDER BY total_emprestimos DESC
+                    LIMIT 10";
+
+        $resultLivros = $conn->query($sqlLivros);
+        $pos = 1;
+        while ($row = $resultLivros->fetch_assoc()) {
+            echo "<tr>
+                    <td>$pos</td>
+                    <td>{$row['titulo']}</td>
+                    <td>{$row['isbn_falso']}</td>
+                    <td>{$row['total_emprestimos']}</td>
+                </tr>";
+            $pos++;
+        }
+        ?>
+    </tbody>
+</table>
+<button>Rank de Livros</button>
+                </div>
             </div>
         </div>
 
