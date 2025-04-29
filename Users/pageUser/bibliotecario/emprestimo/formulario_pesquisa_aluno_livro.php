@@ -1,6 +1,8 @@
 
+
 <div class="areaDebusca">
     <!-- formulario_pesquisa_aluno_livro.php -->
+     
 <h3>Buscar Aluno</h3>
 <input type="text" id="buscaAluno" placeholder="Digite o nome ou RA do aluno">
 <button onclick="buscar('Aluno')">Buscar</button>
@@ -38,6 +40,19 @@
 <!-- Campo: Data da Devolução -->
 <label for="data_devolucao">Data da Devolução:</label>
 <input type="date" id="data_devolucao" name="data_devolucao"><br><br>
+
+
+
+
+
+
+
+<!-- Campo: botão de confirmar a separação -->
+<button type="button" id="confirmarSeparacao" class="btn btn-confirmar">Confirmar Separação</button>
+
+
+
+
 
 <!-- js de data -->
 <script>
@@ -199,4 +214,40 @@
         });
     }
 </script>
+
+
+<script>
+document.getElementById('confirmarSeparacao').addEventListener('click', function() {
+    const alunoSelect = document.getElementById('selecaoAluno');
+    const livroSelect = document.getElementById('selecaoLivro');
+
+    if (!alunoSelect || !livroSelect) {
+        alert('Por favor, selecione um aluno e um livro.');
+        return;
+    }
+
+    const alunoId = alunoSelect.value;
+    const alunoNome = alunoSelect.options[alunoSelect.selectedIndex].getAttribute('data-nome');
+
+    const livroId = livroSelect.value;
+    const livroTitulo = livroSelect.options[livroSelect.selectedIndex].getAttribute('data-titulo');
+    const livroIsbn = livroSelect.options[livroSelect.selectedIndex].getAttribute('data-isbn');
+
+    // Dados adicionais
+    const nEmprestimo = document.getElementById('nEmprestimo').value;
+    const bibliotecario = document.getElementById('bibliotecario').value;
+    const dtEmprestimo = document.getElementById('dtEmprestimo').value;
+    const dtDevolucao = document.getElementById('dtDevolucao').value;
+
+    if (!alunoId || !livroId) {
+        alert('Por favor, selecione um aluno e um livro.');
+        return;
+    }
+
+    const url = `formulario_confirmacao_pesquisa.php?alunoId=${encodeURIComponent(alunoId)}&alunoNome=${encodeURIComponent(alunoNome)}&livroId=${encodeURIComponent(livroId)}&livroTitulo=${encodeURIComponent(livroTitulo)}&livroIsbn=${encodeURIComponent(livroIsbn)}&nEmprestimo=${encodeURIComponent(nEmprestimo)}&bibliotecario=${encodeURIComponent(bibliotecario)}&dtEmprestimo=${encodeURIComponent(dtEmprestimo)}&dtDevolucao=${encodeURIComponent(dtDevolucao)}`;
+
+    window.location.href = url;
+});
+</script>
+
 </div>

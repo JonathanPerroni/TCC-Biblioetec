@@ -37,6 +37,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
     }
 
     // ===============================
+// DETALHES DO ALUNO
+// ===============================
+if ($tipo === 'detalhesAluno' && isset($_POST['codigoAluno'])) {
+    $codigoAluno = $_POST['codigoAluno'];
+    $query = "SELECT nome, ra_aluno, periodo, nome_escola, nome_curso, tipo_ensino, status FROM tbalunos WHERE codigo = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $codigoAluno);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    if ($res->num_rows > 0) {
+        $aluno = $res->fetch_assoc();
+        echo json_encode($aluno); // devolve em formato JSON
+    } else {
+        echo json_encode(['erro' => 'Aluno não encontrado.']);
+    }
+    exit();
+}
+
+    // ===============================
     // BUSCA DE LIVROS
     // ===============================
     if ($tipo === 'livro' && isset($_POST['livro'])) {
@@ -60,5 +80,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
         }
         exit();
     }
+    
+        // ===============================
+// DETALHES DO LIVRO
+// ===============================
+if ($tipo === 'detalhesLivro' && isset($_POST['codigoLivro'])) {
+    $codigoLivro = $_POST['codigoLivro'];
+
+    // Primeiro busca o livro
+    $queryLivro = "SELECT titulo, tombo, autor, editora, isbn_falso FROM tblivros WHERE codigo = ?";
+    $stmt = $conn->prepare($queryLivro);
+    $stmt->bind_param("i", $codigoLivro);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    if ($res->num_rows > 0) {
+        $livro = $res->fetch_assoc();
+
+        // Agora busca quantos livros tem o mesmo título e editora
+        $queryQtd = "SELECT COUNT(*) as quantidade FROM tblivros WHERE titulo = ? AND editora = ?";
+        $stmtQtd = $conn->prepare($queryQtd);
+        $stmtQtd->bind_param("ss", $livro['titulo'], $livro['editora']);
+        $stmtQtd->execute();
+        $resQtd = $stmtQtd->get_result();
+        $qtd = $resQtd->fetch_assoc();
+
+        // Junta as informações
+        $livro['quantidade'] = $qtd['quantidade'];
+
+        echo json_encode($livro);
+    } else {
+        echo json_encode(['erro' => 'Livro não encontrado.']);
+    }
+    exit();
+}
+
+
+    
 }
 ?>
