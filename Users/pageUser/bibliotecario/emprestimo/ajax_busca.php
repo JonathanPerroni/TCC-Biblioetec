@@ -49,6 +49,9 @@ if ($tipo === 'detalhesAluno' && isset($_POST['codigoAluno'])) {
 
     if ($res->num_rows > 0) {
         $aluno = $res->fetch_assoc();
+
+        // Salva os dados do aluno na sessão
+        $_SESSION['aluno'] = $aluno;
         echo json_encode($aluno); // devolve em formato JSON
     } else {
         echo json_encode(['erro' => 'Aluno não encontrado.']);
@@ -81,40 +84,58 @@ if ($tipo === 'detalhesAluno' && isset($_POST['codigoAluno'])) {
         exit();
     }
     
-        // ===============================
-// DETALHES DO LIVRO
+// ===============================
+// DETALHES DO LIVRO (Para múltiplos livros)
 // ===============================
 if ($tipo === 'detalhesLivro' && isset($_POST['codigoLivro'])) {
-    $codigoLivro = $_POST['codigoLivro'];
+    $codigosLivros = $_POST['codigoLivro']; // array de códigos
+    $livros = [];
 
-    // Primeiro busca o livro
-    $queryLivro = "SELECT titulo, tombo, autor, editora, isbn_falso FROM tblivros WHERE codigo = ?";
-    $stmt = $conn->prepare($queryLivro);
-    $stmt->bind_param("i", $codigoLivro);
-    $stmt->execute();
-    $res = $stmt->get_result();
+    foreach ($codigosLivros as $codigoLivro) {
+        $queryLivro = "SELECT codigo, titulo, tombo, autor, editora, isbn_falso, isbn FROM tblivros WHERE codigo = ?";
+        $stmt = $conn->prepare($queryLivro);
+        $stmt->bind_param("i", $codigoLivro);
+        $stmt->execute();
+        $res = $stmt->get_result();
 
-    if ($res->num_rows > 0) {
-        $livro = $res->fetch_assoc();
+        if ($res->num_rows > 0) {
+            $livro = $res->fetch_assoc(); // contém o campo 'codigo'
 
-        // Agora busca quantos livros tem o mesmo título e editora
-        $queryQtd = "SELECT COUNT(*) as quantidade FROM tblivros WHERE titulo = ? AND editora = ?";
-        $stmtQtd = $conn->prepare($queryQtd);
-        $stmtQtd->bind_param("ss", $livro['titulo'], $livro['editora']);
-        $stmtQtd->execute();
-        $resQtd = $stmtQtd->get_result();
-        $qtd = $resQtd->fetch_assoc();
+            // Quantidade de exemplares com mesmo título e editora
+            $queryQtd = "SELECT COUNT(*) as quantidade FROM tblivros WHERE titulo = ? AND editora = ?";
+            $stmtQtd = $conn->prepare($queryQtd);
+            $stmtQtd->bind_param("ss", $livro['titulo'], $livro['editora']);
+            $stmtQtd->execute();
+            $resQtd = $stmtQtd->get_result();
+            $qtd = $resQtd->fetch_assoc();
 
-        // Junta as informações
-        $livro['quantidade'] = $qtd['quantidade'];
-
-        echo json_encode($livro);
-    } else {
-        echo json_encode(['erro' => 'Livro não encontrado.']);
+            $livro['quantidade'] = $qtd['quantidade'];
+            $livros[] = $livro;
+        }
     }
+
+    // Acumular na sessão
+    if (!isset($_SESSION['livros'])) {
+        $_SESSION['livros'] = [];
+    }
+
+    foreach ($livros as $novoLivro) {
+        $jaExiste = false;
+        foreach ($_SESSION['livros'] as $livroExistente) {
+            if ($livroExistente['codigo'] == $novoLivro['codigo']) {
+                $jaExiste = true;
+                break;
+            }
+        }
+        if (!$jaExiste) {
+            $_SESSION['livros'][] = $novoLivro;
+        }
+    }
+
+    // Retorna todos os livros da sessão
+    echo json_encode($_SESSION['livros']);
     exit();
 }
-
 
     
 }

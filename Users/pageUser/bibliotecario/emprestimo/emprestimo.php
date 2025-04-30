@@ -20,7 +20,7 @@ if(!isset($_SESSION['etapa'])){
     $_SESSION['etapa'] = 1;
 }
 
-$_SESSION['etapa'] = 2;
+$_SESSION['etapa'] = 1;
 
 
 
@@ -44,15 +44,36 @@ $_SESSION['etapa'] = 2;
 
    <main class="mx-1 sm:mx-16 my-8">
        <?php
+
+      
+
+        //receber os dados do formulario
+        $dados  = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        //conecta com a pagina validacao de dados dos livros e aluno
+        include_once './validacao_dados_aluno.php';
+        include_once './validacao_dados_livro.php';
+        
+        //criar a variavel para receber as mensagens de erro ou sucesso
+        $_SESSION['msg'] = "";
+
+        //mensagem que ira ser exibidia!
+        echo $_SESSION['msg'];
+        $_SESSION['msg'] = "";
+
+    //verifica se deve carregar o formulario da etapa 1 
        if($_SESSION['etapa'] == 1){
          
-        //incluir o formulario da pagina formulario_pesquisa_aluno_livro.php
+        //incluir o formulario da pagina formulario_pesquisa_aluno.php
         include_once './formulario_pesquisa_aluno.php';
 
        }elseif($_SESSION['etapa'] == 2){
-              //incluir o formulario da pagina formulario_confirmação_pesquisa.php
+              //incluir o formulario da pagina formulario_pesquisa_livro.php
               include_once './formulario_pesquisa_livro.php';
               
+       }elseif($_SESSION['etapa'] == 3){
+            //incluir o formulario da pagina formulario_de_confirmacacao.php
+            include_once './formulario_de_confirmacao.php';
        }
 
        

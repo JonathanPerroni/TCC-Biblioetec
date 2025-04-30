@@ -21,16 +21,10 @@
   <!-- Botão de adicionar -->
   <button type="button" id="btnAdicionarLivro" onclick="adicionarCampoLivro()">+ Adicionar outro livro</button>
 
-  <!-- Campo: Data do Empréstimo -->
-  <br><br>
-  <label for="data_emprestimo">Data do Empréstimo:</label>
-  <input type="date" id="data_emprestimo" name="data_emprestimo" value="<?= date('Y-m-d') ?>" readonly><br><br>
 
-  <!-- Campo: Data da Devolução -->
-  <label for="data_devolucao">Data da Devolução:</label>
-  <input type="date" id="data_devolucao" name="data_devolucao"><br><br>
 
-  <button type="submit" name="confirmelivro" value="Confirma livro">Confirma livro</button>
+
+  <button type="submit" name="confirmelivro" value="confirmelivro">Confirma livro</button>
 </form>
 
 <!-- resumo geral -->
@@ -128,74 +122,48 @@
 
   // ----- 6. Atualiza o bloco de resumo geral -----
   function atualizarResumoLivros() {
-    resumoLivrosDiv.innerHTML = '<h3>Livros Selecionados</h3>';
-    const blocos = livrosWrapper.querySelectorAll('.livro-bloco');
-    let contador = 1;
+  resumoLivrosDiv.innerHTML = '<h3>Livros Selecionados</h3>';
 
-    blocos.forEach(bloco => {
-      const codigo = bloco.querySelector('.codigoLivroSelecionado').value;
-      if (!codigo) return;
+  const codigos = [];
+  const blocos = livrosWrapper.querySelectorAll('.livro-bloco');
 
-      fetch('ajax_busca.php', {
-        method: 'POST',
-        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-        body:`tipo=detalhesLivro&codigoLivro=${encodeURIComponent(codigo)}`
-      })
-      .then(r => r.json())
-      .then(dados => {
-        if (dados.erro) return;
-        resumoLivrosDiv.innerHTML += `
-          <div style="margin-bottom:15px;">
-            <strong>Livro ${contador}</strong><br>
-            <strong>Título:</strong> ${dados.titulo}<br>
-            <strong>Tombo:</strong> ${dados.tombo}<br>
-            <strong>Autor:</strong> ${dados.autor}<br>
-            <strong>Editora:</strong> ${dados.editora}<br>
-            <strong>ISBN Falso:</strong> ${dados.isbn_falso}<br>
-            <strong>Quantidade:</strong> ${dados.quantidade}<br>
-          </div>
-          <hr>
-        `;
-        contador++;
-      });
-    });
-  }
+  blocos.forEach(bloco => {
+    const codigo = bloco.querySelector('.codigoLivroSelecionado').value;
+    if (codigo) codigos.push(codigo);
+  });
 
-  // ----- 7. Ajuste automático da data de devolução -----
-  document.addEventListener("DOMContentLoaded", () => {
-    const dataEmp = document.getElementById("data_emprestimo");
-    const dataDev = document.getElementById("data_devolucao");
+  if (codigos.length === 0) return;
 
-    function ajustarDataDevolucao(d) {
-      const dia = d.getDay();
-      if (dia === 6) d.setDate(d.getDate() - 1);
-      if (dia === 0) d.setDate(d.getDate() + 1);
-      return d;
-    }
+  const formData = new URLSearchParams();
+  formData.append('tipo', 'detalhesLivro');
+  codigos.forEach(c => formData.append('codigoLivro[]', c));
 
-    function definirDataPadrao() {
-      let d = new Date(dataEmp.value);
-      d.setDate(d.getDate() + 7);
-      dataDev.value = ajustarDataDevolucao(d)
-                        .toISOString().split('T')[0];
-    }
+  fetch('ajax_busca.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: formData.toString()
+  })
+  .then(r => r.json())
+  .then(livros => {
+    if (!Array.isArray(livros)) return;
 
-    definirDataPadrao();
-
-    dataDev.addEventListener("change", () => {
-      const emp = new Date(dataEmp.value);
-      let dev = new Date(dataDev.value);
-      if (dev < emp) {
-        alert("Data de devolução não pode ser anterior à de empréstimo.");
-        definirDataPadrao();
-        return;
-      }
-      if ([0,6].includes(dev.getDay())) {
-        alert("Ajustando para evitar fim de semana.");
-        dataDev.value = ajustarDataDevolucao(dev)
-                          .toISOString().split('T')[0];
-      }
+    livros.forEach((livro, idx) => {
+      resumoLivrosDiv.innerHTML += `
+        <div style="margin-bottom:15px;">
+          <strong>Livro ${idx + 1}</strong><br>
+          <strong>Título:</strong> ${livro.titulo}<br>
+          <strong>Tombo:</strong> ${livro.tombo}<br>
+          <strong>Autor:</strong> ${livro.autor}<br>
+          <strong>Editora:</strong> ${livro.editora}<br>
+          <strong>ISBN Falso:</strong> ${livro.isbn_falso}<br>
+          <strong>Quantidade:</strong> ${livro.quantidade}<br>
+        </div>
+        <hr>
+      `;
     });
   });
+}
+
+ 
 </script>
 
