@@ -1,3 +1,7 @@
+<?php
+include_once('../seguranca.php');// já verifica login e carrega CSRF
+$token_csrf = gerarTokenCSRF(); // usa token no formulário
+?>
 <!-- FORMULARIO DA ETAPA 1, BUSCAR DADOS DO ALUNO --> 
  
 <form action="" method="post">

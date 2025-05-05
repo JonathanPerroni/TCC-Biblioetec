@@ -3,6 +3,10 @@
 ob_start();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../../../conexao/conexao.php");
+include_once('../seguranca.php');// já verifica login e carrega CSRF
+$token_csrf = gerarTokenCSRF(); // usa token no formulário
+
+
 
 // Função para gerar o número de empréstimo (gera só 1 vez por carregamento)
 function gerarNumeroEmprestimo($conn) {
@@ -21,9 +25,11 @@ $pseudoNumero = gerarNumeroEmprestimo($conn);
 $usuarioLogado = $_SESSION['usuario'] ?? 'Desconhecido';
 
 // Processa o POST quando o form for enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
+
     // Captura as datas
-  
+    $dataEmprestimo = $_POST['data_emprestimo'] ?? date('Y-m-d');
+    $dataDevolucaoPrevista = $_POST['data_devolucao'] ?? date('Y-m-d', strtotime('+7 weekdays'));
 
     // Dados do aluno e lista de livros
     $raAluno     = $_SESSION['aluno']['ra_aluno'];
@@ -73,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $conn->commit();
 
-     
+ 
 
     } catch (Exception $e) {
         $conn->rollback();
@@ -127,6 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <label for="data_devolucao">Data da Devolução:</label>
     <input type="date" id="data_devolucao" name="data_devolucao" required><br><br>
+
+    <!-- Campo oculto para o número do empréstimo -->
+    <input type="hidden" name="nEmprestimo" value="<?= htmlspecialchars($pseudoNumero) ?>">
 
     <button type="submit" name="confirmarEmprestimo" value="confirmarEmprestimo">
         Confirmar Empréstimo

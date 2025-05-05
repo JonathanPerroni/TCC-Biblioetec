@@ -27,17 +27,17 @@ if(isset($dados['confirmelivro'])){
     }
 }   
 
-if(isset($dados['confirmarEmprestimo'])){
-  
-       
-   // Limpa sessão e redireciona para o recibo, passando o número de empréstimo
-   unset($_SESSION['livros'], $_SESSION['aluno'], $_SESSION['etapa']);
-   header("Location: recibo_emprestimo.php?n=" . urlencode($nEmprestimo));
-   exit;
+if (isset($dados['confirmarEmprestimo'])) {
+    // Recupera o número que veio do formulário
+    $nEmprestimo = $dados['nEmprestimo'] ?? '';
 
+    // Limpa a sessão antes de redirecionar
+    unset($_SESSION['livros'], $_SESSION['aluno'], $_SESSION['etapa']);
     
-}   
-
+    // Redireciona para o recibo de empréstimo
+    header("Location: recibo_emprestimo.php?n=" . urlencode($nEmprestimo));
+    exit;
+}
 
 
 ?>

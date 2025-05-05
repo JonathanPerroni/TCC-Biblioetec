@@ -5,6 +5,10 @@ ob_start();
 date_default_timezone_set('America/Sao_Paulo');
 
 include_once("../../../../conexao/conexao.php");
+include_once('../seguranca.php');// já verifica login e carrega CSRF
+$token_csrf = gerarTokenCSRF(); // usa token no formulário
+
+
 
 // Verifica se o usuário está logado
 if (empty($_SESSION['email'])) {

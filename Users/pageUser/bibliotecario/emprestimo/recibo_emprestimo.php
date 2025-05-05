@@ -67,6 +67,14 @@ $emprestimo = $rows[0];
 <body>
 
 <button onclick="window.print()">Imprimir 2 Vias</button>
+<!-- Botão para iniciar novo empréstimo -->
+<button
+  type="button"
+  onclick="window.location.href='emprestimo.php';"
+  style="margin-top: 10px;"
+>
+  Novo Empréstimo
+</button>
 
 <?php for ($i = 1; $i <= 2; $i++): ?>
     <div class="recibo copias">

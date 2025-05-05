@@ -36,26 +36,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
         exit();
     }
 
-    // ===============================
-// DETALHES DO ALUNO
+// ===============================
+// DETALHES DO ALUNO COM VERIFICAÇÕES
 // ===============================
 if ($tipo === 'detalhesAluno' && isset($_POST['codigoAluno'])) {
     $codigoAluno = $_POST['codigoAluno'];
+
+    // Consulta dados do aluno
     $query = "SELECT nome, ra_aluno, periodo, nome_escola, nome_curso, tipo_ensino, status FROM tbalunos WHERE codigo = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $codigoAluno);
     $stmt->execute();
     $res = $stmt->get_result();
 
-    if ($res->num_rows > 0) {
-        $aluno = $res->fetch_assoc();
-
-        // Salva os dados do aluno na sessão
-        $_SESSION['aluno'] = $aluno;
-        echo json_encode($aluno); // devolve em formato JSON
-    } else {
+    if ($res->num_rows === 0) {
         echo json_encode(['erro' => 'Aluno não encontrado.']);
+        exit();
     }
+
+    $aluno = $res->fetch_assoc();
+
+    // Verifica se o aluno está bloqueado
+    if ($aluno['status'] == 0) {
+        echo json_encode(['erro' => 'Aluno está bloqueado.']);
+        exit();
+    }
+
+    // Verifica se tem empréstimos não devolvidos
+    $queryPendencia = "SELECT COUNT(*) as pendencias 
+                       FROM tbemprestimo 
+                       WHERE id_aluno = ? AND (data_devolucao_efetiva IS NULL OR data_devolucao_efetiva = '')";
+    $stmtPendencia = $conn->prepare($queryPendencia);
+    $stmtPendencia->bind_param("i", $codigoAluno);
+    $stmtPendencia->execute();
+    $resPendencia = $stmtPendencia->get_result();
+    $dadosPendencia = $resPendencia->fetch_assoc();
+
+    if ($dadosPendencia['pendencias'] > 0) {
+        echo json_encode(['erro' => 'Aluno possui livros não devolvidos.']);
+        exit();
+    }
+
+    // Se passou nas verificações, salva na sessão e retorna dados
+    $_SESSION['aluno'] = $aluno;
+    echo json_encode($aluno);
     exit();
 }
 

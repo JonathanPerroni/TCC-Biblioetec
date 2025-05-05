@@ -1,3 +1,75 @@
+<?php
+include_once('../seguranca.php');// já verifica login e carrega CSRF
+$token_csrf = gerarTokenCSRF(); // usa token no formulário
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmelivro'])) {
+  $codigosLivros = $_POST['codigos_livros'] ?? [];
+
+  if (!empty($codigosLivros)) {
+      // 🔍 Carrega detalhes dos livros
+      $placeholders = implode(',', array_fill(0, count($codigosLivros), '?'));
+      $stmt = $conn->prepare("SELECT titulo, editora, isbn_falso FROM tblivros WHERE id IN ($placeholders)");
+      $stmt->bind_param(str_repeat('i', count($codigosLivros)), ...$codigosLivros);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      $livros = [];
+      while ($row = $result->fetch_assoc()) {
+          $livros[] = $row;
+      }
+
+      // 🔍 Verifica disponibilidade
+      $livrosIndisponiveis = [];
+
+      foreach ($livros as $livro) {
+          $titulo  = $livro['titulo'] ?? '';
+          $editora = $livro['editora'] ?? '';
+          $isbn    = $livro['isbn_falso'] ?? '';
+
+          if (empty($titulo) || empty($editora)) {
+              $livrosIndisponiveis[] = "Livro com dados incompletos: título ou editora ausente.";
+              continue;
+          }
+
+          // Soma total de exemplares com mesmo título e editora
+          $stmtTotal = $conn->prepare("
+              SELECT SUM(quantidade) AS total_acervo
+              FROM tblivros
+              WHERE titulo = ? AND editora = ?
+          ");
+          $stmtTotal->bind_param('ss', $titulo, $editora);
+          $stmtTotal->execute();
+          $total = $stmtTotal->get_result()->fetch_assoc()['total_acervo'] ?? 0;
+
+          // Conta quantos estão emprestados (e ainda não devolvidos)
+          $stmtEmprestado = $conn->prepare("
+              SELECT COUNT(*) AS emprestados
+              FROM tbemprestimos
+              WHERE nome_livro = ? AND isbn_falso = ? AND data_devolucao_efetiva IS NULL
+          ");
+          $stmtEmprestado->bind_param('ss', $titulo, $isbn);
+          $stmtEmprestado->execute();
+          $emprestados = $stmtEmprestado->get_result()->fetch_assoc()['emprestados'] ?? 0;
+
+          $disponivel = (int)$total - (int)$emprestados;
+
+          if ($disponivel < 1) {
+              $livrosIndisponiveis[] = "Livro \"{$titulo}\" da editora \"{$editora}\" está com todos os exemplares emprestados.";
+          }
+      }
+
+      if (!empty($livrosIndisponiveis)) {
+          $mensagem = implode("\\n", $livrosIndisponiveis);
+          echo "<script>alert('Os seguintes livros não estão disponíveis:\\n$mensagem'); window.location.href='emprestimo_etapa2.php';</script>";
+          exit;
+      }
+
+      // Aqui segue o processo de inserção, se desejar (não incluso ainda)
+      // ...
+  }
+}
+?>
+
 <!-- FORMULÁRIO DA ETAPA 2 -->
 <form action="" method="post">
   <!-- Limite de livros -->
