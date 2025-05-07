@@ -91,7 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!-- Formulário HTML -->
+
 <h2>Confirmar Empréstimo</h2>
+<!-- Botão para voltar e cancelar -->
+<a href="cancelar_emprestimo.php" class="btn btn-danger">Voltar para a página do bibliotecário</a>
 <form action="" method="post">
     <div class="dadosAlunos">
         <h3>Aluno Selecionado</h3>

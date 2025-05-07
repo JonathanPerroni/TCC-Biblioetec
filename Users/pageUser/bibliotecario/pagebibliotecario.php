@@ -364,7 +364,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
                   <div><img src="../icon/books.svg" alt=""></div>
                   EMPRESTIMO                                               
               </a>
-              <a href="pedido">
+              <a href="./gerenciamento_pedidos/gerenciamento.php">
                 <div><img src="../icon/pedidos.svg" alt=""></div>
               <?php 
                             $tabela = 'tbpedidos';

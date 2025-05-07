@@ -1,9 +1,11 @@
 <?php
 include_once('../seguranca.php');// já verifica login e carrega CSRF
 $token_csrf = gerarTokenCSRF(); // usa token no formulário
+
 ?>
 <!-- FORMULARIO DA ETAPA 1, BUSCAR DADOS DO ALUNO --> 
- 
+ <!-- Botão para voltar e cancelar -->
+<a href="cancelar_emprestimo.php" class="btn btn-danger">Voltar para a página do bibliotecário</a>
 <form action="" method="post">
 <h3>Buscar Aluno</h3>
 <input type="text" id="buscaAluno" placeholder="Digite o nome ou RA do aluno">
@@ -14,9 +16,16 @@ $token_csrf = gerarTokenCSRF(); // usa token no formulário
 <input type="hidden" name="codigo_aluno" id="codigoAlunoSelecionado">
 
 <button type="submit" name="confirmeAluno" value="Confirma Aluno">Confirma Aluno</button>
+<!--<button type="button" onclick="confirmarAluno()">Confirma Aluno</button>-->
 </form>
 
 <div id="detalhesAluno" style="margin-top: 20px;"></div>
+<?php
+if (isset($_SESSION['msg'])) {
+    echo "<div class='mensagem'>{$_SESSION['msg']}</div>";
+    unset($_SESSION['msg']);
+}
+?>
 
 
 <script>
@@ -73,4 +82,27 @@ $token_csrf = gerarTokenCSRF(); // usa token no formulário
     });
 }
 
+function confirmarAluno() {
+    const codigoAluno = document.getElementById('codigoAlunoSelecionado').value;
+
+    fetch('ajax_busca.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `tipo=verificaAluno&codigoAluno=${encodeURIComponent(codigoAluno)}`
+    })
+    .then(response => response.json())
+    .then(dados => {
+        if (dados.erro) {
+            alert(dados.erro);
+        } else {
+            alert('Aluno confirmado com sucesso!');
+            // Pode redirecionar ou liberar próxima etapa
+        }
+    });
+}
+
     </script>
+
+    

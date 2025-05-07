@@ -56,26 +56,51 @@ if ($tipo === 'detalhesAluno' && isset($_POST['codigoAluno'])) {
 
     $aluno = $res->fetch_assoc();
 
+    // ===============================
+// VERIFICAÇÃO COMPLETA DO ALUNO
+// ===============================
+if ($tipo === 'verificaAluno' && isset($_POST['codigoAluno'])) {
+    $codigoAluno = $_POST['codigoAluno'];
+
     // Verifica se o aluno está bloqueado
-    if ($aluno['status'] == 0) {
-        echo json_encode(['erro' => 'Aluno está bloqueado.']);
-        exit();
+    $queryAluno = "SELECT * FROM tbalunos WHERE codigo = ?";
+    $stmtAluno = $conn->prepare($queryAluno);
+    $stmtAluno->bind_param("i", $codigoAluno);
+    $stmtAluno->execute();
+    $resAluno = $stmtAluno->get_result();
+
+    if ($resAluno->num_rows === 0) {
+        echo json_encode(['erro' => 'Aluno não encontrado.']);
+        exit;
     }
 
-    // Verifica se tem empréstimos não devolvidos
-    $queryPendencia = "SELECT COUNT(*) as pendencias 
-                       FROM tbemprestimo 
-                       WHERE id_aluno = ? AND (data_devolucao_efetiva IS NULL OR data_devolucao_efetiva = '')";
+    $aluno = $resAluno->fetch_assoc();
+
+    if ($aluno['status'] == 0) {
+        echo json_encode(['erro' => 'Aluno está bloqueado.']);
+        exit;
+    }
+
+    // Verifica pendência de devolução
+    $queryPendencia = "SELECT COUNT(*) as pendencias FROM tbemprestimos WHERE ra_aluno = ? AND (data_devolucao_efetiva IS NULL OR data_devolucao_efetiva = '')";
     $stmtPendencia = $conn->prepare($queryPendencia);
-    $stmtPendencia->bind_param("i", $codigoAluno);
+    $stmtPendencia->bind_param("s", $aluno['ra_aluno']);
     $stmtPendencia->execute();
     $resPendencia = $stmtPendencia->get_result();
     $dadosPendencia = $resPendencia->fetch_assoc();
 
     if ($dadosPendencia['pendencias'] > 0) {
         echo json_encode(['erro' => 'Aluno possui livros não devolvidos.']);
-        exit();
+        exit;
     }
+
+    // Tudo certo, salvar na sessão
+    $_SESSION['aluno'] = $aluno;
+    echo json_encode(['sucesso' => true]);
+    exit;
+}
+
+
 
     // Se passou nas verificações, salva na sessão e retorna dados
     $_SESSION['aluno'] = $aluno;

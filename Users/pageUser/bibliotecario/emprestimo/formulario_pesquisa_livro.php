@@ -71,6 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmelivro'])) {
 ?>
 
 <!-- FORMULÁRIO DA ETAPA 2 -->
+ <!-- Botão para voltar e cancelar -->
+<a href="cancelar_emprestimo.php" class="btn btn-danger">Voltar para a página do bibliotecário</a>
+
 <form action="" method="post">
   <!-- Limite de livros -->
   <label for="limiteLivros">Limite de livros por aluno:</label>
@@ -98,7 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmelivro'])) {
 
   <button type="submit" name="confirmelivro" value="confirmelivro">Confirma livro</button>
 </form>
-
+<?php
+if (isset($_SESSION['msg'])) {
+    echo "<div class='mensagem'>{$_SESSION['msg']}</div>";
+    unset($_SESSION['msg']);
+}
+?>
 <!-- resumo geral -->
 <div id="resumoLivros" style="margin-top:30px;"></div>
 
