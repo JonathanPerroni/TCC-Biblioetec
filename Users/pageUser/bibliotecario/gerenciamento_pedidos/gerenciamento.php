@@ -1,12 +1,10 @@
 <?php
 session_start();
 ob_start();
-
 date_default_timezone_set('America/Sao_Paulo');
 
 include_once("../../../../conexao/conexao.php");
-include_once('../seguranca.php');// já verifica login e carrega CSRF
-
+include_once('../seguranca.php'); // já verifica login e carrega CSRF
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +12,7 @@ include_once('../seguranca.php');// já verifica login e carrega CSRF
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>     
-    <title>Document</title>
+    <title>Gerenciamento de Pedidos</title>
     <style>
         /* styles.css */
         #tabs {
@@ -44,22 +42,22 @@ include_once('../seguranca.php');// já verifica login e carrega CSRF
             border: 1px solid #ccc;
             padding: 20px;
         }
-
     </style>
 </head>
 <body>
 
+   
     <ul id="tabs">
-        <li class="tab-button active" data-tab="lista_emprestimo">EMPRESTIMO</li>
+        <li class="tab-button active" data-tab="areaEmprestimo/lista_emprestimo">Empréstimos</li>
         <li class="tab-button" data-tab="devolucao">Devolução</li>
         <li class="tab-button" data-tab="lista_espera">Lista de Espera</li>
-        <li data-tab="pedidos.php">PEDIDOS</li>
-        <li data-tab="separacao.php">SEPARAÇÃO</li>
-        <li data-tab="">DEVOLUÇÃO</li>
+        <li class="tab-button" data-tab="pedidos.php">Pedidos</li>
+        <li class="tab-button" data-tab="separacao.php">Separação</li>
+        <li class="tab-button" data-tab="">Recusa</li>
     </ul>
 
     <div id="tab-content" class="conteudo-tab">
-        <!-- conteudo sera mostrado aqui -->
+        <!-- conteúdo será mostrado aqui -->
     </div>
 
     <script src="./js/tabs.js"></script>
