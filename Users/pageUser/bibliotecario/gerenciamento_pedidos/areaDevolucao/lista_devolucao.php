@@ -23,8 +23,8 @@ $search = isset($_GET['query']) ? trim($_GET['query']) : '';
 
 <?php
 if ($search !== '') {
-    $query = "SELECT id_emprestimo, n_emprestimo, ra_aluno, nome_aluno, data_emprestimo, data_devolucao_prevista 
-              FROM tbemprestimos 
+    $query = "SELECT id_devolucao, n_emprestimo, ra_aluno, nome_aluno, data_emprestimo, data_devolucao_prevista, data_devolucao_efetiva 
+              FROM tbdevolucao 
               WHERE n_emprestimo LIKE '%$search%' 
                  OR ra_aluno LIKE '%$search%' 
                  OR nome_aluno LIKE '%$search%'
@@ -33,26 +33,22 @@ if ($search !== '') {
     $result = $conn->query($query);
 
     if ($result->num_rows === 1) {
-        // Se encontrar exatamente 1 resultado, redireciona automaticamente
         $row = $result->fetch_assoc();
-        $id = $row['id_emprestimo'];
-        echo "<script>window.location.href = '../gerenciamento.php';</script>";
+        $id = $row['id_devolucao'];
+        echo "<script>window.location.href = 'areaDevolucao/detalhes_devolucao.php?id=$id';</script>";
         exit;
     } elseif ($result->num_rows === 0) {
-        // Se não encontrar nada, mostra alerta
-        echo "<script>alert('Nenhum empréstimo encontrado.');</script>";
+        echo "<script>alert('Nenhuma devolução encontrada.');</script>";
     }
 }
 ?>
 
 <?php
-// Exibe tabela apenas se houver múltiplos resultados
 if ($search === '' || ($result && $result->num_rows > 1)) {
 
-    // (Reexecuta a query se necessário)
     if (!isset($result)) {
-        $query = "SELECT id_emprestimo, n_emprestimo, ra_aluno, nome_aluno, data_emprestimo, data_devolucao_prevista 
-                  FROM tbemprestimos 
+        $query = "SELECT id_devolucao, n_emprestimo, ra_aluno, nome_aluno, data_emprestimo, data_devolucao_prevista, data_devolucao_efetiva 
+                  FROM tbdevolucao 
                   ORDER BY data_emprestimo DESC";
         $result = $conn->query($query);
     }
@@ -64,23 +60,25 @@ if ($search === '' || ($result && $result->num_rows > 1)) {
                     <th class='border px-4 py-2'>RA Aluno</th>
                     <th class='border px-4 py-2'>Nome do Aluno</th>
                     <th class='border px-4 py-2'>Data Empréstimo</th>
-                    <th class='border px-4 py-2'>Data de Devolução</th>
+                    <th class='border px-4 py-2'>Prevista</th>
+                    <th class='border px-4 py-2'>Efetiva</th>
                     <th class='border px-4 py-2'>Ações</th>
                 </tr>
             </thead>
             <tbody>";
 
     while ($row = $result->fetch_assoc()) {
-        $id = $row['id_emprestimo'];
+        $id = $row['id_devolucao'];
         echo "<tr>
                 <td class='border px-4 py-2'>{$row['n_emprestimo']}</td>
                 <td class='border px-4 py-2'>{$row['ra_aluno']}</td>
                 <td class='border px-4 py-2'>{$row['nome_aluno']}</td>
                 <td class='border px-4 py-2'>{$row['data_emprestimo']}</td>
                 <td class='border px-4 py-2'>{$row['data_devolucao_prevista']}</td>
+                <td class='border px-4 py-2'>{$row['data_devolucao_efetiva']}</td>
                 <td class='border px-4 py-2'>
                     <button class='bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600' 
-                            onclick=\"window.location.href='areaEmprestimo/detalhes_emprestimo.php?id=$id'\">
+                            onclick=\"window.location.href='areaDevolucao/detalhes_devolucao.php?id=$id'\">
                         Detalhes
                     </button>
                 </td>
