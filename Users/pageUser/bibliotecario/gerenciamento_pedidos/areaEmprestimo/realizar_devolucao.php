@@ -70,7 +70,7 @@ if ($stmt_devolucao->execute()) {
     $stmt_delete->execute();
     $stmt_delete->close();
 
-    echo "<script>alert('Devolução realizada com sucesso!'); window.location.href = 'lista_emprestimo.php';</script>";
+    echo "<script>alert('Devolução realizada com sucesso!'); window.location.href = '../gerenciamento.php';</script>";
 } else {
     echo "<script>alert('Erro ao registrar a devolução.'); window.history.back();</script>";
 }
