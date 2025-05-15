@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06/05/2025 às 01:06
+-- Tempo de geração: 15/05/2025 às 03:18
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -426,6 +426,36 @@ INSERT INTO `tbdev` (`codigo`, `nome`, `cpf`, `email`, `password`, `telefone`, `
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `tbdevolucao`
+--
+
+CREATE TABLE `tbdevolucao` (
+  `id_devolucao` int(11) NOT NULL,
+  `id_emprestimo` int(11) NOT NULL,
+  `n_emprestimo` text NOT NULL,
+  `ra_aluno` varchar(20) DEFAULT NULL,
+  `nome_aluno` text NOT NULL,
+  `isbn_falso` text NOT NULL,
+  `isbn` text NOT NULL,
+  `tombo` text NOT NULL,
+  `nome_livro` text NOT NULL,
+  `qntd_livros` int(11) NOT NULL,
+  `data_emprestimo` datetime DEFAULT NULL,
+  `data_devolucao_prevista` datetime DEFAULT NULL,
+  `data_devolucao_efetiva` datetime DEFAULT NULL,
+  `tipo` enum('emprestado','pedido') CHARACTER SET armscii8 COLLATE armscii8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbdevolucao`
+--
+
+INSERT INTO `tbdevolucao` (`id_devolucao`, `id_emprestimo`, `n_emprestimo`, `ra_aluno`, `nome_aluno`, `isbn_falso`, `isbn`, `tombo`, `nome_livro`, `qntd_livros`, `data_emprestimo`, `data_devolucao_prevista`, `data_devolucao_efetiva`, `tipo`) VALUES
+(1, 1, 'emp-05-05-25-np00001', '123456789', 'Aluno Teste da Silva', 'f000000000006', '9781547540402', '', 'O BATISMO NO ESPÍRITO SANTO', 2, '2025-05-11 18:22:32', '2025-05-19 00:00:00', '2025-05-11 18:50:02', 'emprestado');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `tbemprestimos`
 --
 
@@ -444,13 +474,6 @@ CREATE TABLE `tbemprestimos` (
   `data_devolucao_efetiva` datetime DEFAULT NULL,
   `tipo` enum('emprestado','pedido') CHARACTER SET armscii8 COLLATE armscii8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `tbemprestimos`
---
-
-INSERT INTO `tbemprestimos` (`id_emprestimo`, `n_emprestimo`, `ra_aluno`, `nome_aluno`, `isbn_falso`, `isbn`, `tombo`, `nome_livro`, `qntd_livros`, `data_emprestimo`, `data_devolucao_prevista`, `data_devolucao_efetiva`, `tipo`) VALUES
-(1, 'emp-05-05-25-np00001', '123456789', 'Aluno Teste da Silva', 'f000000000006', '9781547540402', '', 'O BATISMO NO ESPÍRITO SANTO', 2, '2025-05-05 00:00:00', '2025-05-14 00:00:00', NULL, 'emprestado');
 
 -- --------------------------------------------------------
 
@@ -7006,6 +7029,12 @@ ALTER TABLE `tbdev`
   ADD PRIMARY KEY (`codigo`);
 
 --
+-- Índices de tabela `tbdevolucao`
+--
+ALTER TABLE `tbdevolucao`
+  ADD PRIMARY KEY (`id_devolucao`);
+
+--
 -- Índices de tabela `tbemprestimos`
 --
 ALTER TABLE `tbemprestimos`
@@ -7136,6 +7165,12 @@ ALTER TABLE `tbcursos`
 --
 ALTER TABLE `tbdev`
   MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de tabela `tbdevolucao`
+--
+ALTER TABLE `tbdevolucao`
+  MODIFY `id_devolucao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tbemprestimos`
