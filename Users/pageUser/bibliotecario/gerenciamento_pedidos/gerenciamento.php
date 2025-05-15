@@ -46,7 +46,10 @@ include_once('../seguranca.php'); // já verifica login e carrega CSRF
 </head>
 <body>
 
-   
+    <a href="../pagebibliotecario.php"
+   class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    Página Principal
+</a>
     <ul id="tabs">
         <li class="tab-button active" data-tab="areaEmprestimo/lista_emprestimo">Empréstimos</li>
         <li class="tab-button" data-tab="areaDevolucao/lista_devolucao">Devolução</li>
