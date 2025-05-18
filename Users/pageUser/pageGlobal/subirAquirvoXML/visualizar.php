@@ -1,56 +1,55 @@
 <?php
-if (isset($_GET['arquivo'])) {
-    $arquivo = 'xml/' . $_GET['arquivo'];
-
-    // Verifica se o arquivo existe
+session_start();
+if (isset($_SESSION['arquivo_enviado'])) {
+    $arquivo = 'xml/' . $_SESSION['arquivo_enviado'];
     if (file_exists($arquivo)) {
-        // Carrega o XML com suporte a namespaces
-        $xml = simplexml_load_file($arquivo, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $namespaces = $xml->getNamespaces(true);
+        try {
+            $xml = simplexml_load_file($arquivo);
+            $rows = $xml->Worksheet->Table->Row;
 
-        // Registra o namespace para o XPath
-        $xml->registerXPathNamespace('ss', $namespaces['ss']);
+            // Array para armazenar isbn_falso por combinação titulo+editora
+            $isbnFalsoMap = [];
+            $contadorISBN = 1;
 
-        echo "<h1>Conteúdo do Arquivo XML</h1>";
-        echo "<table border='1' cellpadding='10'>";
-        echo "<tr>
-                <th>Nome Escola</th>
-                <th>Classe</th>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Editora</th>
-                <th>Ano Publicação</th>
-                <th>ISBN</th>
-                <th>Gênero</th>
-                <th>Número de Páginas</th>
-                <th>Idioma</th>
-                <th>Data Adição</th>
-                <th>Estante</th>
-                <th>Prateleira</th>
-                <th>Edição</th>
-                <th>Quantidade</th>
-            </tr>";
+            $html = "<h2>Pré-visualização dos dados</h2><table border='1'><tr>
+                <th>Tombo</th><th>Aquisição</th><th>CDD</th><th>ISBN</th><th>Título</th><th>Autor</th>
+                <th>Editora</th><th>Ano</th><th>Páginas</th><th>Idioma</th><th>Gênero</th><th>Quantidade</th><th>ISBN Falso</th></tr>";
 
-        // Navega pela estrutura correta
-        $rows = $xml->xpath('//ss:Worksheet/ss:Table/ss:Row');
+            for ($i = 1; $i < count($rows); $i++) {
+                $cells = $rows[$i]->Cell;
 
-        // Percorre as linhas encontradas
-        foreach ($rows as $row) {
-            echo "<tr>";
-            // Para cada linha, capturar as células (Cell)
-            $cells = $row->xpath('./ss:Cell/ss:Data');
-            // Para cada célula, exibe o valor
-            foreach ($cells as $cell) {
-                echo "<td>" . (string)$cell . "</td>";
+                // Pega título e editora para gerar isbn_falso
+                $titulo = isset($cells[4]->Data) ? (string)$cells[4]->Data : '';
+                $editora = isset($cells[6]->Data) ? (string)$cells[6]->Data : '';
+
+                $key = strtolower(trim($titulo)) . '|' . strtolower(trim($editora));
+
+                if (isset($isbnFalsoMap[$key])) {
+                    $isbn_falso = $isbnFalsoMap[$key];
+                } else {
+                    // Gera novo isbn_falso no formato f + 12 dígitos zerados incrementais
+                    $isbn_falso = 'f' . str_pad($contadorISBN, 12, '0', STR_PAD_LEFT);
+                    $isbnFalsoMap[$key] = $isbn_falso;
+                    $contadorISBN++;
+                }
+
+                $html .= "<tr>";
+                for ($j = 0; $j < 12; $j++) {
+                    $dado = isset($cells[$j]->Data) ? (string)$cells[$j]->Data : 'N/A';
+                    $html .= "<td>" . htmlspecialchars($dado) . "</td>";
+                }
+                // Adiciona coluna isbn_falso
+                $html .= "<td>" . htmlspecialchars($isbn_falso) . "</td>";
+
+                $html .= "</tr>";
             }
-            echo "</tr>";
-        }
 
-        echo "</table>";
-    } else {
-        echo "Arquivo não encontrado.";
+            $html .= "</table>";
+            $_SESSION['visualizacao'] = $html;
+        } catch (Exception $e) {
+            $_SESSION['msg'] = "Erro ao visualizar o XML: " . $e->getMessage();
+        }
     }
-} else {
-    echo "Nenhum arquivo especificado.";
 }
-?>
+header("Location: index.php");
+exit;
