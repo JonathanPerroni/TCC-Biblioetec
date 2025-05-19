@@ -4,18 +4,22 @@ $token_csrf = gerarTokenCSRF(); // usa token no formulário
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmelivro'])) {
   $codigosLivros = $_POST['codigos_livros'] ?? [];
+  $quantidadesLivros = $_POST['quantidade_livros'] ?? [];
 
   if (!empty($codigosLivros)) {
       // 🔍 Carrega detalhes dos livros
       $placeholders = implode(',', array_fill(0, count($codigosLivros), '?'));
-      $stmt = $conn->prepare("SELECT titulo, editora, isbn_falso FROM tblivros WHERE id IN ($placeholders)");
+      $stmt = $conn->prepare("SELECT titulo, editora, isbn_falso FROM tblivros WHERE codigo IN ($placeholders)");
       $stmt->bind_param(str_repeat('i', count($codigosLivros)), ...$codigosLivros);
       $stmt->execute();
       $result = $stmt->get_result();
 
       $livros = [];
+      $index = 0;
       while ($row = $result->fetch_assoc()) {
+          $row['quantidade_solicitada'] = (int)($quantidadesLivros[$index] ?? 1);
           $livros[] = $row;
+          $index++;
       }
 
       // 🔍 Verifica disponibilidade
@@ -87,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmelivro'])) {
     <button type="button" onclick="buscarLivro(this)">Buscar</button>
     <div class="resultadoLivro"></div>
     <input type="hidden" name="codigos_livros[]" class="codigoLivroSelecionado">
+    <input type="number" name="quantidade_livros[]" class="quantidadeLivroSelecionado" min="1" value="1" placeholder="Qtde" style="margin-top:5px; width:60px; display:block;">
     <button type="button" class="btn-excluir" onclick="removerCampoLivro(this)">Excluir</button>
   </div>
 </div>
@@ -193,9 +198,38 @@ if (isset($_SESSION['msg'])) {
       const select = resultadoDiv.querySelector('select');
       if (!select) return;
 
-      select.onchange = () => {
+     select.onchange = () => {
         hiddenInput.value = select.value;
         atualizarResumoLivros();
+
+        const isbn_falso = select.selectedOptions[0].getAttribute('data-isbn_falso');
+
+        if (!isbn_falso) return;
+
+        fetch('ajax_busca.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'acao=verifica_qtd&isbn_falso=' + encodeURIComponent(isbn_falso)
+        })
+        .then(res => res.json())
+        .then(data => {
+          const infoDiv = document.createElement('div');
+          infoDiv.innerHTML = `
+            <div style="margin-top:10px;">
+              <strong>Total:</strong> ${data.total} |
+              <strong>Emprestados:</strong> ${data.emprestados} |
+              <strong>Disponíveis:</strong> ${data.disponiveis}
+              ${data.disponiveis === 0
+                ? `<br><span style="color:red"><strong>Nenhum exemplar disponível.</strong></span>
+                  <br><label><input type="checkbox" name="forcar_emprestimo[]"> Autorizar mesmo assim</label>`
+                : data.disponiveis === 1
+                ? `<br><span style="color:orange"><strong>Apenas 1 exemplar disponível.</strong></span>`
+                : ''
+              }
+            </div>
+          `;
+          resultadoDiv.appendChild(infoDiv);
+        });
       };
     });
   }

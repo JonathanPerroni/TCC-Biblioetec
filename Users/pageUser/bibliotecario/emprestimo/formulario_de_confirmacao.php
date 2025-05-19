@@ -27,6 +27,7 @@ $usuarioLogado = $_SESSION['usuario'] ?? 'Desconhecido';
 // Processa o POST quando o form for enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
 
+    $livros = $_SESSION['livros'];
     // Captura as datas
     $dataEmprestimo = $_POST['data_emprestimo'] ?? date('Y-m-d');
     $dataDevolucaoPrevista = $_POST['data_devolucao'] ?? date('Y-m-d', strtotime('+7 weekdays'));
@@ -37,6 +38,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $livros      = $_SESSION['livros'];
     $nEmprestimo = $pseudoNumero;     // usa sempre o mesmo gerado acima
     $tipo        = 'emprestado';
+
+    foreach ($livros as $livro) {
+    $isbn_falso = $livro['isbn_falso'];
+
+    // Consulta quantidade total
+    $stmtTotal = $conn->prepare("SELECT COUNT(*) FROM tblivros WHERE isbn_falso = ?");
+    $stmtTotal->bind_param("s", $isbn_falso);
+    $stmtTotal->execute();
+    $stmtTotal->bind_result($total);
+    $stmtTotal->fetch();
+    $stmtTotal->close();
+
+    // Consulta quantidade emprestada
+    $stmtEmprestados = $conn->prepare("SELECT COUNT(*) FROM tbemprestimos WHERE isbn_falso = ? AND data_devolucao_efetiva IS NULL");
+    $stmtEmprestados->bind_param("s", $isbn_falso);
+    $stmtEmprestados->execute();
+    $stmtEmprestados->bind_result($emprestados);
+    $stmtEmprestados->fetch();
+    $stmtEmprestados->close();
+
+    $disponiveis = max(0, $total - $emprestados);
+
+    // Verifica se o bibliotecário autorizou manualmente
+    $forcados = $_POST['forcar_emprestimo'] ?? [];
+    $foiForcado = in_array($isbn_falso, $forcados);
+
+    if ($disponiveis <= 0 && !$foiForcado) {
+        $_SESSION['msg'] = "O livro \"{$livro['titulo']}\" não possui exemplares disponíveis e não foi autorizado manualmente.";
+        $_SESSION['etapa'] = 3;
+        header("Location: emprestimo.php");
+        exit;
+    }
+}
+
+
+
+
 
     $conn->begin_transaction();
     try {
@@ -109,15 +147,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="dadosLivro">
         <h3>Livros Selecionados</h3>
         <?php if (!empty($_SESSION['livros'])): ?>
-            <?php foreach ($_SESSION['livros'] as $livro): ?>
-                <p><strong>Título:</strong> <?= htmlspecialchars($livro['titulo']) ?></p>
-                <p><strong>Tombo:</strong> <?= htmlspecialchars($livro['tombo']) ?></p>
-                <p><strong>Autor:</strong> <?= htmlspecialchars($livro['autor']) ?></p>
-                <p><strong>Editora:</strong> <?= htmlspecialchars($livro['editora']) ?></p>
-                <p><strong>ISBN Falso:</strong> <?= htmlspecialchars($livro['isbn_falso']) ?></p>
-                <p><strong>Quantidade Disponível:</strong> <?= htmlspecialchars($livro['quantidade']) ?></p>
-                <hr>
-            <?php endforeach; ?>
+        <?php foreach ($_SESSION['livros'] as $livro): ?>
+            <p><strong>Título:</strong> <?= htmlspecialchars($livro['titulo']) ?></p>
+            <p><strong>Tombo:</strong> <?= htmlspecialchars($livro['tombo']) ?></p>
+            <p><strong>Autor:</strong> <?= htmlspecialchars($livro['autor']) ?></p>
+            <p><strong>Editora:</strong> <?= htmlspecialchars($livro['editora']) ?></p>
+            <p><strong>ISBN Falso:</strong> <?= htmlspecialchars($livro['isbn_falso']) ?></p>
+
+            <?php
+            $isbn_falso = $livro['isbn_falso'];
+
+            // Consulta total e emprestados
+            $stmtTotal = $conn->prepare("SELECT COUNT(*) FROM tblivros WHERE isbn_falso = ?");
+            $stmtTotal->bind_param("s", $isbn_falso);
+            $stmtTotal->execute();
+            $stmtTotal->bind_result($total);
+            $stmtTotal->fetch();
+            $stmtTotal->close();
+
+            $stmtEmp = $conn->prepare("SELECT COUNT(*) FROM tbemprestimos WHERE isbn_falso = ? AND data_devolucao_efetiva IS NULL");
+            $stmtEmp->bind_param("s", $isbn_falso);
+            $stmtEmp->execute();
+            $stmtEmp->bind_result($emprestados);
+            $stmtEmp->fetch();
+            $stmtEmp->close();
+
+            $disponiveis = max(0, $total - $emprestados);
+            ?>
+
+            <p><strong>Disponíveis:</strong> <?= $disponiveis ?></p>
+
+            <?php if ($disponiveis <= 0): ?>
+                <p style="color:red;"><strong>Nenhum exemplar disponível.</strong></p>
+                <label>
+                    <input type="checkbox" name="forcar_emprestimo[]" value="<?= htmlspecialchars($livro['isbn_falso']) ?>">
+                    Autorizar empréstimo mesmo sem disponibilidade
+                </label>
+            <?php elseif ($disponiveis == 1): ?>
+                <p style="color:orange;"><strong>Apenas 1 exemplar disponível.</strong></p>
+            <?php endif; ?>
+
+            <hr>
+        <?php endforeach; ?>
+
         <?php else: ?>
             <p>Nenhum livro selecionado.</p>
         <?php endif; ?>

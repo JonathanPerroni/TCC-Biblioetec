@@ -24,7 +24,6 @@ $dados  = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 // Conecta com as páginas de validação dos dados do aluno e do livro
 include_once './validacao_dados_aluno.php';
-include_once './validacao_dados_livro.php';
 
 // Exibe a mensagem somente se for da etapa correta
 if (isset($_SESSION['msg']) && $_SESSION['etapa'] == 1) {

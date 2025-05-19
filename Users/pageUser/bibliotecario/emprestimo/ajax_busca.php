@@ -3,6 +3,40 @@
 session_start();
 require_once '../../../../conexao/conexao.php'; // Ajuste o caminho se necessário
 
+    // ===============================
+    // VERIFICA QUANTIDADE POR ISBN_FALSO
+    // ===============================
+    if (isset($_POST['acao']) && $_POST['acao'] === 'verifica_qtd' && isset($_POST['isbn_falso'])) {
+        $isbn_falso = $_POST['isbn_falso'];
+
+        // Total de exemplares com o mesmo isbn_falso
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM tblivros WHERE isbn_falso = ?");
+        $stmt->bind_param("s", $isbn_falso);
+        $stmt->execute();
+        $stmt->bind_result($total);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Quantos estão emprestados
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM tbemprestimos WHERE isbn_falso = ? AND data_devolucao_efetiva IS NULL");
+        $stmt->bind_param("s", $isbn_falso);
+        $stmt->execute();
+        $stmt->bind_result($emprestados);
+        $stmt->fetch();
+        $stmt->close();
+
+        $disponiveis = max(0, $total - $emprestados);
+
+        echo json_encode([
+            'total' => $total,
+            'emprestados' => $emprestados,
+            'disponiveis' => $disponiveis
+        ]);
+        exit;
+}
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
     $tipo = $_POST['tipo'];
     $conn = new mysqli("localhost", "root", "", "bdescola"); // Atualize se necessário
