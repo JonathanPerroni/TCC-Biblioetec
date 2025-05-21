@@ -6,20 +6,15 @@ include_once("../../../../conexao/conexao.php");
 include_once('../seguranca.php');// já verifica login e carrega CSRF
 $token_csrf = gerarTokenCSRF(); // usa token no formulário
 
-
-
-// Função para gerar o número de empréstimo (gera só 1 vez por carregamento)
+// Adicione a função aqui:
 function gerarNumeroEmprestimo($conn) {
-    $row = $conn
-        ->query("SELECT MAX(n_emprestimo) AS ultimo FROM tbemprestimos")
-        ->fetch_assoc();
-    $ultInt = (int) substr($row['ultimo'], -5);
-    $novo   = str_pad($ultInt + 1, 5, "0", STR_PAD_LEFT);
-    return "emp-" . date("d-m-y") . "-np" . $novo;
+    $stmt = $conn->query("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tbemprestimos'");
+    $row = $stmt->fetch_assoc();
+    $proximoId = $row['AUTO_INCREMENT'] ?? rand(1000, 9999);
+    return "np00" . $proximoId;
 }
 
-// Gera o número que será exibido e usado no INSERT e no redirect
-$pseudoNumero = gerarNumeroEmprestimo($conn);
+
 
 // Pega usuário logado (se tiver)
 $usuarioLogado = $_SESSION['usuario'] ?? 'Desconhecido';
@@ -28,56 +23,53 @@ $usuarioLogado = $_SESSION['usuario'] ?? 'Desconhecido';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
 
     $livros = $_SESSION['livros'];
-    // Captura as datas
     $dataEmprestimo = $_POST['data_emprestimo'] ?? date('Y-m-d');
     $dataDevolucaoPrevista = $_POST['data_devolucao'] ?? date('Y-m-d', strtotime('+7 weekdays'));
 
-    // Dados do aluno e lista de livros
     $raAluno     = $_SESSION['aluno']['ra_aluno'];
     $nomeAluno   = $_SESSION['aluno']['nome'];
-    $livros      = $_SESSION['livros'];
-    $nEmprestimo = $pseudoNumero;     // usa sempre o mesmo gerado acima
     $tipo        = 'emprestado';
 
     foreach ($livros as $livro) {
-    $isbn_falso = $livro['isbn_falso'];
+        $isbn_falso = $livro['isbn_falso'];
 
-    // Consulta quantidade total
-    $stmtTotal = $conn->prepare("SELECT COUNT(*) FROM tblivros WHERE isbn_falso = ?");
-    $stmtTotal->bind_param("s", $isbn_falso);
-    $stmtTotal->execute();
-    $stmtTotal->bind_result($total);
-    $stmtTotal->fetch();
-    $stmtTotal->close();
+        // Consulta quantidade total
+        $stmtTotal = $conn->prepare("SELECT COUNT(*) FROM tblivros WHERE isbn_falso = ?");
+        $stmtTotal->bind_param("s", $isbn_falso);
+        $stmtTotal->execute();
+        $stmtTotal->bind_result($total);
+        $stmtTotal->fetch();
+        $stmtTotal->close();
 
-    // Consulta quantidade emprestada
-    $stmtEmprestados = $conn->prepare("SELECT COUNT(*) FROM tbemprestimos WHERE isbn_falso = ? AND data_devolucao_efetiva IS NULL");
-    $stmtEmprestados->bind_param("s", $isbn_falso);
-    $stmtEmprestados->execute();
-    $stmtEmprestados->bind_result($emprestados);
-    $stmtEmprestados->fetch();
-    $stmtEmprestados->close();
+        // Consulta quantidade emprestada
+        $stmtEmprestados = $conn->prepare("SELECT COUNT(*) FROM tbemprestimos WHERE isbn_falso = ? AND data_devolucao_efetiva IS NULL");
+        $stmtEmprestados->bind_param("s", $isbn_falso);
+        $stmtEmprestados->execute();
+        $stmtEmprestados->bind_result($emprestados);
+        $stmtEmprestados->fetch();
+        $stmtEmprestados->close();
 
-    $disponiveis = max(0, $total - $emprestados);
+        $disponiveis = max(0, $total - $emprestados);
 
-    // Verifica se o bibliotecário autorizou manualmente
-    $forcados = $_POST['forcar_emprestimo'] ?? [];
-    $foiForcado = in_array($isbn_falso, $forcados);
+        // Verifica se o bibliotecário autorizou manualmente
+        $forcados = $_POST['forcar_emprestimo'] ?? [];
+        $foiForcado = in_array($isbn_falso, $forcados);
 
-    if ($disponiveis <= 0 && !$foiForcado) {
-        $_SESSION['msg'] = "O livro \"{$livro['titulo']}\" não possui exemplares disponíveis e não foi autorizado manualmente.";
-        $_SESSION['etapa'] = 3;
-        header("Location: emprestimo.php");
-        exit;
+        $quantidadeSolicitada = $livro['quantidade_solicitada'] ?? 1;
+
+        if ($disponiveis < $quantidadeSolicitada && !$foiForcado) {
+            $_SESSION['msg'] = "O livro \"{$livro['titulo']}\" não possui exemplares suficientes. Solicitado: $quantidadeSolicitada | Disponíveis: $disponiveis.";
+            $_SESSION['etapa'] = 3;
+            header("Location: emprestimo.php");
+            exit;
+        }
     }
-}
-
-
-
-
 
     $conn->begin_transaction();
     try {
+        // Primeiro insere o primeiro livro com n_emprestimo NULL
+        $livro0 = $livros[0];
+
         $stmt = $conn->prepare("
             INSERT INTO tbemprestimos
               (n_emprestimo,
@@ -90,34 +82,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                data_emprestimo,
                data_devolucao_prevista,
                tipo)
-            VALUES (?,?,?,?,?,?,?,?,?,?)
+            VALUES (NULL,?,?,?,?,?,?,?,?,?)
         ");
 
-        foreach ($livros as $livro) {
-            $isbn_falso  = $livro['isbn_falso']  ?? '';
-            $isbn        = $livro['isbn']        ?? '';
-            $nomeLivro   = $livro['titulo']      ?? '';
-            $quantidade  = $livro['quantidade']  ?? 1;
+        $stmt->bind_param(
+            'sssssssss',
+            $raAluno,
+            $nomeAluno,
+            $livro0['isbn_falso'],
+            $livro0['isbn'],
+            $livro0['titulo'],
+            $livro0['quantidade_solicitada'],
+            $dataEmprestimo,
+            $dataDevolucaoPrevista,
+            $tipo
+        );
 
-            $stmt->bind_param(
-                'ssssssssss',
-                $nEmprestimo,
-                $raAluno,
-                $nomeAluno,
-                $isbn_falso,
-                $isbn,
-                $nomeLivro,
-                $quantidade,
-                $dataEmprestimo,
-                $dataDevolucaoPrevista,
-                $tipo
-            );
-            $stmt->execute();
+        $stmt->execute();
+        $idEmprestimo = $conn->insert_id;
+        $nEmprestimo = "np00" . $idEmprestimo;
+
+        // Atualiza o primeiro com o número gerado
+        $conn->query("UPDATE tbemprestimos SET n_emprestimo = '$nEmprestimo' WHERE id_emprestimo = $idEmprestimo");
+
+        // Insere os demais livros
+        if (count($livros) > 1) {
+            $stmt = $conn->prepare("
+                INSERT INTO tbemprestimos
+                  (n_emprestimo,
+                   ra_aluno,
+                   nome_aluno,
+                   isbn_falso,
+                   isbn,
+                   nome_livro,
+                   qntd_livros,
+                   data_emprestimo,
+                   data_devolucao_prevista,
+                   tipo)
+                VALUES (?,?,?,?,?,?,?,?,?,?)
+            ");
+
+            for ($i = 1; $i < count($livros); $i++) {
+                $livro = $livros[$i];
+
+                $stmt->bind_param(
+                    'ssssssssss',
+                    $nEmprestimo,
+                    $raAluno,
+                    $nomeAluno,
+                    $livro['isbn_falso'],
+                    $livro['isbn'],
+                    $livro['titulo'],
+                    $livro['quantidade_solicitada'],
+                    $dataEmprestimo,
+                    $dataDevolucaoPrevista,
+                    $tipo
+                );
+                $stmt->execute();
+            }
         }
 
         $conn->commit();
-
- 
 
     } catch (Exception $e) {
         $conn->rollback();
@@ -153,6 +178,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p><strong>Autor:</strong> <?= htmlspecialchars($livro['autor']) ?></p>
             <p><strong>Editora:</strong> <?= htmlspecialchars($livro['editora']) ?></p>
             <p><strong>ISBN Falso:</strong> <?= htmlspecialchars($livro['isbn_falso']) ?></p>
+            <p><strong>Disponíveis:</strong> <?= $disponiveis ?> livro<?= $disponiveis == 1 ? '' : 's' ?></p>
+
 
             <?php
             $isbn_falso = $livro['isbn_falso'];
@@ -196,8 +223,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Número do Empréstimo -->
-    <p><strong>Número do Empréstimo:</strong> <?= htmlspecialchars($pseudoNumero) ?></p>
-
+<?php
+$numeroEmprestimoHTML = $_SESSION['numero_emprestimo'] ?? gerarNumeroEmprestimo($conn);
+?>
+<p><strong>Número do Empréstimo:</strong> <?= htmlspecialchars($numeroEmprestimoHTML) ?></p>
+<input type="hidden" name="nEmprestimo" value="<?= htmlspecialchars($numeroEmprestimoHTML) ?>
     <!-- Autorizado por -->
     <p><strong>Autorizado por:</strong> <?= htmlspecialchars($usuarioLogado) ?></p>
 
@@ -210,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="date" id="data_devolucao" name="data_devolucao" required><br><br>
 
     <!-- Campo oculto para o número do empréstimo -->
-    <input type="hidden" name="nEmprestimo" value="<?= htmlspecialchars($pseudoNumero) ?>">
+    <input type="hidden" name="nEmprestimo" value="<?= htmlspecialchars($numeroEmprestimo) ?>">
 
     <button type="submit" name="confirmarEmprestimo" value="confirmarEmprestimo">
         Confirmar Empréstimo

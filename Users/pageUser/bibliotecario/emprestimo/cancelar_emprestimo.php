@@ -1,7 +1,8 @@
 <?php
 session_start();
-unset($_SESSION['livros']); // Limpa os livros
-unset($_SESSION['aluno']);  // Limpa o aluno
-header("Location: ../pagebibliotecario.php"); // Redireciona para a página principal
+unset($_SESSION['livros']);
+unset($_SESSION['aluno']);
+unset($_SESSION['etapa']);   // Adicionado: limpa a etapa atual
+header("Location: ../pagebibliotecario.php");
 exit;
 ?>

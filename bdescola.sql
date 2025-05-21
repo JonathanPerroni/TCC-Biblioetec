@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/05/2025 às 02:54
+-- Tempo de geração: 21/05/2025 às 05:35
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,6 +20,606 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `bdescola`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `dados_etec`
+--
+
+CREATE TABLE `dados_etec` (
+  `codigo` int(11) NOT NULL,
+  `codigo_escola` varchar(50) NOT NULL,
+  `unidadeEscola` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `dados_etec`
+--
+
+INSERT INTO `dados_etec` (`codigo`, `codigo_escola`, `unidadeEscola`) VALUES
+(1, '006', 'Etec Polivalente de Americana'),
+(2, '007', 'Etec Conselheiro Antônio Prado'),
+(3, '008', 'Etec Vasco Antônio Venchiarutti'),
+(4, '009', 'Etec João Baptista de Lima Figueiredo'),
+(5, '010', 'Etec Lauro Gomes'),
+(6, '011', 'Etec Jorge Street'),
+(7, '012', 'Etec Prof. Camargo Aranha (Mooca)'),
+(8, '013', 'Etec Getúlio Vargas (Ipiranga)'),
+(9, '014', 'Etec Júlio de Mesquita'),
+(10, '015', 'Etec Presidente Vargas'),
+(11, '016', 'Etec Fernando Prestes'),
+(12, '017', 'Etec Rubens de Faria e Souza'),
+(13, '018', 'Etec São Paulo (Bom Retiro)'),
+(14, '019', 'Etec Dr. Adail Nunes da Silva'),
+(15, '023', 'Etec Albert Einstein (Casa Verde)'),
+(16, '024', 'Etec Prefeito Alberto Feres'),
+(17, '025', 'Etec Prof. Alcídio de Souza Prado'),
+(18, '026', 'Etec Prof. Alfredo de Barros Santos'),
+(19, '027', 'Etec Amim Jundi'),
+(20, '028', 'Etec Sebastiana Augusta de Moraes'),
+(21, '029', 'Etec Profª Anna de Oliveira Ferraz'),
+(22, '030', 'Etec Antônio de Pádua Cardoso'),
+(23, '031', 'Etec Antônio Devisate'),
+(24, '032', 'Etec Prof. Dr. Antônio E. de Toledo'),
+(25, '033', 'Etec Antonio Junqueira da Veiga'),
+(26, '034', 'Etec Prof. Aprígio Gonzaga (Penha)'),
+(27, '035', 'Etec Aristóteles Ferreira'),
+(28, '036', 'Etec Prof. Armando Bayeux da Silva'),
+(29, '037', 'Etec Frei Arnaldo Maria de Itaporanga'),
+(30, '038', 'Etec Astor de Mattos Carvalho'),
+(31, '039', 'Etec Augusto Tortolero Araújo'),
+(32, '040', 'Etec Comendador João Rays'),
+(33, '041', 'Etec Prof. Basílides de Godoy (Vila Leopoldina)'),
+(34, '042', 'Etec Benedito Storani'),
+(35, '043', 'Etec Bento Quirino'),
+(36, '044', 'Etec Prof. Marcos Uchôas dos Santos Penchel'),
+(37, '045', 'Etec Carlos de Campos (Brás)'),
+(38, '046', 'Etec Prof. Carmelino Correa Junior'),
+(39, '047', 'Etec Dr. Carolino da Motta e Silva'),
+(40, '048', 'Etec Cônego José Bento'),
+(41, '049', 'Etec Dr. Dario Pacheco Pedroso'),
+(42, '050', 'Etec Dr. Demétrio Azevedo Jr.'),
+(43, '051', 'Etec Dr. Domingos Minicucci Filho'),
+(44, '052', 'Etec Profª Carmelina Barbosa'),
+(45, '053', 'Etec Prof. Edson Galvão'),
+(46, '054', 'Etec Elias Nechar'),
+(47, '061', 'Etec Guaracy Silveira (Pinheiros)'),
+(48, '062', 'Etec Profª Helcy Moreira Martins Aguiar'),
+(49, '055', 'Etec Prof. Eudécio Luiz Vicente'),
+(50, '056', 'Etec Cel. Fernando Febeliano da Costa'),
+(51, '057', 'Etec Prof. Francisco dos Santos'),
+(52, '058', 'Etec Dep. Francisco Franco'),
+(53, '059', 'Etec Dr. Francisco Nogueira de Lima'),
+(54, '060', 'Etec Francisco Garcia'),
+(55, '054', 'Etec Elias Nechar'),
+(56, '065', 'Etec de Ilha Solteira'),
+(57, '066', 'Etec Jacinto Ferreira de Sá'),
+(58, '067', 'Etec João Belarmino'),
+(59, '068', 'Etec João Gomes de Araújo'),
+(60, '069', 'Etec João Jorge Geraissate');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `historico_usuarios`
+--
+
+CREATE TABLE `historico_usuarios` (
+  `id` int(11) NOT NULL,
+  `historico_responsavel` text NOT NULL,
+  `historico_acao` text NOT NULL,
+  `historico_usuario` text NOT NULL,
+  `historico_acesso` text NOT NULL,
+  `historico_data_hora` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `historico_usuarios`
+--
+
+INSERT INTO `historico_usuarios` (`id`, `historico_responsavel`, `historico_acao`, `historico_usuario`, `historico_acesso`, `historico_data_hora`) VALUES
+(1, 'Jonathan Perroni', 'cadastrar', 'Magnata', 'administrador', '2024-11-01 04:53:55'),
+(2, 'Jonathan Perroni', 'cadastrar', 'Larrissa Noda', 'desenvolvedor', '2024-11-03 18:05:53'),
+(3, 'Jonathan Perroni', 'cadastrar', 'Etec La Noda', 'tecnica', '2024-11-03 18:30:58'),
+(4, 'Jonathan Perroni', 'cadastrar', 'Pedro ETEC', 'Escola', '2024-11-03 18:35:52'),
+(5, 'Jonathan Perroni', 'editar', 'Jonathan Granado Perroni', 'Desenvolvedor', '2024-11-03 18:41:32'),
+(6, 'Jonathan Perroni', 'editar', 'Julio cessar romano', 'administrador', '2024-11-03 18:46:07'),
+(7, 'Jonathan Perroni', 'editar', 'Etec Prof. Basílides de Godoy (Vila Leopoldina)', 'Escola', '2024-11-03 18:50:21'),
+(8, 'Jonathan Perroni', 'excluir', '11', 'Desenvolvedor', '2024-11-03 19:08:05'),
+(9, 'Jonathan Perroni', 'excluir', '15', 'Desenvolvedor', '2024-11-03 19:11:59'),
+(10, 'Jonathan Perroni', 'excluir', '12', 'Desenvolvedor', '2024-11-03 19:22:09'),
+(11, 'Jonathan Perroni', 'excluir', 'Larissa noda', 'Desenvolvedor', '2024-11-03 19:24:14'),
+(12, 'Jonathan Perroni', 'excluir', 'jonathan Henrique Granaddo Perroni', 'administrador', '2024-11-03 19:26:17'),
+(13, 'Jonathan Perroni', 'excluir', 'Larrissa Noda', 'desenvolvedor', '2024-11-03 19:29:14'),
+(14, 'Jonathan Perroni', 'excluir', '44', 'Escola', '2024-11-03 19:31:36'),
+(15, 'Jonathan Perroni', 'excluir', 'Etec La Noda', 'Escola', '2024-11-03 19:35:49'),
+(16, 'Jonathan Perroni', 'excluir', 'zitos', 'Escola', '2024-11-03 19:35:56'),
+(17, 'Jonathan Granado Perroni', 'cadastrar', 'Jonathan Henrique Granado Perroni', 'administrador', '2024-11-04 01:23:37'),
+(18, 'Funcionário Teste', 'editar', 'Funcionário Teste', 'bibliotecario', '2025-02-16 06:12:56'),
+(19, 'Jonathan Granado Perroni', 'cadastrar', 'Dev user test final', 'desenvolvedor', '2025-02-16 15:21:37'),
+(20, 'Jonathan Granado Perroni', 'cadastrar', 'adminteste@gmail.com', 'administrador', '2025-02-16 15:23:50'),
+(21, 'Jonathan Granado Perroni', 'cadastrar', 'Etec zitos', 'Escola', '2025-02-16 15:25:53'),
+(22, 'Funcionário Teste', 'editar', 'Dev user test finall', 'desenvolvedor', '2025-02-16 15:52:38'),
+(23, 'Funcionário Teste', 'excluir', 'Dev user test finall', 'desenvolvedor', '2025-02-16 15:53:15'),
+(24, 'Funcionário Teste', 'editar', 'admintestee@gmail.com', 'administrador', '2025-02-16 15:54:24'),
+(25, 'Funcionário Teste', 'excluir', 'admintestee@gmail.com', 'administrador', '2025-02-16 15:54:44'),
+(26, 'Funcionário Teste', 'editar', 'Etec zitosss', 'Escola', '2025-02-16 15:55:27'),
+(27, 'Funcionário Teste', 'excluir', 'Etec zitosss', 'Escola', '2025-02-16 15:55:39'),
+(28, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Felipe ', 'administrador', '2025-02-16 15:59:22'),
+(29, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'ivasco', 'administrador', '2025-02-16 16:01:40'),
+(30, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'ivasco', 'bibliotecario', '2025-02-16 17:08:49'),
+(31, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Desenvolvimento web', 'Curso', '2025-02-16 17:20:05'),
+(32, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Figma UX', 'Curso', '2025-02-16 17:27:34'),
+(33, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'UX & XD', 'Curso', '2025-02-16 17:48:41'),
+(34, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Curso X', 'Curso', '2025-02-16 17:49:36'),
+(35, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'Teste Curso', 'Curso', '2025-02-16 17:54:03'),
+(36, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'aa', 'Curso', '2025-02-16 17:58:58'),
+(37, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'a', 'Curso', '2025-02-16 18:00:33'),
+(38, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'a', 'Curso', '2025-02-16 18:00:49'),
+(39, 'Jonathan Henrique Granado Perroni', 'cadastrar', 'adasdasdasdasd', 'Curso', '2025-02-16 18:05:08'),
+(40, 'Sistema', 'Cadastro de livro via XML', '1984', 'Cadastro', '2025-04-01 00:53:56'),
+(41, 'Sistema', 'Cadastro de livro via XML', 'A Insustentável Leveza do Ser', 'Cadastro', '2025-04-01 00:53:56'),
+(42, 'Sistema', 'Cadastro de livro via XML', 'A Tulipa Negra', 'Cadastro', '2025-04-01 00:53:56'),
+(43, 'Sistema', 'Cadastro de livro via XML', 'Manual de Procedimentos em Pediatria', 'Cadastro', '2025-04-01 00:53:56'),
+(44, 'Sistema', 'Cadastro de livro via XML', 'O BATISMO NO ESPÍRITO SANTO', 'Cadastro', '2025-04-01 00:53:56'),
+(45, 'Sistema', 'Cadastro de livro via XML', 'O Poeta da Paixão - Vinicius de Moraes', 'Cadastro', '2025-04-01 00:53:56'),
+(46, 'Sistema', 'Cadastro de livro via XML', '... E O SERTÃO ACABOU', 'Cadastro', '2025-04-01 00:53:56'),
+(47, 'Sistema', 'Cadastro de livro via XML', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Cadastro', '2025-04-01 00:53:56'),
+(48, 'Sistema', 'Cadastro de livro via XML', '10 anos com Mafalda', 'Cadastro', '2025-04-01 00:53:56'),
+(49, 'Sistema', 'Cadastro de livro via XML', '1984', 'Cadastro', '2025-04-01 00:56:51'),
+(50, 'Sistema', 'Cadastro de livro via XML', 'A Insustentável Leveza do Ser', 'Cadastro', '2025-04-01 00:56:51'),
+(51, 'Sistema', 'Cadastro de livro via XML', 'A Tulipa Negra', 'Cadastro', '2025-04-01 00:56:51'),
+(52, 'Sistema', 'Cadastro de livro via XML', 'Manual de Procedimentos em Pediatria', 'Cadastro', '2025-04-01 00:56:51'),
+(53, 'Sistema', 'Cadastro de livro via XML', 'O BATISMO NO ESPÍRITO SANTO', 'Cadastro', '2025-04-01 00:56:51'),
+(54, 'Sistema', 'Cadastro de livro via XML', 'O Poeta da Paixão - Vinicius de Moraes', 'Cadastro', '2025-04-01 00:56:51'),
+(55, 'Sistema', 'Cadastro de livro via XML', '... E O SERTÃO ACABOU', 'Cadastro', '2025-04-01 00:56:51'),
+(56, 'Sistema', 'Cadastro de livro via XML', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Cadastro', '2025-04-01 00:56:51'),
+(57, 'Sistema', 'Cadastro de livro via XML', '10 anos com Mafalda', 'Cadastro', '2025-04-01 00:56:51'),
+(58, 'Sistema', 'Cadastro de livro via XML', '1984', 'Cadastro', '2025-04-01 00:59:44'),
+(59, 'Sistema', 'Cadastro de livro via XML', 'A Insustentável Leveza do Ser', 'Cadastro', '2025-04-01 00:59:44'),
+(60, 'Sistema', 'Cadastro de livro via XML', 'A Tulipa Negra', 'Cadastro', '2025-04-01 00:59:44'),
+(61, 'Sistema', 'Cadastro de livro via XML', 'Manual de Procedimentos em Pediatria', 'Cadastro', '2025-04-01 00:59:44'),
+(62, 'Sistema', 'Cadastro de livro via XML', 'O BATISMO NO ESPÍRITO SANTO', 'Cadastro', '2025-04-01 00:59:44'),
+(63, 'Sistema', 'Cadastro de livro via XML', 'O Poeta da Paixão - Vinicius de Moraes', 'Cadastro', '2025-04-01 00:59:44'),
+(64, 'Sistema', 'Cadastro de livro via XML', '... E O SERTÃO ACABOU', 'Cadastro', '2025-04-01 00:59:44'),
+(65, 'Sistema', 'Cadastro de livro via XML', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Cadastro', '2025-04-01 00:59:44'),
+(66, 'Sistema', 'Cadastro de livro via XML', '10 anos com Mafalda', 'Cadastro', '2025-04-01 00:59:44'),
+(67, 'Sistema', 'Cadastro de livro via XML', '1984', 'Cadastro', '2025-04-01 01:01:04'),
+(68, 'Sistema', 'Cadastro de livro via XML', 'A Insustentável Leveza do Ser', 'Cadastro', '2025-04-01 01:01:04'),
+(69, 'Sistema', 'Cadastro de livro via XML', 'A Tulipa Negra', 'Cadastro', '2025-04-01 01:01:04'),
+(70, 'Sistema', 'Cadastro de livro via XML', 'Manual de Procedimentos em Pediatria', 'Cadastro', '2025-04-01 01:01:04'),
+(71, 'Sistema', 'Cadastro de livro via XML', 'O BATISMO NO ESPÍRITO SANTO', 'Cadastro', '2025-04-01 01:01:04'),
+(72, 'Sistema', 'Cadastro de livro via XML', 'O Poeta da Paixão - Vinicius de Moraes', 'Cadastro', '2025-04-01 01:01:04'),
+(73, 'Sistema', 'Cadastro de livro via XML', '... E O SERTÃO ACABOU', 'Cadastro', '2025-04-01 01:01:04'),
+(74, 'Sistema', 'Cadastro de livro via XML', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Cadastro', '2025-04-01 01:01:04'),
+(75, 'Sistema', 'Cadastro de livro via XML', '10 anos com Mafalda', 'Cadastro', '2025-04-01 01:01:04'),
+(76, 'Sistema', 'Cadastro de livro via XML', '1984', 'Cadastro', '2025-04-01 01:01:58'),
+(77, 'Sistema', 'Cadastro de livro via XML', 'A Insustentável Leveza do Ser', 'Cadastro', '2025-04-01 01:01:58'),
+(78, 'Sistema', 'Cadastro de livro via XML', 'A Tulipa Negra', 'Cadastro', '2025-04-01 01:01:58'),
+(79, 'Sistema', 'Cadastro de livro via XML', 'Manual de Procedimentos em Pediatria', 'Cadastro', '2025-04-01 01:01:58'),
+(80, 'Sistema', 'Cadastro de livro via XML', 'O BATISMO NO ESPÍRITO SANTO', 'Cadastro', '2025-04-01 01:01:58'),
+(81, 'Sistema', 'Cadastro de livro via XML', 'O Poeta da Paixão - Vinicius de Moraes', 'Cadastro', '2025-04-01 01:01:58'),
+(82, 'Sistema', 'Cadastro de livro via XML', '... E O SERTÃO ACABOU', 'Cadastro', '2025-04-01 01:01:58'),
+(83, 'Sistema', 'Cadastro de livro via XML', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Cadastro', '2025-04-01 01:01:58'),
+(84, 'Sistema', 'Cadastro de livro via XML', '10 anos com Mafalda', 'Cadastro', '2025-04-01 01:01:58'),
+(85, 'Sistema', 'Cadastro de livro via XML', '1984', 'Cadastro', '2025-04-01 01:02:41'),
+(86, 'Sistema', 'Cadastro de livro via XML', 'A Insustentável Leveza do Ser', 'Cadastro', '2025-04-01 01:02:41'),
+(87, 'Sistema', 'Cadastro de livro via XML', 'A Tulipa Negra', 'Cadastro', '2025-04-01 01:02:41'),
+(88, 'Sistema', 'Cadastro de livro via XML', 'Manual de Procedimentos em Pediatria', 'Cadastro', '2025-04-01 01:02:41'),
+(89, 'Sistema', 'Cadastro de livro via XML', 'O BATISMO NO ESPÍRITO SANTO', 'Cadastro', '2025-04-01 01:02:41'),
+(90, 'Sistema', 'Cadastro de livro via XML', 'O Poeta da Paixão - Vinicius de Moraes', 'Cadastro', '2025-04-01 01:02:41'),
+(91, 'Sistema', 'Cadastro de livro via XML', '... E O SERTÃO ACABOU', 'Cadastro', '2025-04-01 01:02:41'),
+(92, 'Sistema', 'Cadastro de livro via XML', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Cadastro', '2025-04-01 01:02:41'),
+(93, 'Sistema', 'Cadastro de livro via XML', '10 anos com Mafalda', 'Cadastro', '2025-04-01 01:02:41'),
+(94, 'Sistema', 'Cadastro de livro via XML', '1984', 'Cadastro', '2025-04-01 01:04:22'),
+(95, 'Sistema', 'Cadastro de livro via XML', 'A Insustentável Leveza do Ser', 'Cadastro', '2025-04-01 01:04:22'),
+(96, 'Sistema', 'Cadastro de livro via XML', 'A Tulipa Negra', 'Cadastro', '2025-04-01 01:04:22'),
+(97, 'Sistema', 'Cadastro de livro via XML', 'Manual de Procedimentos em Pediatria', 'Cadastro', '2025-04-01 01:04:22'),
+(98, 'Sistema', 'Cadastro de livro via XML', 'O BATISMO NO ESPÍRITO SANTO', 'Cadastro', '2025-04-01 01:04:22'),
+(99, 'Sistema', 'Cadastro de livro via XML', 'O Poeta da Paixão - Vinicius de Moraes', 'Cadastro', '2025-04-01 01:04:22'),
+(100, 'Sistema', 'Cadastro de livro via XML', '... E O SERTÃO ACABOU', 'Cadastro', '2025-04-01 01:04:22'),
+(101, 'Sistema', 'Cadastro de livro via XML', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Cadastro', '2025-04-01 01:04:22'),
+(102, 'Sistema', 'Cadastro de livro via XML', '10 anos com Mafalda', 'Cadastro', '2025-04-01 01:04:22');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbadmin`
+--
+
+CREATE TABLE `tbadmin` (
+  `codigo` int(11) NOT NULL,
+  `nome` text NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `telefone` text DEFAULT NULL,
+  `celular` text NOT NULL,
+  `cpf` char(11) NOT NULL,
+  `codigo_escola` int(3) DEFAULT NULL,
+  `acesso` text DEFAULT NULL,
+  `cadastrado_por` varchar(50) DEFAULT NULL,
+  `data_cadastro` datetime DEFAULT NULL,
+  `codigo_autenticacao` varchar(8) DEFAULT NULL,
+  `chave_recuperar_senha` varchar(220) DEFAULT NULL,
+  `data_codigo_autenticacao` datetime DEFAULT NULL,
+  `statusDev` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbadmin`
+--
+
+INSERT INTO `tbadmin` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
+(16, 'Jonathan Henrique Granado Perroni', 'jhow.zitos@gmail.com', '$2y$10$TlJa4hIWCJDLHno8ULWRQOEGMtULv973czMVMbQ1JJv6q5PhqjcYm', '18996511409', '18996511409', '36844808860', 8, 'administrador', 'Jonathan Granado Perroni', '2024-11-03 22:23:37', NULL, '$2y$10$PpWY6Ku2kFA4KMd88qZYvemCIKrJkCm0xo2fZIiPPGrVDSActu9G.', NULL, 1),
+(18, 'Felipe ', 'felipe@gmail.com', '$2y$10$wY2pNlQuR9F42e4Amiq0V./HS6qhQfIkyOktqJnhfMWZ5Eh2CJfmy', '18996511409', '18996511409', '25810827047', 11, 'administrador', 'Jonathan Henrique Granado Perroni', '2025-02-16 12:59:22', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbalunos`
+--
+
+CREATE TABLE `tbalunos` (
+  `codigo` int(11) NOT NULL,
+  `nome` text NOT NULL,
+  `data_nascimento` date NOT NULL,
+  `endereco` text NOT NULL,
+  `cidade` text NOT NULL,
+  `estado` char(2) NOT NULL,
+  `cpf` char(11) NOT NULL,
+  `ra_aluno` text NOT NULL,
+  `celular` text NOT NULL,
+  `periodo` text NOT NULL,
+  `situacao` text NOT NULL,
+  `responsavel` text NOT NULL,
+  `nome_escola` text NOT NULL,
+  `nome_curso` text NOT NULL,
+  `email` text DEFAULT NULL,
+  `tipo_ensino` varchar(50) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `acesso` text NOT NULL,
+  `cadastrado_por` varchar(50) DEFAULT NULL,
+  `data_cdadastro` datetime DEFAULT NULL,
+  `codigo_autenticacao` varchar(8) DEFAULT NULL,
+  `chave_recuperar_senha` varchar(220) DEFAULT NULL,
+  `data_codigo_autenticacao` datetime DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbalunos`
+--
+
+INSERT INTO `tbalunos` (`codigo`, `nome`, `data_nascimento`, `endereco`, `cidade`, `estado`, `cpf`, `ra_aluno`, `celular`, `periodo`, `situacao`, `responsavel`, `nome_escola`, `nome_curso`, `email`, `tipo_ensino`, `password`, `acesso`, `cadastrado_por`, `data_cdadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `status`) VALUES
+(1, 'Aluno Teste da Silva', '1994-11-22', 'Rua Teste, 552', 'Adamantina', 'SP', '413.735.168', '123456789', '18991599472', 'noite', 'a cursar', 'Maria Teste', 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', 'aluno@teste.com', 'tecnico', '$2y$10$JcSCQzzMKtXK17nGTogu2epkBt4/Ic9kNlvXTeiDBqg0zHmtbXyhC', 'aluno', NULL, NULL, 'a0S7FY', '$2y$10$uUi0xSOFyGZ62SDzmCe.m.H7K6qXpYqjiQ2TSvnSOMjAMxarWcnIu', '2025-05-18 21:56:04', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbbibliotecario`
+--
+
+CREATE TABLE `tbbibliotecario` (
+  `codigo` int(11) NOT NULL,
+  `nome` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `telefone` text DEFAULT NULL,
+  `celular` text DEFAULT NULL,
+  `cpf` text DEFAULT NULL,
+  `codigo_escola` text DEFAULT NULL,
+  `acesso` text DEFAULT NULL,
+  `cadastrado_por` varchar(50) NOT NULL,
+  `data_cadastro` datetime DEFAULT NULL,
+  `codigo_autenticacao` varchar(8) DEFAULT NULL,
+  `chave_recuperar_senha` varchar(220) DEFAULT NULL,
+  `data_codigo_autenticacao` datetime DEFAULT NULL,
+  `statusDev` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbbibliotecario`
+--
+
+INSERT INTO `tbbibliotecario` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
+(1, 'Funcionário Teste', 'teste@email.com', '$2y$10$Lko2658q.wupmxP1az9o5.swd1F719SLuIxQpPtO9YtEMSo9qt7pa', '', '18991599472', '46533043862', '055', 'bibliotecario', '', NULL, NULL, '$2y$10$Z3HWtCKSybMbps2fQz2XB.OXT7rNWauOzzihl7OqIWmtME4c7Ruwq', NULL, NULL),
+(2, 'ivasco', 'ivasco@gmail.com', '$2y$10$O9bevSswR5q0CffZndJRfuXISvCxrz/FuJoq1mayfONZ67j.xEU0e', '18996511409', '18996511409', '62949020020', '015', 'bibliotecario', 'Jonathan Henrique Granado Perroni', '2025-02-16 14:08:49', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbclasse`
+--
+
+CREATE TABLE `tbclasse` (
+  `codigo` int(11) NOT NULL,
+  `classe` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbclasse`
+--
+
+INSERT INTO `tbclasse` (`codigo`, `classe`) VALUES
+(1, 'Livro'),
+(2, 'Revista'),
+(3, 'Jornal'),
+(4, 'Tcc'),
+(5, 'Midia'),
+(6, 'Jogo');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbcursos`
+--
+
+CREATE TABLE `tbcursos` (
+  `codigo` int(11) NOT NULL,
+  `nome_escola` text NOT NULL,
+  `nome_curso` text NOT NULL,
+  `tempo_curso` text NOT NULL,
+  `cadastrado_por` varchar(255) NOT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbcursos`
+--
+
+INSERT INTO `tbcursos` (`codigo`, `nome_escola`, `nome_curso`, `tempo_curso`, `cadastrado_por`, `data_cadastro`) VALUES
+(1, 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', '3 semestres', '', '2025-02-16 17:20:00'),
+(2, 'Prof Eudécio Luiz Vicente', 'Açúcar e Álcool', '3 semestres', '', '2025-02-16 17:20:00'),
+(3, 'Prof Eudécio Luiz Vicente', 'Administração', '3 semestres', '', '2025-02-16 17:20:00'),
+(4, 'Prof Eudécio Luiz Vicente', 'Contabilidade', '3 semestres', '', '2025-02-16 17:20:00'),
+(5, 'Prof Eudécio Luiz Vicente', 'Enfermagem', '4 semestres', '', '2025-02-16 17:20:00'),
+(6, 'Prof Eudécio Luiz Vicente', 'Ensino Médio', '6 semestres', '', '2025-02-16 17:20:00'),
+(7, 'Prof Eudécio Luiz Vicente', 'Ensino Médio Integrado', '6 semestres', '', '2025-02-16 17:20:00'),
+(8, 'Prof Eudécio Luiz Vicente', 'Informática para Internet', '3 semestres', '', '2025-02-16 17:20:00'),
+(9, 'Prof Eudécio Luiz Vicente', 'Logística', '3 semestres', '', '2025-02-16 17:20:00'),
+(10, 'Prof Eudécio Luiz Vicente', 'Mecânica', '3 semestres', '', '2025-02-16 17:20:00'),
+(11, 'Prof Eudécio Luiz Vicente', 'Secretariado - EAD', '2 semestres', '', '2025-02-16 17:20:00'),
+(12, 'Prof Eudécio Luiz Vicente', 'Segurança do Trabalho', '3 semestres', '', '2025-02-16 17:20:00'),
+(13, '', 'Desenvolvimento web', '2', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:20:05'),
+(14, '', 'Figma UX', '2 semestres ', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:27:34'),
+(15, '', 'UX & XD', '2 semestre', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:48:41'),
+(16, '', 'Curso X', '1 semestre', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:49:36'),
+(17, '', 'Teste Curso', '1 semestre', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:54:03'),
+(18, '', 'aa', '1 ', 'Jonathan Henrique Granado Perroni', '2025-02-16 17:58:58'),
+(19, '', 'a', '1', 'Jonathan Henrique Granado Perroni', '2025-02-16 18:00:33'),
+(20, '', 'a', 'a', 'Jonathan Henrique Granado Perroni', '2025-02-16 18:00:49'),
+(21, 'Etec Lauro Gomes', 'adasdasdasdasd', '2', 'Jonathan Henrique Granado Perroni', '2025-02-16 18:05:08');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbdev`
+--
+
+CREATE TABLE `tbdev` (
+  `codigo` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `cpf` varchar(20) NOT NULL,
+  `email` varchar(220) NOT NULL,
+  `password` varchar(220) NOT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `celular` varchar(30) DEFAULT NULL,
+  `acesso` varchar(15) DEFAULT NULL,
+  `codigo_autenticacao` varchar(8) DEFAULT NULL,
+  `chave_recuperar_senha` varchar(220) DEFAULT NULL,
+  `data_codigo_autenticacao` datetime DEFAULT NULL,
+  `statusDev` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbdev`
+--
+
+INSERT INTO `tbdev` (`codigo`, `nome`, `cpf`, `email`, `password`, `telefone`, `celular`, `acesso`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
+(8, 'Jonathan Granado Perroni', '36844808860', 'jhow.zitos@gmail.com', '$2y$10$lrTMlf2V3I8DFDNJ.vkwieXTr.rh2dK/p/weBZsSgLkX0wCZzOsdS', '18996511409', '18996511409', 'Desenvolvedor', NULL, NULL, NULL, 1),
+(9, 'Fernanda  Stanislaw', '00959139044', 'fer.stanislaw.fs@gmail.com', '$2y$10$uit8efwwTtyLbO.Gz8jx6O4MpWGVBfXi5lLGnHbOZGJt/tD2guBbS', '(18) 99612-2396', '(18) 99612-2396', 'Desenvolvedor', NULL, NULL, NULL, 1),
+(11, 'supremeDev', '93608124047', 'supremeDev@gmail.com', '$2y$10$mP5t4HdOlM/ooQqfr2zHNOIIgL/Tf3BoCIBK3iQk..eiyrjbPdzDS', '18996511409', '18996511409', 'Desenvolvedor', NULL, NULL, NULL, 0),
+(18, 'teste94', '16702118007', 'teste@teste.com', '$2y$10$ih8U1g9GHHZSwDt.O24/z.iGNPfoyVEoTrN1805dMF2kWe1op63YS', '18996511409', '18999999999', 'Desenvolvedor', NULL, NULL, NULL, 1),
+(24, 'Felipe Ivasco', '41373516860', 'felipeivasco@gmail.com', '$2y$10$TJ2sPBt6uyW7crwVtI/3aOu1v9Q1ux5c1gGQLDajoSEmUitBK9p0a', '18996511409', '18996511409', 'desenvolvedor', NULL, NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbdevolucao`
+--
+
+CREATE TABLE `tbdevolucao` (
+  `id_devolucao` int(11) NOT NULL,
+  `id_emprestimo` int(11) NOT NULL,
+  `n_emprestimo` text NOT NULL,
+  `ra_aluno` varchar(20) DEFAULT NULL,
+  `nome_aluno` text NOT NULL,
+  `isbn_falso` text NOT NULL,
+  `isbn` text NOT NULL,
+  `tombo` text NOT NULL,
+  `nome_livro` text NOT NULL,
+  `qntd_livros` int(11) NOT NULL,
+  `data_emprestimo` datetime DEFAULT NULL,
+  `data_devolucao_prevista` datetime DEFAULT NULL,
+  `data_devolucao_efetiva` datetime DEFAULT NULL,
+  `tipo` enum('emprestado','pedido') CHARACTER SET armscii8 COLLATE armscii8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbdevolucao`
+--
+
+INSERT INTO `tbdevolucao` (`id_devolucao`, `id_emprestimo`, `n_emprestimo`, `ra_aluno`, `nome_aluno`, `isbn_falso`, `isbn`, `tombo`, `nome_livro`, `qntd_livros`, `data_emprestimo`, `data_devolucao_prevista`, `data_devolucao_efetiva`, `tipo`) VALUES
+(12, 12, 'np00001', '123456789', 'Aluno Teste da Silva', 'f000000000003', '9788556623270', '11017', 'MENTES COM MEDO: DA COMPREENSÃO Á SUPERAÇÃO', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 00:11:29', 'emprestado'),
+(13, 13, 'np00001', '123456789', 'Aluno Teste da Silva', 'f000000000150', '8577320367', '10870', 'LÍNGUA INGLESA 7 - WHAT CAN YOU DO FOR IT?', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 00:11:33', 'emprestado'),
+(14, 14, 'np00001', '123456789', 'Aluno Teste da Silva', 'f000000000002', 'OCLC:683401996', '11018', 'COMO CONQUISTAR, FALANDO', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 00:17:42', 'emprestado'),
+(15, 15, 'np00001', '123456789', 'Aluno Teste da Silva', 'f000000000006', '9788532310415', '11014', 'CONCEITO DE MUNDO E DE PESSOA EM GESTALT-TERAPIA:', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 00:29:06', 'emprestado'),
+(16, 16, 'emp-20-05-25-np00001', '123456789', 'Aluno Teste da Silva', 'f000000000003', '9788556623270', '', 'MENTES COM MEDO: DA COMPREENSÃO Á SUPERAÇÃO', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 00:35:23', 'emprestado'),
+(17, 17, 'emp-20-05-25-np00001', '123456789', 'Aluno Teste da Silva', 'f000000000004', 'sab190597259', '', 'SABER ADMINISTRAR O ESTRESSE NA VIDA E NO TRABALHO', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 00:53:46', 'emprestado'),
+(18, 18, 'np000001', '123456789', 'Aluno Teste da Silva', 'f000000000001', '9786556405377', '', 'O CORCUNDA DE NOTRE DAME', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 23:33:25', 'emprestado'),
+(19, 19, 'np000001', '123456789', 'Aluno Teste da Silva', 'f000000000002', 'OCLC:683401996', '', 'COMO CONQUISTAR, FALANDO', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-21 00:21:41', 'emprestado');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbemprestimos`
+--
+
+CREATE TABLE `tbemprestimos` (
+  `id_emprestimo` int(11) NOT NULL,
+  `n_emprestimo` text NOT NULL,
+  `ra_aluno` varchar(20) DEFAULT NULL,
+  `nome_aluno` text NOT NULL,
+  `isbn_falso` text NOT NULL,
+  `isbn` text NOT NULL,
+  `tombo` text NOT NULL,
+  `nome_livro` text NOT NULL,
+  `qntd_livros` int(11) NOT NULL,
+  `data_emprestimo` datetime DEFAULT NULL,
+  `data_devolucao_prevista` datetime DEFAULT NULL,
+  `data_devolucao_efetiva` datetime DEFAULT NULL,
+  `tipo` enum('emprestado','pedido') CHARACTER SET armscii8 COLLATE armscii8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbescola`
+--
+
+CREATE TABLE `tbescola` (
+  `codigo` int(11) NOT NULL,
+  `nome_escola` text NOT NULL,
+  `tipoEscola` varchar(220) NOT NULL,
+  `codigo_escola` varchar(50) NOT NULL,
+  `endereco` text NOT NULL,
+  `bairro` text NOT NULL,
+  `cidade` text NOT NULL,
+  `estado` char(100) NOT NULL,
+  `cnpj` char(14) NOT NULL,
+  `telefone` text DEFAULT NULL,
+  `celular` text NOT NULL,
+  `email` varchar(220) NOT NULL,
+  `cep` varchar(20) NOT NULL,
+  `numero` varchar(100) NOT NULL,
+  `cadastrado_por` varchar(220) NOT NULL,
+  `data_cadastro` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbescola`
+--
+
+INSERT INTO `tbescola` (`codigo`, `nome_escola`, `tipoEscola`, `codigo_escola`, `endereco`, `bairro`, `cidade`, `estado`, `cnpj`, `telefone`, `celular`, `email`, `cep`, `numero`, `cadastrado_por`, `data_cadastro`) VALUES
+(37, 'Etec Prof. Basílides de Godoy (Vila Leopoldina)', 'ensinoMedio', '041 - Etec Prof. Basílides de Godoy (Vila Leopoldi', 'Av. ademar de barro, 489 ap 3', 'centro', 'Adamantina', 'SP', '04364091000103', '18996511409', '998086573', 'zitos.eteca@gmail.com', '17800000', '1444', 'Jonathan Perroni', '2024-09-10 01:47:46'),
+(38, 'Etec João Jorge Geraissate', 'tecnico', '069 - Etec João Jorge Geraissate', 'Av. ademar de barro, 489 ap 3', 'centro', 'Adamantina', 'PA', '89207954000183', '(18) 99808-6573', '998086573', 'zitoas.etec@gmail.com', '17800000', '123', 'Jonathan Perroni', '2024-09-10 02:13:08'),
+(39, 'Etec Elias Nechar', 'ensinoMedio', '054 - Etec Elias Nechar', 'av rio', 'cent', 'ada', 'PA', '39183908000113', '18996511409', '18996511409', 'z@gmail.com', '17800', '17', 'Jonathan Perroni', '2024-09-10 12:11:32'),
+(40, 'Etec Lauro Gomes', 'tecnico', '010 - Etec Lauro Gomes', 'avenida geraldo', 'centro', 'Adamantina', 'MG', '08734162000165', '18996511409', '18996511409', 'jhowtest@gmail.com', '17800', '69', 'Jonathan Perroni', '2024-09-10 19:03:28'),
+(41, 'Etec Prof. Camargo Aranha (Mooca)', 'tecnico', '012 - Etec Prof. Camargo Aranha (Mooca)', 'rua gera', 'todos', 'jurere', 'MS', '86919756000154', '18996511409', '18996511409', 'teste123@teste.com', '17888999', '10', 'Jonathan Perroni', '2024-09-16 20:13:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbfuncionarios`
+--
+
+CREATE TABLE `tbfuncionarios` (
+  `codigo` int(11) NOT NULL,
+  `nome` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `telefone` text DEFAULT NULL,
+  `celular` text DEFAULT NULL,
+  `cpf` text DEFAULT NULL,
+  `codigo_escola` text DEFAULT NULL,
+  `acesso` text DEFAULT NULL,
+  `cadastrado_por` varchar(50) DEFAULT NULL,
+  `data_cadastro` datetime DEFAULT NULL,
+  `codigo_autenticacao` varchar(8) DEFAULT NULL,
+  `chave_recuperar_senha` varchar(220) DEFAULT NULL,
+  `data_codigo_autenticacao` datetime DEFAULT NULL,
+  `statusDev` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbfuncionarios`
+--
+
+INSERT INTO `tbfuncionarios` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
+(1, 'Funcionário Teste', 'funcionario@email.com', '$2y$10$uhYMPZ./bkkDWNYhqHduteEpwAcWiBj3wniIf4V8VNYViGdCY9QdK', '', '18997005573', '06968841358', '055', 'funcionario', NULL, NULL, 'a0S7FY', NULL, '2025-05-18 21:56:04', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbjogoseducativos`
+--
+
+CREATE TABLE `tbjogoseducativos` (
+  `codigo` int(11) NOT NULL,
+  `nome_escola` text NOT NULL,
+  `classe` text NOT NULL,
+  `titulo` text NOT NULL,
+  `categoria` text DEFAULT NULL,
+  `idade_minima` int(11) DEFAULT NULL,
+  `num_jogadores` int(11) DEFAULT NULL,
+  `fabricante` text DEFAULT NULL,
+  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estante` text DEFAULT NULL,
+  `prateleira` text DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbjogoseducativos`
+--
+
+INSERT INTO `tbjogoseducativos` (`codigo`, `nome_escola`, `classe`, `titulo`, `categoria`, `idade_minima`, `num_jogadores`, `fabricante`, `data_adicao`, `estante`, `prateleira`, `quantidade`) VALUES
+(1, 'Prof Eudécio Luiz Vicente', 'Jogo', 'Jogo Teste', 'Estratégia', 10, 2, 'Toys', '2024-07-04 00:42:51', '1', '1', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbjornal_revista`
+--
+
+CREATE TABLE `tbjornal_revista` (
+  `codigo` int(11) NOT NULL,
+  `nome_escola` text NOT NULL,
+  `classe` text NOT NULL,
+  `titulo` text NOT NULL,
+  `data_publicacao` date DEFAULT NULL,
+  `editora` text DEFAULT NULL,
+  `categoria` text DEFAULT NULL,
+  `issn` text DEFAULT NULL,
+  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estante` text DEFAULT NULL,
+  `prateleira` text DEFAULT NULL,
+  `edicao` int(11) DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbjornal_revista`
+--
+
+INSERT INTO `tbjornal_revista` (`codigo`, `nome_escola`, `classe`, `titulo`, `data_publicacao`, `editora`, `categoria`, `issn`, `data_adicao`, `estante`, `prateleira`, `edicao`, `quantidade`) VALUES
+(1, 'Prof Eudécio Luiz Vicente', 'Jornal', 'Jornal Teste', '2021-03-01', 'Editora Teste', 'Categoria Teste', '123456', '2024-07-04 00:33:17', '1', '2', 2, 5),
+(2, 'Prof Eudécio Luiz Vicente', 'Revista', 'Revista Teste', '2023-04-25', 'Editora Teste', 'Categoria Teste', '654321', '2024-07-04 00:33:43', '6', '1', 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tblistaespera`
+--
+
+CREATE TABLE `tblistaespera` (
+  `id_lista_espera` int(11) NOT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `ra_aluno` varchar(20) DEFAULT NULL,
+  `data_inscricao` datetime DEFAULT current_timestamp(),
+  `posicao` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1061,9 +1661,2404 @@ INSERT INTO `tblivros` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome
 (998, '2023-11-30', 10009, '8691', NULL, 'LIVRO', 'VERMELHO POEIRA', 'Karen Gallão', 'URUTAU', '2023', '9786599965722', 'Juvenile Fiction', 130, 'PT-BR', '2025-05-19 00:52:26', NULL, 1, 0, 'Jonathan', '2025-05-19', 'f000000000918'),
 (999, '2023-11-30', 10008, '5107', NULL, 'LIVRO', 'MATEMÁTICA - CONTEXTO E APLICAÇÃOES 1', 'Luiz Roberto Dante', 'ÁTICA', '2011', '8508129661', 'Educação', 0, 'PT-BR', '2025-05-19 00:52:26', NULL, 1, 0, 'Jonathan', '2025-05-19', 'f000000000919');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tblivros_acervo_real`
+--
+
+CREATE TABLE `tblivros_acervo_real` (
+  `codigo` int(11) NOT NULL,
+  `data_aquisicao` date DEFAULT NULL,
+  `tombo` int(50) DEFAULT NULL,
+  `cdd_cutter` varchar(50) DEFAULT NULL,
+  `nome_escola` text DEFAULT NULL,
+  `classe` text DEFAULT NULL,
+  `titulo` text NOT NULL,
+  `autor` text NOT NULL,
+  `editora` text DEFAULT NULL,
+  `ano_publicacao` year(4) DEFAULT NULL,
+  `isbn` text DEFAULT NULL,
+  `isbn_falso` varchar(13) NOT NULL,
+  `genero` text DEFAULT NULL,
+  `num_paginas` int(11) DEFAULT NULL,
+  `idioma` text DEFAULT NULL,
+  `data_edicao` timestamp NOT NULL DEFAULT current_timestamp(),
+  `edicao` int(11) DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL,
+  `qnt_emp_disponivel` int(11) NOT NULL,
+  `cadastrado_por` varchar(220) DEFAULT NULL,
+  `data_cadastro` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tblivros_acervo_real`
+--
+
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(4, '2024-05-22', 10640, '98161', NULL, 'LIVRO', '... E O SERTÃO ACABOU', 'José Alvarenga', 'MINISTÉRIO DA EDUCAÇÃO E CULTURA', '1998', 'LCCN:2003337015', 'f000000000008', 'São Paulo (Brazil : State)', 463, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(5, '2023-06-22', 7310, 'COR216', NULL, 'LIVRO', '1 CORÍNTIOS (VERSÍCULO POR VERSÍCULO)', 'Andrew J. Lamont-Turner', 'GRÁFICA ICOM LTDA', '0000', '1co835254670', 'f000000000009', 'Religião', 345, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(6, '2014-01-22', 5457, '7415', NULL, 'LIVRO', '10 anos com Mafalda', 'Quino', 'MARTINS FONTES', '2015', '10a209747907', 'f000000000010', 'Humor', 191, 'ES', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(7, '2023-10-05', 9559, 'BRA676', NULL, 'LIVRO', '10 BRASILEIROS FUNDAMENTAIS EM NOSSA HISTÓRIA', 'Departamento de História da Universidade Federal da Paraíba', 'ABRIL', '2004', '10b973319779', 'f000000000011', 'História', 187, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(8, '2010-01-26', 2343, '5369', NULL, 'LIVRO', '10 Minutos para Aprender Excel para Windows 95', 'Jennifer Fulton', 'BERKELEY BRASIL', '1997', '078971020X', 'f000000000012', 'Computers', 228, 'EN', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(9, '2010-01-26', 2345, '46', NULL, 'LIVRO', '10 Minutos para navegar na Internet', 'Galen Grimes', 'BERKELEY BRASIL', '1995', '8572513973', 'f000000000013', 'Internet', 145, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(10, '2023-06-23', 7454, '23291', NULL, 'LIVRO', '10 RESPOSTAS QUE VÃO MUDAR SUA VIDA', 'Padre Reginaldo Manzotti', 'EDIOURO', '2016', '9788500026775', 'f000000000014', 'Religião', 181, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(11, '2010-12-21', 3174, '32552', NULL, 'LIVRO', '100 anos da imigração japonesa no Brasil', 'Centro de Documentação e Disseminação de Informações (Brazil)', 'BUNKYO', '2008', 'STANFORD:36105210555319', 'f000000000015', 'História', 222, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(12, '2023-08-25', 8601, 'HIS406', NULL, 'LIVRO', '101 HISTÓRIAS FAVORITAS DA BÍBLIA', 'John C. Maxwell', 'LUZ PARA O CAMINHO', '2003', '9781418535353', 'f000000000016', 'Religião', 112, 'ES', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(13, '2010-12-21', 3173, '869', NULL, 'LIVRO', '1924 O Diário da Revolução', 'Duarte Pereira', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2010', 'STANFORD:36105217839146', 'f000000000017', 'Brazil', 182, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(14, '2011-08-31', 3764, '981061', NULL, 'LIVRO', '1932 Imagens de uma revolução', 'Marco Antonio Villa', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2008', 'STANFORD:36105132090965', 'f000000000018', 'Brazil', 224, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(15, '2010-12-21', 3288, '981061', NULL, 'LIVRO', '1932: Imagens de uma revolução', 'Marco Antonio Villa', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2008', 'STANFORD:36105132090965', 'f000000000019', 'Brazil', 224, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(16, '2024-04-09', 10429, '823', NULL, 'LIVRO', '1984', 'George Orwell', 'COMPANHIA DAS LETRAS', '2021', '9786587921938', 'f000000000001', 'Ficção', 395, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(17, '2010-12-21', 3186, '34281026', NULL, 'LIVRO', '1988-2008 Vinte anos da constituição cidadã', 'André Ramos Tavares', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2008', '8570606605', 'f000000000020', 'Constitutional history', 301, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(18, '2022-01-26', 6942, '8699308', NULL, 'LIVRO', '1ª Antologia de contos, poemas e crônicas regionai', 'Desconhecido', 'IMPRESS GRÁFICA E EDITORA', '1998', 'OCLC:817967514', 'f000000000021', 'Desconhecido', 186, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(19, '2010-01-07', 2064, '370', NULL, 'LIVRO', '2 anos da TV Escola Seminário Internacional,1998', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '1999', 'LCCN:2002370262', 'f000000000023', 'Educational television programs', 112, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(20, '2010-02-26', 2449, '510', NULL, 'LIVRO', '20.000 Léguas de Matemáticas', 'A.K. Dewdney', 'ZAHAR', '0000', '853780472X', 'f000000000024', 'Mathematics', 235, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(21, '2009-08-17', 1483, '86993', NULL, 'LIVRO', '200 Crônicas Escolhidas', 'Rubem Braga', 'ROCCO', '1998', '8501012432', 'f000000000025', 'Brazilian literature', 488, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(22, '2024-11-05', 11006, '90983', NULL, 'LIVRO', '21 LIÇÕES PARA O SÉCULO 21', 'Yuval Noah Harari', 'COMPANHIA DAS LETRAS', '2018', '9788554511326', 'f000000000026', 'História', 344, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(23, '2023-12-20', 10187, 'B8693', NULL, 'LIVRO', '25 CONTOS DE MACHADO DE ASSIS', 'Machado De Assis, Nadia Battella Gotlib', 'CONTEMPORÂNEA', '2019', '8551304593', 'f000000000027', 'Desconhecido', 256, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(24, '2024-09-13', 10797, '78008', NULL, 'LIVRO', '2ª ANTOLOGIA DE CONTOS, POEMAS E CRÔNICAS REGIONAI', 'Desconhecido', 'SCORTECCI', '1998', 'OCLC:817967514', 'f000000000028', 'Desconhecido', 186, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(25, '2011-05-26', 3422, '86998', NULL, 'LIVRO', '50 - Crônicas Escolidas', 'Rubem Braga', 'BESTBOLSO', '2021', '9786556121796', 'f000000000029', 'Ficção', 168, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(26, '2024-06-26', 10755, '61999', NULL, 'LIVRO', '50 ANOS PLANTANDO AMOR - REDE DE COMBATE AO CÂNCER', 'Desconhecido', 'REDE DE COMBATE AO CÂNCER DE ADAMANTINA', '0000', 'N/A', 'f000000000030', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(27, '2009-05-14', 192, '65800722', NULL, 'LIVRO', '50 Casos Reais de Adiminstração', 'Peter Ferdinand Drucker', 'PIONEIRA THOMSON LEARNING', '1983', '8522101086', 'f000000000031', 'Industrial management', 245, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(28, '2009-05-14', 190, '65800722', NULL, 'LIVRO', '50 Casos Reais de Administraçaõ', 'Peter Ferdinand Drucker', 'PIONEIRA THOMSON LEARNING', '1983', '8522101086', 'f000000000032', 'Industrial management', 245, 'PT-BR', '2025-04-10 02:20:52', NULL, 5, 4, NULL, '2025-04-09'),
+(29, '2012-10-10', 5299, '150', NULL, 'LIVRO', '50 Ideias que podem mudar sua vida', 'Karin Kuschik', 'BEST SELLER', '2023', '9789892358284', 'f000000000037', 'Self-Help', 256, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(30, '2023-12-04', 10074, '86989928', NULL, 'LIVRO', '52 BALAS DE ESTALO', 'Desconhecido', 'CALIGRAMA', '0000', 'N/A', 'f000000000038', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(31, '2003-04-10', 859, '658202', NULL, 'LIVRO', '5S A Base para a Qualidade Total', 'Haroldo Ribeiro', 'CASA DA QUALIDADE', '1994', '8585651024', 'f000000000039', 'Desconhecido', 115, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(32, '2023-11-01', 9767, '285', NULL, 'LIVRO', '6 VEZES LUCAS', 'Editora Mundo Cristão', 'CASA LYGIA BOJUNGA', '2022', 'EAN:4066339321984', 'f000000000040', 'Bibles', 34, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(33, '2011-05-30', 3455, '285', NULL, 'LIVRO', '7 Contos Crus', 'Ricardo Gómez', 'COMBOIO DE CORDA', '2010', '8560820817', 'f000000000041', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(34, '2021-12-09', 6585, '8698992', NULL, 'LIVRO', '80 degraus', 'Luís Dill', 'PALAVRAS', '2018', '8592590256', 'f000000000042', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(35, '2023-12-06', 10129, 'B8693', NULL, 'LIVRO', '88 HISTÓRIAS: CONTOS E MINICONTOS', 'Desconhecido', 'CORTEZ', '0000', 'N/A', 'f000000000043', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(36, '2023-09-12', 9056, '98161', NULL, 'LIVRO', 'A \"PÁTRIA PAULISTA\"', 'Alberto Sales', 'SÃO PAULO', '0000', 'SRLF:AA0007002439', 'f000000000044', 'São Paulo (Brazil : State)', 320, 'AF', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(37, '2009-05-21', 312, '6581552', NULL, 'LIVRO', 'A Administração de Custos, Preços e Lucros', 'Adriano Leal Bruni', 'ATLAS', '2008', '8522449376', 'f000000000045', 'Desconhecido', 394, 'PT-BR', '2025-04-10 02:20:52', NULL, 5, 4, NULL, '2025-04-09'),
+(38, '2023-04-06', 7156, 'AAL321', NULL, 'LIVRO', 'A ALEGRIA DE VIVER', 'Orison Swett Marden', 'CIDADE NOVA', '0000', 'OCLC:958964195', 'f000000000050', 'Desconhecido', 301, 'EN', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(39, '2023-09-13', 9097, '32349098161', NULL, 'LIVRO', 'A ALIMENTAÇÃO DO LEVIATÃ NOS PLANOS REGIONAL E NAC', 'Desconhecido', 'ARQUIVO DO ESTADO', '2002', 'UTEXAS:059173011890640', 'f000000000051', 'Authoritarianism', 212, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(40, '2024-04-12', 10548, 'AAL888', NULL, 'LIVRO', 'A ALMA ALHEIA', 'Pedro Rabello', 'TRÊS', '0000', 'HARVARD:32044080682941', 'f000000000052', 'Desconhecido', 212, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(41, '2010-07-12', 2674, '970', NULL, 'LIVRO', 'A América que os europeus encontraram', 'P. YAMANDU, Enrique Peregalli', 'ATUAL', '1994', '8570565186', 'f000000000053', 'Juvenile Nonfiction', 96, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(42, '2023-12-06', 10131, '20.ED-028.5', NULL, 'LIVRO', 'A ANGÚSTIA DAS PEQUENAS COISAS RIDÍCULAS', 'Luisa Geisler', 'CHAMPAGNAT', '2023', '9788596041072', 'f000000000054', 'Juvenile Fiction', 304, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(43, '2010-01-21', 2253, '285', NULL, 'LIVRO', 'A Arca de Noé', 'Ilka Brunhilde Laurito', 'J. OLYMPIO', '2021', '9786555392890', 'f000000000055', 'Juvenile Nonfiction', 53, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(44, '2023-12-11', 10150, '843', NULL, 'LIVRO', 'A ARMADILHA', 'Shortcut Edition', 'MUNDARÉU', '0000', 'aar639043354', 'f000000000057', 'Body, Mind & Spirit', 17, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(45, '2010-01-12', 2134, '291', NULL, 'LIVRO', 'A Arte da Guerra', 'Sun Tzu', 'MARTIN CLARET', '2009', '9788581301389', 'f000000000058', 'Filosofia', 152, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(46, '2024-09-09', 10789, '1581', NULL, 'LIVRO', 'A ARTE DE AMAR-SE: UM ENCONTRO COM DEUS NO PRÓPRIO', 'Rossano Sobrinho', 'MYTHOS', '2015', '8578671740', 'f000000000060', 'Family & Relationships', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(47, '2024-10-24', 10987, 'AAR956', NULL, 'LIVRO', 'A ARTE DE CONTAR HISTÓRIAS NO SÉCULO XXI: TRADIÇÃO', 'Cléo Busatto', 'PETRÓPOLIS', '2006', '8532633137', 'f000000000061', 'Desconhecido', 149, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(48, '2011-04-18', 3352, '370981', NULL, 'LIVRO', 'A Arte de Educar', 'Flávio Gikovate', 'POSITIVO', '2002', '8572550321', 'f000000000062', 'Educação', 116, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(49, '2003-04-10', 504, '64043', NULL, 'LIVRO', 'A arte de Fazer Acontecer', 'David Allen, Brandon Hall', 'ELSEVIER', '2021', '9786555641387', 'f000000000063', 'Business & Economics', 213, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(50, '2010-01-05', 2037, '3709', NULL, 'LIVRO', 'A Arte do Magistério', 'Earl Vivon Pullias, James Douglas Young', 'ZAHAR', '1970', 'OCLC:683976541', 'f000000000064', 'Desconhecido', 275, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(51, '2009-08-04', 1292, '880', NULL, 'LIVRO', 'A Arte Poética', 'Nicolas Boileau-Despreaux', 'MARTIN CLARET', '1979', 'OCLC:940047532', 'f000000000065', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(52, '2010-12-21', 3033, '708981', NULL, 'LIVRO', 'A arte que banha o nordeste', 'Palácio dos Bandeirantes (São Paulo, Brazil)', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2008', 'STANFORD:36105132846218', 'f000000000066', 'Arte, Brazilian', 86, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(53, '2021-12-03', 6535, '890898', NULL, 'LIVRO', 'A árvore dos cantos', 'Pajés Parahiteri, Anne Ballester Soares', 'JC EDITORA', '0000', '8577155110', 'f000000000067', 'Desconhecido', 100, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(54, '2010-01-25', 2322, '285', NULL, 'LIVRO', 'A árvore que dava dinheiro', 'Domingos Pellegrini, Pellegrini Júnior Pellegrini Jr.', 'ÁTICA', '1991', '8508037724', 'f000000000068', 'Desconhecido', 104, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(55, '2023-05-17', 7592, 'AAS995', NULL, 'LIVRO', 'A ASCENSÃO DE THANOS', 'Jason Aaron', 'PANINI BRASIL', '2022', '9786559828715', 'f000000000070', 'Comics & Graphic Novels', 116, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(56, '2010-07-13', 2709, '5515', NULL, 'LIVRO', 'A atmosfera terrestre', 'ROBERTO RIBEIRO DA SILVA, Mario Tolentino', 'MODERNA', '2004', '8516041409', 'f000000000071', 'Desconhecido', 160, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(57, '2022-01-26', 6967, '920929', NULL, 'LIVRO', 'A autobiografia do poeta-escravo', 'JUAN FRANCISCO MANZANO, ALEX CASTRO', 'PLANA', '0000', '8577153517', 'f000000000072', 'Desconhecido', 224, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(58, '2010-12-21', 3128, '2', NULL, 'LIVRO', 'A Aventura do livro do leitor ao navegador', 'Roger Chartier', 'UNESP', '2002', '8571392234', 'f000000000073', 'Biography & Autobiography', 166, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(59, '2003-04-10', 545, '658202', NULL, 'LIVRO', 'A Base para a Qualidade Total -5S', 'Lewton Burity Verri', 'CASA DA QUALIDADE', '2014', 'PKEY:CLDEAU23451', 'f000000000074', 'Business & Economics', 177, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(60, '2009-10-15', 1935, '86993', NULL, 'LIVRO', 'À Beira do Corpo', 'Walmir Ayala', 'LEITURA', '1964', 'OCLC:459443383', 'f000000000075', 'Desconhecido', 127, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(61, '2011-05-27', 3431, '86993', NULL, 'LIVRO', 'A Bela e a Fera', 'Elizabeth Rudnick', 'SOCIEDADE LITERÁRIA', '2017', '9788550301297', 'f000000000076', 'Juvenile Fiction', 180, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(62, '2009-07-30', 1175, '83983', NULL, 'LIVRO', 'A Biblioteca Mágica de Bibbi Bokken', 'Jostein Gaarder, Klaus Hagerup', 'CIA. DAS LETRAS', '2018', '9788543804958', 'f000000000077', 'Juvenile Fiction', 184, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(63, '2012-08-29', 5262, '8135', NULL, 'LIVRO', 'A Boa Terra', 'Jair Da Silva Lima', 'ABRIL CULTURAL', '2014', 'PKEY:CLDEAU243', 'f000000000078', 'Religião', 3033, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(64, '2023-11-06', 9788, '285', NULL, 'LIVRO', 'A BRECHA UMA REVIRAVOLTA QUILOMBOLA', 'Jefferson Gonçalves Correia, Arquimino dos Santos, Deborah Goldemberg', 'CULTURAL BRASIL', '2020', '9786586059793', 'f000000000079', 'Juvenile Fiction', 152, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(65, '2023-05-24', 7431, 'ABR476', NULL, 'LIVRO', 'A BRIGADA DOS OSSOS CRUZADOS', 'Desconhecido', 'PANINI BRASIL', '0000', 'N/A', 'f000000000080', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(66, '2023-11-01', 9748, '8116', NULL, 'LIVRO', 'A BRUXA NÃO VAI PARA A FOGUEIRA NESTE LIVRO', 'Amanda Lovelace', 'TEXTO', '2018', '9788544107027', 'f000000000082', 'Poesia', 221, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(67, '2024-04-09', 10457, '813', NULL, 'LIVRO', 'A CABANA', 'Brad Robison, William P. Young', 'ARQUEIRO', '2017', '8543104688', 'f000000000083', 'Ficção', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(68, '2010-01-20', 2215, '285', NULL, 'LIVRO', 'A Cadeira do Dentista e outras crônicas', 'CARLOS EDUARDO NOVAES', 'ÁTICA', '0000', '8508051204', 'f000000000084', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(69, '2012-08-29', 5237, '843', NULL, 'LIVRO', 'A Cama Desfeita', 'Francoise Sagan', 'ABRIL CULTURAL', '1984', 'OCLC:816987409', 'f000000000085', 'Desconhecido', 209, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(70, '2024-04-12', 10519, 'ACA621', NULL, 'LIVRO', 'A CARNE', 'Júlio Ribeiro', 'TRÊS', '2018', '9788594862051', 'f000000000086', 'Literary Collections', 105, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(71, '2010-01-25', 2310, '981', NULL, 'LIVRO', 'A Carta de Pero Vaz Caminha', 'Desconhecido', 'LIVRO TÉCNICO', '1999', 'OCLC:684547700', 'f000000000087', 'Desconhecido', 64, 'PT-BR', '2025-04-10 02:20:52', NULL, 3, 2, NULL, '2025-04-09'),
+(72, '2010-07-12', 2681, '981', NULL, 'LIVRO', 'A Carta de Pero Vaz de Caminha', 'Desconhecido', 'AO LIVRO TÉCNICO', '1999', 'OCLC:684547700', 'f000000000090', 'Desconhecido', 64, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(73, '2024-10-01', 10976, '813872', NULL, 'LIVRO', 'A CARTA ROUBADA E OUTRAS HISTÓRIAS DE CRIME E MIST', 'Desconhecido', 'L&PM', '0000', 'N/A', 'f000000000091', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(74, '2009-08-14', 1456, '86993', NULL, 'LIVRO', 'A Casa', 'Zita Machado', 'NOVO SÉCULO', '1974', 'UTEXAS:059173022911709', 'f000000000092', 'Desconhecido', 176, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(75, '2023-12-06', 10117, '823', NULL, 'LIVRO', 'A CASA ASSOMBRADA E OUTROS CONTOS DE HORROR', 'Magic Tales Brasil', 'CLAVE', '0000', 'aca932001456', 'f000000000093', 'Ficção', 30, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(76, '2010-01-13', 2149, '869', NULL, 'LIVRO', 'A Casa da Água', 'Antonio Olinto', 'CIRCULO DO LIVROS S/A', '1999', '852090971X', 'f000000000094', 'Desconhecido', 369, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(77, '2010-12-21', 3127, '862', NULL, 'LIVRO', 'A casa de Bernarda Alba', 'Federico García Lorca', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2019', '9721037168', 'f000000000095', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(78, '2010-12-21', 3268, '9292', NULL, 'LIVRO', 'A casa do pinhal', 'Associação Pró Casa do Pinhal', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '1991', 'OCLC:46758255', 'f000000000096', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(79, '2023-12-01', 10045, '8135', NULL, 'LIVRO', 'A CASA NA RUA MANGO', 'Sandra Cisneros', 'PORTO ALEGRE', '2020', '9786555530124', 'f000000000097', 'Ficção', 103, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(80, '2023-08-31', 8830, 'ACL625', NULL, 'LIVRO', 'A CÉLULA', 'Geoffrey M. Cooper, Robert E. Hausman', 'BIBLIOTECA CIENTIFICA LIFE', '2016', '9788536310985', 'f000000000098', 'Medical', 736, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(81, '2023-04-24', 7410, 'ACH209', NULL, 'LIVRO', 'A CHAVE PARA O SUCESSO DO SEU ALUNO', 'Franz Bardon', 'SEGMENTO', '2024', '9781619654174', 'f000000000099', 'Body, Mind & Spirit', 253, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(82, '2010-07-14', 2822, '91091732', NULL, 'LIVRO', 'A Cidade', 'Ana Fani Alessandri Carlos', 'CONTEXTO', '2024', '9786555412857', 'f000000000100', 'Social Science', 134, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(83, '2009-08-04', 1300, '880', NULL, 'LIVRO', 'A Cidade Antiga', 'Fustel de Coulanges', 'MARTIN CLARET', '2020', '9786587921631', 'f000000000101', 'Arte', 617, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(84, '2010-01-15', 2179, '86993', NULL, 'LIVRO', 'A Cidade e as Serras', 'Eça de Queirós', 'EDIOURO', '2014', '9789898392459', 'f000000000122', 'Ficção', 239, 'EN', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(85, '2011-03-23', 3216, '8693', NULL, 'LIVRO', 'A Cidade e as Serras', 'Eça de Queirós', 'MARTIN CLARET', '2014', '9789898392459', 'f000000000112', 'Ficção', 239, 'EN', '2025-04-10 02:20:52', NULL, 20, 19, NULL, '2025-04-09'),
+(86, '2012-08-03', 5010, '285', NULL, 'LIVRO', 'A cidade e as serras', 'Eça de Queirós', 'RIDEEL', '2014', '9789898392459', 'f000000000102', 'Ficção', 239, 'EN', '2025-04-10 02:20:52', NULL, 10, 9, NULL, '2025-04-09'),
+(87, '2011-06-15', 3541, '86993', NULL, 'LIVRO', 'A Cidade Ilhada', 'Milton Hatoum', 'BOA VIAGEM', '2009', '9788563397072', 'f000000000133', 'Ficção', 132, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(88, '2014-02-04', 5523, '863', NULL, 'LIVRO', 'A cidade Transparente', 'Fernando Bento Gomes, Henrique Cayatte', 'PULO DO GATO', '1985', '9722103202', 'f000000000134', 'Desconhecido', 40, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(89, '2023-08-31', 8816, '57407', NULL, 'LIVRO', 'A CIÊNCIA DA BIOLOGIA', 'Sadava, David, Hillis, David, Heller, Craig, Hacker, Sally', 'MODERNA', '2019', '9788582715666', 'f000000000135', 'Ciência', 541, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(90, '2023-08-31', 8820, '57407', NULL, 'LIVRO', 'A CIÊNCIA DA BIOLOGIA 1', 'Sadava, David, Hillis, David, Heller, Craig, Hacker, Sally', 'MODERNA', '2019', '9788582715666', 'f000000000137', 'Ciência', 541, 'PT-BR', '2025-04-10 02:20:52', NULL, 3, 2, NULL, '2025-04-09'),
+(91, '2023-08-31', 8818, '57407', NULL, 'LIVRO', 'A CIÊNCIA DA BIOLOGIA 2', 'David Sadava, Craig Heller, Gordon H. Orians, William K. Purves, David M. Hillis', 'MODERNA', '2009', '8536319224', 'f000000000140', 'Ciência', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(92, '2012-08-29', 5230, '85691', NULL, 'LIVRO', 'A Ciociara', 'Desconhecido', 'ABRIL CULTURAL', '0000', 'OCLC:639650781', 'f000000000142', 'Desconhecido', 78, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(93, '2022-06-29', 7075, '028-5', NULL, 'LIVRO', 'A COLINA DOS SUSPIROS', 'Moacyr Scliar', 'PITANGUÁ', '1999', 'IND:30000066060306', 'f000000000143', 'Young Adult Fiction', 134, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(94, '2012-08-29', 5254, '8135', NULL, 'LIVRO', 'A Comédia Humana', 'Honoré de Balzac', 'ABRIL CULTURAL', '2024', '9786558302193', 'f000000000145', 'Ficção', 663, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(95, '2011-03-23', 3254, '352384', NULL, 'LIVRO', 'A comunicação no serviço público', 'Nuno Cunha Rodrigues', 'DIVERSOS', '2023', '9789724092096', 'f000000000146', 'Law', 596, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(96, '2010-01-13', 2158, '320981', NULL, 'LIVRO', 'A Consciencia Conservadora no Brasil', 'Paulo Mercadante', 'NOVA FRONTEIRA', '1965', 'UOM:39015018040090', 'f000000000147', 'Brazil', 272, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(97, '2023-09-13', 9096, '32349098161', NULL, 'LIVRO', 'A CONSTÂNCIA DO OLHAR VIGILANTE', 'Desconhecido', 'ARQUIVO DO ESTADO', '2002', 'STANFORD:36105113089895', 'f000000000148', 'Authoritarianism', 228, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(98, '2010-12-21', 3277, '32349098161', NULL, 'LIVRO', 'A constância do olhar vigilânte', 'Desconhecido', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2002', 'UTEXAS:059173011890549', 'f000000000149', 'Authoritarianism', 236, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(99, '2023-09-04', 8879, 'ACO482', NULL, 'LIVRO', 'A CONSTRUÇÃO DE IGREJAS', 'Enoch de Oliveira', 'RENES', '0000', '9786589448440', 'f000000000150', 'Religião', 340, 'EN', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(100, '2010-05-06', 2581, '7007', NULL, 'LIVRO', 'A Cor da Criação: Paulo Pasta', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:816995157', 'f000000000151', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(101, '2023-04-06', 7162, 'ACO384', NULL, 'LIVRO', 'A CORAGEM DE RESISTIR', 'Archibald Joseph Cronin', 'RECORD', '1978', 'OCLC:817744379', 'f000000000152', 'Desconhecido', 171, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(102, '2009-08-13', 1448, '174', NULL, 'LIVRO', 'A Corrosão do Caráter', 'Richard Sennett', 'RECORD', '1999', '8501054615', 'f000000000153', 'Social Science', 220, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(103, '2010-12-21', 3320, '363690981', NULL, 'LIVRO', 'A corte européia', 'Débora Minuzzi', 'BARSA PLANETA', '2022', '9786525236803', 'f000000000154', 'Law', 183, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(104, '2024-03-28', 10322, '306', NULL, 'LIVRO', 'A CULTURA E SEU CONTRÁRIO', 'Coelho,Teixeira', 'ILUMINURAS', '2016', '9788585291891', 'f000000000155', 'Art and society', 152, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(105, '2023-11-30', 10005, '329981', NULL, 'LIVRO', 'A DEMOCRACIA INTOLERANTE', 'Pedro Estevam da Rocha Pomar', 'ARQUIVO DO ESTADO', '2002', 'STANFORD:36105113941939', 'f000000000156', 'Brazil', 212, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(106, '2024-03-28', 10327, '814', NULL, 'LIVRO', 'A DESOBEDIÊNCIA CIVIL', 'Henry David Thoreau', 'L&PM', '2024', 'EAN:3410006405490', 'f000000000157', 'Law', 67, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(107, '2023-12-01', 10047, '86993', NULL, 'LIVRO', 'A DESPEDIDA DE FERNANDO PESSOA', 'Desconhecido', 'VMP', '2015', '856387666X', 'f000000000158', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(108, '2011-06-17', 3568, '851', NULL, 'LIVRO', 'A Divina Comédia', 'Dante Alighieri, José Pedro Xavier Pinheiro', 'EDITORA 34', '2020', '9786555520071', 'f000000000159', 'Ficção', 504, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(109, '2009-08-11', 1420, '152', NULL, 'LIVRO', 'A Doença Como Caminho', 'Thorwald Dethlefsen, Rüdiger Dahlke', 'CULTRIX', '2003', '8531604060', 'f000000000160', 'Medical', 272, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(110, '2023-06-01', 7398, '285', NULL, 'LIVRO', 'A DROGA DA OBEDIÊNCIA', 'Pedro Bandeira', 'MODERNA', '2009', '8516045390', 'f000000000161', 'Desconhecido', 190, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(111, '2024-04-04', 10399, '372412', NULL, 'LIVRO', 'A DROGA DO AMOR', 'Pedro Bandeira', 'MODERNA', '1995', '8516012409', 'f000000000162', 'Desconhecido', 127, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(112, '2014-02-04', 5493, '86991', NULL, 'LIVRO', 'A duração do dia', 'Ulrike Julie Maria Pfeiffer', 'RECORD', '2018', '9788567443966', 'f000000000163', 'Family & Relationships', 451, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(113, '2014-02-04', 5537, '843', NULL, 'LIVRO', 'A elegância do ouriço', 'Muriel Barbery', 'PEARSON EDUCATION', '2022', '9786557824399', 'f000000000164', 'Ficção', 356, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(114, '2009-05-27', 461, '65872', NULL, 'LIVRO', 'A Empresa Conectada Empresas Líderes Vencem Atravé', 'EDMIR KUAZAQUI, TEREZINHA COVAS, MARCIA GAMBOA', 'PIONEIRA THOMSON LEARNING', '0000', '8521313063', 'f000000000165', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(115, '2023-09-21', 9290, '33009', NULL, 'LIVRO', 'A ERA DO ECONOMISTA', 'Daniel Ronald Fusfeld, FABIO D. WALTENBERG', 'SARAIVA', '2001', '8502032771', 'f000000000166', 'Desconhecido', 356, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(116, '2010-12-21', 3137, '372357', NULL, 'LIVRO', 'A escola Sustentável', 'Lucia Legan', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2007', '8570605218', 'f000000000167', 'Environmental education', 173, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(117, '2016-10-31', 6360, '86993', NULL, 'LIVRO', 'A Escrava Isaura', 'Bernardo Guimarães', 'CIDADE CULTURAL', '2015', '9788532287984', 'f000000000178', 'Juvenile Fiction', 225, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(118, '2009-09-21', 1582, '86993', NULL, 'LIVRO', 'A Escrava Isaura', 'Bernardo Guimarães', 'L&PM', '2015', '9788532287984', 'f000000000168', 'Juvenile Fiction', 225, 'PT-BR', '2025-04-10 02:20:52', NULL, 10, 9, NULL, '2025-04-09'),
+(119, '2012-08-03', 5070, '285', NULL, 'LIVRO', 'A escreva Isaura', 'Bernardo Guimarães', 'RIDEEL', '2015', '9788532287984', 'f000000000179', 'Juvenile Fiction', 225, 'PT-BR', '2025-04-10 02:20:52', NULL, 10, 9, NULL, '2025-04-09'),
+(120, '2021-12-03', 6562, '800', NULL, 'LIVRO', 'A estação das pequenas coisas', 'João Anzanello Carrascoza', 'PIÁ', '2020', '8564474794', 'f000000000189', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(121, '2023-10-27', 9625, '8947', NULL, 'LIVRO', 'A ESTEPE', 'Anton Tchékhov', 'CALIGRAMA', '2015', '9788543803630', 'f000000000190', 'Ficção', 116, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(122, '2023-12-06', 10126, '813', NULL, 'LIVRO', 'A ESTRADA ENLUARADA E OUTRAS HISTÓRIAS', 'Ambrose Bierce', 'ARQUI', '2021', '9786589741091', 'f000000000191', 'Ficção', 231, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(123, '2014-08-01', 5595, '86993', NULL, 'LIVRO', 'A Estrana Maquina Estraviada', 'José J. Veiga', 'BERTRAND BRASIL', '1981', 'UTEXAS:059173022887670', 'f000000000192', 'Desconhecido', 120, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(124, '2021-12-09', 6593, '86993', NULL, 'LIVRO', 'A estranha máquina extraviada', 'José J. Veiga', 'BERTRAND BRASIL', '1986', 'OCLC:20648825', 'f000000000193', 'Desconhecido', 112, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(125, '2011-05-26', 3421, '86993', NULL, 'LIVRO', 'A Estrela Sobe', 'Marques Rebelo', 'JOSÉ OLYMPIO', '1957', 'PSU:000005148936', 'f000000000194', 'Romance Brasileiro', 238, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(126, '2010-12-21', 3189, '20981', NULL, 'LIVRO', 'A etiqueta de livros no Brasil', 'Ubiratan Machado', 'EDUSP', '2003', '8531407680', 'f000000000195', 'Bookplates', 468, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(127, '2010-07-06', 2667, '53009', NULL, 'LIVRO', 'A Evolução da Física', 'Albert Einstein, Leopold Infeld', 'JORGE ZAHAR', '2008', '853780052X', 'f000000000196', 'Desconhecido', 248, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(128, '2010-10-06', 2843, '1554', NULL, 'LIVRO', 'A evolução psicológica da criança', 'Henri Wallon', 'MARTINS FONTES', '2005', '9724412326', 'f000000000197', 'Desconhecido', 220, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(129, '2010-01-21', 2260, '86991', NULL, 'LIVRO', 'A faca pelo fio', 'Reynaldo Valinho Alvarez', 'FUNDAÇÃO BIBLIOTECA NACIONAL', '1999', 'UOM:39015050155509', 'f000000000198', 'Literary Criticism', 416, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(130, '2009-10-15', 1926, '86993', NULL, 'LIVRO', 'A Face Horrível', 'Ivan Angelo', 'IBEP', '2017', '9788578651411', 'f000000000199', 'Ficção', 201, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(131, '2010-01-20', 2225, '83981', NULL, 'LIVRO', 'A Fazenda Africana', 'Karen Blixen', 'RIO GRÁFICA', '2022', '9788550408453', 'f000000000200', 'Ficção', 432, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(132, '2024-10-21', 10986, '869935', NULL, 'LIVRO', 'A FESTA', 'Katie Ashley', 'GERAÇÃO EDITORIAL', '2014', '9788561784539', 'f000000000201', 'Ficção', 57, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(133, '2023-11-01', 9746, '86993', NULL, 'LIVRO', 'A FILHA DO ESCRITOR', 'Gustavo Bernardo', 'MAMUTE', '2012', '8520930174', 'f000000000202', 'Desconhecido', 148, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(134, '2024-04-04', 10415, '823', NULL, 'LIVRO', 'A FILHA DO SILÊNCIO', 'Marcelo Panguana, Luís Cardoso', 'KLICK', '2018', '8568846386', 'f000000000203', 'Desconhecido', 28, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(135, '2022-01-26', 6976, '285', NULL, 'LIVRO', 'A flauta mágica e o livro da sabedoria', 'Del Candeias', 'SESI-SP', '2016', '9788550401102', 'f000000000204', 'Ficção', 110, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(136, '2009-05-04', 103, '581634', NULL, 'LIVRO', 'A Flora Nacional na Medicina Doméstica', 'Alfons Balbach', 'A EDIFICAÇÃO DEO LAR', '0000', 'OCLC:683395023', 'f000000000205', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(137, '2010-12-21', 3169, '57734', NULL, 'LIVRO', 'A floresta tropical úmida', 'Henri Puig', 'UNESP', '2008', '8570606834', 'f000000000206', 'Forests and forestry', 493, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(138, '2010-07-12', 2675, '980', NULL, 'LIVRO', 'A formação das nações latino-americanas', 'Maria Ligia Prado', 'ATUAL', '1990', 'OCLC:816932918', 'f000000000207', 'Desconhecido', 82, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(139, '2017-01-09', 6375, '3786', NULL, 'LIVRO', 'A formação do formador', 'Joceli de Fátima Arruda Sousa Arruda Sousa', 'CEETEPS', '2016', '3841717810', 'f000000000208', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(140, '2011-04-07', 3343, '289', NULL, 'LIVRO', 'A Formação do Leitor Jovem', 'Ana Mariza Filipouski, Diana Maria Marchi', 'EDELBRA', '2011', '8536010495', 'f000000000209', 'Educação', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(141, '2022-06-30', 7098, '4207', NULL, 'LIVRO', 'A FORMAÇÃO EM DIÁLOGO', 'Manoel Augusto Polastreli Barbosa, Michele de Oliveira Sampaio', 'LOG& PRINT GRÁFICA E LOGISTICA S/A', '2020', '9786588285374', 'f000000000210', 'Educação', 270, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(142, '2010-10-06', 2844, '155413', NULL, 'LIVRO', 'A formação social da mente', 'Lev Semenovich Vygotskiĭ, Michael Cole', 'MARTINS FONTES', '1991', '8533600240', 'f000000000211', 'Desconhecido', 168, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(143, '2024-03-28', 10333, '813', NULL, 'LIVRO', 'A FÚRIA DOS REIS', 'George R.R. Martin', 'LEYA', '2011', '9788580442793', 'f000000000212', 'Ficção', 1060, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(144, '2003-04-10', 1452, '370', NULL, 'LIVRO', 'A Gaia Ciência', 'Friedrich Nietzsche', 'HERMUS', '2019', '9788583863038', 'f000000000213', 'Filosofia', 387, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(145, '2023-04-05', 7144, '813', NULL, 'LIVRO', 'A GAROTA DO LAGO', 'Charlie Donlea', 'FARO EDITORIAL', '2023', '9786586041101', 'f000000000214', 'Ficção', 278, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(146, '2024-09-09', 10785, '82899343', NULL, 'LIVRO', 'A GAROTA QUE EU QUERO', 'Markus Zusak', 'INTRÍNSECA', '2013', '9788580573725', 'f000000000215', 'Ficção', 187, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(147, '2023-10-27', 9666, '7415', NULL, 'LIVRO', 'A GIGANTESCA BARBA DO MAL', 'Stephen Collins', 'VESTÍGIO', '2016', '9788582863220', 'f000000000216', 'Comics & Graphic Novels', 244, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(148, '2010-01-20', 2203, '285', NULL, 'LIVRO', 'A Grande Decisão', 'Álvaro Cardoso Gomes', 'FTD', '2023', '9788596037013', 'f000000000217', 'Juvenile Fiction', 242, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(149, '2023-09-04', 8875, '236', NULL, 'LIVRO', 'A GRANDE ESPERANÇA', 'Ellen G. White', 'CASA PUBLICADORA BRASILEIRA', '2018', '9788534520201', 'f000000000218', 'Religião', 116, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(150, '2023-11-01', 9765, '96989928', NULL, 'LIVRO', 'A GRANDE ILUSÃO', 'Sônia Mara de Oliveira', 'JARDIM DOS LIVROS', '2024', '9786525492148', 'f000000000219', 'Biography & Autobiography', 68, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(151, '2021-12-09', 6592, 'B869.35', NULL, 'LIVRO', 'A grande roda de histórias', 'Nélio Spréa', 'PARABOLÉ', '2013', '8567262070', 'f000000000220', 'Desconhecido', 144, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(152, '2009-07-31', 1186, '823', NULL, 'LIVRO', 'A Guerra dos Mundos', 'H. G. Wells', 'OBJETIVA', '2017', '9788525435606', 'f000000000221', 'Ficção', 208, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(153, '2010-05-07', 2582, '7007', NULL, 'LIVRO', 'A Herança de Mestre Vitalino', 'Elaine Schmidlin, Mirian Celeste Martins, Gisa Picosque', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:816994551', 'f000000000222', 'Desconhecido', 16, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(154, '2023-09-11', 9046, 'AHI255', NULL, 'LIVRO', 'A HISTÓRIA ASSOCIATIVA COM EMPREENDEDORISMO E INOV', 'Kelly Dourado', 'SÃO PAULO', '2022', '9788551847299', 'f000000000223', 'Self-Help', 213, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(155, '2023-09-04', 8883, 'AHI445', NULL, 'LIVRO', 'A HISTÓRIA DA IGREJA', 'Sandro Barbosa', 'RENES', '2019', 'PKEY:CLDEAU43552', 'f000000000224', 'Religião', 690, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(156, '2023-12-01', 10042, '981', NULL, 'LIVRO', 'A HISTÓRIA DA PROVÍNCIA DE SANTA CRUZ', 'Pêro de Magalhães de Gândavo, Ricardo Martins Valle', 'TRILHA DO SABER', '2008', '8577150992', 'f000000000225', 'Desconhecido', 156, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(157, '2017-01-10', 6380, '33947', NULL, 'LIVRO', 'A história das coisas : da natureza ao lixo', 'Annie Leonard', 'ZAHAR', '2011', '9788537807941', 'f000000000226', 'Business & Economics', 376, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(158, '2023-11-06', 9786, 'B86993', NULL, 'LIVRO', 'A HISTÓRIA DE AMOR DE FERNANDO E ISAURA', 'Ariano Suassuna', 'DUETTO', '2019', '8520944272', 'f000000000228', 'Desconhecido', 256, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(159, '2010-01-25', 2320, '813', NULL, 'LIVRO', 'A história de Fernão Capelo Gaivota', 'Ivaan Hansen', 'NÓRDICA', '2018', '9788551806555', 'f000000000229', 'Ficção', 96, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(160, '2023-12-06', 10132, '285', NULL, 'LIVRO', 'A HISTÓRIA DE MARY PRINCE: UMA ESCRAVA DAS ÍNDIAS', 'Desconhecido', 'BMH', '2017', '9788583602996', 'f000000000230', 'Biography & Autobiography', 66, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(161, '2024-02-28', 10250, 'AHI174', NULL, 'LIVRO', 'A HISTÓRIA DE NÓS DOIS', 'Dani Atkins', 'SÃO PAULO', '2016', '9788580415414', 'f000000000231', 'Ficção', 411, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(162, '2010-02-26', 2450, '51273', NULL, 'LIVRO', 'A História de um Número', 'Adolfo E. Jiménez Benítez', 'RECORD', '2010', '9781453562413', 'f000000000232', 'Literary Collections', 232, 'EN', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(163, '2010-01-15', 2184, '86993', NULL, 'LIVRO', 'A Hora da Estrela', 'Clarice Lispector', 'ROCCO', '2020', '9786555950236', 'f000000000234', 'Ficção', 96, 'PT-BR', '2025-04-10 02:20:52', NULL, 14, 13, NULL, '2025-04-09'),
+(164, '2023-10-27', 9630, '8693', NULL, 'LIVRO', 'A HORA DA ESTRELA', 'Clarice Lispector', 'SOCIEDADE LITERÁRIA', '2020', '9786555950236', 'f000000000233', 'Ficção', 96, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(165, '2023-09-04', 8882, 'AIG745', NULL, 'LIVRO', 'A IGREJA NO MUNDO MODERNO', 'Ney de Souza', 'RENES', '2024', '9786525166537', 'f000000000248', 'Filosofia', 199, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(166, '2023-10-27', 9656, '823', NULL, 'LIVRO', 'A ILHA DO TESOURO', 'Robert Louis Stevenson', 'CAROCHINHA', '2023', '9786557828472', 'f000000000250', 'Young Adult Fiction', 137, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(167, '2024-10-21', 10985, '285', NULL, 'LIVRO', 'A ILHA DO TESOURO', 'Robert Louis Stevenson', 'COMPANHIA EDITORA NACIONAL', '2023', '9786557828472', 'f000000000249', 'Young Adult Fiction', 137, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(168, '2014-01-22', 5454, '7415', NULL, 'LIVRO', 'A ilha do tesouro', 'Robert Louis Stevenson', 'SALAMANDRA', '2023', '9786557828472', 'f000000000251', 'Young Adult Fiction', 137, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(169, '2024-03-28', 10340, 'AIL801', NULL, 'LIVRO', 'A ILHA MISTERIOSA', 'Júlio Verne', 'ABRIL CULTURAL', '2021', '9786555523546', 'f000000000252', 'Ficção', 444, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(170, '2009-08-14', 1467, '869', NULL, 'LIVRO', 'A Ilustre Casa de Ramires', 'Eça de Queirós', 'MARTIN CLARET', '2023', '9786550970536', 'f000000000253', 'Ficção', 392, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(171, '2013-06-25', 5391, '370', NULL, 'LIVRO', 'A Importância das Parcerias na Educação Profissina', 'Mareliza Fagundes de Araújo Duarte', 'CEETEPS', '2024', '9786525152813', 'f000000000254', 'Educação', 145, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(172, '2023-09-04', 8886, 'AIM292', NULL, 'LIVRO', 'A IMPORTÂNCIA DAS PARCERIAS NA EDUCAÇÃO PROFISSION', 'Mareliza Fagundes de Araújo Duarte', 'SÃO PAULO', '2024', '9786525152813', 'f000000000255', 'Educação', 145, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(173, '2010-12-21', 3190, '363310981', NULL, 'LIVRO', 'A imprensa confiscada pelo DEOPS (1924-1954)', 'Maria Luiza Tucci Carneiro, Boris Kossoy', 'ATELIÊ EDITORIAL', '2003', '8574801526', 'f000000000256', 'Antiques & Collectibles', 304, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(174, '2010-01-01', 2298, '843', NULL, 'LIVRO', 'A Ingênua Libertina', 'Colette', 'NOVA FRONTEIRA', '2019', '9788520943977', 'f000000000257', 'Ficção', 241, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(175, '2009-07-30', 1167, '8918635', NULL, 'LIVRO', 'A Insustentável Leveza do Ser', 'Milan Kundera', 'CIA. DAS LETRAS', '2022', '9786557826102', 'f000000000002', 'Ficção', 329, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(176, '2011-06-03', 3481, '891863', NULL, 'LIVRO', 'A Insustentável Leveza do Ser', 'Milan Kundera', 'NOVA FRONTEIRA', '2022', '9786557826102', 'f000000000258', 'Ficção', 329, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(177, '2017-01-10', 6390, '32309', NULL, 'LIVRO', 'A invenção dos direitos humanos', 'Lynn Hunt', 'CURITIBA', '2009', '9788580862423', 'f000000000260', 'Political Science', 211, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(178, '2009-07-29', 1133, '813', NULL, 'LIVRO', 'A Ira dos Anjos', 'Sidney Sheldon', 'RECORD', '2004', '8501017159', 'f000000000262', 'New York (N.Y.)', 478, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(179, '2024-04-12', 10533, 'AJA261', NULL, 'LIVRO', 'A JACINA, A MARABÁ', 'Tristão de Alencar Araripe Júnior', 'TRÊS', '0000', 'CORNELL:31924021207299', 'f000000000264', 'Desconhecido', 340, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(180, '2017-01-10', 6392, '3064', NULL, 'LIVRO', 'A juvendude vai ao cinema', 'Inês Assunção de Castro Teixeira, José de Sousa Miguel Lopes, Juarez Dayrell', 'BELO,HORIZONTE', '2015', '9788582176573', 'f000000000265', 'Educação', 243, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(181, '2024-03-13', 10293, '813', NULL, 'LIVRO', 'A LÂMINA DA ASSASSINA', 'Sarah J. Maas', 'GALERA RECORD', '2015', '9788501104571', 'f000000000267', 'Ficção', 490, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(182, '2014-01-21', 5428, '86993081', NULL, 'LIVRO', 'A Legião Negra', 'Oswaldo Faustino', 'SELO NEGRO', '2015', '9788587478887', 'f000000000268', 'Ficção', 254, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(183, '2022-06-09', 7060, '658404', NULL, 'LIVRO', 'A LEI DE MURPHY NO GERENCIAMENTO DE PROJETOS', 'EDUARDO GORGES.', 'BRASPORT', '0000', '857452588X', 'f000000000269', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(184, '2014-11-18', 5687, '370', NULL, 'LIVRO', 'A leitura na formação técnica', 'Daniel Aldo Soares', 'CEETEPS', '2022', '9786587782898', 'f000000000270', 'Language Arts & Disciplines', 189, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(185, '2023-11-06', 9790, '8693', NULL, 'LIVRO', 'A LENDA DO VIOLEIRO INVEJOSO', 'Fábio Sombra', 'JPA', '2021', '9786555950458', 'f000000000271', 'Juvenile Fiction', 194, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(186, '2010-12-21', 3178, '981611', NULL, 'LIVRO', 'A leste do centro: Território urbano', 'Ernest Reig Martínez, Francisco J. Goerlich Gisbert, Isidro Cantarino Martí', 'FAUUSP', '2016', '9788492937646', 'f000000000272', 'Demography', 139, 'ES', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(187, '2023-05-17', 7368, '813', NULL, 'LIVRO', 'A LETRA ESCARLETE', 'Nathaniel Hawthorne', 'MARTIN CLARET', '2011', '9788580864113', 'f000000000273', 'Ficção', 336, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(188, '2024-05-29', 10647, '9209306874', NULL, 'LIVRO', 'A LIÇÃO FINAL', 'RANDY PAUSCH, LAURA ALVES, AURELIO B. REBELLO', 'AGIR', '0000', '8522009201', 'f000000000274', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(189, '2023-11-17', 9948, 'ALI505', NULL, 'LIVRO', 'A LITERATURA PORTUGUESA', 'Massaud Moisés', 'CULTRIX', '2019', '9788531615214', 'f000000000275', 'Literary Criticism', 840, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(190, '2010-01-21', 2255, '1581', NULL, 'LIVRO', 'A Loira do Circo', 'Israel Foguel', 'ZABUMBA BRASIL', '2017', '9788592165680', 'f000000000276', 'Arte', 230, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(191, '2014-02-04', 5535, '86993', NULL, 'LIVRO', 'A madona de Cedro', 'Antônio Callado', 'VIDA MELHOR', '1994', 'OCLC:468304214', 'f000000000277', 'Desconhecido', 223, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(192, '2010-01-22', 2291, '8131', NULL, 'LIVRO', 'A Maior Coisa do Mundo', 'Claudia Maria Ceneviva Nigro, Clarice Maria Ceneviva', 'NOVA CULTURA', '2012', '9788578441210', 'f000000000278', 'Foreign Language Study', 66, 'EN', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(193, '2011-06-14', 3523, '86993', NULL, 'LIVRO', 'A Majestade do Xingu', 'Moacyr Scliar', 'BOA VIAGEM', '2009', '9788580866650', 'f000000000279', 'Ficção', 137, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(194, '2023-10-30', 9710, '86993', NULL, 'LIVRO', 'A MALDIÇÃO DA RAINHA DO ROCK', 'Chris Fuscaldo', 'CRIATIVAMENTE', '2021', '9786599452413', 'f000000000280', 'Biography & Autobiography', 278, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(195, '2023-07-31', 7423, 'AMA781', NULL, 'LIVRO', 'A MALDIÇÃO DAS BRUXAS', 'Valeria Villena Zanotti', 'ÁTICA', '2012', '9788591375714', 'f000000000281', 'Ficção', 125, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(196, '2023-12-11', 10158, '808899282', NULL, 'LIVRO', 'A MALDIÇÃO DAS FADAS', 'Marcos Mota', 'VIGÍLIA', '2023', '9786550970949', 'f000000000282', 'Ficção', 162, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(197, '2024-04-04', 10424, '1339', NULL, 'LIVRO', 'A MANSÃO DA PEDRA TORTA', 'Desconhecido', 'PETIT', '2002', '8572530223', 'f000000000283', 'Desconhecido', 200, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(198, '2023-05-19', 7455, 'AMO476', NULL, 'LIVRO', 'A MÃO E A LUVA', 'Machado de Assis', 'ÁTICA', '2020', '9786555523393', 'f000000000286', 'Ficção', 152, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(199, '2016-10-20', 6350, '86993', NULL, 'LIVRO', 'A mão e a luva', 'Machado de Assis', 'CIDADE CULTURAL', '2020', '9786555523393', 'f000000000285', 'Ficção', 152, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(200, '2014-05-30', 5561, '86993', NULL, 'LIVRO', 'A mão e a Luva', 'Machado de Assis', 'KLICK', '2020', '9786555523393', 'f000000000284', 'Ficção', 152, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(201, '2012-08-03', 4900, '86993', NULL, 'LIVRO', 'A Mão e Luva', 'Machado de Assis', 'RIDEEL', '2020', '9786555523393', 'f000000000287', 'Ficção', 152, 'PT-BR', '2025-04-10 02:20:52', NULL, 10, 9, NULL, '2025-04-09'),
+(202, '2022-06-29', 7073, '028-5', NULL, 'LIVRO', 'A MÁQUINA', 'Haroldo de Campos', 'SALAMANDRA', '2000', '8574800163', 'f000000000297', 'Desconhecido', 114, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(203, '2011-06-14', 3528, '869.0(81)-3', NULL, 'LIVRO', 'A Maravilhosa Semente de Pera', 'Charles Darwin, Daniel Moreira Miranda, Nelio Bizzo', 'DUBOLSINHO', '2019', '9788552100904', 'f000000000299', 'Ciência', 634, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(204, '2023-10-27', 9670, '8693', NULL, 'LIVRO', 'À MARGEM DA LINHA', 'Paulo Rodrigues', 'GRUA LIVROS', '2021', '9786588410172', 'f000000000300', 'Ficção', 70, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(205, '2023-11-01', 9753, '813', NULL, 'LIVRO', 'A MÁSCARA DA MORTE RUBRA', 'Edgar Allan Poe', 'BELA BRAVA', '2021', '9786550390464', 'f000000000301', 'Ficção', 22, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(206, '2011-04-07', 3342, '51072', NULL, 'LIVRO', 'A Matemática Através dos Tempos', 'William P. Berlinghoff, Fernando Q. Gouvêa', 'BLUCHER', '0000', '9788521216278', 'f000000000302', 'Educação', 295, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(207, '2010-01-15', 2177, '285', NULL, 'LIVRO', 'A Megera Domada', 'William Shakespeare, Flavio de Souza', 'SCIPIONE', '2023', '9788596037044', 'f000000000303', 'Ficção', 97, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(208, '2022-06-29', 7076, '028-5', NULL, 'LIVRO', 'A MEGERA DOMADA', 'William Shakespeare, Flavio de Souza', 'SIEDUC', '2023', '9788596037044', 'f000000000304', 'Ficção', 97, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(209, '2010-12-21', 3111, '869945', NULL, 'LIVRO', 'A Memória Brinca', 'Desconhecido', 'ADLER', '2021', '9786559620463', 'f000000000306', 'Arte', 270, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(210, '2023-03-23', 7147, '883', NULL, 'LIVRO', 'A MENINA COM A LAGARTIXA', 'Bernhard Schlink, Marcelo Backes', 'RECORD', '2010', '8501088315', 'f000000000307', 'Desconhecido', 111, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(211, '2023-10-27', 9679, 'AME311', NULL, 'LIVRO', 'A MENINA DE ALEPPO', 'Teresa Carnall Casquilho', 'ANTES', '2024', '9789895860425', 'f000000000308', 'Literary Collections', 48, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(212, '2023-05-24', 7218, '285', NULL, 'LIVRO', 'A MENINA QUE DESCOBRIU O BRASIL', 'Ilka Brunhilde Laurito', 'FTD', '0000', '9788532288592', 'f000000000309', 'Juvenile Fiction', 169, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(213, '2024-02-19', 10212, '285', NULL, 'LIVRO', 'A MENINA QUE FEZ A AMÉRICA', 'Ilka Brunhilde Laurito', 'FTD', '0000', '9788532288608', 'f000000000310', 'Juvenile Fiction', 113, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(214, '2023-10-30', 9732, '8693', NULL, 'LIVRO', 'A MENINA QUE NÃO QUERIA SER TOP MODEL', 'Lia Zatz', 'GAIVOTA', '2020', '9788578482602', 'f000000000311', 'Juvenile Fiction', 148, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(215, '2009-07-31', 1187, '823', NULL, 'LIVRO', 'A MENINA QUE ROUBAVA LIVROS', 'Markus Zusak', 'INTRÍNSECA', '2012', '9788580570182', 'f000000000312', 'Ficção', 561, 'PT-BR', '2025-04-10 02:20:53', NULL, 4, 3, NULL, '2025-04-09'),
+(216, '2010-01-20', 2202, '8691', NULL, 'LIVRO', 'A Mesa do Silêncio', 'Armindo Trevisan', 'L&PM', '1982', 'UTEXAS:059173022998503', 'f000000000316', 'Brazilian poetry', 104, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(217, '2010-01-13', 2143, '65851', NULL, 'LIVRO', 'A Meta', 'Eliyahu M. Goldratt, Jeff Cox', 'EDUCATOR', '2002', 'OCLC:817760472', 'f000000000317', 'Desconhecido', 365, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(218, '2009-05-21', 307, '823', NULL, 'LIVRO', 'A Meta um processo de melhoria continua', 'Eliyahu M. Goldratt, Jeff Cox', 'NOBEL', '2002', 'OCLC:817760472', 'f000000000318', 'Desconhecido', 365, 'PT-BR', '2025-04-10 02:20:53', NULL, 6, 5, NULL, '2025-04-09'),
+(219, '2022-01-25', 6711, '833', NULL, 'LIVRO', 'A METAMORFOSE', 'FRANZ KAFKA', 'SCRIPTORIUM', '2023', '9786555792287', 'f000000000324', 'Ficção', 124, 'PT-BR', '2025-04-10 02:20:53', NULL, 157, 156, NULL, '2025-04-09'),
+(220, '2023-12-01', 10050, '285', NULL, 'LIVRO', 'A MISTERIOSA CARTA PORTUGUESA', 'Alexandre Le Voci Sayad', 'FARIA E SILVA', '2021', '6589573263', 'f000000000481', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(221, '2023-06-01', 7408, '86988', NULL, 'LIVRO', 'A MOEDINHA QUE QUERIA COMPRAR A FELICIDADE', 'Nani', 'MELHORAMENTOS', '2011', '8506067111', 'f000000000482', 'Juvenile Fiction', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(222, '2010-01-20', 2206, '86992', NULL, 'LIVRO', 'A Moratória', 'Jorge Andrade', 'AGIR', '1965', 'UCAL:B3792493', 'f000000000483', 'Desconhecido', 206, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(223, '2022-06-29', 7080, '028-5', NULL, 'LIVRO', 'A MORENA DA ESTAÇÃO', 'Ignácio de Loyola Brandão', 'SIEDUC', '2022', '6557796976', 'f000000000484', 'Juvenile Fiction', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(224, '2023-06-01', 7402, 'AMO216', NULL, 'LIVRO', 'A MORENINHA', 'Joaquim Manuel de Macedo', 'ABRIL', '2013', 'amo615382901', 'f000000000502', 'Ficção', 191, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(225, '2009-08-05', 1319, '86993', NULL, 'LIVRO', 'A Moreninha', 'Joaquim Manuel de Macedo', 'ÁTICA', '2013', 'amo176650703', 'f000000000496', 'Ficção', 191, 'PT-BR', '2025-04-10 02:20:53', NULL, 3, 2, NULL, '2025-04-09'),
+(226, '2016-10-31', 6361, '86993', NULL, 'LIVRO', 'A Moreninha', 'Joaquim Manuel de Macedo', 'CIRANDA CULTURAL EDITORA E DISTRIBUIDORA', '2013', 'amo257160734', 'f000000000500', 'Ficção', 191, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(227, '2010-01-15', 2173, '86993', NULL, 'LIVRO', 'A Moreninha', 'Joaquim Manuel de Macedo', 'FTD', '2013', 'amo111547010', 'f000000000499', 'Ficção', 191, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(228, '2022-01-28', 6999, 'A138', NULL, 'LIVRO', 'A moreninha', 'Joaquim Manuel de Macedo', 'KLICK', '2013', 'amo056511531', 'f000000000501', 'Ficção', 191, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(229, '2012-08-03', 5090, '285', NULL, 'LIVRO', 'A Moreninha', 'Joaquim Manuel de Macedo', 'RIDEEL', '2013', 'amo008329079', 'f000000000486', 'Ficção', 191, 'PT-BR', '2025-04-10 02:20:53', NULL, 10, 9, NULL, '2025-04-09'),
+(230, '2024-04-12', 10520, 'AMO162', NULL, 'LIVRO', 'A MORENINHA - A LUNETA MÁGICA', 'Joaquim Manoel de Macedo', 'TRÊS', '1972', 'OCLC:41471458', 'f000000000503', 'Desconhecido', 312, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(231, '2011-05-27', 3425, '86993', NULL, 'LIVRO', 'A Morte da Porta-estandarte Tati', 'Aníbal Monteiro Machado', 'JOSÉ OLYMPIO', '1989', 'UTEXAS:059173002900539', 'f000000000504', 'Desconhecido', 288, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(232, '2023-10-27', 9638, '843', NULL, 'LIVRO', 'A MORTE DA TERRA', 'J.H. Rosny Aîné', 'PIU', '2020', '9786599162206', 'f000000000505', 'Ficção', 147, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(233, '2014-02-04', 5526, '89173', NULL, 'LIVRO', 'A morte de Ivan Ilitch', 'Lev Tolstói', '34', '2009', '8573263598', 'f000000000506', 'Ficção', 104, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(234, '2023-10-30', 9694, '813', NULL, 'LIVRO', 'A MULHER DE PÉS DESCALÇOS', 'Scholastique Mukasonga', 'NÓS', '2017', '9786586135121', 'f000000000507', 'Ficção', 115, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(235, '2009-08-04', 1294, '843', NULL, 'LIVRO', 'A Mulher de Trinta Anos', 'Honoré de Balzac', 'MARTIN CLARET', '2022', '9786556404943', 'f000000000510', 'Ficção', 210, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(236, '2009-08-03', 1254, '843', NULL, 'LIVRO', 'A Mulher de Trinta Anos', 'Honoré de Balzac', 'NOVA CULTURA', '2022', '9786556404943', 'f000000000509', 'Ficção', 210, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(237, '2024-09-02', 10778, '86993', NULL, 'LIVRO', 'A MULHER DO VIZINHO', 'Fernando Tavares Sabino', 'RECORD', '1964', 'IND:30000005051614', 'f000000000511', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(238, '2009-08-18', 1493, '853', NULL, 'LIVRO', 'A Mulher Leopardo', 'Alberto Moravia', 'BERTRAND BRASIL', '1994', '8528603008', 'f000000000513', 'Desconhecido', 158, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(239, '2023-12-11', 10144, '8693', NULL, 'LIVRO', 'A MURALHA', 'Dinah Silveira de Queiroz', 'ÁGUA VIVA', '1954', 'LCCN:54025471', 'f000000000514', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(240, '2023-09-11', 9018, 'ANE255', NULL, 'LIVRO', 'A NEW ROAD TO ENGLISH 1', 'George Bradshaw', 'ATUAL', '0000', 'NLS:V000211197', 'f000000000515', 'Desconhecido', 318, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(241, '2024-04-12', 10523, 'ANO694', NULL, 'LIVRO', 'A NORMALISTA', 'Adolfo Caminha, Sabóia Ribeiro', 'TRÊS', '1985', '850800009X', 'f000000000516', 'Desconhecido', 136, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(242, '2023-09-11', 9022, 'ANO101', NULL, 'LIVRO', 'A NOVA ORDEM MUNDIAL', 'H.G. Wells', 'ÁTICA', '0000', 'ano247576846', 'f000000000517', 'Political Science', 106, 'PT-BR', '2025-04-10 02:20:53', NULL, 4, 3, NULL, '2025-04-09'),
+(243, '2010-05-07', 2586, '7007', NULL, 'LIVRO', 'A Obra Monumental de Poty', 'Poty', 'MINISTÉRIO DA EDUCAÇÃO', '1998', 'UTEXAS:059173006254200', 'f000000000521', 'Desconhecido', 36, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(244, '2009-07-31', 1192, '813', NULL, 'LIVRO', 'A Odisséia de Penélope', 'Margaret Atwood', 'CIA. DAS LETRAS', '2020', '9788581227917', 'f000000000522', 'Ficção', 135, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(245, '2009-08-17', 1492, '813', NULL, 'LIVRO', 'A Outra Face', 'Sidney Sheldon', 'RECORD', '1988', 'OCLC:80588809', 'f000000000523', 'Desconhecido', 265, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(246, '2010-01-15', 2188, '8693', NULL, 'LIVRO', 'A pata da Gazela', 'José de Alencar', 'FTD', '1967', '9788532288004', 'f000000000524', 'Juvenile Fiction', 161, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(247, '2014-05-30', 5573, '86993', NULL, 'LIVRO', 'A Pátria de Chuteiras', 'Nelson Rodrigues', 'NOVA FRONTEIRA', '1994', 'UTEXAS:059173020387622', 'f000000000525', 'Soccer', 214, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(248, '2009-08-20', 1516, '86992', NULL, 'LIVRO', 'A Pena e a Lei', 'Ariano Suassuna', 'AGIR', '1971', 'UTEXAS:059173022886485', 'f000000000527', 'Brazilian drama', 226, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(249, '2023-12-06', 10113, 'B8693', NULL, 'LIVRO', 'A PENSÃO DE DONA BERTA', 'Ariano Suassuna', 'EDIOURO LAZER E CULTURA', '2021', '9786556402154', 'f000000000528', 'Ficção', 164, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(250, '2009-07-29', 1151, '285', NULL, 'LIVRO', 'A Perseguição', 'Silvio Dutra', 'RECORD', '2021', 'PKEY:CLDEAU57382', 'f000000000529', 'Religião', 20, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(251, '2024-02-28', 10249, 'API582', NULL, 'LIVRO', 'A PINTORA DE SONHOS', 'ADEILSON SALLES', 'CEAC', '0000', '8586359998', 'f000000000531', 'Desconhecido', 174, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(252, '2009-07-30', 1165, '813', NULL, 'LIVRO', 'A Pousada do Fim do Rio', 'Nora Roberts, A. B. PINHEIRO DE LEMOS', 'BERTRAND BRASIL', '2001', '8528608107', 'f000000000532', 'Desconhecido', 529, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(253, '2010-02-18', 2427, '6201', NULL, 'LIVRO', 'A Prática Metalográfia', 'Nicola Chalton, Meredith MacArdle', 'HERMUS', '2017', '9788558890489', 'f000000000533', 'História', 207, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(254, '2023-09-18', 9190, '285', NULL, 'LIVRO', 'A PRIMEIRA HISTÓRIA DO BRASIL', 'Pero de Magalhães Gandavo, Sheila Moura Hue, Ronaldo Menegaz, Angelo Augusto Santos', 'CUORE', '2004', '9788571107625', 'f000000000534', 'História', 207, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(255, '2023-10-30', 9736, '8116', NULL, 'LIVRO', 'A PRINCESA SALVA A SI MESMA NESTE LIVRO', 'Amanda Lovelace', 'CASA DOS MUNDOS', '2017', '9788544106587', 'f000000000535', 'Poesia', 220, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(256, '2010-12-21', 3093, '770981', NULL, 'LIVRO', 'À Procura de um Olhar', 'Patricia Thayer', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2016', '9788468777047', 'f000000000536', 'Ficção', 102, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(257, '2023-11-07', 9808, 'CO863', NULL, 'LIVRO', 'A PROFESSORA E O NOBEL', 'Anselmo Marinho', 'TRGD', '2019', '9788591326471', 'f000000000537', 'Ficção', 100, 'PT-BR', '2025-04-10 02:20:53', NULL, 39, 38, NULL, '2025-04-09'),
+(258, '2010-12-21', 3155, '98161', NULL, 'LIVRO', 'A provícia  de São Paulo', 'Desconhecido', 'FUNDAP', '0000', 'STANFORD:36105033505103', 'f000000000576', 'São Paulo (Brazil : State)', 74, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(259, '2023-09-14', 9126, '373', NULL, 'LIVRO', 'A RADIOATIVIDADE E O LIXO NUCLEAR', 'Maria Elisa Marcondes Helene', 'SCIPIONE', '1996', '8526229508', 'f000000000577', 'Desconhecido', 78, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(260, '2024-03-28', 10372, 'ARE183', NULL, 'LIVRO', 'A REFORMA DA NATUREZA, O MINOTAURO', 'Monteiro Lobato', 'CÍRCULO DO LIVRO', '2012', '9788525004376', 'f000000000578', 'Juvenile Fiction', 97, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(261, '2023-09-18', 9181, 'ARE826', NULL, 'LIVRO', 'A RELÍQUIA', 'Eça de Queirós', 'KLICK', '1945', '9781465569752', 'f000000000579', 'Ficção', 374, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(262, '2009-08-04', 1285, '880', NULL, 'LIVRO', 'A República', 'Platão', 'MARTIN CLARET', '2020', '9788552100478', 'f000000000581', 'Filosofia', 594, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(263, '2023-09-18', 9184, '3209', NULL, 'LIVRO', 'A RESISTÊNCIA ANARQUISTA', 'Raquel de Azevedo', 'ARQUIVO DO ESTADO', '2002', 'UTEXAS:059173011890538', 'f000000000586', 'Anarchism', 486, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(264, '2009-08-12', 1436, '989205', NULL, 'LIVRO', 'A Retirada da Laguna', 'Alfredo d\'Escragnolle Taunay Taunay (Visconde de)', 'CIA. DAS LETRAS', '2010', 'OCLC:817269434', 'f000000000589', 'Desconhecido', 175, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(265, '2009-08-04', 1275, '869', NULL, 'LIVRO', 'A Retirada da Laguna', 'Alfredo d\'Escragnolle Taunay Taunay (Visconde de)', 'MARTIN CLARET', '2010', 'OCLC:817269434', 'f000000000587', 'Desconhecido', 175, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(266, '2011-08-31', 3762, '981.061 07', NULL, 'LIVRO', 'A Revolução de 1932: Constituição e cidadania', 'Marco Antonio Villa', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2010', '8570607121', 'f000000000590', 'São Paulo (Brazil : State)', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(267, '2012-08-29', 5247, '82391', NULL, 'LIVRO', 'A Revolução dos Bichos', 'George Orwell', 'ABRIL CULTURAL', '2021', '9786558178804', 'f000000000597', 'Young Adult Fiction', 193, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(268, '2014-02-04', 5527, '823', NULL, 'LIVRO', 'A revolução dos bichos', 'George Orwell', 'CLARO ENIGMA', '2021', '9786558178804', 'f000000000592', 'Young Adult Fiction', 193, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(269, '2023-10-30', 9705, '823', NULL, 'LIVRO', 'A REVOLUÇÃO DOS BICHOS', 'George Orwell', 'GRÁFICA OCEANO', '2021', '9786558178804', 'f000000000593', 'Young Adult Fiction', 193, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(270, '2023-12-01', 10032, '7415', NULL, 'LIVRO', 'A REVOLUÇÃO DOS BICHOS', 'George Orwell', 'PEQUENA ZAHAR', '2021', '9786558178804', 'f000000000596', 'Young Adult Fiction', 193, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(271, '2023-10-30', 9706, '823', NULL, 'LIVRO', 'A REVOLUÇÃO DOS BICHOS', 'George Orwell', 'TROIA', '2021', '9786558178804', 'f000000000594', 'Young Adult Fiction', 193, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(272, '2023-09-12', 9068, 'ARE284', NULL, 'LIVRO', 'A REVOLUÇÃO LIBERAL DE 1842', 'Aluísio de Almeida', 'LIVRARIA JOSÉ OLYMPIO', '1944', 'UTEXAS:059173023497897', 'f000000000598', 'Brazil', 284, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(273, '2023-11-01', 9773, '808899282', NULL, 'LIVRO', 'A RODA DA VIDA', 'Manuel Filho', 'GUIA DOS CURIOSOS COMUNICAÇÕES', '2020', '9788578887414', 'f000000000599', 'Juvenile Fiction', 162, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(274, '2024-03-28', 10326, '85391', NULL, 'LIVRO', 'A ROMANA', 'Alberto Moravia', 'ABRIL CULTURAL', '1970', '9725684494', 'f000000000600', 'Desconhecido', 441, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(275, '2024-04-04', 10418, '285', NULL, 'LIVRO', 'A ROSA DE JUNHO', 'Andressa Brito Vieira', 'ATUAL', '2021', '9786525005003', 'f000000000601', 'Social Science', 179, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(276, '2011-06-17', 3564, '86991', NULL, 'LIVRO', 'A Rosa do Povo', 'Carlos Drummond de Andrade', 'RECORD', '2022', '9786555876383', 'f000000000602', 'Poesia', 234, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(277, '2023-10-27', 9648, '285', NULL, 'LIVRO', 'A RUA DO TERROR', 'Catriona Ward', 'GODOY\'S', '2022', '9786556220475', 'f000000000603', 'Ficção', 408, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(278, '2010-05-17', 2613, 'ASV944', NULL, 'LIVRO', 'A Saga dos Viajantes, O Esqueleto da Noite', 'Desconhecido', 'ABRIL', '0000', 'N/A', 'f000000000604', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(279, '2009-10-30', 1989, '981551', NULL, 'LIVRO', 'A São Paulo de Ramos de Azevedo', 'Pedro Cavalcanti', 'IMESP', '2004', '8598953016', 'f000000000605', 'Architecture', 204, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(280, '2011-06-02', 3470, '261', NULL, 'LIVRO', 'A Semente de Deus', 'Cesar Romão', 'RECORD', '2011', '9788576657248', 'f000000000606', 'Literary Collections', 128, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(281, '2010-01-05', 2028, '30643', NULL, 'LIVRO', 'A Sociedade da Insegurança e a Violência na Escola', 'Flávia Schilling', 'MODERNA', '2004', '8516043851', 'f000000000607', 'Desconhecido', 110, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(282, '2014-01-23', 5477, '813', NULL, 'LIVRO', 'A sociedade Literária e a Torta de Casca de Batata', 'Mary Ann Shaffer, Annie Barrows', 'ROCCO', '2009', '8532524109', 'f000000000608', 'Ficção', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(283, '2014-09-05', 5642, '373236', NULL, 'LIVRO', 'A sociologia em sala de aula', 'Cesar Augusto de Carvalho', 'BASE EDITORIAL', '2010', '9788572167987', 'f000000000609', 'Educação', 198, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(284, '2011-05-30', 3448, '853', NULL, 'LIVRO', 'A Solidão dos Números Primos', 'Paolo Giordano', 'ROCCO', '2010', '9722522345', 'f000000000611', 'Interpersonal relations', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(285, '2023-10-27', 9677, '824', NULL, 'LIVRO', 'A SOMBRA', 'Verena Kast', 'AMARE', '2022', '9786557137741', 'f000000000612', 'Psychology', 155, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(286, '2023-05-02', 7488, '370115', NULL, 'LIVRO', 'À SOMBRA DESTA MANGUEIRA', 'Paulo Freire', 'PAZ E TERRA', '2015', '9788577532797', 'f000000000613', 'Educação', 268, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(287, '2024-02-19', 10214, '86993', NULL, 'LIVRO', 'A SOMBRA DO CIPRESTE', 'Menalton Braff', 'GLOBAL', '2000', 'UOM:39015049985495', 'f000000000614', 'Desconhecido', 148, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(288, '2023-10-30', 9702, '285', NULL, 'LIVRO', 'À SOMBRA DO CIÚME', 'Marcel Proust', 'ENTRE PALAVRAS', '2012', '9788525052728', 'f000000000615', 'Ficção', 658, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(289, '2023-12-20', 10186, '863', NULL, 'LIVRO', 'A SOMBRA DO VENTO', 'Carlos Ruiz Zafón', 'LOGOS', '2017', '9788543809526', 'f000000000616', 'Ficção', 512, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(290, '2022-01-26', 6946, 'B869.3', NULL, 'LIVRO', 'A sucessora', 'Carolina Nabuco', 'INSTANTE', '2019', '9788552994084', 'f000000000617', 'Ficção', 233, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(291, '2023-08-11', 7774, '1581', NULL, 'LIVRO', 'A SUTIL ARTE DE LIGAR O FODA-SE', 'Mark Manson', 'INTRÍNSECA', '2017', '9788551002506', 'f000000000618', 'Self-Help', 185, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(292, '2010-05-07', 2589, '7007', NULL, 'LIVRO', 'A Tapeçaria de Norberto Nicola', 'Eliane de Fátima Vieira Tinoco, Mirian Celeste Martins, Gisa Picosque', 'MINISTÉRIO DA EDUCAÇÃO', '2005', 'OCLC:817079816', 'f000000000619', 'Desconhecido', 20, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(293, '2023-12-06', 10134, 'ATE300', NULL, 'LIVRO', 'A TELA QUE NOS HABITA', 'Henry Neuman', 'SIGNO', '0000', 'OXFORD:590716361', 'f000000000620', 'Desconhecido', 522, 'ES', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(294, '2023-10-30', 9738, '7415', NULL, 'LIVRO', 'A TEMPESTADE', 'William Shakespeare', 'BADABUM', '2015', 'ate948335617', 'f000000000622', 'Drama', 135, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(295, '2014-01-22', 5459, '7415', NULL, 'LIVRO', 'A tempestade', 'William Shakespeare', 'LAFONTE', '2015', 'ate100739693', 'f000000000621', 'Drama', 135, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(296, '2023-12-06', 10118, '285', NULL, 'LIVRO', 'A TEORIA DO ICEBERG', 'Christopher Bouix', 'BR EDUCAÇÃO', '2023', '9788596037129', 'f000000000623', 'Juvenile Fiction', 201, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(297, '2011-06-03', 3489, '261', NULL, 'LIVRO', 'A Terapia do Amor', 'Desconhecido', 'PENSAMENTO', '0000', '8531507979', 'f000000000624', 'Desconhecido', 112, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(298, '2017-01-10', 6436, '3337', NULL, 'LIVRO', 'A Terceira Margem', 'Maria Helena Rouanet', 'CIA. DAS LETRAS', '2012', '852092929X', 'f000000000625', 'Brazil', 64, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(299, '2014-01-22', 5452, '7415', NULL, 'LIVRO', 'A terceira Margem do rio em graphic novel', 'Maria Helena Rouanet', 'EDIOURO', '2012', '852092929X', 'f000000000627', 'Brazil', 64, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(300, '2023-09-11', 9041, '37135', NULL, 'LIVRO', 'A TERRA', 'John Grotzinger, Tom Jordan', 'MODERNA', '2013', '9788565837828', 'f000000000628', 'Ciência', 764, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(301, '2010-01-25', 2315, '808899', NULL, 'LIVRO', 'A Terra dos Meninos Pelados', 'Graciliano Ramos', 'RECORD', '2013', '9788501403629', 'f000000000629', 'Juvenile Fiction', 87, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(302, '2023-04-06', 7153, 'ATE653', NULL, 'LIVRO', 'A TEUS PÉS', 'Ana Cristina Cesar', 'BRASILIENSE', '2016', '9788543805986', 'f000000000630', 'Poesia', 125, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(303, '2024-03-28', 10348, '813', NULL, 'LIVRO', 'A TORMENTA DE ESPADAS', 'George R. R. Martin', 'LEYA', '2019', '9788554514037', 'f000000000631', 'Ficção', 1620, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(304, '2009-10-15', 1936, '285', NULL, 'LIVRO', 'A Tulipa Negra', 'Alexandre Dumas', 'FTD', '1982', '9788532288530', 'f000000000003', 'Language Arts & Disciplines', 177, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(305, '2013-06-25', 5390, '86899353', NULL, 'LIVRO', 'A tumba do relâmpago', 'Manuel Scorza', 'BERTRAND BRASIL', '1986', 'OCLC:1367333864', 'f000000000632', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(306, '2023-10-05', 9568, '285', NULL, 'LIVRO', 'A TURMA DA VILA MARCONDES', 'Anna Claudia Ramos', 'CUORE', '2022', '6558081857', 'f000000000633', 'Ficção', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(307, '2014-05-30', 5568, '9237', NULL, 'LIVRO', 'A ultima Grande Lição', 'Mitch Albom', 'SEXTANTE', '2018', '9788543105925', 'f000000000634', 'Biography & Autobiography', 154, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(308, '2023-08-29', 8718, 'AUN945', NULL, 'LIVRO', 'A UNIVERSIDADE DE SUCESSO 1', 'Maria Manuel Borges, Elias Sanz Casado', 'RECORD', '2009', '9789892600147', 'f000000000636', 'Desconhecido', 531, 'PT', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(309, '2023-08-29', 8719, 'AUN959', NULL, 'LIVRO', 'A UNIVERSIDADE DE SUCESSO 2', 'Maria Manuel Borges, Elias Sanz Casado', 'RECORD', '2009', '9789892600147', 'f000000000637', 'Desconhecido', 531, 'PT', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(310, '2023-09-21', 9323, 'AUT908', NULL, 'LIVRO', 'A UTOPIA', 'Dominic Hinde', 'ESCALA', '2016', '9781910324837', 'f000000000638', 'Political Science', 171, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(311, '2023-12-01', 10041, '869301', NULL, 'LIVRO', 'A VALENTIA DAS PERSONAGENS SECUNDÁRIAS', 'Stella Maris Rezende', 'GLOBO', '2019', '9786580634163', 'f000000000639', 'Ficção', 131, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(312, '2014-02-04', 5536, '86993', NULL, 'LIVRO', 'A vendedora de Fósforos', 'Hans Christian Andersen', 'ROCCO', '2010', '9788537810033', 'f000000000640', 'Ficção', 19, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(313, '2024-04-09', 10455, 'AVI365', NULL, 'LIVRO', 'A VIAGEM DE UMA ALMA', 'Peter Richelieu', 'PENSAMENTO', '1974', '8531506980', 'f000000000641', 'Body, Mind & Spirit', 214, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(314, '2010-05-17', 2614, 'AVE136', NULL, 'LIVRO', 'A Vida das Estrelas, O Limite da Eternidade', 'Bárbara Ellen Rodrigues', 'ABRIL', '2025', 'avi747704799', 'f000000000642', 'Ficção', 455, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(315, '2010-01-13', 2151, '9273', NULL, 'LIVRO', 'A Vida de Miguel Ângelo', 'Adonias Filho, José Baeza', 'NOVA FRONTEIRA', '0000', 'OCLC:817775191', 'f000000000643', 'Desconhecido', 112, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(316, '2009-08-04', 1305, '880', NULL, 'LIVRO', 'A Vida dos Doze Césares', 'Suetônio', 'MARTIN CLARET', '2019', '9788583864219', 'f000000000644', 'História', 470, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(317, '2009-10-16', 1940, '789', NULL, 'LIVRO', 'A Vida é Sonho', 'Pedro Calderón de la Barca', 'HARBRA LTDA', '0000', 'avi071372704', 'f000000000645', 'Ficção', 81, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(318, '2010-07-06', 2661, '612014', NULL, 'LIVRO', 'A Vida no Limite: a ciência da sobrevivência', 'Frances Ashcroft', 'JORGE ZAHAR', '2001', '8571106266', 'f000000000646', 'Desconhecido', 324, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(319, '2023-09-01', 8871, 'AVI691', NULL, 'LIVRO', 'A VIDA NOS CASTELOS', 'Cesar Sanchez', 'MALTESE', '2022', 'avi647470450', 'f000000000647', 'Antiques & Collectibles', 27, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(320, '2009-08-11', 1417, '301', NULL, 'LIVRO', 'A Vida Social da Informação', 'Maria Manuel Borges, Elias Sanz Casado', 'MAKRON BOOKS', '2009', '9789892600147', 'f000000000648', 'Desconhecido', 531, 'PT', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(321, '2015-09-10', 5964, '823', NULL, 'LIVRO', 'A Vida, o Universo e tudo mais', 'Douglas Adams', 'SEXTANTE', '2007', '8599296590', 'f000000000649', 'Ficção', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(322, '2024-07-24', 10757, 'AVI499', NULL, 'LIVRO', 'A VIRGEM E O CIGANO', 'D. H. Lawrence, R. L. Stevenson, Aníbal Fernandes', 'CÍRCULO DO LIVRO', '1985', '9723701642', 'f000000000650', 'Desconhecido', 136, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(323, '2011-06-02', 3472, '261', NULL, 'LIVRO', 'A Vírgem Maria-Papa João Paulo II', 'Jan Paweł II ((papież ;)', 'CLÉOFAS', '1987', 'OCLC:1412854526', 'f000000000651', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(324, '2013-11-27', 5413, '86993', NULL, 'LIVRO', 'A viuvinha', 'José de Alencar', 'FTD', '2013', 'avi643939704', 'f000000000652', 'Ficção', 81, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(325, '2009-10-29', 1971, '285', NULL, 'LIVRO', 'ABC - do mundo Árabe', 'Paulo Daniel Farah, Alê Abreu', 'MICROSOFT CORPORATION', '2006', '8576750333', 'f000000000653', 'Desconhecido', 48, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(326, '2009-05-21', 317, '6581552', NULL, 'LIVRO', 'ABC Custeio Baseado em Atividade', 'Masayuki Nakagawa', 'ATLAS', '2001', '8522429677', 'f000000000654', 'Desconhecido', 95, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(327, '2010-01-22', 2278, '8693', NULL, 'LIVRO', 'ABC de Castro Alves', 'Jorge Amado', 'MARTINS', '1957', 'UTEXAS:059173022851436', 'f000000000659', 'Desconhecido', 336, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(328, '2023-09-14', 9141, '74540221', NULL, 'LIVRO', 'ABC DO RENDERING', 'Ericson Straub, Marcelo Castilho, Paulo Biondan, Hélio de Queiroz', 'INFOLIO', '2013', '9788582600740', 'f000000000660', 'Design', 136, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(329, '2017-02-13', 6484, '179760981', NULL, 'LIVRO', 'Aborto e Legalidade malformação congênita', 'Patrícia Partamian Karagulian', 'YENDIS', '2007', '8577280136', 'f000000000661', 'Desconhecido', 283, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(330, '2009-09-25', 1683, 'B869.1', NULL, 'LIVRO', 'Abraão e as Frutas', 'Luciana V. P. de Mendonça', 'MINISTÉRIO DA EDUCAÇÃO', '2006', '8529600517', 'f000000000662', 'Desconhecido', 81, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(331, '2009-11-05', 2019, '700', NULL, 'LIVRO', 'Abrindo Caminhos- História, Comunicação e Arte', 'Benilde Justo Caniato, Elza Miné', 'CETEC', '2002', 'STANFORD:36105112780486', 'f000000000664', 'Brazilian literature', 564, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(332, '2023-05-02', 7478, '3701', NULL, 'LIVRO', 'AÇÃO CULTURAL PARA A LIBERDADE', 'Paulo Freire', 'PAZ E TERRA', '2010', 'OCLC:940010598', 'f000000000665', 'Desconhecido', 176, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(333, '2014-09-08', 5652, '540', NULL, 'LIVRO', 'Ação e Reação: Ideias para aulas especiais', 'Wilson Costa', 'RHJ', '2023', '9798379116064', 'f000000000666', 'Ficção', 190, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(334, '2023-09-05', 8972, '37112', NULL, 'LIVRO', 'AÇÃO E REFLEXÃO NA FORMAÇÃO DOCENTE', 'Soraiha Miranda de Lima', 'ARTMÍDIA', '2005', '8532701558', 'f000000000668', 'Teachers', 241, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(335, '2010-01-26', 2337, '1642', NULL, 'LIVRO', 'Access 7.0 - passo a passo - básico', 'Desconhecido', 'TERRA', '0000', '9781449628222', 'f000000000669', 'Desconhecido', 703, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(336, '2022-01-26', 6924, '69981', NULL, 'LIVRO', 'Aceitação de sistemas de sprinklers', 'Domingos Sávio Almonfrey', 'INSTITUTO SPRINKLER BRASIL', '2022', 'ace193187026', 'f000000000670', 'Technology & Engineering', 219, 'PT-BR', '2025-04-10 02:20:53', NULL, 9, 8, NULL, '2025-04-09'),
+(337, '2010-12-21', 3081, '70898161', NULL, 'LIVRO', 'Acervo Artístico dos Palácios', 'Conselho Curador do Acervo Artistico-Cultural dos Palácios do Governo do Estado de Sao Paulo, Radha Abramo, Stella Teixeira de Barros, Maria Rossetti Batista, Cleide Santos Costa Biancardi, Sonia SALZTEIN, Ruth Sprung Tarasantchi', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '1989', 'OCLC:959109530', 'f000000000679', 'Desconhecido', 152, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(338, '2023-09-20', 9285, '695', NULL, 'LIVRO', 'ACERVO DO MUSEU DE HISTÓRIA DA MEDICINA DA ASSOCIA', 'Desconhecido', 'BRASIL', '1994', 'UTEXAS:059173001858120', 'f000000000680', 'Brazil', 202, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(339, '2014-04-16', 5541, '36299162', NULL, 'LIVRO', 'ACIMA DE TUDO O AMOR', 'Adriano de Alvarenga Azevedo', 'GENTE', '2019', '9788594171047', 'f000000000681', 'Poesia', 107, 'PT-BR', '2025-04-10 02:20:53', NULL, 10, 9, NULL, '2025-04-09'),
+(340, '2010-02-18', 2426, '6201', NULL, 'LIVRO', 'Aços e Ferros Fundidos', 'Vicente Chiaverini', 'ASSOCIAÇÃO BRASILEIRA DE METAIS', '1977', 'OCLC:246919011', 'f000000000691', 'Desconhecido', 504, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(341, '2024-02-19', 10210, 'ACA222', NULL, 'LIVRO', 'AÇÚCAR AMARGO', 'Luiz Puntel', 'ÁTICA', '2018', '8508173474', 'f000000000692', 'Agricultural laborers', 151, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(342, '2023-05-15', 7199, '615892', NULL, 'LIVRO', 'ACUPUNTURA MULTIPROFISSIONAL', 'Gisele Damian Antonio Gouveia', 'YENDIS', '2021', '9786558402114', 'f000000000693', 'Health & Fitness', 128, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(343, '2010-01-21', 2226, '86993', NULL, 'LIVRO', 'Acusado de Homicídio', 'José Louzeiro', 'RECORD', '1960', 'UTEXAS:059173023408966', 'f000000000694', 'Ficção, Brazilian', 192, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(344, '2022-06-09', 7063, '6583', NULL, 'LIVRO', 'ADM. DE CARGOS E SALÁRIOS CARREIRAS E REMUNERAÇÃO', 'Benedito Rodrigues Pontes', 'LTR', '2021', '9786558830665', 'f000000000695', 'Law', 428, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(345, '2009-05-22', 361, '65815', NULL, 'LIVRO', 'Administação Financeira', 'Robert C. Higgins', 'ATLAS', '2014', '9788580553208', 'f000000000696', 'Business & Economics', 465, 'PT-BR', '2025-04-10 02:20:53', NULL, 4, 3, NULL, '2025-04-09'),
+(346, '2009-05-27', 455, '658', NULL, 'LIVRO', 'Administração', 'Wayne K. Hoy, Cecil G. Miskel, C. John Tarter', 'SARAIVA', '2015', '9788580554953', 'f000000000700', 'Educação', 536, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(347, '2024-02-15', 10202, '658', NULL, 'LIVRO', 'ADMINISTRAÇÃO - EDUCAÇÃO SEM FRONTEIRAS', 'Thomas S. Bateman, Scott A. Snell', 'ANHANGUERA PUBLICAÇÕES', '2013', '9788580550825', 'f000000000701', 'Business & Economics', 407, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(348, '2003-04-10', 228, '6585', NULL, 'LIVRO', 'Administração da Produção', 'Fernando Piero Laugeni, Petrônio Garcia Martins', 'ATLAS', '2015', '8502618350', 'f000000000703', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 6, 5, NULL, '2025-04-09'),
+(349, '2003-04-10', 665, '6585', NULL, 'LIVRO', 'Administração da Produção', 'Fernando Piero Laugeni, Petrônio Garcia Martins', 'CAMPUS', '2015', '8502618350', 'f000000000708', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(350, '2023-05-23', 7436, '6585', NULL, 'LIVRO', 'ADMINISTRAÇÃO DA PRODUÇÃO', 'Fernando Piero Laugeni, Petrônio Garcia Martins', 'SARAIVA', '2015', '8502618350', 'f000000000702', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(351, '2003-04-10', 520, '658001', NULL, 'LIVRO', 'Administração das Teorias Adm, Aplicada e Contempo', 'João Pinheiro de Barros Neto', 'FTD', '2025', '9786556754888', 'f000000000710', 'Business & Economics', 245, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(352, '2009-05-18', 234, '630681', NULL, 'LIVRO', 'Administração de Custos na Agopecuária', 'Gilberto José dos Santos, José Carlos Marion', 'ATLAS', '2002', '8522431922', 'f000000000711', 'Desconhecido', 165, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(353, '2009-05-18', 230, '630681', NULL, 'LIVRO', 'Administração de Custos na Agropecuária', 'Gilberto José dos Santos, José Carlos Marion', 'ATLAS', '2002', '8522431922', 'f000000000712', 'Desconhecido', 165, 'PT-BR', '2025-04-10 02:20:53', NULL, 4, 3, NULL, '2025-04-09'),
+(354, '2003-04-10', 689, '6581552', NULL, 'LIVRO', 'Administração de Custos, Precos e Lucros', 'Adriano Leal Bruni', 'ATLAS', '2008', '8522449376', 'f000000000716', 'Desconhecido', 394, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(355, '2003-04-10', 659, '6588', NULL, 'LIVRO', 'Administração de Marketing', 'Philip Kotler, Kevin Lane Keller', 'PEARSON PRENTICE HALL', '2019', '8543024951', 'f000000000717', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(356, '2003-04-10', 170, '6587', NULL, 'LIVRO', 'Administração de Materiais', 'João José Viana', 'ATLAS', '2000', '8522423954', 'f000000000719', 'Desconhecido', 448, 'PT-BR', '2025-04-10 02:20:53', NULL, 10, 9, NULL, '2025-04-09'),
+(357, '2003-04-10', 503, '6587', NULL, 'LIVRO', 'Administração de Materiais', 'João José Viana', 'CAMPUS', '2000', '8522423954', 'f000000000718', 'Desconhecido', 448, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(358, '2012-05-15', 4678, '6587', NULL, 'LIVRO', 'Administração de Materiais e do Patrimônio', 'Paulinho Francischini, Floriano Gurgel', 'CENGAGE LEARNING', '2013', '8522112797', 'f000000000729', 'Educação', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(359, '2003-04-10', 544, '6587', NULL, 'LIVRO', 'Administração de Materiais e Recursos Patrimoniais', 'Petrônio Garcia Martins, Paulo Renato Campos Alt', 'SARAIVA', '2006', '850205600X', 'f000000000734', 'Desconhecido', 441, 'PT-BR', '2025-04-10 02:20:53', NULL, 7, 6, NULL, '2025-04-09'),
+(360, '2009-05-29', 483, '6587', NULL, 'LIVRO', 'Administração de Materiais e Recursos Patrimonial', 'Petrônio Garcia Martins, Paulo Renato Campos Alt', 'SARAIVA', '2006', '850205600X', 'f000000000741', 'Desconhecido', 441, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(361, '2023-08-11', 8284, '6156', NULL, 'LIVRO', 'ADMINISTRAÇÃO DE MEDIACAMENTOS', 'Débora Maria Alves Estrela, Talita Pavarini Borges de Souza', 'REICHMANN & AFFONSO', '2023', '9786555368482', 'f000000000742', 'Medical', 308, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(362, '2009-04-15', 8, '6156', NULL, 'LIVRO', 'Administração de medicamentos', 'Débora Maria Alves Estrela, Talita Pavarini Borges de Souza', 'DIFUSÃO', '2023', '9786555368482', 'f000000000743', 'Medical', 308, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(363, '2009-05-18', 240, '658', NULL, 'LIVRO', 'Administração de Operações de Serviço', 'Robert Johnston, Graham Clark', 'ATLAS', '2001', '8522432104', 'f000000000745', 'Desconhecido', 562, 'PT-BR', '2025-04-10 02:20:53', NULL, 3, 2, NULL, '2025-04-09'),
+(364, '2003-04-10', 242, '658', NULL, 'LIVRO', 'Administração de Operacões de Serviços', 'Roger W. Schmenner', 'ATLAS', '1999', '8574130079', 'f000000000748', 'Desconhecido', 422, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(365, '2003-04-10', 860, '6585', NULL, 'LIVRO', 'Administração de Produção', 'Henrique L. Corrêa, Carlos A. Corrêa', 'ELSEVIER', '2022', '6559773256', 'f000000000750', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(366, '2003-04-10', 381, '6583', NULL, 'LIVRO', 'Administração de Recursos Humanos', 'Geroge Bohlander, Scott Snell', 'FUTURA', '2014', '8522118191', 'f000000000752', 'Educação', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 6, 5, NULL, '2025-04-09'),
+(367, '2003-04-10', 522, '351', NULL, 'LIVRO', 'Administração de Recursos Humanos', 'Geroge Bohlander, Scott Snell', 'IMESP', '2014', '8522118191', 'f000000000751', 'Educação', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(368, '2024-03-01', 10256, '6583', NULL, 'LIVRO', 'ADMINISTRAÇÃO DE RECURSOS HUMANOS', 'Geroge Bohlander, Scott Snell', 'MANOLE', '2014', '8522118191', 'f000000000758', 'Educação', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(369, '2009-05-26', 450, '6587', NULL, 'LIVRO', 'Administração de Recursos Materiais e Patrimoniais', 'Hamilton Pozo', 'ATLAS', '2002', '8522431051', 'f000000000759', 'Desconhecido', 195, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(370, '2023-12-04', 10087, '6588', NULL, 'LIVRO', 'ADMINISTRAÇÃO DE VENDAS', 'Idalberto Chiavenato', 'ATLAS', '2010', '9788535216318', 'f000000000764', 'Sales management', 177, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(371, '2010-01-11', 2086, '370', NULL, 'LIVRO', 'Administração Educacional', 'Brazil. Secretaria de Ensino de 1o. e 2o. Graus', 'MINISTÉRIO DA EDUCAÇÃO E CULTURA', '1979', 'UTEXAS:059173025373104', 'f000000000766', 'School management and organization', 72, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(372, '2003-04-10', 653, '6591', NULL, 'LIVRO', 'Administração em Publicidade', 'Marcélia Lupetti', 'PIONEIRA THOMSON LEARNING', '2009', '8522107815', 'f000000000767', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(373, '2009-05-22', 375, '6584012', NULL, 'LIVRO', 'Administração Estratégica', 'John E. Gamble, Arthur A. Thompson Jr.', 'ATLAS', '2012', '9788580550894', 'f000000000768', 'Business & Economics', 369, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(374, '2003-04-10', 501, '6584012', NULL, 'LIVRO', 'Administração Estratégica', 'John E. Gamble, Arthur A. Thompson Jr.', 'PEARSON PRENTICE HALL', '2012', '9788580550894', 'f000000000773', 'Business & Economics', 369, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(375, '2009-05-29', 481, '658', NULL, 'LIVRO', 'Administração Estratégica de Serviços', 'Irineu G. N. Gianesi, Henrique L. Corrêa', 'ATLAS', '1994', '8522411522', 'f000000000774', 'Desconhecido', 233, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(376, '2009-05-22', 365, '65815', NULL, 'LIVRO', 'Administração Financeira', 'Giovanni Bugni Lemes', 'ATLAS', '2017', 'PKEY:CLDEAU32145', 'f000000000786', 'Business & Economics', 446, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(377, '2009-05-29', 491, '658152', NULL, 'LIVRO', 'Administração Financeira', 'Giovanni Bugni Lemes', 'CAMPUS', '2017', 'PKEY:CLDEAU32145', 'f000000000788', 'Business & Economics', 446, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(378, '2023-05-17', 7391, '65815', NULL, 'LIVRO', 'ADMINISTRAÇÃO FINANCEIRA', 'Giovanni Bugni Lemes', 'SARAIVA', '2017', 'PKEY:CLDEAU32145', 'f000000000787', 'Business & Economics', 446, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(379, '2003-04-10', 830, '658', NULL, 'LIVRO', 'Administração Financeira', 'Giovanni Bugni Lemes', 'TEXTONOVO', '2017', 'PKEY:CLDEAU32145', 'f000000000775', 'Business & Economics', 446, 'PT-BR', '2025-04-10 02:20:53', NULL, 11, 10, NULL, '2025-04-09'),
+(380, '2009-05-25', 391, '65815', NULL, 'LIVRO', 'Administração Financeira Teoria e Prática', 'Eugene Brigham, Michael Ehrhardt', 'CENGAGE LEARNING', '2016', '8522123918', 'f000000000789', 'Educação', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(381, '2003-04-10', 780, '65880186', NULL, 'LIVRO', 'Administração Gerência - Economia', 'Elói Martins Senhoras', 'FGV', '2021', '9786559832309', 'f000000000794', 'Business & Economics', 256, 'PT-BR', '2025-04-10 02:20:53', NULL, 8, 7, NULL, '2025-04-09'),
+(382, '2003-04-10', 433, '6583', NULL, 'LIVRO', 'Administração Industrial e Geral', 'Henri Fayol', 'ATLAS', '1989', '8522405018', 'f000000000802', 'Desconhecido', 138, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(383, '2009-05-25', 386, '3360181', NULL, 'LIVRO', 'Administração Orçamento e Contabilidade Pública', 'Sérgio Jund', 'CAMPUS', '2008', '8535230246', 'f000000000807', 'Desconhecido', 907, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(384, '2009-05-19', 245, '658403', NULL, 'LIVRO', 'Administração para Obter Resultados', 'Arnaud Velloso Pamponet', 'PIONEIRA THOMSON LEARNING', '0000', '9786501201504', 'f000000000812', 'Business & Economics', 134, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(385, '2012-05-16', 4699, '63068', NULL, 'LIVRO', 'Administração Rural', 'Roni Antonio Garcia da Silva', 'JURUÁ', '2011', 'OCLC:817251334', 'f000000000814', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(386, '2003-04-10', 658, '658001', NULL, 'LIVRO', 'Administração Teoria, Processo e Prática', 'Desconhecido', 'ELSEVIER', '1981', 'OCLC:83778746', 'f000000000815', 'Desconhecido', 8, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(387, '2009-05-19', 244, '658403', NULL, 'LIVRO', 'Administrando para Obter Resultados', 'Peter Ferdinand Drucker', 'PIONEIRA THOMSON LEARNING', '2002', '8522101310', 'f000000000816', 'Desconhecido', 214, 'PT-BR', '2025-04-10 02:20:53', NULL, 3, 2, NULL, '2025-04-09'),
+(388, '2009-05-13', 178, '6587', NULL, 'LIVRO', 'Administrção de Materiáis', 'Brazil. Departamento Administrativo do Serviço Público. Serviço de Documentação', 'ATLAS', '0000', 'UOM:39015065722293', 'f000000000819', 'Desconhecido', 174, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(389, '2023-06-26', 7441, '81308762', NULL, 'LIVRO', 'ADMIRÁVEL MUNDO NOVO', 'Aldous Huxley', 'GLOBO', '2001', '8525033227', 'f000000000820', 'Desconhecido', 320, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(390, '2010-07-08', 2671, '960', NULL, 'LIVRO', 'África e Brasil Africano', 'Marina de Mello e Souza', 'ÁTICA', '2016', '8508160526', 'f000000000822', 'Desconhecido', 175, 'PT-BR', '2025-04-10 02:20:53', NULL, 3, 2, NULL, '2025-04-09'),
+(391, '2010-12-21', 3125, '98161', NULL, 'LIVRO', 'Agora Nós! Chronica da revolução paulista', 'Paulo Duarte', 'FUNDAP', '2007', 'STANFORD:36105133415872', 'f000000000825', 'São Paulo (Brazil : State)', 426, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(392, '2022-01-26', 6954, '86993', NULL, 'LIVRO', 'Agosto', 'Gabriel García Márquez', 'EDIOURO LAZER E CULTURA', '2024', '9789722081023', 'f000000000826', 'Ficção', 71, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(393, '2009-08-10', 1387, '86991', NULL, 'LIVRO', 'Agrestes', 'Mateus Lira', 'NOVA FRONTEIRA', '2022', 'agr244282270', 'f000000000827', 'Poesia', 62, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(394, '2023-08-23', 8559, 'AGR109', NULL, 'LIVRO', 'AGRICULTURA SUSTENTÁVEL', 'Shóstenes S. Formiga', 'SECRETARIA DO MEIO AMBIENTE', '2023', 'EAN:3410005977172', 'f000000000828', 'Nature', 59, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(395, '2017-01-10', 6422, '345027', NULL, 'LIVRO', 'Agrobiodiversidade e Direito dos Agricultores', 'Juliana Santilli', 'PETRÓPOLIS', '2009', '9788575962343', 'f000000000829', 'Law', 478, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(396, '2023-09-11', 9039, '285', NULL, 'LIVRO', 'ÁGUA', 'Ana Claudia Melo De Azevedo', 'PAE', '2023', 'EAN:3410005609516', 'f000000000831', 'Law', 34, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(397, '2010-07-13', 2704, '333910', NULL, 'LIVRO', 'Águas Doces no Brasil', 'Desconhecido', 'ESCRITURAS', '2015', '8575314513', 'f000000000832', 'Ciência', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(398, '2023-12-01', 10051, '285', NULL, 'LIVRO', 'AINDA ASSIM TE QUERO BEM', 'Caio Riter, Penélope Martins', 'AKPALÔ', '2021', '9786558178835', 'f000000000833', 'Young Adult Fiction', 198, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(399, '2009-08-11', 1413, '1554', NULL, 'LIVRO', 'Ajudando a Criança a Crecer', 'Edward Teyber', 'GLOBO', '1995', '8521308434', 'f000000000834', 'Desconhecido', 224, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(400, '2009-08-18', 1501, '926', NULL, 'LIVRO', 'Alberto Santos-Dumont : o pai da aviação', 'Fernando Hippólyto da Costa', 'ADLER', '1986', 'OCLC:18717509', 'f000000000835', 'Aeronautics', 75, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(401, '2011-02-15', 2944, '370', NULL, 'LIVRO', 'Alceu Amoroso Lima', 'Alceu Amoroso Lima', 'MASSANGANA', '1923', 'OCLC:64949499', 'f000000000836', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(402, '2010-12-21', 3069, '77014', NULL, 'LIVRO', 'Alegorias brasileiras', 'Desconhecido', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2005', 'OCLC:1249897666', 'f000000000837', 'Desconhecido', 84, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(403, '2023-04-06', 7155, 'ALE510', NULL, 'LIVRO', 'ALEGRIA E TRIUNFO', 'Lourenço Prado', 'PENSAMENTO', '2014', '9788531516412', 'f000000000838', 'Self-Help', 147, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(404, '2023-11-01', 9777, '808899282', NULL, 'LIVRO', 'ALEK CIARAN E OS GUARDIÕES DA ESCURIDÃO', 'Shirley Souza', 'PANDA BOOK', '2022', '9786556971520', 'f000000000839', 'Young Adult Fiction', 344, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(405, '2011-05-26', 3420, '86993', NULL, 'LIVRO', 'Além do ponto e outros contos', 'Caio Fernando Abreu', 'ÁTICA', '2010', '8508140002', 'f000000000840', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(406, '2014-06-02', 5579, '323490981', NULL, 'LIVRO', 'Alemanha', 'Mary Fulbrook, Barbara Duarte', 'ARQUIVO DO ESTADO', '2012', '8572838031', 'f000000000841', 'Desconhecido', 287, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(407, '2010-12-21', 3262, '981032', NULL, 'LIVRO', 'Alexandre de Gusmão e tratado de Madrid', 'Alexandre de Gusmão, Jaime Cortesão', 'FUNDAÇÃO ALEXANDRE DE GUSMÃO', '1952', 'STANFORD:36105049004166', 'f000000000842', 'Brazil', 972, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(408, '2014-08-05', 5600, '285', NULL, 'LIVRO', 'Alexandre e outros heróis', 'Graciliano Ramos', 'RECORD', '2013', '9788501404374', 'f000000000844', 'Ficção', 223, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(409, '2023-06-22', 7320, 'ALE926', NULL, 'LIVRO', 'ALEXANDRE O GRANDE', 'Pierre Briant', 'TRÊS', '2010', '9788525429209', 'f000000000845', 'História', 81, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(410, '2023-05-02', 7482, '370115', NULL, 'LIVRO', 'ALFABETIZAÇÃO', 'Claudemir Belintane', 'PAZ E TERRA', '2016', '9788524922732', 'f000000000846', 'Language Arts & Disciplines', 276, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(411, '2011-02-15', 2975, '370', NULL, 'LIVRO', 'Alfred Binet', 'Rene Zazzo, Fundação Joaquim Nabuco', 'MASSANGANA', '2010', '8570195338', 'f000000000847', 'Desconhecido', 140, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(412, '2023-09-01', 8841, '5815', NULL, 'LIVRO', 'ALGAE AND ENVIRONMENT - A GENERAL APPROACH', 'Bhaskar Singh, Kuldeep Bauddh, Faizal Bux', 'SÃO PAULO', '2015', '9788132226413', 'f000000000848', 'Ciência', 194, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(413, '2023-09-12', 9073, 'LGE105', NULL, 'LIVRO', 'ÁLGEBRA III', 'Vandenberg Lopes Vieira', 'MODERNA', '2021', '6555630892', 'f000000000849', 'Mathematics', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(414, '2023-09-20', 9263, 'LGE166', NULL, 'LIVRO', 'ÁLGEBRA IV', 'Cid A. Guelli, Gelson Iezzi, Osvaldo Dolce', 'MODERNA', '1977', 'UTEXAS:059173023338587', 'f000000000850', 'Algebra', 280, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(415, '2023-03-28', 7358, '51', NULL, 'LIVRO', 'ALGORITMOS', 'Aditya Y. Bhargava', 'ÉRICA', '2017', '9788575225639', 'f000000000851', 'Computers', 30, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(416, '2003-04-10', 974, '51', NULL, 'LIVRO', 'Algoritmos Lógica para Desenvolvimento de Programa', 'José Augusto Navarro Garcia Manzano, Jayr Figueiredo de Oliveira', 'ÉRICA', '2000', '857194718X', 'f000000000852', 'Desconhecido', 236, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(417, '2009-08-13', 1443, '89243', NULL, 'LIVRO', 'Alguém para Correr Comigo', 'David Grossman', 'CIA. DAS LETRAS', '2005', '8535906606', 'f000000000853', 'Adolescence', 437, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(418, '2023-12-06', 10125, 'B8691', NULL, 'LIVRO', 'ALGUMA POESIA', 'Carlos Drummond de Andrade', 'CLARO ENIGMA', '2022', '9786555875010', 'f000000000854', 'Poesia', 128, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(419, '2024-05-22', 10641, 'ALG464', NULL, 'LIVRO', 'ALGUMA POESIA / CAMPO GERAL', 'Marcio Goldman', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2016', '9788564116979', 'f000000000855', 'Social Science', 190, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(420, '2023-08-30', 8776, 'ALI477', NULL, 'LIVRO', 'ALIANÇA DE SANGUE', 'EW Kenyon', 'ORVALHO', '2021', '9786587001579', 'f000000000856', 'Religião', 86, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(421, '2010-12-21', 3136, '16658', NULL, 'LIVRO', 'Alianças e Parcerías', 'Richard Gibbs, Andrew Humphries', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2024', '9786559284740', 'f000000000857', 'Business & Economics', 225, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(422, '2014-01-22', 5468, '808899282', NULL, 'LIVRO', 'Alice', 'Lewis Carroll', 'RHJ', '1980', '8532300448', 'f000000000858', 'Desconhecido', 292, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(423, '2011-05-27', 3427, '285', NULL, 'LIVRO', 'Alice no País das Maravilhas', 'Lewis Carroll', 'COSAC NAIFY', '1998', '9788525400307', 'f000000000859', 'Young Adult Fiction', 132, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(424, '2023-05-25', 7404, 'ALI273', NULL, 'LIVRO', 'ALICE NO PAÍS DAS MARAVILHAS', 'Lewis Carroll', 'SOL', '1998', '9788525400307', 'f000000000860', 'Young Adult Fiction', 132, 'PT-BR', '2025-04-10 02:20:53', NULL, 3, 2, NULL, '2025-04-09'),
+(425, '2017-01-10', 6438, '6413', NULL, 'LIVRO', 'Alimentos orgânicos', 'Paulo César Stringheta, José Norberto Muniz', 'SENAC', '2003', '8572691723', 'f000000000863', 'Desconhecido', 452, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(426, '2024-05-02', 10598, 'ALI403', NULL, 'LIVRO', 'ALIMENTOS SAUDÁVEIS - ALIMENTOS PERIGOSOS', 'READER\'S DIGEST', 'READER\'S DIGEST BRASIL', '0000', '8576450690', 'f000000000865', 'Desconhecido', 400, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(427, '2023-12-20', 10175, '4207', NULL, 'LIVRO', 'ALIVE HIGH - 1 - INGLÊS', 'Desconhecido', 'SM', '0000', 'N/A', 'f000000000866', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(428, '2023-12-20', 10176, '4207', NULL, 'LIVRO', 'ALIVE HIGH - 2 - INGLÊS', 'No Author', 'SM', '2020', '9789390221714', 'f000000000867', 'Foreign Language Study', 128, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(429, '2024-03-26', 10317, '4207', NULL, 'LIVRO', 'ALIVE HIGH - 3', 'George Carter Stent', 'SM', '0000', 'UCAL:$B252347', 'f000000000868', 'Ballads, Chinese', 322, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(430, '2023-12-20', 10177, '4207', NULL, 'LIVRO', 'ALIVE HIGH - 3 - INGLÊS', 'Desconhecido', 'SM', '0000', 'N/A', 'f000000000869', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(431, '2024-03-07', 10283, '4207', NULL, 'LIVRO', 'ALIVE HIGH - INGLÊS 3', 'Margarete Magalhaes', 'SM', '2008', '8562301418', 'f000000000870', 'Desconhecido', 78, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(432, '2023-07-31', 7409, 'ALM840', NULL, 'LIVRO', 'ALMANAQUE DE SOCIOLOGIA PARA VESTIBULAR E ENEM', 'Claudionor Aparecido Ritondale', 'ON LINE', '2016', '9788569056027', 'f000000000872', 'Social Science', 556, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(433, '2011-02-15', 2945, '370', NULL, 'LIVRO', 'Almeida Júnior', 'José Ferraz de Almeida Júnior', 'MASSANGANA', '1979', 'UTEXAS:059173023455569', 'f000000000873', 'Painters', 176, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(434, '2009-08-12', 1426, '612741', NULL, 'LIVRO', 'Alongue-se', 'Bob Anderson', 'SUMMUS', '1998', '8532306314', 'f000000000874', 'Health & Fitness', 116, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(435, '2010-07-06', 2662, '5407', NULL, 'LIVRO', 'Alquimistas e Químicos', 'José Atílio Vanin', 'MODERNA', '2005', '8516046281', 'f000000000875', 'Desconhecido', 119, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(436, '2023-10-30', 9730, '285', NULL, 'LIVRO', 'ALUADO E OUTROS CONTOS DE ALUMBRAMENTO', 'Desconhecido', 'ALUAR', '0000', 'N/A', 'f000000000876', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(437, '2023-09-18', 9198, 'ALU101', NULL, 'LIVRO', 'ALUCINADO SOM DE TUBA', 'Betto (Frei), Franco de Rosa', 'ÁTICA', '1993', '8508043368', 'f000000000877', 'Desconhecido', 117, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(438, '2010-01-15', 2185, '8693', NULL, 'LIVRO', 'Alves & Cia,', 'Eça de Queiroz', 'ÁTICA', '1955', '8561578572', 'f000000000878', 'Desconhecido', 183, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(439, '2017-02-07', 6480, '61683', NULL, 'LIVRO', 'Alzheimer Diacnóstico e Tratamento', 'Ronaldo Pontes Barreira Filho, Idalbenia V. Barbosa P. Barreira', 'YENDIS', '2017', '9788559682229', 'f000000000879', 'Medical', 186, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(440, '2024-05-29', 10648, '813', NULL, 'LIVRO', 'AMANHECER', 'Manoel de Barros', 'INTRÍNSECA', '2001', 'STANFORD:36105112780130', 'f000000000880', 'Children\'s poetry, Brazilian', 58, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(441, '2021-12-13', 6622, '7415', NULL, 'LIVRO', 'Amar, verbo intransitivo', 'Mário de Andrade', 'SOMOS SISTEMAS DE ENSINO', '1955', 'STANFORD:36105012030776', 'f000000000881', 'Desconhecido', 194, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(442, '2009-08-19', 1509, '86993', NULL, 'LIVRO', 'Amar, verbo intransitivo: idílio', 'Mário de Andrade', 'AGIR', '2022', '9786555527599', 'f000000000882', 'Ficção', 146, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(443, '2010-07-08', 2672, '3309811', NULL, 'LIVRO', 'Amazônia: Geopolítica na virada do III milênio', 'Bertha K. Becker', 'GARAMOND', '2004', 'UOM:39015061203678', 'f000000000883', 'Amazon River Region', 176, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(444, '2023-08-31', 8829, '372357', NULL, 'LIVRO', 'AMBIENTE COMPONENTES E INTERAÇÕES', 'Raul Matias Cezar', 'NACIONAL', '2021', '9786525113388', 'f000000000884', 'Ciência', 130, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(445, '2024-03-28', 10330, '86993', NULL, 'LIVRO', 'AME-A OU DEIXE-A', 'Dias Gomes', 'BERTRAND BRASIL', '1987', 'OCLC:940057326', 'f000000000885', 'Desconhecido', 199, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(446, '2010-05-07', 2583, '7007', NULL, 'LIVRO', 'Amelia Toledo: Razão e Intuição', 'Elaine Schmidlin, Mirian Celeste Martins, Gisa Picosque', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:816996847', 'f000000000886', 'Desconhecido', 16, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(447, '2015-08-05', 5943, '813', NULL, 'LIVRO', 'Amigos absolutos', 'John Le Carré', 'RECORD', '2005', '8501071927', 'f000000000887', 'Portuguese language materials', 420, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(448, '2009-08-13', 1438, '8135', NULL, 'LIVRO', 'Amor', 'Sue Gerhardt', 'CIA. DAS LETRAS', '2016', '9788582713501', 'f000000000888', 'Psychology', 310, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(449, '2016-10-31', 6359, '8693', NULL, 'LIVRO', 'Amor de Perdição', 'Castelo Branco', 'CIDADE CULTURAL', '0000', 'UBBS:UBBS-00009790', 'f000000000889', 'Desconhecido', 316, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(450, '2023-05-19', 7461, 'AMO360', NULL, 'LIVRO', 'AMOR DE PERDIÇÃO', 'Castelo Branco', 'CIRCULO DO LIVROS S/A', '0000', 'UBBS:UBBS-00009790', 'f000000000891', 'Desconhecido', 316, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(451, '2022-01-28', 7000, 'A554', NULL, 'LIVRO', 'Amor de perdição', 'Castelo Branco', 'KLICK', '0000', 'UBBS:UBBS-00009790', 'f000000000890', 'Desconhecido', 316, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(452, '2024-04-12', 10528, 'AMO625', NULL, 'LIVRO', 'AMOR DE PERDIÇÃO', 'Castelo Branco', 'TRÊS', '0000', 'UBBS:UBBS-00009790', 'f000000000892', 'Desconhecido', 316, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(453, '2010-01-25', 2319, '8693', NULL, 'LIVRO', 'Amor de Perdição - mmemória duma família', 'Camilo Castelo Branco', 'FTD', '2020', '9798663472371', 'f000000000893', 'Desconhecido', 140, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(454, '2023-10-30', 9711, '285', NULL, 'LIVRO', 'AMOR E GUERRA EM CANUDOS', 'Lourenço Cazarré', 'YELLOWFANTE', '2021', '8551308149', 'f000000000894', 'Desconhecido', 224, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(455, '2023-11-17', 9953, 'AMO339', NULL, 'LIVRO', 'AMOR E PERDIÇÃO', 'Castelo Branco', 'KLICK', '0000', 'UBBS:UBBS-00009790', 'f000000000895', 'Desconhecido', 316, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(456, '2009-08-14', 1462, '869935', NULL, 'LIVRO', 'Amrik', 'Ana Maria Miranda', 'CIA. DAS LETRAS', '1997', 'UOM:39015040063847', 'f000000000896', 'Ficção', 216, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(457, '2009-08-20', 1522, '86993', NULL, 'LIVRO', 'Ana e a Margem do Rio', 'Godofredo de Oliveira Neto', 'CIVILIZAÇÃO BRASILEIA', '2008', '8520008879', 'f000000000897', 'Desconhecido', 206, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(458, '2009-08-03', 1247, '891', NULL, 'LIVRO', 'Ana Karênina', 'Liev Tolstói', 'NOVA CULTURA', '2022', '6558470837', 'f000000000898', 'Ficção', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(459, '2023-12-20', 10167, 'ANA195', NULL, 'LIVRO', 'ANAIS DO I CONGRESSO DE INICIAÇÃO CINETÍFICA DA FA', 'Desconhecido', 'MNIA', '2010', '9899613061', 'f000000000900', 'Research', 184, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(460, '2010-12-21', 3159, '614253', NULL, 'LIVRO', 'Análise da Atuação da enfermagem no ambulatório', 'Sônia Maria Brutscher', 'UNB.BR', '2000', '852300565X', 'f000000000901', 'Desconhecido', 235, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(461, '2003-04-10', 755, '6573', NULL, 'LIVRO', 'Análise das Demonstrações Financeiras', 'Clovis Luis Padoveze, Gideon Carvalho de Benedicto', 'ATLAS', '2010', '8522110700', 'f000000000902', 'Educação', 0, 'PT-BR', '2025-04-10 02:20:53', NULL, 5, 4, NULL, '2025-04-09'),
+(462, '2009-05-07', 135, '61444', NULL, 'LIVRO', 'Análise dos Alimentos', 'EDIRA ANDRADE', 'COPIDART', '0000', '8577590070', 'f000000000907', 'Desconhecido', 280, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(463, '2003-04-10', 518, '65815', NULL, 'LIVRO', 'Análise e Controle da Administração Financeira', 'Masakazu Hoji', 'TEXTONOVO', '1999', '852242120X', 'f000000000908', 'Desconhecido', 428, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(464, '2009-06-08', 570, '65815', NULL, 'LIVRO', 'Análise e Controle da Administração Financeira Fun', 'Robert C. Higgins', 'TEXTONOVO', '2014', '9788580553208', 'f000000000909', 'Business & Economics', 465, 'PT-BR', '2025-04-10 02:20:53', NULL, 28, 27, NULL, '2025-04-09'),
+(465, '2003-04-10', 954, '6584038011', NULL, 'LIVRO', 'Análise e Estruturas de Sistemas de Informação', 'Iiba', 'ÉRICA', '2011', '9780981129242', 'f000000000937', 'Business & Economics', 266, 'EN', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(466, '2014-05-30', 5576, '620', NULL, 'LIVRO', 'Análise e Montagem de Sistemas Pneumáticas', 'Ilo da Silva Moreira', 'FESTO DIDACTIC', '2015', '9788583939900', 'f000000000938', 'Technology & Engineering', 333, 'PT-BR', '2025-04-10 02:20:53', NULL, 1, 0, NULL, '2025-04-09'),
+(467, '2011-05-31', 3461, '161', NULL, 'LIVRO', 'Análise Estruturada de Sistemas', 'Paulo Cesar Masiero', 'LTC LIVROS TÉCNICOS E CIENTIFICOS', '1992', 'OCLC:635307084', 'f000000000939', 'Desconhecido', 232, 'PT-BR', '2025-04-10 02:20:53', NULL, 2, 1, NULL, '2025-04-09'),
+(468, '2003-04-10', 710, '658151', NULL, 'LIVRO', 'Análise Financeira das Empresas', 'Jose Pereira da Silva', 'ATLAS', '2010', '8522459037', 'f000000000941', 'Desconhecido', 518, 'PT-BR', '2025-04-10 02:20:54', NULL, 5, 4, NULL, '2025-04-09'),
+(469, '2009-05-20', 275, '65815076', NULL, 'LIVRO', 'Análise Financeira de Balanços', 'Dante C. Matarazzo', 'ATLAS', '1991', '8522400342', 'f000000000946', 'Desconhecido', 232, 'PT-BR', '2025-04-10 02:20:54', NULL, 6, 5, NULL, '2025-04-09'),
+(470, '2014-09-15', 5676, '418', NULL, 'LIVRO', 'Análise linguística nos gêneros textuais', 'Ricardo Santos David', 'SARAIVA', '2021', '9786559567669', 'f000000000952', 'Educação', 306, 'PT-BR', '2025-04-10 02:20:54', NULL, 2, 1, NULL, '2025-04-09'),
+(471, '2003-04-10', 955, '5756', NULL, 'LIVRO', 'Análise Relacional de Sistemas', 'Henrique Pontes Gonçalves de Oliveira', 'ÉRICA', '2019', '9788539629251', 'f000000000954', 'Computers', 219, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(472, '2023-06-07', 7395, '6121741', NULL, 'LIVRO', 'ANATOMIA DO ALONGAMENTO', 'Arnold G Nelson, Jouko Kokkonen', 'MANOLE', '2007', '8520426247', 'f000000000955', 'Desconhecido', 144, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(473, '2023-04-14', 7266, '61161261073', NULL, 'LIVRO', 'ANATOMIA E FISIOLOGIA', 'Gerard J. Tortora, Bryan Derrickson', 'CRV', '2016', '9788582713648', 'f000000000956', 'Medical', 704, 'PT-BR', '2025-04-10 02:20:54', NULL, 2, 1, NULL, '2025-04-09'),
+(474, '2009-05-08', 149, '611', NULL, 'LIVRO', 'Anatomia e Fisiologia Humana', 'Francemilson Goulart da Silva, Gabriela Placoná Diniz', 'E.P.U.', '2021', '9788578083359', 'f000000000958', 'Medical', 109, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(475, '2009-05-05', 120, '61073', NULL, 'LIVRO', 'Anatomia e Movimento Humano', 'Nigel Palastanga, Derek Field, Roger Soames, Nelson Gomes de Oliveira', 'MANOLE', '2000', '8520410014', 'f000000000959', 'Human anatomy', 765, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(476, '2009-05-05', 111, '61073', NULL, 'LIVRO', 'Anatomia Humana', 'Valdemir Rodrigues Pereira, Lisley Alves de Oliveira, Luiz Antonio Pereira, Ricardo Augusto Rotter Montibeller, Eduardo Pereira, Cristiane Regina Ruiz, Sérgio Ricardo Rios Nascimento, Renato Murcia, Magno César Vieira, Alex Kors Vidsiunas', 'MANOLE', '2021', '9788578083021', 'f000000000960', 'Medical', 308, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(477, '2023-10-30', 9716, '7415', NULL, 'LIVRO', 'ANAYDE BEIRIZ: UMA BIOGRAFIA EM QUADRINHOS', 'Luyse Costa', 'JC EDITORA', '2016', '856869909X', 'f000000000961', 'Feminists', 0, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(478, '2011-02-15', 2976, '370', NULL, 'LIVRO', 'Andrés Bello', 'Iván Jaksić', 'MASSANGANA', '2020', '9788594730244', 'f000000000962', 'Biography & Autobiography', 418, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(479, '2023-04-14', 7238, 'AND316', NULL, 'LIVRO', 'ANDROID PARA PROGAMADORES', 'Paul Deitel, Harvey Deitel, Alexander Wald', 'BOOKMAN', '2016', '9788582604120', 'f000000000963', 'Computers', 456, 'PT-BR', '2025-04-10 02:20:54', NULL, 2, 1, NULL, '2025-04-09'),
+(480, '2022-01-26', 6977, 'B869.3', NULL, 'LIVRO', 'Angola Janga', 'Marcelo d\'Salete', 'VENETA', '2018', '9898513799', 'f000000000965', 'Desconhecido', 432, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(481, '2010-12-21', 3266, '71140981611', NULL, 'LIVRO', 'Anhangabaú: História e urbanismo', 'José Geraldo Simões Júnior', 'SENAC', '2003', 'UTEXAS:059173015280120', 'f000000000966', 'Anhangabaú (São Paulo, Brazil)', 204, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(482, '2011-02-15', 2946, '370', NULL, 'LIVRO', 'Anísio Teixeira', 'Mônica Almeida Kornis', 'MASSANGANA', '2001', 'OCLC:817052017', 'f000000000967', 'Desconhecido', 24, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(483, '2010-05-07', 2584, '7007', NULL, 'LIVRO', 'Anita Malfatti: Modernista por Natureza', 'Cacá Vicalvi, Instituto Arte na Escola', 'MINISTÉRIO DA EDUCAÇÃO', '2001', 'OCLC:817957773', 'f000000000968', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(484, '2024-02-19', 10211, '285', NULL, 'LIVRO', 'ANJO DA MORTE', 'Marcos J. Sterenkrantz', 'MODERNA', '1966', 'UTEXAS:059173022994229', 'f000000000969', 'Desconhecido', 184, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(485, '2009-08-10', 1394, '853', NULL, 'LIVRO', 'Anjo Negro', 'Nelson Rodrigues', 'ROCCO', '2013', '9788520934371', 'f000000000970', 'Performing Arts', 68, 'PT-BR', '2025-04-10 02:20:54', NULL, 2, 1, NULL, '2025-04-09'),
+(486, '2009-08-13', 1440, '813', NULL, 'LIVRO', 'Anjos e Demônios', 'Dan Brown', 'SEXTANTE', '2012', '9788580410860', 'f000000000972', 'Ficção', 702, 'PT-BR', '2025-04-10 02:20:54', NULL, 2, 1, NULL, '2025-04-09'),
+(487, '2023-12-04', 10071, '285', NULL, 'LIVRO', 'ANNE DE GREEN GABLES', 'L. M. Montgomery', 'ESCALA', '2017', '9781509847389', 'f000000000974', 'Juvenile Fiction', 319, 'EN', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(488, '2023-12-20', 10183, '285', NULL, 'LIVRO', 'ANNE FRANK - A MEMÓRIA DO HOLOCAUSTO', 'Theo Coster', 'NAVEGARE', '2012', '9789892317939', 'f000000000975', 'Biography & Autobiography', 151, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(489, '2009-10-27', 1962, '7098106', NULL, 'LIVRO', 'Anos 60/70 - Museu de Arte Moderna', 'Desconhecido', 'MAM', '1992', 'UTEXAS:059173015227296', 'f000000000976', 'Arte', 132, 'EN', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(490, '2009-10-27', 1961, '7098106', NULL, 'LIVRO', 'Anos 80 O palco da DIversidade', 'Museu de Arte Moderna Coleção Gilberto Chateaubriand', 'MAM', '1995', 'OCLC:944924591', 'f000000000977', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(491, '2010-12-21', 3107, '3167', NULL, 'LIVRO', 'Anos JK: margens da Modernidade', 'Desconhecido', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2002', 'UTEXAS:059173010089457', 'f000000000978', 'Architecture and state', 176, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(492, '2023-06-01', 7401, '1581', NULL, 'LIVRO', 'ANSIEDADE - COMO ENFRENTAR O AML DO SÉCULO', 'Saba Marques', 'SARAIVA', '0000', 'ans294343491', 'f000000000979', 'Self-Help', 62, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(493, '2023-07-31', 7400, '15246', NULL, 'LIVRO', 'ANSIEDADE 2', 'Augusto Cury', 'SARAIVA', '2016', '8557170432', 'f000000000980', 'Psychology', 0, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(494, '2010-01-27', 2371, '910', NULL, 'LIVRO', 'Antártica', 'Laura Klink, Tamara Klink, Marininha Klink', 'MINISTÉRIO DA EDUCAÇÃO', '2016', '9788575964262', 'f000000000981', 'Viagem', 72, 'PT-BR', '2025-04-10 02:20:54', NULL, 2, 1, NULL, '2025-04-09'),
+(495, '2023-10-27', 9684, 'B8698', NULL, 'LIVRO', 'ANTES DO BAILE VERDE', 'Lygia Fagundes Telles', 'BONIFÁCIO', '2009', '9788563397379', 'f000000000983', 'Ficção', 212, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(496, '2009-08-14', 1470, '180', NULL, 'LIVRO', 'Antes e Depois de Sócrates', 'Francis McDonald Cornford', 'MARTINS FONTES', '1994', 'OCLC:457552660', 'f000000000984', 'Desconhecido', 80, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(497, '2015-09-10', 5971, '610', NULL, 'LIVRO', 'Antibioticoterapia', 'Narcilio Freitas Damasceno; Taciana Silveira; Ana Paula Silveira', 'MEDSI', '2022', '9786500549157', 'f000000000985', 'Medical', 97, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(498, '2009-10-15', 1927, '285', NULL, 'LIVRO', 'Antologia da poesia barroca brasileira', 'Desconhecido', 'IBEP', '2008', '8534222126', 'f000000000986', 'Desconhecido', 159, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(499, '2010-01-26', 2361, '869', NULL, 'LIVRO', 'Antologia da Sabedoria', 'Desconhecido', 'MINOX', '1969', 'OCLC:819738911', 'f000000000987', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(500, '2009-08-31', 1565, '8699308', NULL, 'LIVRO', 'Antologia de Contos Brasileiro do Romantismo ao Mo', 'Mario Higa', 'MODERNA', '2017', '9788578651220', 'f000000000988', 'Ficção', 273, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(501, '2023-11-21', 9960, 'ANT269', NULL, 'LIVRO', 'ANTOLOGIA DOS CONTOS', 'Maria Lúcia Medeiros', 'ADAMANTINA', '2009', '8589916014', 'f000000000989', 'Desconhecido', 167, 'PT-BR', '2025-04-10 02:20:54', NULL, 4, 3, NULL, '2025-04-09'),
+(502, '2023-10-05', 9563, 'ANT502', NULL, 'LIVRO', 'ANTOLOGIA ESCOLAR DE CONTOS BRASILEIROS', 'Desconhecido', 'EDIOURO', '1979', 'OCLC:1390256509', 'f000000000993', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(503, '2010-01-11', 2072, '102', NULL, 'LIVRO', 'Antologia Ilustrada de Filosofia', 'Ubaldo Nicola', 'GLOBAL', '2005', '8525038997', 'f000000000994', 'Desconhecido', 479, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(504, '2023-11-06', 9801, 'B8691', NULL, 'LIVRO', 'ANTOLOGIA POÉTICA', 'Cecília Meireles', 'A PÁGINA', '2020', '9786556120287', 'f000000001025', 'Poesia', 381, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(505, '2009-08-27', 1539, '86991', NULL, 'LIVRO', 'Antologia Poética', 'Cecília Meireles', 'CIVILIZAÇÃO BRASILEIA', '2020', '9786556120287', 'f000000000999', 'Poesia', 381, 'PT-BR', '2025-04-10 02:20:54', NULL, 1, 0, NULL, '2025-04-09'),
+(506, '2014-08-05', 5601, '8699108', NULL, 'LIVRO', 'Antologia poética', 'Cecília Meireles', 'COMPANHIA DAS LETRAS', '2020', '9786556120287', 'f000000001002', 'Poesia', 381, 'PT-BR', '2025-04-10 02:22:30', NULL, 22, 21, NULL, '2025-04-09'),
+(507, '2023-11-01', 9775, 'B8691', NULL, 'LIVRO', 'ANTOLOGIA POÉTICA', 'Cecília Meireles', 'GLOBAL', '2020', '9786556120287', 'f000000001024', 'Poesia', 381, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(508, '2009-08-13', 1441, '285', NULL, 'LIVRO', 'Antologia Poética', 'Cecília Meireles', 'NOVA FRONTEIRA', '2020', '9786556120287', 'f000000000995', 'Poesia', 381, 'PT-BR', '2025-04-10 02:20:54', NULL, 5, 4, NULL, '2025-04-09'),
+(509, '2014-08-01', 5596, '86991', NULL, 'LIVRO', 'Antologia poética', 'Cecília Meireles', 'RECORD', '2020', '9786556120287', 'f000000001001', 'Poesia', 381, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(510, '2011-03-23', 3241, '8699108', NULL, 'LIVRO', 'Antologia Poética - Vinicius de Moaes', 'Vinícius de Moraes', 'CIA. DAS LETRAS', '1960', 'OCLC:2310710', 'f000000001026', 'Desconhecido', 260, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(511, '2011-03-23', 3242, '8699108', NULL, 'LIVRO', 'Antologia Poética - Vinicius de Moraes', 'Vinícius de Moraes', 'CIA. DAS LETRAS', '1960', 'OCLC:2310710', 'f000000001027', 'Desconhecido', 260, 'PT-BR', '2025-04-10 02:22:30', NULL, 4, 3, NULL, '2025-04-09'),
+(512, '2010-10-05', 2839, '285', NULL, 'LIVRO', 'Antologia poética/ Cecília Meireles', 'Cecília Meireles', 'NOVA FRONTEIRA', '2020', '9786556120287', 'f000000001031', 'Poesia', 381, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(513, '2009-08-10', 1393, '86993', NULL, 'LIVRO', 'Antologia: Meus Contos Preferido', 'Lygia Fagundes Telles', 'ROCCO', '2004', 'IND:30000100688765', 'f000000001032', 'Brazilian fiction', 328, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(514, '2011-02-15', 2977, '370', NULL, 'LIVRO', 'Anton Makarenko', 'Cecília da Silveira Luedemann', 'MASSANGANA', '2005', '8587394347', 'f000000001033', 'Desconhecido', 432, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(515, '2011-02-15', 2978, '370', NULL, 'LIVRO', 'Antonio Gramsci', 'Gianni Fresu', 'MASSANGANA', '2020', '9786557170038', 'f000000001034', 'Biography & Autobiography', 566, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(516, '2010-12-21', 3071, '730092', NULL, 'LIVRO', 'Antonio Lizárraga: Quadros em Quadros', 'Annateresa Fabris', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2000', '8587073184', 'f000000001035', 'Desconhecido', 296, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(517, '2010-05-07', 2585, '7007', NULL, 'LIVRO', 'Antonio Saggese: Arqueologia da Imagem', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:817080171', 'f000000001036', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(518, '2013-06-07', 5380, '770', NULL, 'LIVRO', 'Ao Aroma do café', 'Daniel Choma, Tati Costa', 'CÂMARA CLARA', '2013', '8562002062', 'f000000001037', 'Coffee', 148, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(519, '2011-02-15', 2947, '370', NULL, 'LIVRO', 'Aparecida Joly Gouveia', 'Menga Lüdke, Fundação Joaquim Nabuco', 'MASSANGANA', '2010', '8570195303', 'f000000001038', 'Desconhecido', 145, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(520, '2010-12-21', 3029, '70998161', NULL, 'LIVRO', 'APCA 50 anos de Arte Brasileira', 'Associação Paulista de Críticos de Artes', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2006', 'STANFORD:36105124230793', 'f000000001039', 'Art critics', 172, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(521, '2003-04-10', 994, '5133', NULL, 'LIVRO', 'Aplicações em Visual Basic 6', 'Adilson da Silva Lima', 'ÉRICA', '1999', '8571946639', 'f000000001040', 'Desconhecido', 256, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(522, '2013-10-30', 5395, '41', NULL, 'LIVRO', 'Aprenda a usar o computador e a Internet através d', 'Kushantha Gunawardana', 'READER\'S DIGEST BRASIL', '2023', '9788575228470', 'f000000001041', 'Computers', 421, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(523, '2013-11-05', 5402, '66', NULL, 'LIVRO', 'Aprenda Microsoft Visio 2002', 'Desconhecido', 'CAMPUS', '2001', 'OCLC:667095696', 'f000000001042', 'Computer graphics', 181, 'EN', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(524, '2023-11-01', 9759, '7415', NULL, 'LIVRO', 'APRENDENDO A CAIR', 'Mikaël Ross', 'NEMO', '2020', '9786586128031', 'f000000001043', 'Comics & Graphic Novels', 132, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(525, '2021-12-03', 6558, '8698', NULL, 'LIVRO', 'Aprendendo a viver', 'LUCIUS ANNAEUS SENECA', 'SOCIEDADE LITERÁRIA', '2002', '8533615477', 'f000000001044', 'Desconhecido', 256, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(526, '2023-05-02', 7489, '370981', NULL, 'LIVRO', 'APRENDENDO COM A PRÓPRIA HISTÓRIA', 'Paulo Freire', 'PAZ E TERRA', '2021', '8577534324', 'f000000001045', 'Educators', 0, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(527, '2023-08-31', 8785, '53007', NULL, 'LIVRO', 'APRENDENDO FÍSICA 3', 'Francisco Finardi, Carla Ulasowicz', 'SCIPIONE', '2023', '9786525125343', 'f000000001046', 'Educação', 343, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(528, '2003-04-10', 972, '5', NULL, 'LIVRO', 'Aprendendo Java 2', 'Rodrigo Fernandes de Mello, Ramon Chiara, Renato Villela', 'NOVATEC', '2002', '8575220217', 'f000000001047', 'Desconhecido', 191, 'PT-BR', '2025-04-10 02:22:30', NULL, 2, 1, NULL, '2025-04-09'),
+(529, '2010-12-21', 3132, '37241', NULL, 'LIVRO', 'Aprendendo Portugues nas Escolas-Tiriyó e Kaxuyana', 'Desconhecido', 'LEPÉ', '2010', '8570607628', 'f000000001049', 'Portuguese language', 177, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(530, '2003-04-10', 983, '5133', NULL, 'LIVRO', 'Aprendendo Programação na Internet com Visual Basi', 'Rodrigo Vollo Antonio Rodrigues', 'ÉRICA', '2016', '9788592122102', 'f000000001050', 'Computers', 216, 'EN', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(531, '2009-10-07', 1858, '370156', NULL, 'LIVRO', 'Aprender a Ler: Vencendo o Fracasso', 'Eveline Charmeux', 'CORTEZ', '1994', '8524905409', 'f000000001051', 'Desconhecido', 143, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(532, '2009-10-06', 1855, '37262', NULL, 'LIVRO', 'Aprender e Praticar Gramática', 'Mauro Ferreira', 'FTD', '1992', '8532206700', 'f000000001052', 'Desconhecido', 470, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(533, '2023-08-11', 8278, 'APR695', NULL, 'LIVRO', 'APRENDER SEMPRE', 'Claudia Castro Lobo', 'SÃO PAULO', '2015', '9897360093', 'f000000001053', 'Desconhecido', 90, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(534, '2010-12-21', 3134, '37135', NULL, 'LIVRO', 'Aprendizagem a Distância', 'Fredric M. Litto', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2010', 'STANFORD:36105217829311', 'f000000001054', 'Distance education', 100, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(535, '2009-05-20', 281, '6584062', NULL, 'LIVRO', 'Aprendizagem e Inovação Organizacional', 'Afonso Carlos Corrêa Fleury, Maria Tereza Leme Fleury', 'ATLAS', '1995', '8522413215', 'f000000001055', 'Desconhecido', 237, 'PT-BR', '2025-04-10 02:22:30', NULL, 6, 5, NULL, '2025-04-09'),
+(536, '2022-01-26', 6955, '39820981', NULL, 'LIVRO', 'Aqui tem coisa', 'Patativa do Assaré', 'CONFIANÇA', '2022', '9788577157136', 'f000000001061', 'Poesia', 255, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(537, '2010-01-20', 2222, '86993', NULL, 'LIVRO', 'Ardentia', 'Desconhecido', 'NOVA FRONTEIRA', '0000', '9788564280267', 'f000000001062', 'Desconhecido', 196, 'EN', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(538, '2009-08-31', 1561, '8531', NULL, 'LIVRO', 'Argo e seu Dono', 'Italo Svevo', 'BERLENDIS & VERTECCHIA EDITORES', '2021', '9786587921303', 'f000000001063', 'Ficção', 125, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(539, '2024-03-18', 10297, '86993', NULL, 'LIVRO', 'ARMADILHAS DA MENTE', 'Augusto Cury', 'ARQUEIRO', '2020', '9786555640427', 'f000000001064', 'Self-Help', 270, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(540, '2011-02-15', 2948, '370', NULL, 'LIVRO', 'Armanda Álvaro Alberto', 'Dalva Lazaroni', 'MASSANGANA', '2010', 'LCCN:2012319085', 'f000000001065', 'Educação', 590, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(541, '2009-10-29', 1970, '323490981', NULL, 'LIVRO', 'Arquivo em Imagens', 'Adriana Maria Cursino de Menezes', 'SECRETARIA DE ESTADO DA CULTURA', '2023', '9786525031231', 'f000000001066', 'Language Arts & Disciplines', 210, 'PT-BR', '2025-04-10 02:22:30', NULL, 3, 2, NULL, '2025-04-09'),
+(542, '2009-10-29', 1969, '770981', NULL, 'LIVRO', 'Arquivos em Imagens', 'Ana Cristina de Albuquerque, Aline Lopes de Lacerda, André Porto Ancona Lopez, André Malverdes, Miriam Paula Manini, Anna Carla Almeida Mariz, Roberta Pinto Medeiros, Rúbia Martins, Bruno de Andrea Roma, Marcelo Nogueira de Siqueira, Izângela Maria Sansoni Tonello, Regina Aranda da Cruz Galo, Sonia Troitiño, Ana Carolina Simionato Arakaki, Fabiana Costa Dias, Roberta Mociaro Zanatta, Marcos Issa, Laura Maria Del Mar Lourenço, Geovane José De Oliveira, Sergio Ranalli, Elisabete Marin Ribas, Cristal Magalhães da Rocha, Rubens Ribeiro Gonçalves da Silva', 'FUNDUNESP', '2022', '9786559542772', 'f000000001069', 'Photography', 452, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(543, '2009-07-30', 1160, '813', NULL, 'LIVRO', 'Arrebatado pela Mar', 'Nora Roberts', 'BERTRAND BRASIL', '2018', '9788528623710', 'f000000001070', 'Ficção', 431, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(544, '2024-10-01', 10968, '37319', NULL, 'LIVRO', 'ARTE 1 - O QUE É \"BELO\"?', 'Desconhecido', 'FTD', '0000', '8585426756', 'f000000001071', 'Desconhecido', 60, 'EN', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(545, '2024-10-01', 10959, '37319', NULL, 'LIVRO', 'ARTE 10 - ARTE E CULTURAS ORIENTAIS', 'Arte em Madeira, Artesanato, Online Editora', 'FTD', '2021', 'art687950799', 'f000000001072', 'Arte', 33, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(546, '2024-10-01', 10958, '37319', NULL, 'LIVRO', 'ARTE 11 - ARTE E CULTURAS OCIDENTAIS: ÁFRICA E AME', 'Desconhecido', 'FTD', '0000', 'N/A', 'f000000001073', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(547, '2024-10-01', 10957, '37319', NULL, 'LIVRO', 'ARTE 12 - ARTE INDÍGENA BRASILEIRA', 'Maria Heloisa Fénelon Costa, Museu Nacional de Belas Artes (Brazil)', 'FTD', '1983', 'UTEXAS:059173018587072', 'f000000001074', 'Arte', 58, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(548, '2024-10-01', 10967, '37319', NULL, 'LIVRO', 'ARTE 2 - O ELO NO MUNDO CONTEMPORÂNEO', 'Ramón Máiz, Ramón Máiz Suárez', 'FTD', '2011', '9788498653960', 'f000000001075', 'Desconhecido', 318, 'GL', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(549, '2024-10-01', 10966, '37319', NULL, 'LIVRO', 'ARTE 3 - MANIFESTAÇÕES ARTÍSTICAS PRÉ-HISTÓRICAS', 'Mario Consens', 'FTD', '2007', '9789974804975', 'f000000001076', 'Arte', 189, 'ES', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(550, '2024-10-01', 10965, '37319', NULL, 'LIVRO', 'ARTE 4 - POVOS ANTIGOS DO ORIENTE MÉDIO', 'Patrícia Bencardini', 'FTD', '2012', '9788579230042', 'f000000001077', 'Performing Arts', 221, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(551, '2024-10-01', 10964, '37319', NULL, 'LIVRO', 'ARTE 5 - CIVILIZAÇÃO DO ORIENTE', 'Alcántara, Manuel, García Montero, Mercedes, Sánchez López, Francisco', 'FTD', '2018', '9788490129166', 'f000000001078', 'Arte', 1191, 'ES', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(552, '2024-10-01', 10963, '37319', NULL, 'LIVRO', 'ARTE 6 - ESTÉTICA GREGA: OS MITOS E A FILOSOFIA', 'Desconhecido', 'FTD', '0000', 'N/A', 'f000000001079', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(553, '2024-10-01', 10962, '37319', NULL, 'LIVRO', 'ARTE 7 - ARTE GREGA', 'Desconhecido', 'FTD', '0000', '8535212612', 'f000000001080', 'Desconhecido', 408, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(554, '2024-10-01', 10961, '37319', NULL, 'LIVRO', 'ARTE 8 - ARTE, PODER E FÉ I', 'Mathias de SOUSA VILLALOBOS', 'FTD', '0000', 'BL:A0022100617', 'f000000001081', 'Desconhecido', 238, 'EN', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(555, '2024-10-01', 10960, '37319', NULL, 'LIVRO', 'ARTE 9 - ARTE, PODER E FÉ II', 'Alvaro Soler del Campo, National Gallery of Art (Estados Unidos), Sociedad Estatal para la Acción Cultural Exterior (Spain)', 'FTD', '2009', 'UCBK:C106160474', 'f000000001082', 'Design', 314, 'EN', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(556, '2010-12-21', 3194, '70981', NULL, 'LIVRO', 'Arte Brasileira', 'Sonia Gomes Pereira', 'CIA NACIONAL DO LIVROS', '2008', 'STANFORD:36105132372454', 'f000000001083', 'Arte, Brazilian', 140, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(557, '2009-10-29', 1973, '70403981', NULL, 'LIVRO', 'Arte Brasileira', 'Sonia Gomes Pereira', 'CIA. EDITORA NACIONAL', '2008', 'STANFORD:36105132372454', 'f000000001084', 'Arte, Brazilian', 140, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(558, '2023-08-31', 8778, '690720', NULL, 'LIVRO', 'ARTE DE PROJETAR EM ARQUITETURA', 'Ernst Neufert, BENELISA FRANCO', 'GG', '2013', '8565985083', 'f000000001085', 'Desconhecido', 432, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(559, '2010-05-07', 2587, '7007', NULL, 'LIVRO', 'Arte e Matéria', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:817081036', 'f000000001086', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(560, '2009-10-30', 1986, '707', NULL, 'LIVRO', 'Arte na Educação Escolar', 'Desconhecido', 'CORTEZ', '0000', '9788599583944', 'f000000001087', 'Desconhecido', 26, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(561, '2009-10-29', 1972, '7450981', NULL, 'LIVRO', 'Arte Popular Séculos 20 e 21', 'Percival Tirapeli', 'CIA. EDITORA NACIONAL', '2006', 'STANFORD:36105123167780', 'f000000001088', 'Architecture', 92, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(562, '2009-11-05', 2007, '700', NULL, 'LIVRO', 'Arte, Historia & Produção', 'Carla Paula Brondi Calabria, Raquel Valle Martins', 'FTD', '0000', '8532235301', 'f000000001089', 'Desconhecido', 144, 'PT-BR', '2025-04-10 02:22:30', NULL, 10, 9, NULL, '2025-04-09'),
+(563, '2023-02-03', 8694, '700', NULL, 'LIVRO', 'ARTES VISUAIS', 'Associação Brasil 500 Anos Artes Visuais', 'FTD', '2000', 'OCLC:50833726', 'f000000001099', 'Arte', 40, 'EN', '2025-04-10 02:22:30', NULL, 6, 5, NULL, '2025-04-09'),
+(564, '2017-01-10', 6428, '3711024', NULL, 'LIVRO', 'Artes visuais na educação inclusiva', 'Rodrigo Hübner Mendes, José Cavalhero, Ana Maria Caira Gitahy', 'PETRÓPOLIS', '2010', '8575961845', 'f000000001105', 'Arte', 143, 'PT-BR', '2025-04-10 02:22:30', NULL, 2, 1, NULL, '2025-04-09'),
+(565, '2009-07-31', 1181, '285', NULL, 'LIVRO', 'Arthur e os Minimoys', 'Luc Besson', 'MARTINS', '2005', '8599102168', 'f000000001107', 'Desconhecido', 255, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(566, '2023-08-29', 8733, '808066', NULL, 'LIVRO', 'ARTIGOS CIENTÍFICOS', 'Luiz CORRÊA', 'GUANABARA KOOGAN', '2018', '1983311855', 'f000000001108', 'Desconhecido', 138, 'PT-BR', '2025-04-10 02:22:30', NULL, 2, 1, NULL, '2025-04-09'),
+(567, '1011-12-21', 3088, '730981', NULL, 'LIVRO', 'Artistas Brasileiros', 'Desconhecido', 'EDUSP', '1980', 'OCLC:950105144', 'f000000001110', 'Desconhecido', 0, 'EN', '2025-04-10 02:22:30', NULL, 3, 2, NULL, '2025-04-09'),
+(568, '2010-12-21', 3061, '791430981', NULL, 'LIVRO', 'Ary Fernandes: sua fascinandes história', 'Desconhecido', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '0000', 'N/A', 'f000000001113', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(569, '2010-12-21', 3038, '791092', NULL, 'LIVRO', 'Ary Fontoura: entre rios e janeiros', 'Rogério Menezes', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2006', 'UIUC:30112082670941', 'f000000001114', 'Biography & Autobiography', 244, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(570, '2014-02-04', 5512, '285', NULL, 'LIVRO', 'As 17 Cores do Branco', 'Luiz Raul Machado', 'RECORD', '2012', '850109448X', 'f000000001115', 'Ficção', 129, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(571, '2023-09-19', 9247, 'ASA213', NULL, 'LIVRO', 'AS ALIANÇAS', 'Lêdo Ivo', 'CULTURAL BRASIL', '1982', 'OCLC:1416333238', 'f000000001116', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(572, '2023-12-11', 10152, 'B8693', NULL, 'LIVRO', 'AS AMIGAS QUE FIZ', 'Marcus Buckingham', 'ROTA IMAGINÁRIA', '2015', '9789898781154', 'f000000001117', 'Business & Economics', 245, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(573, '2009-07-29', 1143, '813', NULL, 'LIVRO', 'As Areias do Tempo', 'Salim Miguel', 'RECORD', '1988', 'UCAL:B3696809', 'f000000001118', 'Desconhecido', 116, 'PT-BR', '2025-04-10 02:22:30', NULL, 2, 1, NULL, '2025-04-09'),
+(574, '2009-10-15', 1937, '86364', NULL, 'LIVRO', 'As aventuras de El Cid Campeador', 'Jose Arrabal, DANIEL ARAUJO', 'PAULINAS', '2008', '8535622403', 'f000000001120', 'Desconhecido', 175, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(575, '2024-03-26', 10313, '7415', NULL, 'LIVRO', 'AS AVENTURAS DE MIKE', 'Gabriel Dearo, Manu Digilio', 'PLANETA', '2019', '9788542217636', 'f000000001121', 'Young Adult Fiction', 137, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(576, '2012-08-29', 5267, '813', NULL, 'LIVRO', 'As Aventuras de Nick Adams', 'Ernest Hemingway', 'ARTENOVA', '1973', 'OCLC:819722286', 'f000000001122', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:30', NULL, 2, 1, NULL, '2025-04-09'),
+(577, '2014-02-04', 5510, '285', NULL, 'LIVRO', 'As aventuras de Pinoquio', 'Carlo Collodi', 'COSAC NAIFY', '2016', '9788573215168', 'f000000001124', 'Ficção', 24, 'PT-BR', '2025-04-10 02:22:30', NULL, 1, 0, NULL, '2025-04-09'),
+(578, '2009-09-23', 1653, '821', NULL, 'LIVRO', 'As aventuras de Robinson Crusoé', 'Daniel Defoe', 'L&PM', '1997', '9788525422576', 'f000000001125', 'Ficção', 345, 'PT-BR', '2025-04-10 02:22:30', NULL, 10, 9, NULL, '2025-04-09'),
+(579, '2009-08-14', 1479, '285', NULL, 'LIVRO', 'As Aventuras de Tom Sawyer', 'Mark Twain', 'ÁTICA', '2017', '9788551302866', 'f000000001135', 'Juvenile Fiction', 298, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(580, '2023-09-19', 9205, '285', NULL, 'LIVRO', 'AS AVENTURAS DO BARÃO DE MUNCHAUSEN', 'Rudolf Erich Raspel', 'ILUMINURAS', '2000', '8573213310', 'f000000001136', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(581, '2010-12-21', 3082, '700', NULL, 'LIVRO', 'As belas-artes reduzidas a um mesmo princípio', 'Charles Batteux, MARCO AURELIO WERLE', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2009', '8577321061', 'f000000001138', 'Desconhecido', 172, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(582, '2024-05-22', 10638, 'ASB760', NULL, 'LIVRO', 'AS BRUMAS DE AVALON', 'Marion Zimmer Bradley', 'NOVA CULTURA', '2017', '9788542212181', 'f000000001139', 'Ficção', 1, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(583, '2024-04-04', 10397, '813', NULL, 'LIVRO', 'AS BRUMAS DE AVALON - A SENHORA DA MAGIA', 'Marion Zimmer Bradley', 'IMAGO', '2015', '9789896377069', 'f000000001140', 'Desconhecido', 447, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(584, '2024-11-05', 11008, '86998008', NULL, 'LIVRO', 'AS CEM MELHORES CRÔNICAS BRASILEIRAS', 'Joaquim Ferreira dos Santos', 'OBJETIVA', '2007', 'STANFORD:36105133434766', 'f000000001141', 'Ficção', 368, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(585, '2014-01-21', 5434, '86992', NULL, 'LIVRO', 'As Centenárias & Maria do Caritó', 'Desconhecido', 'TERCEIRO NOME', '0000', 'N/A', 'f000000001142', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(586, '2023-04-06', 7163, 'ASC698', NULL, 'LIVRO', 'AS CHAVES DO REINO', 'Desconhecido', 'RECORD', '1958', 'OCLC:912747736', 'f000000001143', 'Desconhecido', 374, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(587, '2011-06-17', 3554, '85391', NULL, 'LIVRO', 'As Cidades Invisíveis', 'Italo Calvino', 'CIA. DAS LETRAS', '1990', '9788580863024', 'f000000001144', 'Ficção', 156, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(588, '2023-06-02', 7367, '813', NULL, 'LIVRO', 'AS CINCO PESSOAS QUE VOCÊ ENCONTRA NO CÉU', 'Mitch Albom', 'ARQUEIRO', '2004', '8575421425', 'f000000001145', 'Accident victims', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(589, '2023-12-11', 10141, '8692', NULL, 'LIVRO', 'AS CONCHAMBRANÇAS DE QUADERMA', 'Ariano Suassuna', 'PETRA', '2018', '9788520943564', 'f000000001146', 'Drama', 160, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(590, '2017-01-09', 6370, '374', NULL, 'LIVRO', 'As demandas sociais educação continuada nas organi', 'Lubia Faeth Alves Ferreira', 'CEETEPS', '2024', '9788585264253', 'f000000001147', 'Educação', 151, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(591, '2024-04-12', 10532, 'ASD943', NULL, 'LIVRO', 'AS DUAS FIANDEIRAS', 'Gomes de Amorim', 'TRÊS', '1973', 'OCLC:817535370', 'f000000001148', 'Desconhecido', 248, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(592, '2010-02-23', 2441, '669', NULL, 'LIVRO', 'As Estampas- A Eletroerosão Os Moldes', 'ROGER MEROZ, MARCEL CUENDET', 'HEMUS', '0000', '8528902099', 'f000000001149', 'Desconhecido', 330, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(593, '2010-05-07', 2588, '7007', NULL, 'LIVRO', 'As Fábulas de Antonio Poteiro', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:817080875', 'f000000001150', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(594, '2023-12-11', 10148, '285', NULL, 'LIVRO', 'AS FERAS CÚMPLICES', 'Robert Henry Srour', 'LIVROS DA RAPOSA VERMELHA', '2009', '9788535233940', 'f000000001151', 'Desconhecido', 177, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(595, '2014-01-23', 5481, '89513', NULL, 'LIVRO', 'As filhas sem nome', 'Gardenia Yud', 'BOA VIAGEM', '2013', '9781490800141', 'f000000001152', 'Ficção', 240, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(596, '2009-07-31', 1195, '841', NULL, 'LIVRO', 'As Flores do Mal', 'Charles Baudelaire', 'NOVA FRONTEIRA', '2013', '9788520926413', 'f000000001153', 'Poesia', 617, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(597, '2022-01-26', 6957, '808899282', NULL, 'LIVRO', 'As gêmeas da família', 'Stella Maris Rezende', 'GLOBO', '2023', '9788525054944', 'f000000001154', 'Juvenile Fiction', 129, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(598, '2010-01-25', 2331, '33847', NULL, 'LIVRO', 'As Leis e o Turismo', 'Moisés de Lemos Martins, Rosânia da Silva', 'TEXTONOVO', '2021', '9789898974563', 'f000000001155', 'Social Science', 247, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(599, '2010-12-21', 3316, '363690981', NULL, 'LIVRO', 'As marcas do Ialã', 'Desconhecido', 'BARSA PLANETA', '2002', '8439594186', 'f000000001156', 'Desconhecido', 0, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(600, '2010-05-17', 2611, 'AMO889', NULL, 'LIVRO', 'As Margens do Oceano Cósmico', 'Rafael Arrais', 'ABRIL', '2024', 'asm059269016', 'f000000001157', 'Ciência', 256, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(601, '2012-05-15', 4684, '86998', NULL, 'LIVRO', 'As Melhores Crônicas de Fernando Sabino', 'Fernando Sabino', 'BESTBOLSO', '1986', '8577991245', 'f000000001158', 'Desconhecido', 208, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(602, '2012-08-03', 4860, '86993', NULL, 'LIVRO', 'As melhores crônicas/Fernando Sabino', 'Fernando Tavares Sabino', 'RECORD', '1996', '8521000189', 'f000000001159', 'Desconhecido', 1144, 'PT-BR', '2025-04-10 02:22:31', NULL, 9, 8, NULL, '2025-04-09'),
+(603, '2023-12-11', 10142, '2013', NULL, 'LIVRO', 'AS MELHORES HISTÓRIAS DA MITOLOGIA', 'A. S. Franchini, Carmen Seganfredo', 'VIA LÁCTEA', '2003', '9788525408211', 'f000000001168', 'Ficção', 842, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(604, '2014-02-04', 5495, '86998', NULL, 'LIVRO', 'As melhores histórias de fernando sabino', 'Fernando Sabino', 'BESTBOLSO', '2024', '9786558550112', 'f000000001169', 'Ficção', 203, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(605, '2010-01-25', 2313, '285', NULL, 'LIVRO', 'As Memórias da Bruxa Onilda', 'Enric Larreula i Vidal, Roser Capdevila i Valls', 'SCIPIONE', '1993', '8526216376', 'f000000001170', 'Desconhecido', 31, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(606, '2009-08-14', 1466, '86993', NULL, 'LIVRO', 'As Meninas', 'Eliane Trindade', 'ROCCO', '2005', 'STANFORD:36105121930288', 'f000000001171', 'Social Science', 428, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(607, '2023-05-25', 7475, 'ASM426', NULL, 'LIVRO', 'AS MIL E UMA NOITES', 'Antoine Galland', 'SOL', '2015', '9788595081420', 'f000000001172', 'Ficção', 1116, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(608, '2023-09-01', 8867, 'ASM228', NULL, 'LIVRO', 'AS MONTANHAS E OS VULCÕES', 'Maria Helena Guedes', 'MALTESE', '2016', 'PKEY:CLDEAU27873', 'f000000001173', 'Juvenile Nonfiction', 60, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(609, '2024-02-09', 10193, 'B8693', NULL, 'LIVRO', 'AS PESSOAS LÁ DE FORA', 'Marcos Aragão Correia', 'LONGARINA', '2010', '9781481797832', 'f000000001174', 'Juvenile Nonfiction', 148, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(610, '2003-04-10', 514, '6583', NULL, 'LIVRO', 'As Pessoas na Organização', 'Maria Tereza Leme Fleury', 'GENTE', '2002', '8573123664', 'f000000001175', 'Human capital', 306, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(611, '2023-09-01', 8872, 'ASP268', NULL, 'LIVRO', 'AS PLANTAS, AS FLORES E AS ÁRVORES', 'Desconhecido', 'MALTESE', '1986', 'OCLC:816840767', 'f000000001176', 'Desconhecido', 59, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(612, '2010-01-25', 2330, '930', NULL, 'LIVRO', 'As Primeiras Civilizações', 'Jaime Pinsky', 'ATUAL', '2015', '9788572447591', 'f000000001177', 'História', 145, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(613, '2010-01-13', 2147, '86993', NULL, 'LIVRO', 'As Pupilas do Senhor Reitor', 'Júlio Dinis', 'EDIOURO', '2022', '9789897027628', 'f000000001178', 'Ficção', 314, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(614, '2024-04-12', 10518, 'ASP329', NULL, 'LIVRO', 'AS PUPILAS DO SENHOR REITOR', 'Júlio Dinis', 'TRÊS', '2022', '9789897027628', 'f000000001179', 'Ficção', 314, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(615, '2012-08-29', 5242, '82391', NULL, 'LIVRO', 'As Sandálias do Pescador', 'Morris L. West', 'ABRIL CULTURAL', '1965', 'OCLC:816955786', 'f000000001180', 'Desconhecido', 303, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(616, '2024-04-12', 10534, 'AST389', NULL, 'LIVRO', 'AS TARDES DE UM PINTOR', 'Antonio Gonçalves Teixeira e Sousa', 'TRÊS', '1973', 'OCLC:50828539', 'f000000001181', 'Desconhecido', 394, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(617, '2009-08-12', 1434, '9209133', NULL, 'LIVRO', 'As Valkírias', 'Paulo Coelho', 'ROCCO', '2020', '9788554516499', 'f000000001182', 'Ficção', 216, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(618, '2024-04-09', 10441, 'ASV886', NULL, 'LIVRO', 'AS VALKÍRIAS', 'Paulo Coelho', 'SÃO PAULO', '2020', '9788554516499', 'f000000001184', 'Ficção', 216, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(619, '2024-03-18', 10296, '32711338098', NULL, 'LIVRO', 'AS VEIAS ABERTAS DA AMÉRICA LATINA', 'Eduardo Galeano', 'PAZ E TERRA', '2022', '9786556663432', 'f000000001185', 'História', 437, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(620, '2009-08-03', 1237, '823', NULL, 'LIVRO', 'As Viagens de Gulliver', 'Jonathan Swift', 'NOVA CULTURA', '2020', '9788520945568', 'f000000001186', 'Ficção', 540, 'PT-BR', '2025-04-10 02:22:31', NULL, 4, 3, NULL, '2025-04-09'),
+(621, '2009-04-30', 84, '61692006', NULL, 'LIVRO', 'Assistência à Saúde da Criança', 'Shirley da Rocha Afonso, Claudia Palhano Castanho, Ligia Ribeiro da Silva Tonuci, Maria Rita Braga, Marisa Ramos, Zilda Lopes', 'IATRIA', '2020', '9786587877037', 'f000000001190', 'Medical', 83, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(622, '2009-05-05', 119, '6107361', NULL, 'LIVRO', 'Assistência de Enf.ao Paciente Gravemente Enfermo', 'Eliane de Araújo Cintra, VERA MEDICE NISHIDE, WILMA APARECIDA NUNES', 'ATHENEU', '2000', '8573791446', 'f000000001191', 'Desconhecido', 671, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(623, '2023-04-14', 7264, '61073', NULL, 'LIVRO', 'ASSISTÊNCIA DE ENFERMAGEM AO PACIENTE C. ADULTO', 'Shirley da Rocha Afonso, Claudia Palhano Castanho, Ligia Ribeiro da Silva Tonuci, Marisa Ramos, Zilda Lopes', 'CRV', '2020', '9786587877020', 'f000000001192', 'Medical', 96, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(624, '2009-04-15', 56, '61073691', NULL, 'LIVRO', 'Assistência de enfermagem em cardiologia', 'Luiza de Oliveira Pitthan, Roberta Senger, Laura de Azevedo Guido', 'IATRIA', '2006', 'OCLC:163108059', 'f000000001194', 'Desconhecido', 73, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(625, '2009-04-29', 76, '61073689', NULL, 'LIVRO', 'Assistência de Enfermagem em Infectologia', 'Marcia de Souza', 'ATHENEU', '2000', '8573792779', 'f000000001195', 'Desconhecido', 351, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(626, '2009-04-15', 63, 'M610.7302', NULL, 'LIVRO', 'Assistência de enfermagem materno-infantil', 'Nívea Cristina Moreira Santos', 'IATRIA', '0000', '857614025X', 'f000000001196', 'Desconhecido', 296, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(627, '2009-04-29', 82, '6107367', NULL, 'LIVRO', 'Assistência de Enfermagem na Recuperação Pós-Anest', 'João Francisco Possari', 'IATRIA', '2003', '8576140160', 'f000000001197', 'Desconhecido', 142, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(628, '2023-08-11', 8286, 'ASS969', NULL, 'LIVRO', 'ASSISTÊNCIA SEGURA PARA O PACIENTE E PARA O PROFI.', 'Desconhecido', 'YENDIS', '2009', 'OCLC:422884994', 'f000000001198', 'Desconhecido', 72, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(629, '2009-04-15', 42, '61073692', NULL, 'LIVRO', 'Assistência ventilatória mecânica', 'José Otávio Costa Auler Júnior', 'E.P.U.', '1995', '8573790512', 'f000000001199', 'Desconhecido', 471, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(630, '2010-01-27', 2376, '910', NULL, 'LIVRO', 'Astronáutica', 'Ronaldo Rogério de Freitas Mourão', 'MINISTÉRIO DA EDUCAÇÃO', '1995', '8520906664', 'f000000001200', 'Desconhecido', 961, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(631, '2010-01-27', 2374, '910', NULL, 'LIVRO', 'Astronomia', 'Edvan Bandeira', 'MINISTÉRIO DA EDUCAÇÃO', '2020', '9786500074017', 'f000000001202', 'Ciência', 241, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(632, '2024-04-02', 10381, 'AST435', NULL, 'LIVRO', 'ASTRONOMIA', 'Edvan Bandeira', 'RIO GRÁFICA', '2020', '9786500074017', 'f000000001204', 'Ciência', 241, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(633, '2013-06-25', 5389, '520', NULL, 'LIVRO', 'Astronomia hoje', 'Joachim Herrmann, Rodolfo Kreston', 'INSTITUTO DE DE CIÊNCIA HOJE', '0000', 'OCLC:816838616', 'f000000001205', 'Desconhecido', 313, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(634, '2023-05-17', 7544, 'ATA949', NULL, 'LIVRO', 'ATAQUE DOS TITÃS 25', 'Hajime Isayama', 'PANINI BRASIL', '2023', '1646514904', 'f000000001206', 'Comics & Graphic Novels', 0, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(635, '2023-05-17', 7545, 'ATA481', NULL, 'LIVRO', 'ATAQUE DOS TITÃS 7', 'Hajime Isayama', 'PANINI BRASIL', '2022', '9781646515653', 'f000000001207', 'Comics & Graphic Novels', 0, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(636, '2015-09-10', 5966, '823', NULL, 'LIVRO', 'Até mais, e obrigado pelos peixes!', 'Douglas Adams', 'SEXTANTE', '2010', '9788599296769', 'f000000001208', 'Ficção', 187, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(637, '2023-08-11', 8280, '285', NULL, 'LIVRO', 'ATÉ PASSARINHO PASSA', 'Bartolomeu Campos de Queirós', 'MODERNA', '2022', '9786556123004', 'f000000001209', 'Juvenile Fiction', 48, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(638, '2023-08-10', 7621, '29993', NULL, 'LIVRO', 'ATENÇÃO PLENA - MINDFULNESS', 'Mark Williams, Danny Penman', 'SEXTANTE', '2015', '9788543101880', 'f000000001210', 'Self-Help', 239, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(639, '2023-08-01', 8326, 'ATE691', NULL, 'LIVRO', 'ATENDIMENTO NUTRICIONAL', 'Vanessa Taís Nozaki, Angela Andréia França Gravena, Isabelle Carvalho Zanquetta, Rose Mari Bennemann', 'ABDR', '2013', '9788564956230', 'f000000001211', 'Medical', 45, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(640, '2009-04-15', 65, '610733', NULL, 'LIVRO', 'Atendimento pré-hospitalar para emergência', 'Nívea Cristina Moreira Santos', 'IATRIA', '2007', '8576140470', 'f000000001212', 'Desconhecido', 224, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(641, '2023-08-31', 8813, 'ATI113', NULL, 'LIVRO', 'ATIVIDADES DE BIOLOGIA - ECOLOGIA', 'Marta Fischer', 'SÃO PAULO', '2018', '9788554945176', 'f000000001213', 'Ciência', 125, 'PT-BR', '2025-04-10 02:22:31', NULL, 7, 6, NULL, '2025-04-09'),
+(642, '2023-09-19', 9211, 'ATI202', NULL, 'LIVRO', 'ATIVIDADES DE BIOLOGIA - GENÉTICA', 'Instituto Oswaldo Cruz', 'SÃO PAULO', '1998', 'UTEXAS:059172144009582', 'f000000001220', 'Medicine', 364, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(643, '2003-04-10', 2421, '371214', NULL, 'LIVRO', 'Atividades de Física', 'Desconhecido', 'CENP', '0000', '9788539702671', 'f000000001221', 'Desconhecido', 57, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(644, '2023-09-14', 9139, '547007', NULL, 'LIVRO', 'ATIVIDADES DE QUÍMICA', 'Fabiele Cristiane Dias Broietti, Viviane Arrigo', 'FTD', '2021', '9788530200978', 'f000000001222', 'Ciência', 114, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(645, '2023-09-21', 9318, 'ATI947', NULL, 'LIVRO', 'ATIVIDADES DOS ALUNOS - EDUCAÇÃO EM SAÚDE ESCOLAR', 'Lucimauro Fernandes De Melo', 'MINISTÉRIO DA SAÚDE', '2019', '9788553240456', 'f000000001223', 'Sports & Recreation', 209, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(646, '2023-06-22', 7294, '22090223', NULL, 'LIVRO', 'ATLAS BÍBLICO', 'André Daniel Reinke', 'DIDÁTICA PAULISTA', '2020', '9786586048148', 'f000000001224', 'Religião', 317, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(647, '2012-05-16', 4700, '61100222', NULL, 'LIVRO', 'Atlas de Anatomia', 'Frank H. Netter', 'GRUPO CULTURAL', '2018', '9788535291032', 'f000000001225', 'Medical', 1596, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(648, '2009-05-05', 116, '610', NULL, 'LIVRO', 'Atlas de Anatomia e Saúde', 'Anne M. Gilroy', 'BOLSA NACIONAL DO LIVRO', '2017', '8527730855', 'f000000001227', 'Medical', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(649, '2014-09-05', 5615, '61100222', NULL, 'LIVRO', 'Atlas Descritivo do Corpo Humano', 'Desconhecido', 'RIDEEL', '2007', '8520424996', 'f000000001229', 'Desconhecido', 564, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(650, '2010-12-21', 3182, '613', NULL, 'LIVRO', 'Atlas do corpo humano', 'Desconhecido', 'BARSA PLANETA', '2007', '8520424996', 'f000000001230', 'Desconhecido', 564, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(651, '2012-11-14', 5313, '61100222', NULL, 'LIVRO', 'Atlas do Corpo Humano', 'Desconhecido', 'DCL-DIFUSÃO CULTURAL DO LIVRO', '2007', '8520424996', 'f000000001231', 'Desconhecido', 564, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(652, '2023-09-05', 8932, 'ATL584', NULL, 'LIVRO', 'ATLAS EÓLICO DO ESTADO DE SÃO PAULO', 'Rio de Janeiro (Estado) Secretaria de Estado de Energia da Indústria Naval e do Petróleo, Odilon A. Camargo do Amarante, Fabiano de Jesus Lima da Silva, Luiz Gonzaga Rios-Filho', 'SÃO PAULO', '2002', 'OCLC:298932358', 'f000000001235', 'Desconhecido', 71, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(653, '2016-05-09', 6221, '621042', NULL, 'LIVRO', 'Atlas Eólico do Estado de São Paulo', 'Rio de Janeiro (Estado) Secretaria de Estado de Energia da Indústria Naval e do Petróleo, Odilon A. Camargo do Amarante, Fabiano de Jesus Lima da Silva, Luiz Gonzaga Rios-Filho', 'SECRETARIA DE ENERGIA', '2002', 'OCLC:298932358', 'f000000001234', 'Desconhecido', 71, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(654, '2023-09-21', 9316, '611', NULL, 'LIVRO', 'ATLAS ESCOLAR DO CORPO HUMANO', 'Vale das Letras', 'AVENIDA', '2019', '8576618338', 'f000000001236', 'Educação', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(655, '2023-09-11', 9043, 'ATL427', NULL, 'LIVRO', 'ATLAS ESCOLAR GEOGRÁFICO', 'Ciranda Cultural', 'CIDADE CULTURAL', '2014', '8538055380', 'f000000001237', 'Ciência', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(656, '2010-07-13', 2707, '912', NULL, 'LIVRO', 'Atlas Geográfico Escolar', 'Conselho Nacional de Geografia (Brazil)', 'IBGE', '1967', 'OCLC:26699961', 'f000000001238', 'Atlases', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(657, '2023-08-24', 8591, 'ATL294', NULL, 'LIVRO', 'ATLAS GEOGRÁFICO ESCOLAR', 'Conselho Nacional de Geografia (Brazil)', 'MINISTÉRIO DA EDUCAÇÃO E CULTURA', '1967', 'OCLC:26699961', 'f000000001252', 'Atlases', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(658, '2022-01-24', 6657, '912', NULL, 'LIVRO', 'Atlas geográfico escolar', 'Conselho Nacional de Geografia (Brazil)', 'TODOLIVRO EDITORA', '1967', 'OCLC:26699961', 'f000000001239', 'Atlases', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 13, 12, NULL, '2025-04-09'),
+(659, '2024-09-09', 10784, '910712', NULL, 'LIVRO', 'ATLAS GEOGRÁFICO ESCOLAR - PARA ENTENDER O MUNDO E', 'Gladis de Fátima Nunes da Silva, Haroldo Scacabarossi, Ivanilton José de Oliveira, Josinaldo Barboza Bezerra, Osvair Brandão Mussato', 'IBEP', '2020', '9786599045899', 'f000000001253', 'Juvenile Nonfiction', 130, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(660, '2010-05-17', 2616, 'AGE186', NULL, 'LIVRO', 'Atlas Geográfico Escolar Multimídia', 'IBGE', 'MINISTÉRIO DA EDUCAÇÃO', '2004', '8524036982', 'f000000001254', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 10, 9, NULL, '2025-04-09'),
+(661, '2024-04-29', 10595, '372891', NULL, 'LIVRO', 'ATLAS GEOGRÁFICO ILUSTRADO', 'Marcello Martinelli, Graça Maria Lemos Ferreira', 'MODERNA', '2012', '8516082237', 'f000000001264', 'Reference', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(662, '2023-09-11', 9027, 'ATL245', NULL, 'LIVRO', 'ATLAS GEOGRÁFICO MUNDIAL', 'Douglas Michalany', 'SOL90', '1986', 'LCCN:82113385', 'f000000001265', 'Atlases, Brazilian', 110, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(663, '2023-06-22', 7295, '911', NULL, 'LIVRO', 'ATLAS HISTÓRICO ESCOLAR', 'José Luiz Tavares', 'FENAME', '1960', 'OCLC:65546504', 'f000000001266', 'Desconhecido', 124, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(664, '2023-09-05', 8934, 'ATL100', NULL, 'LIVRO', 'ATLAS HISTÓRICO ESCOLAR', 'José Luiz Tavares', 'MINISTÉRIO DA EDUCAÇÃO E CULTURA', '1960', 'OCLC:65546504', 'f000000001267', 'Desconhecido', 124, 'PT-BR', '2025-04-10 02:22:31', NULL, 5, 4, NULL, '2025-04-09'),
+(665, '2023-09-11', 9031, '372891', NULL, 'LIVRO', 'ATLAS MIRIM', 'Daniel de Carvalho', 'SCIPIONE', '2018', '9788553270118', 'f000000001272', 'Ficção', 346, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(666, '2015-11-04', 6016, '61100222', NULL, 'LIVRO', 'ATLAS VISUAL COMPACTO DO CORPO HUMANO', 'Rúbia Yuri Tomita', 'RIDEEL', '1999', '8533902824', 'f000000001273', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(667, '2011-10-03', 3787, '613', NULL, 'LIVRO', 'ATLAS- do Corpo Humano', 'Desconhecido', 'PLANETA', '2007', '8520424996', 'f000000001232', 'Desconhecido', 564, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(668, '2010-01-15', 2180, '8135', NULL, 'LIVRO', 'Atos de Amor', 'Elia Kazan', 'CIA. DAS LETRAS', '1984', 'OCLC:77542890', 'f000000001275', 'Desconhecido', 445, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(669, '2009-08-13', 1446, '839823', NULL, 'LIVRO', 'Através do Espelho', 'Jostein Gaarder', 'CIA. DAS LETRAS', '1998', '9788543804262', 'f000000001276', 'Juvenile Fiction', 120, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(670, '2012-04-25', 4663, '370783', NULL, 'LIVRO', 'Atualidades - Revista do Professor - N2', 'Desconhecido', 'CENP', '0000', '9788573088502', 'f000000001277', 'Desconhecido', 321, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(671, '2012-04-25', 4664, '370783', NULL, 'LIVRO', 'Atualidades - Revista do Professor - N3', 'Desconhecido', 'CENP', '0000', '9786560060395', 'f000000001278', 'Business & Economics', 618, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(672, '2012-04-25', 4665, '370783', NULL, 'LIVRO', 'Atualidades - Revista do Professor - N4', 'Desconhecido', 'CENP', '0000', 'N/A', 'f000000001279', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(673, '2012-04-25', 4666, '370783', NULL, 'LIVRO', 'Atualidades - Revista do Professor - N6', 'ANA CLÁUDIA RODRIGUES THEODORO, FLÁVIA PEREIRA HILL, HUMBERTO DALLA BERNARDINA DE PINHO', 'CENP', '2024', '9786559597260', 'f000000001280', 'Antiques & Collectibles', 654, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(674, '2012-04-25', 4657, '370783', NULL, 'LIVRO', 'Atualidades Vestibular 2008', 'Desconhecido', 'ABRIL', '0000', 'N/A', 'f000000001281', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(675, '2012-04-25', 4658, '370783', NULL, 'LIVRO', 'Atualidades Vestibular+ENEM - 2009', 'Henrique Fanini Leite', 'ABRIL', '2011', 'EAN:3410000488802', 'f000000001282', 'Educação', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(676, '2012-04-25', 4659, '370783', NULL, 'LIVRO', 'Atualidades Vestibular+ENEM - 2010', 'Desconhecido', 'ABRIL', '0000', 'N/A', 'f000000001283', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(677, '2012-04-25', 4660, '370783', NULL, 'LIVRO', 'Atualidades Vestibular+ENEM - 2011', 'Desconhecido', 'ABRIL', '0000', 'N/A', 'f000000001284', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(678, '2012-04-25', 4662, '370783', NULL, 'LIVRO', 'Atualidades Vestibular+ENEM - 2012', 'Desconhecido', 'ABRIL', '0000', 'N/A', 'f000000001286', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(679, '2009-08-25', 1532, '63361', NULL, 'LIVRO', 'Atualização em Produção de Cana de Açúcar', 'Desconhecido', 'PROL', '2006', '8560409017', 'f000000001287', 'Desconhecido', 415, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(680, '2010-05-31', 2632, '63361', NULL, 'LIVRO', 'Atualização em Produção de Cana-de-Açúcar', 'Desconhecido', 'PRINTED BRASIL', '2006', '8560409017', 'f000000001290', 'Desconhecido', 415, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(681, '2009-10-27', 1942, '63361', NULL, 'LIVRO', 'Atualização em Produção de Cana-de-Açucar', 'Desconhecido', 'PROL', '2006', '8560409017', 'f000000001289', 'Desconhecido', 415, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(682, '2003-04-10', 698, '6574', NULL, 'LIVRO', 'Auditoria de Impostos e Contribuições', 'Edmar Oliveira Andrade Filho', 'ATLAS', '2005', '8522441707', 'f000000001292', 'Desconhecido', 181, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(683, '2011-07-04', 3595, '53007', NULL, 'LIVRO', 'Aulas de Física', 'Antonio Nicolau Youssef, Vicente Paz Fernandez', 'ATUAL', '1986', '8526200763', 'f000000001293', 'Desconhecido', 127, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(684, '2023-08-31', 8804, 'AUL552', NULL, 'LIVRO', 'AULAS PRÁTICAS DE MATEMÁTICA', 'Jaqueline Lixandrão Santos', 'ÁTICA', '2020', '9788547345709', 'f000000001294', 'Educação', 115, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(685, '2023-09-19', 9204, 'AUT929', NULL, 'LIVRO', 'AUTISMO: UMA REALIDADE', 'Sílvia Ester Orrú', 'SECRETARIA DA EDUCAÇÃO', '2024', '9788532667632', 'f000000001295', 'Educação', 245, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(686, '2009-08-05', 1322, '86992', NULL, 'LIVRO', 'Auto da Barca do Inferna Farsa de Inês Pereira Aut', 'Gil Vicente', 'ÁTICA', '2024', '9786585641326', 'f000000001296', 'Ficção', 178, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(687, '2023-11-13', 9935, 'AUT838', NULL, 'LIVRO', 'AUTO DA BARCA DO INFERNO', 'Gil Vicente', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2011', '8521315422', 'f000000001302', 'Ficção', 116, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(688, '2014-05-30', 5553, '86993', NULL, 'LIVRO', 'Auto da Barca do Inferno', 'Gil Vicente', 'KLICK', '2011', '8521315422', 'f000000001298', 'Ficção', 116, 'PT-BR', '2025-04-10 02:22:31', NULL, 3, 2, NULL, '2025-04-09'),
+(689, '2011-03-23', 3234, '86993', NULL, 'LIVRO', 'Auto da Barca do Inferno', 'Gil Vicente', 'MARTIN CLARET', '2011', '8521315422', 'f000000001297', 'Ficção', 116, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(690, '2023-09-18', 9197, 'AUT112', NULL, 'LIVRO', 'AUTO DA BARCA DO INFERNO', 'Gil Vicente', 'SOL', '2011', '8521315422', 'f000000001300', 'Ficção', 116, 'PT-BR', '2025-04-10 02:22:31', NULL, 3, 2, NULL, '2025-04-09'),
+(691, '2009-08-05', 1323, '86992', NULL, 'LIVRO', 'Auto da Barca do Inferno Farsa de Inês Pereira Aut', 'Gil Vicente', 'ÁTICA', '2024', '9786585641326', 'f000000001305', 'Ficção', 178, 'PT-BR', '2025-04-10 02:22:31', NULL, 3, 2, NULL, '2025-04-09'),
+(692, '2009-08-14', 1468, '86992', NULL, 'LIVRO', 'Auto da Compadecida', 'Ariano Suassuna', 'AGIR', '2018', '9788520942833', 'f000000001308', 'Drama', 170, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(693, '2010-05-07', 2590, '7007', NULL, 'LIVRO', 'Auto-retrato', 'Carlos Drummond de Andrade', 'MINISTÉRIO DA EDUCAÇÃO', '1989', 'UOM:39015018469240', 'f000000001311', 'Desconhecido', 184, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(694, '2023-09-21', 9291, 'AUT612', NULL, 'LIVRO', 'AUTOGESTÃO', 'Ulisses F. Araújo', 'ANTEAG', '2015', '9788532310071', 'f000000001309', 'Educação', 91, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(695, '2014-08-05', 5602, '620', NULL, 'LIVRO', 'Automação Pneumática', 'Arivelto Bustamante Fialho', 'FESTO DIDACTIC', '2009', '8571949611', 'f000000001310', 'Desconhecido', 324, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(696, '2017-01-09', 6371, '4502', NULL, 'LIVRO', 'Avaliação de competência para tecnologia da inform', 'Renato Miguel de Moraes, Lucí Hildenbrand, Ovidio Orlando Filho', 'CEETEPS', '2024', 'ava276673515', 'f000000001312', 'Educação', 115, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(697, '2016-04-05', 6205, '378', NULL, 'LIVRO', 'Avaliação de treinamento,desenvovimento e educação', 'Gardênia da Silva Abbad, VARIOS ORGANIZADORES, Luciana Mourão, Pedro P. M. Meneses, Thaís Zerbini, Jairo Eduardo Borges-Andrade, Raquel Vilas-Boas', 'CEETEPS', '0000', '8536326476', 'f000000001313', 'Desconhecido', 300, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(698, '2009-04-15', 12, '6107361', NULL, 'LIVRO', 'Avaliação em cuidados críticos', 'Laura A. Talbot', 'REICHMANN & AFFONSO', '2001', '8587148583', 'f000000001314', 'Desconhecido', 333, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(699, '2009-05-20', 270, '6107365', NULL, 'LIVRO', 'Avaliação em Gerontologia', 'Tânia G. Lima', 'REICHMANN & AFFONSO', '2020', '9788539630271', 'f000000001315', 'Social Science', 230, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(700, '2009-04-15', 13, '618920075', NULL, 'LIVRO', 'Avaliação em pediatria', 'Joyce Engel', 'REICHMANN & AFFONSO', '2002', '8587148397', 'f000000001317', 'Desconhecido', 340, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(701, '2023-12-04', 10061, 'B8693', NULL, 'LIVRO', 'AVANTE SOLDADOS: PARA TRÁS', 'Deonísio da Silva', 'DOMO', '2022', '9786556091532', 'f000000001319', 'Ficção', 166, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(702, '2011-06-15', 3533, '86993', NULL, 'LIVRO', 'Ave, palavra', 'João Guimarães Rosa', 'EDIOURO', '2013', '9788520936672', 'f000000001320', 'Ficção', 344, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(703, '2024-04-09', 10453, 'AVE321', NULL, 'LIVRO', 'AVENTURA NO IMPÉRIO DO SOL', 'Silvia Cintra Franco', 'ÁTICA', '1989', '8508032250', 'f000000001321', 'Children\'s stories, Brazilian', 112, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(704, '2024-03-28', 10336, 'AVE706', NULL, 'LIVRO', 'AVENTURAS DE HUCK', 'Mark Twain', 'ABRIL CULTURAL', '2021', '9788726621600', 'f000000001322', 'Ficção', 308, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(705, '2014-02-04', 5505, '7415', NULL, 'LIVRO', 'Aventuras de Menino', 'Luís Jardim', 'NEWTEC', '1977', 'OCLC:1099677733', 'f000000001323', 'Children\'s literature, Brazilian', 86, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(706, '2023-05-11', 7193, '285', NULL, 'LIVRO', 'AVENTURAS DE PEDRO MALASARTES', 'Eraldo Miranda, Ricardo Mendes', 'CORTEZ', '2008', '8526231855', 'f000000001324', 'Desconhecido', 47, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(707, '2011-06-21', 3582, '843', NULL, 'LIVRO', 'Aventuras de Robin Hood', 'Alexandre Dumas', 'SARAIVA', '2016', '9788537815250', 'f000000001326', 'Ficção', 734, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(708, '2014-09-17', 5679, '3637', NULL, 'LIVRO', 'Aves', 'Mario Arthur Favretto', 'ARTE ENSAIO', '2021', '9786500283150', 'f000000001327', 'Nature', 596, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(709, '2023-06-22', 7309, 'AVI225', NULL, 'LIVRO', 'AVIVAMENTO VERDADEIRO', 'Amiton Cristo', 'ATG', '2017', '1521134170', 'f000000001329', 'Desconhecido', 49, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(710, '2023-12-06', 10115, '7415', NULL, 'LIVRO', 'AYA DE YOPOUGON', 'MARGUERITE ABOUET, CLEMENT OUBRERIE', 'NEWTEC', '0000', '852541932X', 'f000000001330', 'Desconhecido', 112, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(711, '2011-02-15', 2949, '370', NULL, 'LIVRO', 'Azevedo Coutinho', 'Sonia A. Siqueira', 'MASSANGANA', '1978', 'OCLC:46752734', 'f000000001331', 'Desconhecido', 142, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(712, '2023-12-11', 10146, '8691', NULL, 'LIVRO', 'BAGAGEM', 'Adélia Prado', 'CAMERON', '1986', 'UTEXAS:059173022954767', 'f000000001332', 'Desconhecido', 152, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(713, '2024-09-09', 10790, '86991', NULL, 'LIVRO', 'BAGAGEM', 'Adélia Prado', 'RECORD', '1986', 'UTEXAS:059173022954767', 'f000000001333', 'Desconhecido', 152, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(714, '2024-09-09', 10786, 'B8693', NULL, 'LIVRO', 'BAGUNÇANDO BRASÍLIA', 'Airo Zamoner', 'PROTEXTO', '2002', '8589026019', 'f000000001335', 'Desconhecido', 110, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(715, '2024-02-09', 10196, 'B8698', NULL, 'LIVRO', 'BAH! CRÔNICAS LIGEIRAS(OU NÃO) DE TEMPOS E TEMAS D', 'Desconhecido', 'LONGARINA', '0000', 'N/A', 'f000000001336', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(716, '2010-01-22', 2275, '8693', NULL, 'LIVRO', 'Bahia de Todos os Santos', 'Jorge Amado', 'MARTINS', '2012', '9788580864298', 'f000000001337', 'Viagem', 305, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(717, '2024-04-10', 10478, 'BAN533', NULL, 'LIVRO', 'BANANA BRAVA', 'José Mauro de Vasconcelos', 'MELHORAMENTOS', '1974', 'UTEXAS:059173022887353', 'f000000001338', 'Brazilian fiction', 190, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(718, '2014-01-22', 5462, '86991', NULL, 'LIVRO', 'Bananas Podres', 'Ferreira Gullar', 'CASA DA PALAVRA', '2011', '857734228X', 'f000000001339', 'Desconhecido', 53, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(719, '2024-03-18', 10298, 'BAN276', NULL, 'LIVRO', 'BANCO DE QUESTÕES - SOMANDO NOVOS TALENTOS PARA O', 'Desconhecido', 'OBMEP', '0000', 'N/A', 'f000000001340', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(720, '2024-03-18', 10299, 'BAN286', NULL, 'LIVRO', 'BANCO DE QUESTÕES 2010', 'Raghu Ramakrishnan, Johannes Gehrke', 'OBMEP', '2008', '9788563308771', 'f000000001341', 'Computers', 905, 'PT-BR', '2025-04-10 02:22:31', NULL, 3, 2, NULL, '2025-04-09'),
+(721, '2024-03-18', 10302, 'BAN224', NULL, 'LIVRO', 'BANCO DE QUESTÕES 2011', 'Raghu Ramakrishnan, Johannes Gehrke', 'OBMEP', '2008', '9788563308771', 'f000000001344', 'Computers', 905, 'PT-BR', '2025-04-10 02:22:31', NULL, 3, 2, NULL, '2025-04-09'),
+(722, '2024-03-18', 10305, 'BAN852', NULL, 'LIVRO', 'BANCO DE QUESTÕES 2012', 'Raghu Ramakrishnan, Johannes Gehrke', 'OBMEP', '2008', '9788563308771', 'f000000001347', 'Computers', 905, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(723, '2024-03-18', 10301, 'BAN758', NULL, 'LIVRO', 'BANCO DE QUESTÕES 2013', 'Raghu Ramakrishnan, Johannes Gehrke', 'OBMEP', '2008', '9788563308771', 'f000000001348', 'Computers', 905, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(724, '2024-03-18', 10308, 'BAN214', NULL, 'LIVRO', 'BANCO DE QUESTÕES 2016', 'Robson Cunha Rael', 'OBMEP', '2022', '9786525227184', 'f000000001349', 'Business & Economics', 136, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(725, '2023-08-01', 8308, '6171027', NULL, 'LIVRO', 'BANDAGEM TERAPÊUTICA', 'Nelson Morini Jr.', 'MANOLE', '2016', '8527729660', 'f000000001350', 'Desconhecido', 242, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(726, '2010-05-07', 2591, '7007', NULL, 'LIVRO', 'Baravelli: Colecionador de Imagens', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:817081067', 'f000000001351', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(727, '2009-09-17', 1581, '981532', NULL, 'LIVRO', 'Barões e Escravos do Café', 'Sonia Sant\'Anna', 'JORGE ZAHAR', '2001', '8571106029', 'f000000001352', 'História', 186, 'ES', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(728, '2011-05-30', 3446, '285', NULL, 'LIVRO', 'Bartleby, o Escriturário', 'Herman Melville', 'ROCCO', '2008', '9788525424747', 'f000000001353', 'Ficção', 71, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(729, '2023-08-01', 8309, '61276', NULL, 'LIVRO', 'BASES BIOMECÂNICAS DO MOVIMENTO HUMANO', 'Joseph Hamill, Kathleen M. Knutzen, Lilia Breternitz Ribeiro, Valdir José Barbanti', 'MANOLE', '1999', '852040779X', 'f000000001354', 'Desconhecido', 532, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(730, '2023-08-01', 8306, '612015', NULL, 'LIVRO', 'BASES BIOQUÍMICAS E FISIOLÓGICAS DA NUTRIÇÃO', 'Cristiane Cominetti', 'MANOLE', '2013', 'OCLC:931981742', 'f000000001355', 'Desconhecido', 1257, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(731, '2023-09-04', 8891, '76932307', NULL, 'LIVRO', 'BASQUETE APRENDENDO A JOGAR', 'Guerrinha', 'IDEA', '2001', '8588121034', 'f000000001356', 'Basketball', 61, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(732, '2009-09-25', 1693, '39820981', NULL, 'LIVRO', 'Batata cozida mingau de cará', 'Eloí Elisabete Bocheco', 'MINISTÉRIO DA EDUCAÇÃO', '2006', '8529600509', 'f000000001357', 'Desconhecido', 78, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(733, '2010-12-21', 3135, '37221', NULL, 'LIVRO', 'Bate-papo: almanaque para pais e filhos', 'Ricardo Garay', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2016', '9781370161058', 'f000000001359', 'Reference', 186, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(734, '2023-05-17', 7522, '7415', NULL, 'LIVRO', 'BATMAN - MORTE EM FAMÍLIA', 'Lincoln Nery', 'DC COMICS', '2016', 'PKEY:CLDEAU27367', 'f000000001360', 'Religião', 170, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(735, '2023-05-17', 7527, '7415973', NULL, 'LIVRO', 'BATMAN - SILÊNCIO PARTE 1', 'Jeph Loeb', 'DC COMICS', '2015', '8447127907', 'f000000001361', 'Desconhecido', 176, 'ES', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(736, '2023-05-17', 7526, '7415973', NULL, 'LIVRO', 'BATMAN - SILÊNCIO PARTE 2', 'Editora Europa', 'DC COMICS', '2024', 'bat726692912', 'f000000001362', 'Comics & Graphic Novels', 100, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(737, '2023-05-17', 7516, 'BAT705', NULL, 'LIVRO', 'BATMAN E A LIGA DA JUSTIÇA', 'Christa Faust, Gary Phillips', 'PANINI BRASIL', '2023', 'bat617136923', 'f000000001363', 'Ficção', 254, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(738, '2010-01-15', 2200, '92881', NULL, 'LIVRO', 'Baú de Ossos', 'Pedro Nava', 'NOVA FRONTEIRA', '1999', '8585851961', 'f000000001364', 'Authors, Brazilian', 470, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(739, '2009-08-18', 1507, 'B869', NULL, 'LIVRO', 'Bebo Chá enquanto os patos grasnam', 'Leida Lusmar', 'MAZZA EDIÇÕES', '2003', '8571602522', 'f000000001365', 'Desconhecido', 136, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(740, '2021-12-03', 6547, '8693', NULL, 'LIVRO', 'Becos da memória', 'Conceição Evaristo', 'PALLAS', '2017', '9788534705523', 'f000000001366', 'Ficção', 176, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(741, '2023-09-11', 8999, 'BEG420', NULL, 'LIVRO', 'BEGINNING LESSONS IN ENGLISH', 'Debbie Zacarian, Judie Haynes', 'AO LIVRO TÉCNICO S.A.', '2012', '9781452279992', 'f000000001367', 'Educação', 153, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(742, '2024-10-24', 10988, 'BEI278', NULL, 'LIVRO', 'BEIJOS - COISAS QUE TODO MUNDO QUER SABER', 'Argentino Barbosa', 'MELHORAMENTOS', '2024', '9786527403814', 'f000000001368', 'Ficção', 105, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(743, '2023-08-31', 8780, '7789', NULL, 'LIVRO', 'BELLE ÉPOQUE NA GAROA', 'Marcia Camargos', 'SÃO PAULO', '2013', '8587454218', 'f000000001369', 'Electric power', 160, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(744, '2023-06-22', 7326, 'BEN391', NULL, 'LIVRO', 'BEN GURION', 'Valdemir Mota de Menezes', 'TRÊS', '2022', '9781711015743', 'f000000001370', 'Biography & Autobiography', 112, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(745, '2024-03-28', 10338, 'BEN901', NULL, 'LIVRO', 'BEN-HUR', 'Lew Wallace', 'ABRIL CULTURAL', '2016', '9788555390586', 'f000000001371', 'Ficção', 600, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(746, '2009-08-04', 1303, '880', NULL, 'LIVRO', 'Ben-Hur Uma história dos tempos de Cristo', ' Wallace, Lew', 'MARTIN CLARET', '0000', '9788582161982', 'f000000001372', 'Ficção', 681, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(747, '2010-12-21', 3094, '92221', NULL, 'LIVRO', 'Bento XVI no Brasil', 'Pope Benedict XVI', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2007', 'STANFORD:36105124287272', 'f000000001373', 'Brazil', 148, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(748, '2011-02-15', 2950, '370', NULL, 'LIVRO', 'Bertha Lutz', 'Teresa Cristina de Novaes Marques, Edições Câmara', 'MASSANGANA', '2020', '9788540207837', 'f000000001374', 'Biography & Autobiography', 350, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(749, '2010-01-22', 2287, '823', NULL, 'LIVRO', 'Betsabé', 'Torgny Lindgren', 'CIRCULO DO LIVROS S/A', '2015', '9788416112982', 'f000000001375', 'Ficção', 180, 'ES', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(750, '2010-12-21', 3045, '791092', NULL, 'LIVRO', 'Betty Faria: rebelde por natureza', 'Betty Faria', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2006', 'UTEXAS:059173022563464', 'f000000001376', 'Biography & Autobiography', 272, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(751, '2023-09-04', 8877, 'BBL717', NULL, 'LIVRO', 'BÍBLIA SAGRADA', 'Sociedade Bíblica do Brasil', 'ASSOCIAÇÃO TORRE DE VIGIA', '2010', '9788531115363', 'f000000001378', 'Bibles', 3983, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(752, '2009-08-17', 1489, '220', NULL, 'LIVRO', 'Biblia Sagrada', 'Desconhecido', 'PAULUS', '0000', 'CHI:25211254', 'f000000001377', 'Desconhecido', 1246, 'ES', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(753, '2003-04-10', 788, '657', NULL, 'LIVRO', 'Biblioteca de Ciências Contábeis', 'Paulo Eduardo Vilchez Viceconti, Jose Luiz Ribeiro Machado', 'BRASILIENSE', '1978', 'OCLC:683394463', 'f000000001379', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 7, 6, NULL, '2025-04-09'),
+(754, '2010-12-21', 3152, '1144', NULL, 'LIVRO', 'Biblioteca Universitatis', 'Università degli Studi (SASSARI), Frederico AGENO', 'EDUSP', '1923', 'OCLC:503710406', 'f000000001386', 'Desconhecido', 48, 'EN', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(755, '2023-09-25', 9340, 'BIC359', NULL, 'LIVRO', 'BICHOS EM ELIMINAÇÃO: GEO-HELMINTÍASE, HANSEANÍASE', 'Desconhecido', 'APE', '0000', 'N/A', 'f000000001388', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(756, '2003-04-10', 776, '657', NULL, 'LIVRO', 'Biclioteca de Prática Comercial Brasileira', 'Antônio Calderelli', 'FORMAR LTDA', '1967', 'OCLC:43550675', 'f000000001389', 'Brazil', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 4, 3, NULL, '2025-04-09'),
+(757, '2009-08-13', 1445, '500', NULL, 'LIVRO', 'Bilhões e Bilhões Reflexões sobre vida e morte na', 'Carl Sagan', 'CIA. DAS LETRAS', '2020', '9788554516369', 'f000000001393', 'Ciência', 292, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(758, '2024-03-07', 10288, '57407', NULL, 'LIVRO', 'BIO', 'Joselito Santos Abrantes', 'SARAIVA', '2003', '8586435945', 'f000000001394', 'Biodiversity', 156, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(759, '2010-07-06', 2660, '1742', NULL, 'LIVRO', 'Bioética: meio ambiente,saúde e pesquisa', 'ADRIANA RODRIGUES A. MENDONÇA', 'IATRIA', '2006', '857614042X', 'f000000001395', 'Desconhecido', 203, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(760, '2023-05-17', 7608, 'BIO623', NULL, 'LIVRO', 'BIOHAZARD 1', 'Aj Messer', 'PANINI BRASIL', '2019', '0368115747', 'f000000001396', 'Ficção', 326, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(761, '2023-05-17', 7607, 'BIO106', NULL, 'LIVRO', 'BIOHAZARD 2', 'S. D. Perry', 'PANINI BRASIL', '2014', '8582401078', 'f000000001397', 'Ficção', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(762, '2023-05-17', 7606, 'BIO692', NULL, 'LIVRO', 'BIOHAZARD 3', 'Game players magazine', 'PANINI BRASIL', '1999', 'OCLC:866877503', 'f000000001398', 'Biohazard', 129, 'ZH-CN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(763, '2023-05-17', 7605, 'BIO170', NULL, 'LIVRO', 'BIOHAZARD 4', 'Desconhecido', 'PANINI BRASIL', '2005', 'OCLC:675127186', 'f000000001399', 'Desconhecido', 0, 'JA', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(764, '2023-05-17', 7604, 'BIO564', NULL, 'LIVRO', 'BIOHAZARD 5', 'Desconhecido', 'PANINI BRASIL', '2010', 'OCLC:703342213', 'f000000001400', 'Desconhecido', 0, 'JA', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(765, '2023-08-01', 8344, '574070202', NULL, 'LIVRO', 'BIOLOGIA', 'Escriba de Cristo', 'ÁTICA', '2021', '9781710076981', 'f000000001407', 'Ciência', 117, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(766, '2023-02-03', 8638, '5107', NULL, 'LIVRO', 'BIOLOGIA', 'Escriba de Cristo', 'MODERNA', '2021', '9781710076981', 'f000000001401', 'Ciência', 117, 'PT-BR', '2025-04-10 02:22:31', NULL, 6, 5, NULL, '2025-04-09'),
+(767, '2023-09-01', 8833, '57407', NULL, 'LIVRO', 'BIOLOGIA 1', 'Eduardo Silva Bittencourt', 'ATUAL', '2008', '856230123X', 'f000000001409', 'Desconhecido', 129, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(768, '2023-08-01', 8304, '57407', NULL, 'LIVRO', 'BIOLOGIA 1', 'Eduardo Silva Bittencourt', 'SARAIVA', '2008', '856230123X', 'f000000001408', 'Desconhecido', 129, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(769, '2023-09-01', 8854, 'BIO135', NULL, 'LIVRO', 'BIOLOGIA 1 - CITOLOGIA E GENÉTICA', 'Andre Luís Laforga Vanzela, Rogério Fernandes de Souza', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2009', '9788571399419', 'f000000001410', 'Ciência', 138, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(770, '2024-09-27', 10866, '37319', NULL, 'LIVRO', 'BIOLOGIA 1 - O ESTUDO DA VIDA', 'Filipe Chagas', 'FTD', '2020', 'EAN:3410003406896', 'f000000001412', 'Educação', 132, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(771, '2024-09-27', 10857, '37319', NULL, 'LIVRO', 'BIOLOGIA 10 - TECIDOS EPITELIAIS', 'Oswaldo Frota-Pessôa', 'FTD', '1960', 'UIUC:30112116607927', 'f000000001413', 'Biology', 872, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(772, '2024-09-27', 10856, '37319', NULL, 'LIVRO', 'BIOLOGIA 11 - TECIDOS CONJUNTIVOS', 'Abraham L. Kierszenbaum', 'FTD', '2008', '8535225137', 'f000000001414', 'Desconhecido', 696, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(773, '2024-09-27', 10855, '37319', NULL, 'LIVRO', 'BIOLOGIA 12 - TECIDOS NERVOSO E MUSCULAR', 'Harvey Lodish, Arnold Berk, Chris A. Kaiser, Monty Krieger, Anthony Bretscher, Hidde Ploegh, Angelika Amon', 'FTD', '2014', '9788582710500', 'f000000001415', 'Ciência', 1241, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(774, '2024-09-27', 10865, '37319', NULL, 'LIVRO', 'BIOLOGIA 2 - A ORIGEM DA VIDA', 'Sadava, David, Hillis, David, Heller, Craig, Hacker, Sally', 'FTD', '2019', '9788582715680', 'f000000001416', 'Ciência', 544, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(775, '2023-09-01', 8863, 'BIO221', NULL, 'LIVRO', 'BIOLOGIA 2 - GENÉTICA', 'Dora Fonseca Mendoza, Heidi Mateus Arbelaez, Nora Contreras Bravo', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2010', '958738122X', 'f000000001417', 'Desconhecido', 74, 'ES', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(776, '2023-08-31', 8831, '57407', NULL, 'LIVRO', 'BIOLOGIA 3', 'César da Silva Júnior', 'SARAIVA', '2010', '8502094297', 'f000000001419', 'Desconhecido', 528, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(777, '2024-09-27', 10864, '37319', NULL, 'LIVRO', 'BIOLOGIA 3 - A QUÍMICA DA VIDA', 'Sadava, David, Hillis, David, Heller, Craig, Hacker, Sally', 'FTD', '2019', '9788582715703', 'f000000001420', 'Ciência', 546, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(778, '2023-09-01', 8861, 'BIO272', NULL, 'LIVRO', 'BIOLOGIA 3 - CITOLOGIA E GENÉTICA', 'Sadava, David, Hillis, David, Heller, Craig, Hacker, Sally', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2019', '9788582715703', 'f000000001421', 'Ciência', 546, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(779, '2023-09-01', 8832, '57407', NULL, 'LIVRO', 'BIOLOGIA 3 - SERES VIVOS EVOLUÇÃO ECOLOGIA', 'Jose Luis Soares', 'SCIPIONE', '1999', '8526234706', 'f000000001423', 'Desconhecido', 560, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(780, '2023-09-01', 8853, 'BIO540', NULL, 'LIVRO', 'BIOLOGIA 4 - GENÉTICA E EVOLUÇÃO', 'Bruce Alberts, Dennis Bray, Karen Hopkin, Alexander Johnson, Julian Lewis, Martin Raff, Keith Roberts, Peter Walter', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2017', '9788582714065', 'f000000001424', 'Ciência', 866, 'PT-BR', '2025-04-10 02:22:31', NULL, 3, 2, NULL, '2025-04-09'),
+(781, '2024-09-27', 10863, '37319', NULL, 'LIVRO', 'BIOLOGIA 4 - O ENVOLTÓRIO DA CÉLULA', 'Bruce Alberts, Dennis Bray, Karen Hopkin, Alexander Johnson, Julian Lewis, Martin Raff, Keith Roberts, Peter Walter', 'FTD', '2017', '9788582714065', 'f000000001427', 'Ciência', 866, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(782, '2024-09-27', 10862, '37319', NULL, 'LIVRO', 'BIOLOGIA 5 - CITOPLASMA E METABOLISMO ENERGÉTICO', 'Clarice Foster Cordeiro', 'FTD', '2020', '9786555176681', 'f000000001428', 'Ciência', 299, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(783, '2023-09-20', 9275, 'BIO118', NULL, 'LIVRO', 'BIOLOGIA 6', 'Gerhard Czihak, Helmut Langer, Volker Blüm, Benedetto Nicoletti', 'MINISTÉRIO DA EDUCAÇÃO', '1984', 'OCLC:636244851', 'f000000001429', 'Desconhecido', 158, 'IT', '2025-04-10 02:22:31', NULL, 4, 3, NULL, '2025-04-09'),
+(784, '2024-09-27', 10861, '37319', NULL, 'LIVRO', 'BIOLOGIA 6 - NÚCLEO ELULAR E SÍNTESE DE PROTEÍNAS', 'Bruce Alberts, Dennis Bray, Karen Hopkin, Alexander Johnson, Julian Lewis, Martin Raff, Keith Roberts, Peter Walter', 'FTD', '2017', '9788582714065', 'f000000001433', 'Ciência', 866, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(785, '2024-09-27', 10860, '37319', NULL, 'LIVRO', 'BIOLOGIA 7 - OS VÍRUS', 'Desconhecido', 'FTD', '1976', 'UCAL:B3249173', 'f000000001434', 'Biology', 346, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(786, '2024-09-27', 10859, '37319', NULL, 'LIVRO', 'BIOLOGIA 8 - DIVISÕES CELULARES:MITOSE E MEIOSE', 'Desconhecido', 'FTD', '0000', 'N/A', 'f000000001435', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(787, '2024-09-27', 10858, '37319', NULL, 'LIVRO', 'BIOLOGIA 9 - GAMETOGÊNESE, EMBRIOGÊNESE E REPRODUÇ', 'Bruce M. Carlson', 'FTD', '2014', '9788535278927', 'f000000001436', 'Medical', 520, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(788, '2023-09-01', 8865, 'BIO507', NULL, 'LIVRO', 'BIOLOGIA ANIMAL 2', 'Sadava, David, Hillis, David, Heller, Craig, Hacker, Sally', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2019', '9788582715680', 'f000000001437', 'Ciência', 544, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(789, '2010-07-06', 2650, '570', NULL, 'LIVRO', 'Biologia da Conservação: essência', 'Helena de Godoy Bergallo, Monique Van Sluys, Maria Alice dos Santos Alves', 'RIMA EDITORA', '2006', '8576560895', 'f000000001438', 'Desconhecido', 588, 'PT-BR', '2025-04-10 02:22:31', NULL, 5, 4, NULL, '2025-04-09'),
+(790, '2023-04-14', 7246, '36315', NULL, 'LIVRO', 'BIOSSEGURANÇA', 'Pedro Teixeira, Silvio Valle', 'ÉRICA', '2010', '9788575413067', 'f000000001443', 'Medical', 434, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(791, '2023-03-22', 7622, 'BIS566', NULL, 'LIVRO', 'BISMARCK', 'Edward Crankshaw', 'TRÊS', '2011', '9781448204878', 'f000000001445', 'Biography & Autobiography', 609, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(792, '2023-05-17', 7562, 'BLA149', NULL, 'LIVRO', 'BLACK CLOVER 10', 'Yuki Tabata', 'PANINI BRASIL', '2018', '9783842046443', 'f000000001446', 'Comics & Graphic Novels', 203, 'DE', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(793, '2023-04-06', 7160, 'BLE501', NULL, 'LIVRO', 'BLECAUTE', 'Nadia Moroz Luciani', 'BRASILIENSE', '2023', '9786525041681', 'f000000001447', 'Drama', 444, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(794, '2023-05-17', 7549, 'BLO708', NULL, 'LIVRO', 'BLOOD + 01', 'Yasuhiro Nightow', 'PANINI BRASIL', '2018', '9788545708537', 'f000000001448', 'Comics & Graphic Novels', 199, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(795, '2023-05-17', 7577, 'BLO230', NULL, 'LIVRO', 'BLOOD+ 02', 'Kumiko Suekane', 'PANINI BRASIL', '2008', '8498476429', 'f000000001449', 'Desconhecido', 0, 'ES', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(796, '2023-05-17', 7576, 'BLO501', NULL, 'LIVRO', 'BLOOD+ 03', 'Asuka Katsura', 'PANINI BRASIL', '2008', '9812763309', 'f000000001450', 'Graphic novels', 0, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(797, '2023-05-17', 7575, 'BLO742', NULL, 'LIVRO', 'BLOOD+ 04', 'Asuka Katsura', 'PANINI BRASIL', '2008', '9812763317', 'f000000001451', 'Graphic novels', 0, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(798, '2023-05-17', 7574, 'BLO561', NULL, 'LIVRO', 'BLOOD+ 05', 'Asuka Katsura', 'PANINI BRASIL', '2008', '1595822410', 'f000000001452', 'Comic books, strips, etc', 0, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(799, '2009-08-31', 1559, '8693', NULL, 'LIVRO', 'Boca do Inferno', 'Jorge de Sousa Braga', 'CLAROENIGMA', '1987', 'IND:39000004701640', 'f000000001453', 'Desconhecido', 52, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(800, '2011-02-15', 2979, '370', NULL, 'LIVRO', 'Bogdan Suchodolski', 'Bogdan Suchodolski, Janusz Kuczyński', 'MASSANGANA', '1986', 'OCLC:169043177', 'f000000001454', 'Desconhecido', 20, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(801, '2015-09-09', 5955, '880', NULL, 'LIVRO', 'Bola de Sebo e Outros Contos', 'Guy de Maupassant', 'MARTIN CLARET', '0000', '8525001074', 'f000000001455', 'Desconhecido', 322, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(802, '2014-06-02', 5586, '32349098161', NULL, 'LIVRO', 'Bolchevismo e Judaísmo', 'Taciana Wiazovski', 'ARQUIVO DO ESTADO', '2001', 'UTEXAS:059173010083520', 'f000000001456', 'Communism', 212, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(803, '2023-09-19', 9223, '25171', NULL, 'LIVRO', 'BOLETIM DO ARQUIVO', 'Arquivo Histórico Ultramarino (Portugal)', 'SÃO PAULO', '1950', 'STANFORD:36105117444286', 'f000000001457', 'Portugal', 574, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(804, '2023-06-22', 7357, 'BOL353', NULL, 'LIVRO', 'BOLIVAR', 'Karl Marx, Vera Ribeiro', 'TRÊS', '2008', '8561635002', 'f000000001459', 'Desconhecido', 76, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(805, '2003-04-10', 998, '5133', NULL, 'LIVRO', 'Borland C ++ Programação for Windows', 'S. Holzner', 'MAKRON BOOKS', '1995', '8534603219', 'f000000001460', 'Desconhecido', 551, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(806, '2014-05-30', 5559, '89693', NULL, 'LIVRO', 'Bras Bexiga e Barra Funda', 'Alcântra Machado', 'KLICK', '2024', '9791043108211', 'f000000001461', 'Ficção', 46, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(807, '2024-11-05', 11000, 'BRS743', NULL, 'LIVRO', 'BRÁS, BEXIGA E BARRA FUNDA', 'Antônio de Alcântara Machado', 'BASE EDITORIAL', '2019', '9788574924564', 'f000000001470', 'Ficção', 89, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(808, '2023-09-18', 9938, 'BRS249', NULL, 'LIVRO', 'BRÁS, BEXIGA E BARRA FUNDA', 'Antônio de Alcântara Machado', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2019', '9788574924564', 'f000000001467', 'Ficção', 89, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(809, '2022-01-28', 7002, 'BBB901', NULL, 'LIVRO', 'Brás, Bexiga e Barra Funda', 'Antônio de Alcântara Machado', 'KLICK', '2019', '9788574924564', 'f000000001462', 'Ficção', 89, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(810, '2023-05-25', 7473, 'BRS125', NULL, 'LIVRO', 'BRÁS, BEXIGA E BARRA FUNDA', 'Antônio de Alcântara Machado', 'SOL', '2019', '9788574924564', 'f000000001463', 'Ficção', 89, 'PT-BR', '2025-04-10 02:22:31', NULL, 5, 4, NULL, '2025-04-09'),
+(811, '2023-06-23', 7450, '3980981', NULL, 'LIVRO', 'BRASEIROS E CAUSOS DA CAPELA', 'Desconhecido', 'SANTUÁRIO', '0000', 'N/A', 'f000000001471', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(812, '2010-07-13', 2705, '910', NULL, 'LIVRO', 'Brasil 500 anos de povoamento', 'Desconhecido', 'IBGE', '2000', '8524007702', 'f000000001472', 'Blacks', 231, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(813, '2009-10-27', 1957, '7799981', NULL, 'LIVRO', 'Brasil das Artes', 'Robério Braga, Cleber Papa, Sérgio Salgado, Rosana Caramaschi, Sandra Carvalho, Lauro Machado Coelho, Nair Benedicto', 'IMAGEMDATA', '1999', 'OCLC:46750311', 'f000000001473', 'Desconhecido', 156, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(814, '2015-06-09', 5916, '981', NULL, 'LIVRO', 'Brasil de Lembraças', 'Eduardo Junqueira', 'ARTE ENSAIO', '2011', '8560504281', 'f000000001474', 'Desconhecido', 123, 'EN', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(815, '2010-07-13', 2708, '9181', NULL, 'LIVRO', 'Brasil Questões Atuais da Reorganização do Territó', 'Iná Elias de Castro, Paulo Cesar da Costa Gomes, Roberto Lobato Corrêa', 'BERTRAND BRASIL', '1996', 'UOM:39015041118418', 'f000000001476', 'Ciência', 484, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(816, '2024-04-09', 10454, 'BRA712', NULL, 'LIVRO', 'BRASIL, MAIS ALÉM', 'Duilio Lena Berni', 'FEB', '1976', 'OCLC:819715050', 'f000000001477', 'Desconhecido', 312, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(817, '2009-08-17', 1481, '98174', NULL, 'LIVRO', 'Brasília Kubitschek de Oliveira', 'Ronaldo Costa Couto', 'RECORD', '2001', 'UOM:39015054441368', 'f000000001478', 'Brasília (Brazil)', 438, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(818, '2010-07-12', 2673, '501', NULL, 'LIVRO', 'Breve História da Ciência Moderna', 'Marco Braga, JOSE CLAUDIO REIS', 'JORGE ZAHAR', '2005', '9788571108677', 'f000000001479', 'Ciência', 158, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(819, '2009-08-17', 1488, '500', NULL, 'LIVRO', 'Breve História de Quase Tudo', 'Bill Bryson', 'CIA. DAS LETRAS', '2020', '9788554517526', 'f000000001480', 'Ciência', 552, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(820, '2024-04-09', 10440, 'BRI149', NULL, 'LIVRO', 'BRIDA', 'Paulo Coelho', 'SÃO PAULO', '2013', '9504921019', 'f000000001481', 'Desconhecido', 263, 'ES', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(821, '2023-05-16', 7211, 'BRI234', NULL, 'LIVRO', 'BRIDGE TO TERABITHIA', 'Katherine Paterson', 'HARPER & ROW DO BRASIL', '2006', '0061253707', 'f000000001482', 'Juvenile Fiction', 212, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(822, '2009-08-04', 1277, '8691', NULL, 'LIVRO', 'Broquéis Faróis', 'Cruz e Souza', 'MARTIN CLARET', '2016', '8544000053', 'f000000001483', 'Poesia', 0, 'PT-BR', '2025-04-10 02:22:31', NULL, 4, 3, NULL, '2025-04-09'),
+(823, '2003-04-10', 1454, '86993', NULL, 'LIVRO', 'Budapeste', 'Chico Buarque', 'CIA. DAS LETRAS', '2003', '9788580861457', 'f000000001487', 'Ficção', 180, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(824, '2023-08-01', 8316, '6151', NULL, 'LIVRO', 'BULÁRIO EXPLICATIVO', 'Desconhecido', 'RIDEEL', '0000', 'N/A', 'f000000001488', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(825, '2011-06-02', 3473, '2484', NULL, 'LIVRO', 'Buscai as Coisas do Alto', 'Devanir Manzoli', 'CANÇÃO NOVA', '2016', '9788592104610', 'f000000001490', 'Religião', 160, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(826, '2003-04-10', 517, '65175', NULL, 'LIVRO', 'Business Letters', 'Shirley Taylor', 'EDICTA', '2012', '9780273755258', 'f000000001491', 'Business & Economics', 514, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(827, '2023-05-17', 7561, 'BUS152', NULL, 'LIVRO', 'BUSO RENKIN', 'Nobuhiro Watsuki', 'JBC', '2012', '9781421552798', 'f000000001492', 'Comics & Graphic Novels', 190, 'EN', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(828, '2003-04-10', 900, '5133', NULL, 'LIVRO', 'Ca-Clipper', 'Dan D. Gutierrez', 'PRINTED ON RECYCLED PAPER', '1994', 'UOM:39015032978069', 'f000000001500', 'Computers', 392, 'EN', '2025-04-10 02:22:31', NULL, 7, 6, NULL, '2025-04-09'),
+(829, '2015-09-10', 5960, '30589435043', NULL, 'LIVRO', 'Cabeça de Turco', 'Günter Wallraff', 'GLOBO', '2004', '8525039152', 'f000000001493', 'Desconhecido', 259, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(830, '2009-09-24', 1675, 'B869.3', NULL, 'LIVRO', 'Cabelos molhados', 'Luís Pimentel', 'MINISTÉRIO DA EDUCAÇÃO', '2006', '8529600525', 'f000000001494', 'Desconhecido', 82, 'PT-BR', '2025-04-10 02:22:31', NULL, 2, 1, NULL, '2025-04-09'),
+(831, '2023-12-06', 10127, '285', NULL, 'LIVRO', 'CABRA-CEGA', 'José Régio', 'NOVO SER', '1982', 'UCAL:B3787732', 'f000000001496', 'Portuguese fiction', 452, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(832, '2010-12-21', 3050, '7914372', NULL, 'LIVRO', 'Cabra-cega: do roteiro de Di Moretti às telas', 'Di Moretti, Toni Venturi', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2005', 'STANFORD:36105121926773', 'f000000001497', 'Cabra-Cega (Motion picture)', 308, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(833, '2024-03-28', 10363, 'CAA178', NULL, 'LIVRO', 'CAÇADAS DE PEDRINHO, HANS STADEN', 'Monteiro Lobato', 'CÍRCULO DO LIVRO', '1985', 'OCLC:10370983', 'f000000001498', 'Desconhecido', 186, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(834, '2014-02-04', 5529, '86899213', NULL, 'LIVRO', 'Cachorro Velho', 'Teresa Cárdenas', 'PALLAS', '2020', '9786556020143', 'f000000001499', 'Ficção', 92, 'PT-BR', '2025-04-10 02:22:31', NULL, 1, 0, NULL, '2025-04-09'),
+(835, '2010-01-26', 2356, '5133', NULL, 'LIVRO', 'CAD', 'Fernando Esgaib Kayatt', 'CEETEPS', '2013', '9788535269215', 'f000000001507', 'Medical', 548, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(836, '2023-09-25', 9336, 'CAD160', NULL, 'LIVRO', 'CADASTRAMENTO', 'Bahia (Brazil : State). Coordenação da Produção Mineral', 'MINISTÉRIO DA SAÚDE', '1973', 'CORNELL:31924004525717', 'f000000001508', 'Mines and mineral resources', 104, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(837, '2021-12-09', 6568, '8693', NULL, 'LIVRO', 'Cadeiras proibidas', 'IGNACIO DE LOYOLA BRANDAO', 'A PÁGINA', '0000', '8526014714', 'f000000001509', 'Desconhecido', 140, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(838, '2024-08-13', 10766, 'CAD508', NULL, 'LIVRO', 'CADERNO 1 - PORTUGUÊS, INGLÊS, HISTÓRIA, GEOGRAFIA', 'Desconhecido', 'OBJETIVO', '1994', 'UTEXAS:059173002350777', 'f000000001510', 'Desconhecido', 72, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(839, '2024-08-13', 10764, 'CAD228', NULL, 'LIVRO', 'CADERNO 1 EH - MATEMÁTICA, FÍSICA, QUÍMICA, PORTUG', 'Franciane Alves dos Santos, Helena Cristina Dutra Braga, Kalita Rocha Chaves, Quésia Guedes da Silva Castilho', 'OBJETIVO', '2024', '9786589928676', 'f000000001511', 'Educação', 52, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(840, '2024-08-13', 10765, 'CAD741', NULL, 'LIVRO', 'CADERNO 2 - PORTUGUÊS, INGLÊS, HISTÓRIA, GEOGRAFIA', 'Desconhecido', 'OBJETIVO', '1994', 'UTEXAS:059173002350777', 'f000000001512', 'Desconhecido', 72, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(841, '2024-08-13', 10763, 'CAD436', NULL, 'LIVRO', 'CADERNO 2HB - HISTÓRIA, GEOGRAFIA, BIOLOGIA, INGLÊ', 'Desconhecido', 'OBJETIVO', '0000', 'N/A', 'f000000001513', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(842, '2024-08-13', 10767, 'CAD432', NULL, 'LIVRO', 'CADERNO 3 - PORTUGUÊS, INGLÊS, HISTÓRIA, GEOGRAFIA', 'Desconhecido', 'OBJETIVO', '1994', 'UTEXAS:059173002350777', 'f000000001514', 'Desconhecido', 72, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(843, '2024-08-13', 10768, 'CAD714', NULL, 'LIVRO', 'CADERNO 4 - PORTUGUÊS, INGLÊS, HISTÓRIA, GEOGRAFIA', 'Desconhecido', 'OBJETIVO', '1994', 'UTEXAS:059173002350777', 'f000000001515', 'Desconhecido', 72, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(844, '2023-08-02', 7501, '6278', NULL, 'LIVRO', 'CADERNO DE ATIVIDADES CIÊNCIAS CONTÁBEIS', 'Desconhecido', 'ANHANGUERA PUBLICAÇÕES', '1997', 'UTEXAS:059172145898846', 'f000000001516', 'Accounting', 112, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(845, '2023-08-02', 7503, '407', NULL, 'LIVRO', 'CADERNO DE ATIVIDADES LETRAS', 'Rosi & Coni', 'ANHANGUERA PUBLICAÇÕES', '2021', '9798518078093', 'f000000001517', 'Desconhecido', 57, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(846, '2009-09-28', 1697, '3496', NULL, 'LIVRO', 'Caderno de Educação Ambiental', 'Ana Lúcia Tostes de Aquino Leite, Naná Mininni-Medina, Universidade Federal de Santa Catarina. Laboratório de Ensino à Distância', 'SMA/CEA', '2000', '8587166166', 'f000000001518', 'Desconhecido', 70, 'PT-BR', '2025-04-10 02:22:32', NULL, 5, 4, NULL, '2025-04-09'),
+(847, '2024-05-02', 10608, 'CAD917', NULL, 'LIVRO', 'CADERNO DE ESTUDOS - BIOLOGIA - ANGLO ALFA 1', 'Desconhecido', 'SOMOS SISTEMAS DE ENSINO', '0000', 'N/A', 'f000000001523', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(848, '2024-05-02', 10609, 'CAD464', NULL, 'LIVRO', 'CADERNO DE QUESTÕES - BIOLOGIA - ALFA ANGLO 2', 'Desconhecido', 'SOMOS SISTEMAS DE ENSINO', '0000', 'N/A', 'f000000001524', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(849, '2024-05-02', 10610, 'CAD869', NULL, 'LIVRO', 'CADERNO DE QUESTÕES - BIOLOGIA - ANGLO ALFA 3', 'Desconhecido', 'SOMOS SISTEMAS DE ENSINO', '0000', 'N/A', 'f000000001525', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(850, '2024-05-02', 10611, 'CAD298', NULL, 'LIVRO', 'CADERNO DE QUESTÕES - BIOLOGIA - ANGLO ALFA 4', 'Desconhecido', 'SOMOS SISTEMAS DE ENSINO', '0000', 'N/A', 'f000000001526', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(851, '2023-09-14', 9140, 'CAD940', NULL, 'LIVRO', 'CADERNO DE QUÍMICA 3', 'Franciane Alves dos Santos, Helena Cristina Dutra Braga, Kalita Rocha Chaves, Quésia Guedes da Silva Castilho', 'SANTUÁRIO', '2024', '9786589928676', 'f000000001527', 'Educação', 52, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(852, '2024-10-01', 10969, '37319', NULL, 'LIVRO', 'CADERNO MAIS - ARTE', 'SESI-SP', 'FTD', '2017', '9788582050286', 'f000000001528', 'Performing Arts', 210, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(853, '2024-09-30', 10887, '37319', NULL, 'LIVRO', 'CADERNO MAIS - FILOSOFIA', 'Desconhecido', 'FTD', '1999', 'UTEXAS:059173004000186', 'f000000001529', 'Filosofia', 116, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(854, '2011-05-23', 3396, '539', NULL, 'LIVRO', 'Cadernos de Educação Ambiental', 'A. Ishy', 'SECRETARIA DO MEIO AMBIENTE', '2006', 'OCLC:708570262', 'f000000001530', 'Desconhecido', 20, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(855, '2011-08-08', 3748, '3496', NULL, 'LIVRO', 'Cadernos de Educação Ambiental - Ecocidadão', 'A. Ishy', 'SECRETARIA DO MEIO AMBIENTE', '2006', 'OCLC:708570262', 'f000000001531', 'Desconhecido', 20, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(856, '2009-08-18', 1504, '8699108', NULL, 'LIVRO', 'Cadernos Negros', 'Desconhecido', 'QUILOMBHOJE', '2000', 'UTEXAS:059173030300460', 'f000000001532', 'Brazilian poetry', 772, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(857, '2010-12-21', 3287, '98161', NULL, 'LIVRO', 'Cadernos paulistas: História e personagens', 'Desconhecido', 'SENAC', '1992', 'UTEXAS:059173000971638', 'f000000001533', 'São Paulo (Brazil)', 298, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(858, '2010-11-01', 2908, '377', NULL, 'LIVRO', 'Cadernos Temáticos', 'Desconhecido', 'SECRETARIA DA EDUCAÇÃO PROFISSIONAL E TE', '0000', 'cad268310938', 'f000000001534', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 3, 2, NULL, '2025-04-09'),
+(859, '2024-02-19', 10206, '86993', NULL, 'LIVRO', 'CAETÉS', 'Graciliano Ramos', 'BESTBOLSO', '2020', '9788501119155', 'f000000001537', 'Ficção', 286, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(860, '2010-12-21', 3192, '98161', NULL, 'LIVRO', 'Café indústria e conhecimento', 'Oswaldo Truzzi, Paulo Marcos Reali Nunes, Ricardo Tilkian', 'EDUFSCAR', '2008', 'STANFORD:36105210642521', 'f000000001538', 'Coffee industry', 208, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(861, '2010-01-07', 2069, '100', NULL, 'LIVRO', 'Café Philo: as grandes indagações da filisofia', 'Le Nouvel Observateur (ed.), Danilo Marcondes, Procopio Abreu', 'ZAHAR', '1999', '8571104980', 'f000000001539', 'Desconhecido', 144, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(862, '2023-04-14', 7268, 'CLC344', NULL, 'LIVRO', 'CÁLCULO E ADM. DE MEDICAMENTOS NA ENFERMAGEM', 'Marcelo Tardelli Silva, Sandra Regina L. P. T. Silva', 'MARTINARI', '2014', '8581160425', 'f000000001540', 'Electronic books', 336, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(863, '2015-05-12', 5853, '6152', NULL, 'LIVRO', 'Cálculo e Administração de Medicamentos na Enferma', 'Marcelo Tardelli Silva, Sandra Regina L. P. T. Silva', 'MARTINARI', '2014', '8581160425', 'f000000001542', 'Electronic books', 336, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(864, '2009-10-08', 1881, '664', NULL, 'LIVRO', 'Calculo na Agroindústria da Cana-de-Açucar', 'Antonio Carlos Fernandes', 'STAB', '2003', 'OCLC:57018987', 'f000000001543', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(865, '2009-04-15', 29, '61558', NULL, 'LIVRO', 'Cálculos e conceitos em farmacologia', 'Desconhecido', 'SENAC', '1999', '8573590947', 'f000000001544', 'Desconhecido', 120, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(866, '2003-04-10', 535, '65001513', NULL, 'LIVRO', 'Cálculos Financeiros Aplcados e Avaliação Ecônomic', 'Luiz Roberto Vannucci', 'TEXTONOVO', '2003', '858573468X', 'f000000001545', 'Desconhecido', 201, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(867, '2009-06-08', 616, '65001513', NULL, 'LIVRO', 'Cálculos Financeiros Aplicados a Informatizados', 'Luiz Roberto Vannucci', 'COPIDART', '2003', '858573468X', 'f000000001546', 'Desconhecido', 201, 'PT-BR', '2025-04-10 02:22:32', NULL, 11, 10, NULL, '2025-04-09'),
+(868, '2003-04-10', 526, '65001513', NULL, 'LIVRO', 'Cálculos Financeiros Aplicados e Informatizados', 'Luiz Roberto Vannucci', 'COPIDART', '2003', '858573468X', 'f000000001557', 'Desconhecido', 201, 'PT-BR', '2025-04-10 02:22:32', NULL, 31, 30, NULL, '2025-04-09'),
+(869, '2010-08-12', 2825, '644', NULL, 'LIVRO', 'Cálculos na Agroindústria da Cana-de-açúcar', 'Antonio Carlos Fernandes', 'STAB', '2003', 'OCLC:57018987', 'f000000001588', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(870, '2009-10-27', 1943, '66411', NULL, 'LIVRO', 'Cálculos na Agroindústria de Cana-de-Açúcar', 'Antonio Carlos Fernandes', 'STAB', '2003', 'OCLC:57018987', 'f000000001589', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(871, '2023-09-20', 9262, 'CMA972', NULL, 'LIVRO', 'CÂMARA TÉCNICA ENSINO E PESQUISA', 'Brazil. Congresso Nacional. Câmara dos Deputados', 'COREN', '1953', 'STANFORD:36105119250996', 'f000000001590', 'Brazil', 968, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(872, '2017-01-10', 6404, '302', NULL, 'LIVRO', 'Caminhando sobre fronteiras', 'Fernando Frochtengarten', 'SUMMUS', '2013', '9788532309860', 'f000000001591', 'Educação', 180, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(873, '2010-12-21', 3171, '81611', NULL, 'LIVRO', 'Caminho do Elevado - Memória e projeto', 'R. R. Chrisostomo', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2022', '9786525404769', 'f000000001593', 'Ficção', 418, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(874, '2011-05-27', 3444, '86993', NULL, 'LIVRO', 'Caminhos Cruzados', 'Erico Veríssimo', 'CLAROENIGMA', '1947', 'UTEXAS:059173023439449', 'f000000001594', 'Desconhecido', 356, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(875, '2010-10-06', 2841, 'B869.1', NULL, 'LIVRO', 'Caminhos da Vida na poesia brasileira', 'José Américo Miranda', 'SCRIPTUM', '2010', '858904419X', 'f000000001595', 'Desconhecido', 187, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(876, '2015-09-21', 6013, '6209', NULL, 'LIVRO', 'Caminhos de Luz - a Energia da Vida', 'Rodrigo Leonardo Costa de Oliveira', 'ARTE ENSAIO', '2020', '9786599045844', 'f000000001596', 'Ciência', 42, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(877, '2015-09-21', 6012, '6209', NULL, 'LIVRO', 'Caminhos de Luz a Energia da Vida', 'Rodrigo Leonardo Costa de Oliveira', 'ARTE ENSAIO', '2020', '9786599045844', 'f000000001597', 'Ciência', 42, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(878, '2023-04-14', 7237, '22', NULL, 'LIVRO', 'CANA DE AÇUCAR DO PLANTIO A COLHEITA', 'QUIMBRASIL (Sao Paulo, SP)', 'UFV', '1978', 'OCLC:709583590', 'f000000001598', 'Desconhecido', 8, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(879, '2023-09-25', 9342, 'CNC130', NULL, 'LIVRO', 'CÂNCER DE MAMA', 'Milena Oliveira, Thiago P. Fernandes, Natanael A. Santos', 'INSTITUTO ARTE DE VIVER BEM', '2023', '9786525297439', 'f000000001600', 'Health & Fitness', 93, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(880, '2010-01-25', 2300, '869', NULL, 'LIVRO', 'Candeias em Espeho D!Agua', 'Marly Therezinha Germano Perecin', 'LOYOLA', '1990', '8515001047', 'f000000001601', 'São Paulo (Brazil : State)', 356, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(881, '2015-09-09', 5953, '880', NULL, 'LIVRO', 'Cândido ou o Otimista', 'Voltarie', 'MARTIN CLARET', '2019', '9788574924502', 'f000000001602', 'Ficção', 129, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(882, '2024-10-01', 10971, '285', NULL, 'LIVRO', 'CANINO BRANCO', 'Jack London, Rodrigo Machado', 'FTD', '2023', '9788596037587', 'f000000001603', 'Ficção', 247, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(883, '2011-05-26', 3417, '285', NULL, 'LIVRO', 'Caninos Brancos', 'Jack London', 'IBEP', '2021', '9788726621549', 'f000000001604', 'Ficção', 223, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(884, '2023-08-10', 7619, 'CAN440', NULL, 'LIVRO', 'CANTARE ESTÓRIAS', 'Desconhecido', 'EP PLÊIADE', '0000', 'N/A', 'f000000001605', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(885, '2021-12-03', 6543, '86991', NULL, 'LIVRO', 'Cantares Amazônicos', 'João de Jesus Paes Loureiro', 'CULTURAL BRASIL', '2019', '9788555171604', 'f000000001606', 'Ficção', 370, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(886, '2021-12-03', 6545, '285', NULL, 'LIVRO', 'Canto do Uirapuru', 'Érica Bombardi', 'ESCRITA FINA', '2016', '8559090037', 'f000000001607', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(887, '2022-01-28', 6991, '8691', NULL, 'LIVRO', 'Cantos da semente do martírio', 'Desconhecido', 'ZÉ - ZAPT EDITORA LTDA', '0000', 'N/A', 'f000000001608', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 5, 4, NULL, '2025-04-09'),
+(888, '2009-08-04', 1258, '80881', NULL, 'LIVRO', 'Canudos Diário de uma Expedição', 'Euclides da Cunha', 'MARTIN CLARET', '1939', 'UVA:X000826321', 'f000000001613', 'Brazil', 242, 'PT-BR', '2025-04-10 02:22:32', NULL, 5, 4, NULL, '2025-04-09'),
+(889, '2010-12-21', 3164, '86991', NULL, 'LIVRO', 'Canudos: História em versos', 'Manuel Pedro das Dores Bombinho', 'EDUFSCAR', '2002', 'UOM:39015057579628', 'f000000001618', 'Brazil', 348, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(890, '2010-01-11', 2108, '373', NULL, 'LIVRO', 'Capacitação Tecnológica da População', 'Desconhecido', 'CAMARA DOS DEPUTADOS', '2007', '8573655003', 'f000000001619', 'Educational change', 289, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(891, '2011-03-23', 3236, '86993', NULL, 'LIVRO', 'Capitães da Areia', 'Jorge Amado', 'CIA. DAS LETRAS', '2008', '9788563397386', 'f000000001621', 'Ficção', 298, 'PT-BR', '2025-04-10 02:22:32', NULL, 15, 14, NULL, '2025-04-09'),
+(892, '2014-11-18', 5689, '86993', NULL, 'LIVRO', 'Capitães da areia', 'Jorge Amado', 'COMPANHIA DAS LETRAS', '2008', '9788563397386', 'f000000001626', 'Ficção', 298, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(893, '2010-01-22', 2274, '8693', NULL, 'LIVRO', 'Capitães da Areia', 'Jorge Amado', 'MARTINS', '2008', '9788563397386', 'f000000001620', 'Ficção', 298, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(894, '2012-04-09', 4591, '86993', NULL, 'LIVRO', 'Capitães de Areia', 'Jorge Amado', 'CIA DAS LETRINHAS', '2008', '9788563397386', 'f000000001637', 'Ficção', 298, 'PT-BR', '2025-04-10 02:22:32', NULL, 10, 9, NULL, '2025-04-09'),
+(895, '2003-04-10', 512, '330122', NULL, 'LIVRO', 'Capitalismo para Principiantes', 'Carlos Eduardo Novaes, Vilmar Rodrigues', 'ÁTICA', '2008', '8508114540', 'f000000001647', 'Desconhecido', 208, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(896, '2014-09-05', 5634, '981', NULL, 'LIVRO', 'Capítulos de História: o trabalho com fontes', 'Carlos Zacarias de Sena Júnior', 'AYMARÁ', '2016', '9788523218737', 'f000000001648', 'Political Science', 278, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(897, '2009-05-29', 486, '658311', NULL, 'LIVRO', 'Captação e Seleção de Talentos', 'Walnice Almeida', 'ATLAS', '2004', 'OCLC:838094705', 'f000000001650', 'Desconhecido', 183, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(898, '2009-09-25', 1685, 'B869.1', NULL, 'LIVRO', 'Caravela [redescobrimentos]', 'Gabriel Bicalho', 'MINISTÉRIO DA EDUCAÇÃO', '2006', '8529600460', 'f000000001651', 'Desconhecido', 73, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(899, '2010-12-21', 3119, '863', NULL, 'LIVRO', 'Cárcere de Amor', 'Diego de San Pedro', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2010', '8570608101', 'f000000001653', 'Desconhecido', 297, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(900, '2023-09-25', 9346, 'CAR772', NULL, 'LIVRO', 'CARDÁPIOS ESPECIAIS', 'Bete Duarte', 'GLOBO', '2004', 'UCSD:31822035094911', 'f000000001654', 'Brazil', 210, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(901, '2011-03-23', 3251, '61073691', NULL, 'LIVRO', 'Cardiopatias', 'Thais Emilia de Campos dos Santos ', 'YENDIS', '2020', '9786555291186', 'f000000001655', 'Family & Relationships', 178, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(902, '2012-08-06', 5143, '6107391', NULL, 'LIVRO', 'Cardiopatias Avaliação e Intervenção em Enfermagem', 'MARLUCI ANDRADE CONCEIÇAO STIPP, NEBIA MARIA ALMEIDA DE FIGUEIREDO, JOSETE LUZIA LEITE', 'YENDIS', '0000', '8577280470', 'f000000001656', 'Desconhecido', 352, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(903, '2011-02-15', 2980, '370', NULL, 'LIVRO', 'Carl Rogers', 'Carl Ransom Rogers', 'MASSANGANA', '1989', '0395483573', 'f000000001657', 'Biography & Autobiography', 548, 'EN', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(904, '2010-12-21', 3047, '791430', NULL, 'LIVRO', 'Carla Camurati: luz natural', 'Carla Camurati, Carlos Alberto Mattos', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2005', '8570602332', 'f000000001658', 'Actors', 311, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(905, '2009-08-10', 1382, '86991', NULL, 'LIVRO', 'Carlos Drummond de Andrade', 'Carlos Drummond de Andrade', 'NOVA FRONTEIRA', '1977', 'UTEXAS:059173022861826', 'f000000001659', 'Desconhecido', 324, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(906, '2010-05-07', 2592, '7007', NULL, 'LIVRO', 'Carlos Fajardo', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2005', 'OCLC:816999366', 'f000000001660', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(907, '2010-12-21', 3097, '791092', NULL, 'LIVRO', 'Carlos Zara : paixão em quadro atos', 'Tania Carvalho', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2006', '8570605234', 'f000000001661', 'Desconhecido', 151, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(908, '2010-12-21', 3180, '3064', NULL, 'LIVRO', 'Carnaval em branco e negro', 'Olga R. de Moraes von Simson', 'UNICAMP', '2007', 'STANFORD:36105124271342', 'f000000001662', 'Carnival', 402, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(909, '2023-09-25', 9358, 'CAR526', NULL, 'LIVRO', 'CARNES, AVES E PEIXES', 'Manuel Luís Goucha', 'GLOBO', '0000', 'OCLC:63081502', 'f000000001663', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(910, '2023-05-17', 7518, 'CAR157', NULL, 'LIVRO', 'CARNIFICINA MÍNIMA', 'Desconhecido', 'PANINI BRASIL', '0000', 'N/A', 'f000000001664', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(911, '2022-01-26', 6956, 'B869.3', NULL, 'LIVRO', 'Carolina', 'Tom Farias', 'VENETA', '0000', '8592736242', 'f000000001665', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(912, '2003-04-10', 549, '65014', NULL, 'LIVRO', 'Carreira e Competência', 'Idalberto Chiavenato', 'SARAIVA', '2002', '8502037897', 'f000000001666', 'Desconhecido', 134, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(913, '2011-05-26', 3413, '831912', NULL, 'LIVRO', 'CARTA AO PAI', 'Franz Kafka', 'BOA VIAGEM', '1997', '9788580861341', 'f000000001667', 'Ficção', 92, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(914, '2015-09-09', 5956, '880', NULL, 'LIVRO', 'Carta de Pero Vaz de Caminha', 'Desconhecido', 'MARTIN CLARET', '1999', 'OCLC:684547700', 'f000000001668', 'Desconhecido', 64, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(915, '2023-11-01', 9761, '846', NULL, 'LIVRO', 'CARTAS A UMA NEGRA', 'Françoise Ega', 'TAIM', '2021', '9786556920955', 'f000000001669', 'Biography & Autobiography', 262, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(916, '2011-06-14', 3529, '869.0(81)', NULL, 'LIVRO', 'Cartas ao Cão', 'Tatiana Busto Garcia', 'SÁ EDITORA', '2009', '8588193485', 'f000000001670', 'Santos (São Paulo, Brazil)', 287, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(917, '2023-09-27', 9440, 'CAR331', NULL, 'LIVRO', 'CARTAS DE INGLATERRA', 'Eça de Queiroz', 'IRACEMA', '1986', 'OCLC:816744325', 'f000000001671', 'Desconhecido', 348, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(918, '2010-12-21', 3103, '86993', NULL, 'LIVRO', 'Cartas Sertanejas; Procellarias', 'Julio Ribeiro', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '0000', 'UCAL:B2827591', 'f000000001672', 'Desconhecido', 154, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(919, '2023-09-01', 8855, 'CAR529', NULL, 'LIVRO', 'CARTILHA DO APICULTOR BRASILEIRO', 'Amaro van Emelen', 'CHACARAS E QUINTAIS', '1952', 'OCLC:710860675', 'f000000001673', 'Bee culture', 356, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(920, '2014-02-04', 5532, 'B869.3', NULL, 'LIVRO', 'Casa Aberta', 'Cecilia Simonetti', 'DUBOLSINHO', '1992', 'OCLC:1371603954', 'f000000001674', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(921, '2024-10-21', 10984, '83982', NULL, 'LIVRO', 'CASA DE BONECAS', 'Henrik Ibsen', 'SÃO PAULO', '1983', 'OCLC:940054093', 'f000000001675', 'Desconhecido', 173, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(922, '2012-08-10', 5050, '285', NULL, 'LIVRO', 'Casa de pensão', 'Aluísio de Azevedo', 'RIDEEL', '2024', '9791043108563', 'f000000001676', 'Ficção', 248, 'PT-BR', '2025-04-10 02:22:32', NULL, 10, 9, NULL, '2025-04-09'),
+(923, '2024-04-12', 10515, 'CAS255', NULL, 'LIVRO', 'CASA DE PENSÃO', 'Aluísio de Azevedo', 'TRÊS', '2024', '9791043108563', 'f000000001686', 'Ficção', 248, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(924, '2010-01-20', 2207, '86993', NULL, 'LIVRO', 'Casa de Pensão / O Cortiço', 'Aluisio Azevedo, Jose de Nicola', 'SCIPIONE', '1995', '8526226940', 'f000000001687', 'Desconhecido', 207, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(925, '2023-10-05', 9578, '796334092', NULL, 'LIVRO', 'CASAGRANDE E SEUS DEMÔNIOS', 'Gilvan Ribeiro, Walter Casagrande', 'GLOBO', '2024', '9788501921840', 'f000000001688', 'Biography & Autobiography', 449, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(926, '2023-09-25', 9375, 'CAS461', NULL, 'LIVRO', 'CASEMODS & BAREBONES', 'Desconhecido', 'ABRIL', '0000', 'N/A', 'f000000001689', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(927, '2023-06-22', 7307, 'CAS235', NULL, 'LIVRO', 'CASTIGO X DISCIPLINA', 'Sofía Torallas Tovar, Inmaculada Pérez Martín', 'IGREJA DA PAZ SOROCABA', '2003', '8400081684', 'f000000001690', 'História', 292, 'ES', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(928, '2009-08-27', 1538, '92869', NULL, 'LIVRO', 'Castro Alves um poeta sempre jovem', 'Alberto da Costa e Silva', 'CLAROENIGMA', '2006', 'OCLC:1356679969', 'f000000001691', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(929, '2023-06-22', 7322, 'CAX299', NULL, 'LIVRO', 'CAXIAS', 'Sílvio Romero', 'TRÊS', '1903', 'UTEXAS:059173023481037', 'f000000001692', 'Desconhecido', 114, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(930, '2011-02-15', 2951, '370', NULL, 'LIVRO', 'Cecília Meireles', 'Cecília Meireles', 'MASSANGANA', '2020', '9786556120300', 'f000000001693', 'Poesia', 237, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(931, '2010-05-24', 2631, 'CEE148', NULL, 'LIVRO', 'CEETEPS', 'Desconhecido', 'CEETEPS', '1995', '8571391017', 'f000000001694', 'Educação', 512, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(932, '2011-02-15', 2981, '370', NULL, 'LIVRO', 'Célestin Freinet', 'Marisa Del Cioppo Elias', 'MASSANGANA', '2004', 'OCLC:51653865', 'f000000001695', 'Desconhecido', 108, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(933, '2010-12-21', 3044, '792.092 81', NULL, 'LIVRO', 'Celso Nunes: Sem Amarras', 'Eliana Rocha', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2008', 'STANFORD:36105132806055', 'f000000001696', 'Theater', 286, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(934, '2011-02-15', 2952, '370', NULL, 'LIVRO', 'Celso Suckow da Fonseca', 'Maria Ciavatta, Maria Ciavatta Franco, Zuleide Simas da Silveira, Fundação Joaquim Nabuco', 'MASSANGANA', '2010', '8570195281', 'f000000001697', 'Educators', 162, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(935, '2023-06-22', 7296, 'CLU131', NULL, 'LIVRO', 'CÉLULA ALIANÇADA', 'Desconhecido', 'DECRETO', '0000', 'N/A', 'f000000001698', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(936, '2009-08-07', 1372, '861', NULL, 'LIVRO', 'Cem Sonetos de Amor', 'Pablo Neruda', 'L&PM POCKET', '1997', '9788525436641', 'f000000001700', 'Poesia', 124, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(937, '2017-01-09', 6374, '4378', NULL, 'LIVRO', 'Cenário de governança de TI ensino superio brasile', 'Desconhecido', 'CEETEPS', '0000', 'N/A', 'f000000001702', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(938, '2014-02-04', 5500, '86993', NULL, 'LIVRO', 'Cenas de Cinema', 'Luís Pimentel', 'MYRRHA', '2011', '8589125173', 'f000000001703', 'Desconhecido', 126, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(939, '2013-05-21', 5366, '828', NULL, 'LIVRO', 'Centerquimica Quimica na medida certa', 'Desconhecido', 'CENTERQUÍMICA', '0000', 'N/A', 'f000000001704', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 5, 4, NULL, '2025-04-09'),
+(940, '2009-04-15', 30, '617', NULL, 'LIVRO', 'Centro cirúrgico', 'Nívea Cristina Moreira Santos', 'MCGRAW-HILL', '2003', '8576140012', 'f000000001709', 'Desconhecido', 180, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(941, '2009-05-12', 157, '61073677', NULL, 'LIVRO', 'Centro Cirúrgico', 'Nívea Cristina Moreira Santos', 'YENDIS', '2003', '8576140012', 'f000000001710', 'Desconhecido', 180, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(942, '2010-01-12', 2131, '61073677', NULL, 'LIVRO', 'Centro Cirúrgico e os Cuidados de Enfermagem', 'Nívea Cristina Moreira Santos', 'IATRIA', '2003', '8576140012', 'f000000001713', 'Desconhecido', 180, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(943, '2009-04-15', 64, '617917', NULL, 'LIVRO', 'Centro cirúrgico:planejamento, organização e gestã', 'João Francisco Possari', 'IATRIA', '2004', '8576140276', 'f000000001714', 'Desconhecido', 308, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(944, '2009-04-15', 44, '36211068', NULL, 'LIVRO', 'Centro de material e esterilização', 'João Francisco Possari', 'IATRIA', '2010', '8576140640', 'f000000001715', 'Technology & Engineering', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(945, '2010-05-24', 2628, 'CPS205', NULL, 'LIVRO', 'Centro Paula Souza', 'Assessoria de Comunicação do Centro Paula Souza', 'CEETEPS', '2015', 'cen226627636', 'f000000001717', 'Educação', 12, 'PT-BR', '2025-04-10 02:22:32', NULL, 3, 2, NULL, '2025-04-09'),
+(946, '2016-05-09', 6220, '370', NULL, 'LIVRO', 'Centro Paula Souza', 'Assessoria de Comunicação do Centro Paula Souza', 'SECRETARIA DA EDUCAÇÃO PROFISSIONAL E TE', '2015', 'cen044799505', 'f000000001716', 'Educação', 12, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(947, '2010-08-12', 2824, '373246', NULL, 'LIVRO', 'Centro Paula Souza - 40 anos', 'Estado de São Paulo', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2011', 'LCCN:2012367218', 'f000000001720', 'Educação', 63, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(948, '2023-09-11', 9045, 'CEN652', NULL, 'LIVRO', 'CENTRO PAULA SOUZA 40 ANOS', 'Estado de São Paulo', 'SÃO PAULO', '2011', 'LCCN:2012367218', 'f000000001721', 'Educação', 63, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(949, '2023-09-11', 9044, 'CEN262', NULL, 'LIVRO', 'CENTRO PAULA SOUZA 45 ANOS, 45 MOTIVOS DE SUCESSO', 'Desconhecido', 'SÃO PAULO', '0000', 'N/A', 'f000000001722', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(950, '2009-07-30', 1166, '899', NULL, 'LIVRO', 'Certeza de um Futuro Melhor', 'Maria Angélica Roma', 'PRINTED BRASIL', '2018', '9788594551313', 'f000000001723', 'Self-Help', 288, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(951, '2023-09-25', 9368, 'CER913', NULL, 'LIVRO', 'CERTIFICAÇÃO', 'Clarisse Droval', 'ABRIL', '2023', '9786525283524', 'f000000001724', 'Business & Economics', 220, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(952, '2023-11-30', 10015, '62892', NULL, 'LIVRO', 'CERTIFICAÇÃO D EPRODUTOS DE SEGURANÇA CONTRA INCÊN', 'Desconhecido', 'INSTITUTO SPRINKLER BRASIL', '0000', 'N/A', 'f000000001725', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 5, 4, NULL, '2025-04-09'),
+(953, '2023-06-06', 7362, '62892', NULL, 'LIVRO', 'CERTIFICAÇÃO DE PRODUTOS DE SEG. CONTRA INCÊNDIO', 'Eusébio Filipe', 'INSTITUTO SPRINKLER BRASIL', '1988', 'UVA:35007001268188', 'f000000001730', 'Merchant marine', 132, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(954, '2022-01-26', 6918, '62892', NULL, 'LIVRO', 'Certificação de produtos de segurança contra incên', 'Eusébio Filipe', 'INSTITUTO SPRINKLER BRASIL', '1988', 'UVA:35007001268188', 'f000000001731', 'Merchant marine', 132, 'PT-BR', '2025-04-10 02:22:32', NULL, 3, 2, NULL, '2025-04-09'),
+(955, '2021-12-13', 6631, '3985', NULL, 'LIVRO', 'Cervantes em cordel', 'Arievaldo Viana, Stelio Torquato Lima, Jean-claude Ramos Alphen', 'FOLIA DE LETRAS', '0000', '8565845141', 'f000000001734', 'Desconhecido', 96, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(956, '2023-06-22', 7323, 'CES973', NULL, 'LIVRO', 'CESAR', 'Marta Góes, Tato Coutinho', 'TRÊS', '2024', '9788501923257', 'f000000001735', 'Biography & Autobiography', 370, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(957, '2010-05-17', 2612, 'CIO917', NULL, 'LIVRO', 'Céu e Inferno, O Planeta Vermelho', 'Marcos Assunpção', 'ABRIL', '2017', 'PKEY:CLDEAU31852', 'f000000001736', 'Body, Mind & Spirit', 428, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(958, '2014-02-04', 5514, '285', NULL, 'LIVRO', 'Chamado Selvagem', 'Jack London', 'EDIOURO', '2020', '9788582180563', 'f000000001737', 'Ficção', 116, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(959, '2010-01-25', 2299, '8699', NULL, 'LIVRO', 'Chão Bruto', 'Hernâni Donato', 'CIRCULO DO LIVROS S/A', '1977', 'UTEXAS:059173022853588', 'f000000001738', 'Desconhecido', 194, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(960, '2011-06-14', 3524, '86993', NULL, 'LIVRO', 'Chapadão do Bugre', 'João Hernesto Weber', 'JOSÉ OLYMPIO', '1976', 'OCLC:499988749', 'f000000001739', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(961, '2022-01-26', 6941, '285', NULL, 'LIVRO', 'Charles Chaplin - Um tesouro em preto e branco', 'Flávia Muniz', 'FTD', '2017', '8596009698', 'f000000001740', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(962, '2011-03-10', 3077, '730981', NULL, 'LIVRO', 'Chelpa Ferro', 'Chelpa Ferro (Artistic Group), Museu de Arte da Pampulha (Belo Horizonte, Brazil)', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2008', 'OCLC:466121690', 'f000000001741', 'Arte, Brazilian', 11, 'UN', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(963, '2010-12-21', 3332, '363690981', NULL, 'LIVRO', 'Christo Redemptor-Um filme de Bel Noronha', 'Desconhecido', 'BARSA PLANETA', '0000', 'N/A', 'f000000001742', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(964, '2023-06-22', 7348, 'CHU257', NULL, 'LIVRO', 'CHURCHILL', 'Andrew Roberts', 'TRÊS', '2020', '9788554517915', 'f000000001743', 'Biography & Autobiography', 1259, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(965, '2009-08-17', 1484, '923241', NULL, 'LIVRO', 'Churchill Lord Roy Jenkins', 'Roy Jenkins', 'NOVA FRONTEIRA', '2012', '9780330476072', 'f000000001744', 'Biography & Autobiography', 1068, 'EN', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(966, '2024-04-10', 10479, '869935', NULL, 'LIVRO', 'CHUVA CRIOULA', 'José Mauro de Vasconcelos', 'MELHORAMENTOS', '2021', '9786555393033', 'f000000001745', 'Ficção', 254, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(967, '2024-04-04', 10427, '8135', NULL, 'LIVRO', 'CHUVAS E TROVOADAS', 'Vera Malfa Pereira, Alcir Spinardi', 'COMPANHIA DAS LETRAS', '2003', '8590331016', 'f000000001746', 'Meteorology', 229, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(968, '2013-05-22', 5372, '33391', NULL, 'LIVRO', 'Ciclo ambiental da água; da chuva à gestão', 'Dirceu D\'Alkmin Telles', 'BLUCHER', '2012', '9788521206958', 'f000000001747', 'Nature', 503, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(969, '2011-12-12', 3847, '868', NULL, 'LIVRO', 'Ciclo da Lua', 'Sidney J. S. Schwan', 'EP PLÊIADE', '2015', '9788591914005', 'f000000001748', 'Drama', 548, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(970, '2022-01-26', 6937, 'CL259', NULL, 'LIVRO', 'Ciclo da Lua', 'Sidney J. S. Schwan', 'PLÊIADE', '2015', '9788591914005', 'f000000001750', 'Drama', 548, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(971, '2003-04-10', 634, '65742', NULL, 'LIVRO', 'Ciclo de Operação Contábeis', 'Fernanda Leoni', 'TEXTONOVO', '2021', '9786525206226', 'f000000001751', 'Law', 158, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(972, '2010-01-13', 2140, '65742', NULL, 'LIVRO', 'Ciclo de Operações Contábeis', 'Fernanda Leoni', 'TEXTONOVO', '2021', '9786525206226', 'f000000001752', 'Law', 158, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(973, '2023-10-27', 9636, '8693', NULL, 'LIVRO', 'CIDADÂ DE SEGUNDA CLASSE', 'Desconhecido', 'ATENIENSE', '0000', 'N/A', 'f000000001753', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(974, '2003-04-10', 543, '361765', NULL, 'LIVRO', 'Cidadania Corporativa', 'Rinaldo Campos Soares', 'QUALITYMARK', '2002', '8522432163', 'f000000001754', 'Desconhecido', 270, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(975, '2024-06-21', 10744, 'CID129', NULL, 'LIVRO', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 'Daniel Garrido Fógos Júnior', 'SÃO PAULO', '2024', '9786527012245', 'f000000001755', 'Social Science', 166, 'PT-BR', '2025-04-10 02:22:32', NULL, 11, 10, NULL, '2025-04-09'),
+(976, '2017-01-10', 6452, '32360981', NULL, 'LIVRO', 'Cidadania no Brasil: um longo caminho', 'José Murilo de Carvalho', 'CIVILIZAÇÃO BRASILEIA', '2001', '8520005659', 'f000000001766', 'Brazil', 248, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(977, '2017-01-10', 6400, '302', NULL, 'LIVRO', 'Cidadania um projeto em construção', 'André Botelho, Lilia Moritz Schwarcz', 'CLARO ENIGMA', '2013', '9788543800424', 'f000000001768', 'Social Science', 106, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(978, '2009-08-10', 1390, '869935', NULL, 'LIVRO', 'Cidade de Deus', 'Paulo Lins', 'CIA. DAS LETRAS', '2018', '9788542214215', 'f000000001770', 'Ficção', 500, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(979, '2014-01-23', 5478, '86993', NULL, 'LIVRO', 'Cidades Mortas', 'José Bento Monteiro Lobato', 'GLOBO', '1920', 'CORNELL:31924021233097', 'f000000001771', 'Desconhecido', 252, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(980, '2010-12-21', 3172, '36369', NULL, 'LIVRO', 'Cidades Universitárias: Patrimônio Urbanístico e A', 'Universidade de São Paulo Centro de Preservação Cultural da USP., Maria Lígia Coelho Prado', 'EDUSP', '2005', '8531408644', 'f000000001772', 'Architecture', 366, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(981, '2023-09-04', 8888, '500', NULL, 'LIVRO', 'CIÊNCIA ALIMENTANDO O BRASIL', 'Kleyton Vinicyus Godoy, Thales Costa Soares, Barabara Bastos De Lima Duque', 'SÃO PAULO', '0000', '8578614585', 'f000000001773', 'Desconhecido', 118, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(982, '2003-04-10', 876, '51992', NULL, 'LIVRO', 'Ciência dos Computadores', 'Desconhecido', 'MCGRAW-HILL', '1983', '0074504436', 'f000000001775', 'Desconhecido', 383, 'PT-BR', '2025-04-10 02:22:32', NULL, 5, 4, NULL, '2025-04-09'),
+(983, '2023-08-29', 8721, '37235', NULL, 'LIVRO', 'CIÊNCIAS', 'Nélio Bizzo, Attico Chassot', 'ÁTICA', '2013', '9788532309136', 'f000000001781', 'Educação', 154, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(984, '2023-09-14', 9124, '500', NULL, 'LIVRO', 'CIÊNCIAS', 'Nélio Bizzo, Attico Chassot', 'SALESIANA', '2013', '9788532309136', 'f000000001780', 'Educação', 154, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(985, '2023-09-21', 9307, 'CIN264', NULL, 'LIVRO', 'CIÊNCIAS - CORPO HUMANO', 'Carlos Barros', 'SCIPIONE', '2002', '8508084528', 'f000000001782', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(986, '2009-05-07', 131, '610', NULL, 'LIVRO', 'Ciências e Programas de Saúde', 'São Paulo (Estado). Secretaria de Educação. Coordenadoria de Estudos e Normas Pedagógicas, Eneida Rocha Di Martino', 'SE/CENP', '1991', 'OCLC:709909697', 'f000000001783', 'Desconhecido', 66, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(987, '2023-08-01', 8314, '37235', NULL, 'LIVRO', 'CIÊNCIAS, NATUREZA E COTIDIANO', 'Wender Faleiro, Maria Paulina de Assis', 'FTD', '2017', '9788546208630', 'f000000001784', 'Educação', 436, 'PT-BR', '2025-04-10 02:22:32', NULL, 2, 1, NULL, '2025-04-09'),
+(988, '2010-01-13', 2138, '6327', NULL, 'LIVRO', 'Cigarrinhas da Cana-de-Açucar', 'BA) CEPLAC. Centro de Pesquisas do Cacau. Divisao de Bibliografias e Documentacao(Ilheus', 'INSECTA', '1979', 'OCLC:708786778', 'f000000001786', 'Desconhecido', 78, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(989, '2023-05-19', 7460, '8699334', NULL, 'LIVRO', 'CINCO MINUTOS A VIUVINHA', 'José de Alencar', 'ÁTICA', '2023', '9788596037600', 'f000000001787', 'Ficção', 214, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(990, '2016-10-20', 6347, '86993', NULL, 'LIVRO', 'Cinco minutos e A viuvinha', 'José de Alencar', 'CIDADE CULTURAL', '2023', '9788596037600', 'f000000001788', 'Ficção', 214, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(991, '2024-04-09', 10452, 'CIN669', NULL, 'LIVRO', 'CINCO MINUTOS, A VIUVINHA', 'José de Alencar', 'ÁTICA', '2023', '9788596037600', 'f000000001789', 'Ficção', 214, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(992, '2011-06-06', 3505, '869', NULL, 'LIVRO', 'Cinco Semanas em Balão', 'Júlio Verne', 'BISORDI', '2017', '9788506081419', 'f000000001790', 'Juvenile Fiction', 208, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(993, '2011-07-11', 3643, '620', NULL, 'LIVRO', 'Cinemática', 'Leonardo Diego Lins', 'NACIONAL', '2015', 'PKEY:CLDEAU23879', 'f000000001791', 'Ciência', 121, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(994, '2009-08-14', 1460, '86993', NULL, 'LIVRO', 'Cinzas do Norte', 'Milton Hatoum', 'CIA. DAS LETRAS', '2023', '9788535935622', 'f000000001792', 'Ficção', 290, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(995, '2014-01-23', 5491, '86993', NULL, 'LIVRO', 'Ciranda de nós', 'Maria Carolina Maia', 'GRUA LIVROS', '2021', '9786588410165', 'f000000001793', 'Ficção', 174, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(996, '2009-08-18', 1502, '86993', NULL, 'LIVRO', 'Ciranda de Pedra', 'Lygia Fagundes Telles', 'PRUMO', '2009', '9788580860276', 'f000000001794', 'Ficção', 228, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(997, '2023-10-05', 9612, 'CIR774', NULL, 'LIVRO', 'CIRCUITOS & INFORMAÇÕES', 'Newton C. Braga', 'SABER E LER', '1985', 'OCLC:817939263', 'f000000001795', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(998, '2010-12-21', 3026, '70074', NULL, 'LIVRO', 'Circuitos paralelos : Restropectiva Frest Forest', 'Desconhecido', 'PAÇO DAS ARTES', '2006', 'STANFORD:36105123597887', 'f000000001796', 'Video art', 136, 'FR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(999, '2003-04-10', 1437, '86998', NULL, 'LIVRO', 'Cisne de Feltro', 'Paulo Mendes Campos', 'CIVILIZAÇÃO BRASILEIA', '2001', '8520005721', 'f000000001797', 'Poets, Brazilian', 156, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1000, '2010-01-15', 2171, '9234', NULL, 'LIVRO', 'Clara dos Anjos', 'Lima Barreto', 'ÁTICA', '2020', '9788582652022', 'f000000001798', 'Ficção', 153, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1001, '2014-01-23', 5483, '86993', NULL, 'LIVRO', 'Clarice na Cabeceira', 'Clarice Lispector', 'LENDO E APRENDENDO', '2010', '9788581225609', 'f000000001799', 'Ficção', 146, 'PT-BR', '2025-04-10 02:22:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1002, '2016-09-26', 6246, '86991', NULL, 'LIVRO', 'Claro enigma', 'Carlos Drummond de Andrade', 'CIA. DAS LETRAS', '2022', '9786555875003', 'f000000001800', 'Poesia', 149, 'PT-BR', '2025-04-10 02:22:32', NULL, 20, 19, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(1003, '2014-05-30', 5558, '89693', NULL, 'LIVRO', 'Classico da Poesia Brasileira', 'Desconhecido', 'KLICK', '2019', 'OCLC:955705365', 'f000000001820', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1004, '2011-08-24', 3756, '61444', NULL, 'LIVRO', 'Clínica Médica', 'Antonio Carlos Lopes, Fernando Sabia Tallo, Guilherme Di Camillo Orfali, Igor Gouveia Pietrobom, Paula M. Peçanha Pietrobom', 'SAÚDE TOTAL', '2019', '8527735814', 'f000000001821', 'Medical', 0, 'PT-BR', '2025-04-10 02:22:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1005, '2011-08-24', 3758, '613907', NULL, 'LIVRO', 'Clínica Médica Ginecologia, Obstetrícia, DST, AIDS', 'Desconhecido', 'SAÚDE TOTAL', '0000', 'N/A', 'f000000001823', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1006, '2009-04-15', 58, '61073', NULL, 'LIVRO', 'Clínica médica para enfermagem', 'Nívea Cristina Moreira Santos', 'IATRIA', '2004', '8576140217', 'f000000001824', 'Desconhecido', 236, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1007, '2023-09-20', 9266, 'CLN280', NULL, 'LIVRO', 'CLÍNICAS OBSTÉTRICAS E GINECOLÓGICAS', 'Desconhecido', 'INTERAMERICANA', '2009', '9788445819951', 'f000000001825', 'Desconhecido', 195, 'ES', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1008, '2003-04-10', 1001, '16425', NULL, 'LIVRO', 'Clipper', 'Desconhecido', 'LTC LIVROS TÉCNICOS E CIENTIFICOS', '0000', 'cli152801594', 'f000000001826', 'Desconhecido', 6, 'EN', '2025-04-10 02:22:33', NULL, 4, 3, NULL, '2025-04-09'),
+(1009, '2003-04-11', 929, '16425', NULL, 'LIVRO', 'Clipper 5.0 : Básico', 'J.A.A. Ramalho', 'MCGRAW-HILL', '1991', 'OCLC:709433479', 'f000000001830', 'Desconhecido', 837, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1010, '2003-04-10', 1000, '16425', NULL, 'LIVRO', 'Clipper 5.0 Avançado', 'Roger Dalton', 'MCGRAW-HILL', '1991', '8572510109', 'f000000001831', 'Desconhecido', 866, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1011, '2003-04-10', 1016, '16425', NULL, 'LIVRO', 'Clipper Versão Summer 87', 'Antonio Geraldo da Rocha Vidal', 'LTC LIVROS TÉCNICOS E CIENTIFICOS', '1989', '8521606397', 'f000000001832', 'Desconhecido', 546, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1012, '2024-04-09', 10434, 'CLT477', NULL, 'LIVRO', 'CLT - CONSOLIDAÇÃO DAS LEIS DO TRABALHO', 'Câmara dos Deputados, Edições Câmara', 'SARAIVA', '2022', '9788540206953', 'f000000001833', 'Law', 169, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1013, '2009-05-20', 292, '3424', NULL, 'LIVRO', 'CLT Consolidação das Leis Trabalhista', 'Câmara dos Deputados, Edições Câmara', 'SARAIVA', '2022', '9788540206953', 'f000000001834', 'Law', 169, 'PT-BR', '2025-04-10 02:22:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1014, '2009-05-20', 294, '3424', NULL, 'LIVRO', 'CLT Consolidação das Leis Trabalhistas', 'Câmara dos Deputados, Edições Câmara', 'SARAIVA', '2022', '9788540206953', 'f000000001836', 'Law', 169, 'PT-BR', '2025-04-10 02:22:33', NULL, 3, 2, NULL, '2025-04-09'),
+(1015, '2003-04-10', 872, '16424', NULL, 'LIVRO', 'Cobol para Microcomputadores', 'Alberto Luiz Ferreira', 'MCGRAW-HILL', '2023', '9786500862850', 'f000000001839', 'Computers', 241, 'PT-BR', '2025-04-10 02:22:33', NULL, 4, 3, NULL, '2025-04-09'),
+(1016, '2010-01-20', 2217, '86991', NULL, 'LIVRO', 'Cobra Norato e outros poemas', 'Raul Bopp', 'CIVILIZAÇÃO BRASILEIA', '1956', 'OCLC:1025749652', 'f000000001843', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1017, '2009-09-25', 1691, 'B869.3', NULL, 'LIVRO', 'Cobras em Compota', 'Índigo', 'MINISTÉRIO DA EDUCAÇÃO', '2006', '8529600444', 'f000000001844', 'Desconhecido', 121, 'PT-BR', '2025-04-10 02:22:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1018, '2003-04-10', 685, '3477', NULL, 'LIVRO', 'Código Comercial Brasileiro', 'Brazil, Carlos Eduardo Barreto', 'ATLAS', '1971', 'OCLC:22227781', 'f000000001846', 'Commercial law', 925, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1019, '2003-04-10', 675, '3477', NULL, 'LIVRO', 'Código Comercial e Legislação Complementar Anotado', 'Isabel Ferreira Quelhas Geraldes', 'SARAIVA', '2023', '9789894011651', 'f000000001847', 'Law', 486, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1020, '2009-05-21', 298, '3477', NULL, 'LIVRO', 'Código Comercial Legislação Complementar Anotados', 'Portugal, Abílio Neto', 'SARAIVA', '1991', 'STANFORD:36105061002387', 'f000000001848', 'Business enterprises', 992, 'PT-BR', '2025-04-10 02:22:33', NULL, 4, 3, NULL, '2025-04-09'),
+(1021, '2009-05-21', 297, '3477', NULL, 'LIVRO', 'Código Comercial Legislação Complementas Anotados', 'Portugal, Abílio Neto', 'SARAIVA', '1991', 'STANFORD:36105061002387', 'f000000001852', 'Business enterprises', 992, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1022, '2003-04-10', 701, '342', NULL, 'LIVRO', 'Código de Processo Civil', 'Artur Barbosa Da Silveira', 'MALHEIROS EDITORES LTDA', '2015', '9781508953777', 'f000000001853', 'Social Science', 260, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1023, '2003-04-10', 702, '342', NULL, 'LIVRO', 'Código de Processo Civil', 'Artur Barbosa Da Silveira', 'SARAIVA', '2015', '9781508953777', 'f000000001854', 'Social Science', 260, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1024, '2003-04-10', 704, '3431', NULL, 'LIVRO', 'Código de Processo Penal', 'Brazil', 'FLORENSE', '1942', 'OCLC:24459029', 'f000000001855', 'Criminal procedure', 232, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1025, '2011-07-05', 3607, '343', NULL, 'LIVRO', 'Código de Processo Penal Interpretado', 'Júlio Fabbrini Mirabete', 'ATLAS', '1994', '8522411212', 'f000000001856', 'Criminal procedure', 864, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1026, '2009-08-03', 1202, '34137', NULL, 'LIVRO', 'Código de Proteção da Defesa do Consumidor', 'Brasil Governo', 'MINISTÉRIO DA JUSTIÇÃ', '2011', 'OCLC:1277111659', 'f000000001857', 'Consumer protection', 300, 'PT-BR', '2025-04-10 02:22:33', NULL, 15, 14, NULL, '2025-04-09'),
+(1027, '2023-09-28', 9478, '34137', NULL, 'LIVRO', 'CÓDIGO DE PROTEÇÃO E DEFESA DO CONSUMIDOR', 'Brasil Governo', 'MINISTÉRIO DA JUSTIÇÃ', '2011', 'OCLC:1277111659', 'f000000001872', 'Consumer protection', 300, 'PT-BR', '2025-04-10 02:22:33', NULL, 63, 62, NULL, '2025-04-09'),
+(1028, '2023-11-30', 10006, 'CDI466', NULL, 'LIVRO', 'CÓDIGO PENAL ANOTADO', 'Gilberto Thums', 'SARAIVA', '2010', '8561321245', 'f000000001935', 'Desconhecido', 370, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1029, '2023-12-20', 10179, 'CDI223', NULL, 'LIVRO', 'CÓDIGO TRIBUTÁRIO NACIONAL', 'Hugo de Brito Machado Segundo', 'RIDEEL', '2018', '8597015667', 'f000000001942', 'Law', 0, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1030, '2009-05-20', 276, '34336', NULL, 'LIVRO', 'Código Tributário Nacional', 'Hugo de Brito Machado Segundo', 'SARAIVA', '2018', '8597015667', 'f000000001936', 'Law', 0, 'PT-BR', '2025-04-10 02:22:33', NULL, 6, 5, NULL, '2025-04-09'),
+(1031, '2010-12-21', 3170, '634909811', NULL, 'LIVRO', 'Coleção Brasil Natureza Florestas', 'Thais Riotto', 'ECO ASSOCIAÇÃO', '0000', 'col354902483', 'f000000001943', 'Juvenile Fiction', 54, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1032, '2023-05-15', 7200, 'COL462', NULL, 'LIVRO', 'COLEÇÃO DR. DRAUZIO VARELLA', 'Drauzio Varella', 'GOLD EDITORA', '2016', '9788543807980', 'f000000001944', 'Health & Fitness', 267, 'PT-BR', '2025-04-10 02:22:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1033, '2023-05-15', 7202, 'COL342', NULL, 'LIVRO', 'COLEÇÃO DR.DRAUZIO VARELLA', 'Desconhecido', 'GOLD EDITORA', '0000', 'N/A', 'f000000001946', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1034, '2011-02-15', 3005, '370', NULL, 'LIVRO', 'Coleção Educadores:Índice Geral de Nomes e Assunto', 'Desconhecido', 'MASSANGANA', '0000', 'N/A', 'f000000001947', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1035, '2010-07-13', 2696, '910', NULL, 'LIVRO', 'Coleção Explorando o Ensino Geografia', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '1958', 'UCAL:$B547775', 'f000000001948', 'Geography', 126, 'ES', '2025-04-10 02:22:33', NULL, 4, 3, NULL, '2025-04-09'),
+(1036, '2014-01-21', 5430, '86993', NULL, 'LIVRO', 'Coleção Melhores Crônicas', 'Moacyr Scliar', 'GLOBAL', '2015', '9788526018419', 'f000000001952', 'Ficção', 346, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1037, '2023-09-27', 9441, 'COL903', NULL, 'LIVRO', 'COLEÇÕES EM DIÁLOGO: MUSEU NACIONAL DE SOARES DOS', 'Desconhecido', 'PINACOTECA', '2017', '8582560842', 'f000000001953', 'Painting, Brazilian', 156, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1038, '2023-09-12', 9058, '370113', NULL, 'LIVRO', 'COLEÇÕES, ACERVOS E CENTROS DE MEMÓRIA', 'Museu de Arte Contemporânea de Pernambuco', 'SÃO PAULO', '2001', 'UTEXAS:059173013770898', 'f000000001954', 'Arte', 72, 'EN', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1039, '2023-09-21', 9313, 'CLE485', NULL, 'LIVRO', 'CÓLERA - NORMAS E INSTRUÇÕES', 'Desconhecido', 'CVE', '1991', 'UTEXAS:059173001676291', 'f000000001955', 'Cholera', 106, 'ES', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1040, '2023-09-11', 9034, '285', NULL, 'LIVRO', 'COLETA SELETIVA E RECICLAGEM', 'Desconhecido', 'PAE', '2007', 'OCLC:709660089', 'f000000001956', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:22:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1041, '2023-09-26', 9384, 'COL400', NULL, 'LIVRO', 'COLETA SELETIVA PARA PREFEITURAS', 'São Paulo (Estado). Secretaria do Meio Ambiente. Coordenadoria de Planejamento Ambiental Estratégico e Educação Ambiental', 'SECRETARIA DO MEIO AMBIENTE', '2005', '8586624411', 'f000000001963', 'Desconhecido', 32, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1042, '2010-01-12', 2122, '3042', NULL, 'LIVRO', 'Coleta Seletiva para Prefeituras', 'São Paulo (Estado). Secretaria do Meio Ambiente. Coordenadoria de Planejamento Ambiental Estratégico e Educação Ambiental', 'SMA/CPLEA', '2005', '8586624411', 'f000000001958', 'Desconhecido', 32, 'PT-BR', '2025-04-10 02:22:33', NULL, 5, 4, NULL, '2025-04-09'),
+(1043, '2023-08-22', 8372, 'COL121', NULL, 'LIVRO', 'COLETÂNEA ARTIGOS DE OPINIÃO', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '1999', 'OCLC:930506930', 'f000000001964', 'Desconhecido', 166, 'PT-BR', '2025-04-10 02:22:33', NULL, 9, 8, NULL, '2025-04-09'),
+(1044, '2023-09-05', 8976, 'COL240', NULL, 'LIVRO', 'COLETÂNEA ENEM', 'EdiCase Publicações', 'POLIEDRO', '2020', 'col585234730', 'f000000001973', 'Educação', 205, 'PT-BR', '2025-04-10 02:22:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1045, '2014-01-21', 5432, '8699308', NULL, 'LIVRO', 'Coletivo 21', 'VARIOS AUTORES', 'AUTÊNTICA', '2011', '8575265709', 'f000000001974', 'Desconhecido', 126, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1046, '2009-05-29', 472, '6501', NULL, 'LIVRO', 'Com a Palavra, os Vencedores', 'Donald Trump', 'CAMPUS', '2004', '8535214909', 'f000000001975', 'Success in business', 212, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1047, '2013-05-08', 5351, '37019', NULL, 'LIVRO', 'Com direito à palavra: dicionário em sala de aula', 'Ângela Maria dos Santos Maia', 'MINISTÉRIO DA EDUCAÇÃO', '2002', '857177126X', 'f000000001976', 'Desconhecido', 86, 'PT-BR', '2025-04-10 02:22:34', NULL, 9, 8, NULL, '2025-04-09'),
+(1048, '2009-07-31', 1183, '843', NULL, 'LIVRO', 'COM o Diabo no Corpo O baile do conde d.Orgel', 'Raymond Radiguet', 'CONTRAPONTO', '1995', '8585910011', 'f000000001985', 'Desconhecido', 249, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1049, '2024-02-28', 10246, '1339', NULL, 'LIVRO', 'COM OS OLHOS DO CORAÇÃO', 'Desconhecido', 'PETIT', '0000', '8572531270', 'f000000001986', 'Desconhecido', 208, 'EN', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1050, '2010-12-21', 3255, '842914', NULL, 'LIVRO', 'Combate de negro e de cães; O retorno ao deserto;', 'Bernard-Marie Koltès, Eduardo Siopa', 'INSTITUTO TOTEM CULTURAL', '0000', '9728423187', 'f000000001987', 'Desconhecido', 0, 'EN', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1051, '2014-06-02', 5587, '32349098161', NULL, 'LIVRO', 'Combates pela liberdade', 'Lucia Silva Parra', 'ARQUIVO DO ESTADO', '2003', 'UTEXAS:059173014535893', 'f000000001988', 'Anarchism', 212, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1052, '2023-09-26', 9406, 'COM212', NULL, 'LIVRO', 'COMECE CERTO', 'Marco Antonio Ribeiro', 'SEBRAE', '2024', '6598482305', 'f000000001989', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1053, '2023-09-18', 9177, '9104', NULL, 'LIVRO', 'COMER REZAR AMAR', 'Elizabeth Gilbert', 'OBJETIVA', '2008', '9788539002283', 'f000000001990', 'Biography & Autobiography', 396, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1054, '2009-10-08', 1882, '6147', NULL, 'LIVRO', 'Comércio e meio ambiente:direito, economia e polít', 'Sao Paulo (Estado). Secretaria de Estado do Meio Ambiente, Tom Wathen', 'CETESB', '1996', 'OCLC:46756105', 'f000000001991', 'Desconhecido', 180, 'PT-BR', '2025-04-10 02:22:34', NULL, 3, 2, NULL, '2025-04-09'),
+(1055, '2024-03-01', 10265, '6585', NULL, 'LIVRO', 'COMO ADMINISTRAR A PRODUÇÃO + CURSO ON-LINE', 'Luiz Arnaldo Biagio', 'MANOLE', '0000', '9788520441220', 'f000000001994', 'Desconhecido', 104, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1056, '2011-06-06', 3500, '80883', NULL, 'LIVRO', 'Como atirar vacas no precipício', 'Alzira Castilho', 'PANDA', '2000', '8587537105', 'f000000001995', 'Parables', 175, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1057, '2011-06-02', 3478, '261', NULL, 'LIVRO', 'Como Atrair Dinheiro', 'Joseph Murphy', 'FORENSE UNIVERSITÁRIA', '1962', 'OCLC:683343535', 'f000000001996', 'Desconhecido', 199, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1058, '2024-03-01', 10266, '658816', NULL, 'LIVRO', 'COMO CALCULAR O PREÇO DE VENDA + CURSO ON-LINE', 'Luiz Arnaldo Biagio', 'MANOLE', '0000', '9788520436660', 'f000000001997', 'Desconhecido', 108, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1059, '2024-11-13', 11018, 'COM985', NULL, 'LIVRO', 'COMO CONQUISTAR, FALANDO', 'Marques Oliveira', 'EDIOURO', '1970', 'OCLC:683401996', 'f000000001998', 'Desconhecido', 169, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1060, '2023-09-20', 9280, '2537', NULL, 'LIVRO', 'COMO DESCREVER DOCUMENTOS DE ARQUIVO', 'André Porto Ancona Lopez', 'ARQUIVO DO ESTADO', '2002', '8570601131', 'f000000001999', 'Desconhecido', 60, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1061, '2024-03-01', 10270, '6584012', NULL, 'LIVRO', 'COMO ELABORAR O PLANO DE NEGÓCIOS + CURSO ON-LINE', 'Luiz Arnaldo Biagio', 'MANOLE', '0000', '9788520436677', 'f000000002000', 'Desconhecido', 103, 'PT-BR', '2025-04-10 02:22:34', NULL, 1, 0, NULL, '2025-04-09'),
+(1062, '2023-05-16', 7208, '823', NULL, 'LIVRO', 'COMO EU ERA ANTES DE VOCÊ', 'Jojo Moyes', 'INTRÍNSECA', '2013', '9788580573268', 'f000000002001', 'Ficção', 457, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1063, '2023-10-05', 9560, 'COM955', NULL, 'LIVRO', 'COMO FALAR BEM', 'LIGIA CAVALCANTI, LINA FERNANDES', 'SEGMENTO', '0000', '8599303201', 'f000000002002', 'Desconhecido', 51, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1064, '2023-09-20', 9272, '25129', NULL, 'LIVRO', 'COMO FAZER ANÁLISE DIPLOMÁTICA E A T D D DE ARQUIV', 'Heloísa Liberalli Bellotto', 'ARQUIVO DO ESTADO', '2002', '858672646X', 'f000000002003', 'Archives', 120, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1065, '2023-08-29', 8735, '6585', NULL, 'LIVRO', 'COMO FAZER PESQUISA DE MARKETING', 'Walter Nique, Wagner Ladeira', 'ATLAS', '2017', '8597012587', 'f000000002004', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 2, 1, NULL, '2025-04-09'),
+(1066, '2023-09-18', 9199, '25129', NULL, 'LIVRO', 'COMO FAZER PROGRAMAS DE REPRODUÇÃO DE DOCUMENTOS D', 'Esther Caldas Bertoletti', 'ARQUIVO DO ESTADO', '2002', '8586726400', 'f000000002006', 'Desconhecido', 48, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1067, '2013-06-07', 5379, '5', NULL, 'LIVRO', 'Como Funciona a Internet', 'Bruce Sinclair', 'QUARK', '2018', '9788551303559', 'f000000002007', 'Business & Economics', 303, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1068, '2023-09-20', 9271, '25171', NULL, 'LIVRO', 'COMO IMPLANTAR ARQUIVOS PÚBLICOS MUNICIPAIS', 'Helena Corrêa Machado', 'ARQUIVO DO ESTADO', '1999', 'UTEXAS:059173010534072', 'f000000002008', 'Municipal archives', 100, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1069, '2023-08-29', 8741, '61603622', NULL, 'LIVRO', 'COMO LER ARTIGOS CIENTÍFICOS', 'Trisha Greenhalgh', 'ARTMED', '2015', '9788582712238', 'f000000002009', 'Medical', 180, 'PT-BR', '2025-04-10 02:23:30', NULL, 2, 1, NULL, '2025-04-09'),
+(1070, '2023-09-26', 9421, 'COM444', NULL, 'LIVRO', 'COMO MONTAR FÁBRICA DE CADEIRAS DE PRAIA', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002011', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1071, '2023-09-26', 9435, 'COM340', NULL, 'LIVRO', 'COMO MONTAR UM AÇOUGUE', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002012', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1072, '2023-09-26', 9417, 'COM905', NULL, 'LIVRO', 'COMO MONTAR UM BAZAR E ARMARINHO', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525567', 'f000000002013', 'Desconhecido', 23, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1073, '2023-09-26', 9413, 'COM508', NULL, 'LIVRO', 'COMO MONTAR UM BUFFET', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525536', 'f000000002014', 'Desconhecido', 23, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1074, '2023-09-28', 9471, 'COM199', NULL, 'LIVRO', 'COMO MONTAR UM COMÉRCIO DE EQUIPAMENTOS PARA COZIN', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002015', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1075, '2023-09-27', 9460, 'COM650', NULL, 'LIVRO', 'COMO MONTAR UM COMÉRCIO DE FRIOS E LATICÍNIOS', 'Nell Hessy', 'SEBRAE', '2020', 'com277569749', 'f000000002016', 'Business & Economics', 69, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1076, '2023-09-27', 9452, 'COM841', NULL, 'LIVRO', 'COMO MONTAR UM COMÉRCIO DE ROUPAS BRANCAS', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002017', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1077, '2023-09-27', 9447, 'COM532', NULL, 'LIVRO', 'COMO MONTAR UM COMÉRCIO DE ROUPAS SEMI-NOVAS', 'Rebecca Ellington', 'SEBRAE', '2018', '9781547539437', 'f000000002018', 'Crafts & Hobbies', 67, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1078, '2023-09-26', 9427, 'COM736', NULL, 'LIVRO', 'COMO MONTAR UM COMÉRCIO E CONSERTOS DE BICICLETAS', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002019', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1079, '2023-09-27', 9454, 'COM376', NULL, 'LIVRO', 'COMO MONTAR UM COMÉRCIO E SERVIÇOS DE CHAVEIRO', 'P. C. Mauro', 'SEBRAE', '2006', '8521313217', 'f000000002020', 'Business & Economics', 332, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1080, '2023-09-27', 9465, 'COM473', NULL, 'LIVRO', 'COMO MONTAR UM CURSO DE IDIOMAS', 'Joaquim Martins Junior', 'SEBRAE', '2017', '9788532656179', 'f000000002021', 'Educação', 249, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1081, '2023-09-27', 9468, 'COM631', NULL, 'LIVRO', 'COMO MONTAR UM DEDETIZADORA', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002022', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1082, '2023-09-27', 9463, 'COM593', NULL, 'LIVRO', 'COMO MONTAR UM ESCRITÓRIO DE PAISAGISMO', 'Marcelo Adriano Rossi', 'SEBRAE', '2022', '9786525233932', 'f000000002023', 'Business & Economics', 56, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1083, '2023-09-26', 9410, 'COM759', NULL, 'LIVRO', 'COMO MONTAR UM ESTACIONAMENTO', 'Pequenas Empresas e Grandes Negócios', 'SEBRAE', '0000', '8525034673', 'f000000002024', 'Desconhecido', 156, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1084, '2023-09-27', 9445, 'COM577', NULL, 'LIVRO', 'COMO MONTAR UM POSTO DE GASOLINA', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709510242', 'f000000002025', 'Desconhecido', 21, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1085, '2023-09-27', 9467, 'COM283', NULL, 'LIVRO', 'COMO MONTAR UM TRALLER DE LANCHES', 'Nelson Gonçalves', 'SEBRAE', '2021', 'PKEY:CLDEAU58420', 'f000000002026', 'Self-Help', 178, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1086, '2023-09-28', 9474, 'COM277', NULL, 'LIVRO', 'COMO MONTAR UMA AGÊNCIA DE EMPREGOS', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002027', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1087, '2023-09-26', 9415, 'COM461', NULL, 'LIVRO', 'COMO MONTAR UMA AGÊNCIA DE ENTREGA RÁPIDA', 'Digital World', 'SEBRAE', '2024', '9786547365338', 'f000000002028', 'Business & Economics', 66, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1088, '2023-09-26', 9432, 'COM923', NULL, 'LIVRO', 'COMO MONTAR UMA AGÊNCIA DE PUBLICIDADE E PROPAGAND', 'Marcos Cobra, Adelia Franceschini', 'SEBRAE', '2012', '9788535258691', 'f000000002029', 'Business & Economics', 177, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1089, '2023-09-26', 9419, 'COM406', NULL, 'LIVRO', 'COMO MONTAR UMA AGÊNCIA DE TURISMO', 'Serviço de Apoio às Micro e Pequenas Empresas de São Paulo', 'SEBRAE', '1997', '8585607831', 'f000000002030', 'Desconhecido', 37, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1090, '2023-09-27', 9462, 'COM941', NULL, 'LIVRO', 'COMO MONTAR UMA ALFAIATARIA', 'Rebecca Ellington', 'SEBRAE', '2018', '9781547539437', 'f000000002031', 'Crafts & Hobbies', 67, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1091, '2023-09-27', 9466, 'COM468', NULL, 'LIVRO', 'COMO MONTAR UMA BANCA DE JORNAL', 'Wallace D. Wattles', 'SEBRAE', '2020', '9781619652071', 'f000000002032', 'Body, Mind & Spirit', 42, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1092, '2023-09-27', 9464, 'COM303', NULL, 'LIVRO', 'COMO MONTAR UMA CONFECÇÃO DE ARTIGOS DE CAMA, MESA', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002033', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1093, '2023-09-27', 9446, 'COM358', NULL, 'LIVRO', 'COMO MONTAR UMA CONFECÇÃO DE CAMISAS', 'Magno Constantino', 'SEBRAE', '2020', 'PKEY:CLDEAU50779', 'f000000002034', 'Body, Mind & Spirit', 82, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1094, '2023-09-28', 9472, 'COM643', NULL, 'LIVRO', 'COMO MONTAR UMA CONFECÇÃO DE JEANS', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709523199', 'f000000002035', 'Desconhecido', 33, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1095, '2023-09-26', 9436, 'COM333', NULL, 'LIVRO', 'COMO MONTAR UMA CONFECÇÃO DE LINGERIE', 'Elle MacPherson', 'SEBRAE', '2025', '9789895813674', 'f000000002036', 'Biography & Autobiography', 321, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1096, '2023-09-26', 9409, 'COM478', NULL, 'LIVRO', 'COMO MONTAR UMA CONFECÇÃO DE ROUPAS DE BANHO', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525563', 'f000000002037', 'Desconhecido', 30, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1097, '2023-09-26', 9433, 'COM626', NULL, 'LIVRO', 'COMO MONTAR UMA CONFECÇÃO DE UNIFORMES PROFISSIONA', 'Pequenas Empresas e Grandes Negócios', 'SEBRAE', '0000', '8525034673', 'f000000002038', 'Desconhecido', 156, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1098, '2023-09-28', 9475, 'COM670', NULL, 'LIVRO', 'COMO MONTAR UMA CONFECÇÃO INFANTO-JUVENIL', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525563', 'f000000002039', 'Desconhecido', 30, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1099, '2023-09-27', 9453, 'COM437', NULL, 'LIVRO', 'COMO MONTAR UMA EMPRESA PARA CONSTRUÇÃO E MANUTENÇ', 'Aldo Dórea Mattos', 'SEBRAE', '2019', '9788579753350', 'f000000002040', 'Technology & Engineering', 291, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1100, '2023-09-27', 9450, 'COM831', NULL, 'LIVRO', 'COMO MONTAR UMA FÁBRICA DE COMEDOURO E BEBEDOURO P', 'Desconhecido', 'SEBRAE', '0000', 'N/A', 'f000000002041', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1101, '2023-09-26', 9414, 'COM685', NULL, 'LIVRO', 'COMO MONTAR UMA FÁBRICA DE COMPOTAS E GELÉIAS', 'Raimundo Camelo Mororó', 'SEBRAE', '1999', 'OCLC:71310957', 'f000000002042', 'Desconhecido', 110, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1102, '2023-09-27', 9456, 'COM302', NULL, 'LIVRO', 'COMO MONTAR UMA FÁBRICA DE CORTINAS', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525501', 'f000000002043', 'Desconhecido', 23, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1103, '2023-09-27', 9455, 'COM822', NULL, 'LIVRO', 'COMO MONTAR UMA FÁBRICA DE GELO', 'Desconhecido', 'SEBRAE', '1996', 'OCLC:709518289', 'f000000002044', 'Desconhecido', 25, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1104, '2023-09-26', 9434, 'COM842', NULL, 'LIVRO', 'COMO MONTAR UMA FÁBRICA DE GRAVATAS', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525584', 'f000000002045', 'Desconhecido', 26, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1105, '2023-09-26', 9425, 'COM823', NULL, 'LIVRO', 'COMO MONTAR UMA FÁBRICA DE POLPA DE FRUTA CONGELAD', 'Desconhecido', 'SEBRAE', '1999', 'OCLC:709684231', 'f000000002046', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1106, '2023-09-26', 9437, 'COM275', NULL, 'LIVRO', 'COMO MONTAR UMA FARMÁCIA E DROGARIA', 'Desconhecido', 'SEBRAE', '0000', '8523307494', 'f000000002047', 'Desconhecido', 60, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1107, '2023-09-26', 9420, 'COM245', NULL, 'LIVRO', 'COMO MONTAR UMA GRÁFICA', 'Margot Vinogradov', 'SEBRAE', '2019', 'com321674007', 'f000000002048', 'Business & Economics', 72, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1108, '2023-09-27', 9448, 'COM751', NULL, 'LIVRO', 'COMO MONTAR UMA INDÚSTRIA DE BISCOITO DE POLVILHO', 'Desconhecido', 'SEBRAE', '1994', 'OCLC:709518299', 'f000000002049', 'Desconhecido', 26, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1109, '2023-09-26', 9428, 'COM476', NULL, 'LIVRO', 'COMO MONTAR UMA INDÚSTRIA DE PRODUTOS DE HIGIENE E', 'Pequenas Empresas e Grandes Negócios', 'SEBRAE', '0000', '8525034673', 'f000000002050', 'Desconhecido', 156, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1110, '2023-09-26', 9408, 'COM889', NULL, 'LIVRO', 'COMO MONTAR UMA LAVANDEIRA SELF-SERVICE', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709510583', 'f000000002051', 'Desconhecido', 25, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1111, '2023-09-26', 9430, 'COM193', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE ALIMENTOS E BEBIDAS IMPORT', 'Tero Ojanperä, Timo O. Vuori', 'SEBRAE', '2022', '9786559282135', 'f000000002052', 'Business & Economics', 370, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1112, '2023-09-26', 9424, 'COM435', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE ANIMAIS', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525583', 'f000000002053', 'Desconhecido', 22, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1113, '2023-09-27', 9451, 'COM955', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE ARTIGOS ESPORTIVOS', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525496', 'f000000002054', 'Desconhecido', 21, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1114, '2023-09-26', 9429, 'COM651', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE ARTIGOS PARA BEBÊ', 'O.Nashchubskiy', 'SEBRAE', '0000', 'com527046238', 'f000000002055', 'Family & Relationships', 501, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1115, '2023-09-26', 9426, 'COM261', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE ARTIGOS PARA PESCA', 'Sandro Santos', 'SEBRAE', '0000', 'com793172705', 'f000000002056', 'Political Science', 150, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1116, '2023-09-27', 9444, 'COM264', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE AUTOPEÇAS', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002057', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1117, '2023-09-27', 9461, 'COM129', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE BRINQUEDOS', 'Pequenas Empresas e Grandes Negócios', 'SEBRAE', '0000', '8525034673', 'f000000002058', 'Desconhecido', 156, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1118, '2023-09-26', 9407, 'COM112', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE CALÇADOS', 'Margot Vinogradov', 'SEBRAE', '2019', 'com587130393', 'f000000002059', 'Business & Economics', 72, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1119, '2023-09-26', 9418, 'COM953', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE MATERIAL ELÉTRICO', 'Michael K. White, Julian Dent', 'SEBRAE', '2024', '9786559283668', 'f000000002060', 'Business & Economics', 468, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1120, '2023-09-27', 9457, 'COM167', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE MATERIAL PARA CONSTRUÇÃO', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002061', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1121, '2023-09-26', 9422, 'COM526', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE PRODUTOS NATURAIS', 'Rebecca Ellington', 'SEBRAE', '2018', '9781547539437', 'f000000002062', 'Crafts & Hobbies', 67, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1122, '2023-09-27', 9459, 'COM269', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA DE TINTAS', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525587', 'f000000002063', 'Desconhecido', 22, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1123, '2023-09-28', 9470, 'COM983', NULL, 'LIVRO', 'COMO MONTAR UMA LOJA PARA COMÉRCIO E INSTALAÇÃO DE', 'Pequenas Empresas e Grandes Negócios', 'SEBRAE', '0000', '8525034673', 'f000000002064', 'Desconhecido', 156, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1124, '2023-09-27', 9469, 'COM359', NULL, 'LIVRO', 'COMO MONTAR UMA MARCENARIA', 'Desconhecido', 'SEBRAE', '1993', 'OCLC:709525475', 'f000000002065', 'Desconhecido', 25, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1125, '2023-09-26', 9423, 'COM490', NULL, 'LIVRO', 'COMO MONTAR UMA MERCEARIA', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002066', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1126, '2023-09-26', 9431, 'COM634', NULL, 'LIVRO', 'COMO MONTAR UMA OFICINA DE CONSERTO DE BRINQUEDOS', 'Desconhecido', 'SEBRAE', '1997', 'UTEXAS:059173002661020', 'f000000002067', 'New business enterprises', 236, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1127, '2023-09-27', 9449, 'COM716', NULL, 'LIVRO', 'COMO MONTAR UMA OFICINA DE CONSERTO ELETRO ELETRÕN', 'Desconhecido', 'SEBRAE', '0000', 'N/A', 'f000000002068', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1128, '2023-09-26', 9416, 'COM160', NULL, 'LIVRO', 'COMO MONTAR UMA PEIXARIA', 'SEBRAE (Brasilia, DF).', 'SEBRAE', '1994', 'OCLC:709323849', 'f000000002069', 'Desconhecido', 23, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1129, '2023-09-26', 9411, 'COM891', NULL, 'LIVRO', 'COMO MONTAR UMA PIZZARIA', 'Alessandro Paes dos Reis', 'SEBRAE', '2017', '9788584611539', 'f000000002070', 'Business & Economics', 214, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1130, '2023-09-28', 9473, 'COM678', NULL, 'LIVRO', 'COMO MONTAR UMA PRODUTORA DE VÍDEO', 'Desconhecido', 'SEBRAE', '2005', '8535214976', 'f000000002071', 'Brazil', 440, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1131, '2023-09-26', 9412, 'COM376', NULL, 'LIVRO', 'COMO MONTAR UMA SORVETERIA', 'Desconhecido', 'SEBRAE', '1998', 'OCLC:709525937', 'f000000002072', 'Desconhecido', 76, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1132, '2023-09-21', 9317, 'COM622', NULL, 'LIVRO', 'COMO PREVENIR A TRANSMISSÃO VERTICAL DO HIV E DA S', 'Brasil. Ministério da Saúde. Secretaria da Vigilância em Saúde. Programa Nacional de DST e Aids, Doris Sztutmann Bergmann, Maria José de Oliveira Araújo, Dario Noleto, Programa Nacional de Doenças Sexualmente Transmissíveis/AIDS (Brasil)', 'UNICEF', '2006', '8533412762', 'f000000002073', 'Desconhecido', 122, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1133, '2010-01-05', 2032, '37071', NULL, 'LIVRO', 'Como se Ensina e como se aprende a ser Professor', 'Marilda da Silva', 'EDUSC', '2003', '8574601233', 'f000000002074', 'Desconhecido', 148, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1134, '2024-04-10', 10470, 'COM542', NULL, 'LIVRO', 'COMO SE PREPARA PARA O EXAME DE ORDEM -6- PROCESSO', 'Roberto Comporto', 'MÉTODO', '2013', '9788580202359', 'f000000002075', 'Law', 126, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1135, '2024-04-10', 10473, 'COM767', NULL, 'LIVRO', 'COMO SE PREPARAR PARA O EXAME DE ORDEM - 3-ADMINIS', 'Renato Saraiva', 'MÉTODO', '2000', '8530953959', 'f000000002076', 'Desconhecido', 329, 'EN', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1136, '2024-04-10', 10471, 'COM742', NULL, 'LIVRO', 'COMO SE PREPARAR PARA O EXAME DE ORDEM - 5 - PENAL', 'Roberto Comporto', 'MÉTODO', '2013', '9788580202359', 'f000000002077', 'Law', 126, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1137, '2024-04-10', 10467, 'COM552', NULL, 'LIVRO', 'COMO SE PREPARAR PARA O EXAME DE ORDEM - 9', 'Roberto Comporto', 'MÉTODO', '2013', '9788580202359', 'f000000002078', 'Law', 126, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1138, '2024-04-10', 10472, 'COM325', NULL, 'LIVRO', 'COMO SE PREPARAR PARA O EXAME DE ORDEM -4- TRIBUTÁ', 'Roberto Comporto', 'MÉTODO', '2013', '9788580202359', 'f000000002080', 'Law', 126, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1139, '2024-04-10', 10469, 'COM979', NULL, 'LIVRO', 'COMO SE PREPARAR PARA O EXAME DE ORDEM -7-TRABALHO', 'Roberto Comporto', 'MÉTODO', '2013', '9788580202359', 'f000000002081', 'Law', 126, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1140, '2024-04-10', 10468, 'COM612', NULL, 'LIVRO', 'COMO SE PREPARAR PARA O EXAME DE ORDEM -8- COMERCI', 'Roberto Comporto', 'MÉTODO', '2013', '9788580202359', 'f000000002082', 'Law', 126, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1141, '2024-04-10', 10474, 'COM276', NULL, 'LIVRO', 'COMO SE PREPARAR PARA O EXAME DE ORDEM- 2-PROCESSO', 'Rafael Tonassi Sonto', 'MÉTODO', '2014', '8530951506', 'f000000002079', 'Labor laws and legislation', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1142, '2010-01-05', 2040, '37015', NULL, 'LIVRO', 'Como ser um bom Professor', 'Wagner Luiz Marques', 'E.P.U.', '2011', 'PKEY:CLDEAU5960', 'f000000002083', 'Educação', 109, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1143, '2022-01-24', 6706, '65885', NULL, 'LIVRO', 'Como ser um vendedor de sucesso', 'Tom Hopkins', 'SEXTANTE', '2018', '9788568905739', 'f000000002084', 'Business & Economics', 570, 'PT-BR', '2025-04-10 02:23:30', NULL, 4, 3, NULL, '2025-04-09'),
+(1144, '2009-10-27', 1955, '37289', NULL, 'LIVRO', 'Como Seria Sua Vida na Idade Média', 'Fiona Macdonald', 'SCIPIONE', '2008', '8526267906', 'f000000002088', 'Desconhecido', 48, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1145, '2009-10-27', 1956, '37289', NULL, 'LIVRO', 'Como seria sua vida na Roma Antiga', 'Anita Ganeri', 'SCIPIONE', '2008', '8526267892', 'f000000002089', 'Desconhecido', 48, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1146, '2023-11-06', 9803, '285', NULL, 'LIVRO', 'COMO SUBRI EM ÁRVORES', 'Tiago de Melo Andrade', 'AKPALÔ', '2020', '9786558171935', 'f000000002090', 'Young Adult Fiction', 85, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1147, '2023-09-27', 9458, 'COM821', NULL, 'LIVRO', 'COMO UM MONTAR UM COMÉRCIO DE ÓTICA', 'Marlon Santos Bragança', 'SEBRAE', '0000', '9781526050021', 'f000000002091', 'Business & Economics', 47, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1148, '2016-05-05', 6216, '6107303', NULL, 'LIVRO', 'Compacto Dicionário Ilustrado de Saude', 'Carlos Roberto Lyra da Silva, Dirce Laplaca Viana', 'YENDIS', '2009', '8577281183', 'f000000002092', 'Desconhecido', 1110, 'PT-BR', '2025-04-10 02:23:30', NULL, 2, 1, NULL, '2025-04-09'),
+(1149, '2011-05-27', 3435, '285', NULL, 'LIVRO', 'Companhia Três Marias', 'António Vieira', 'GIRAFINHA', '0000', 'NKP:1003122981', 'f000000002094', 'Desconhecido', 592, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1150, '2023-09-13', 9103, '37289', NULL, 'LIVRO', 'COMPÊNDIO DE HISTÓRIA GERAL', 'Antônio José Borges Hermida', 'COMPANHIA EDITORA NACIONAL', '1966', 'UTEXAS:059173018439891', 'f000000002095', 'World history', 360, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1151, '2009-05-04', 108, '610', NULL, 'LIVRO', 'Compêndio Médico', 'Organização Andrei (São Paulo, Brasil)', 'ANDREI', '1999', 'OCLC:50836792', 'f000000002096', 'Desconhecido', 990, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1152, '2024-04-04', 10423, '813', NULL, 'LIVRO', 'COMPLICADO DEMAIS', 'William Bouça', 'VALENTINA', '2024', '9789893770313', 'f000000002097', 'Desconhecido', 170, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1153, '2012-05-15', 4673, '6583', NULL, 'LIVRO', 'Comportamento humano do Trabalho', 'John W. Newstrom', 'CENGAGE LEARNING', '2008', '9788563308870', 'f000000002098', 'Business & Economics', 524, 'PT-BR', '2025-04-10 02:23:30', NULL, 5, 4, NULL, '2025-04-09'),
+(1154, '2012-05-15', 4668, '6583', NULL, 'LIVRO', 'Comportamento humano no Trabalho', 'John W. Newstrom', 'CENGAGE LEARNING', '2008', '9788563308870', 'f000000002113', 'Business & Economics', 524, 'PT-BR', '2025-04-10 02:23:30', NULL, 5, 4, NULL, '2025-04-09'),
+(1155, '2009-05-15', 208, '6583', NULL, 'LIVRO', 'Comportamento Humano no Trabalho', 'John W. Newstrom', 'PIONEIRA THOMSON LEARNING', '2008', '9788563308870', 'f000000002103', 'Business & Economics', 524, 'PT-BR', '2025-04-10 02:23:30', NULL, 10, 9, NULL, '2025-04-09'),
+(1156, '2003-04-10', 542, '658', NULL, 'LIVRO', 'Comportamento Organizacional', 'John W. Newstrom', 'M. BOOKS', '2008', '9788563308870', 'f000000002118', 'Business & Economics', 524, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1157, '2009-05-27', 459, '6583145', NULL, 'LIVRO', 'Comportamentos Humano nas Organizações', 'Roberto Kanaane', 'ATLAS', '2017', '859701248X', 'f000000002119', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1158, '2022-06-10', 7070, '6584', NULL, 'LIVRO', 'COMUNICAÇÃO E COMPORTAMENTO ORGANIZACIONAL', 'Cleide Cristina da Silva', 'ANHANGUERA PUBLICAÇÕES', '2015', '8536511214', 'f000000002120', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1159, '2024-04-09', 10462, '6584', NULL, 'LIVRO', 'COMUNICAÇÃO E COMPORTAMENTO ORGANIZACIONAL', 'Cleide Cristina da Silva', 'ICDEP', '2015', '8536511214', 'f000000002121', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1160, '2003-04-10', 1857, '808', NULL, 'LIVRO', 'Comunicação em Prosa Moderna', 'Othon M. Garcia', 'FUNDAÇÃO GETULIO VARGAS', '2015', '9788522508914', 'f000000002122', 'Educação', 374, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1161, '2009-08-10', 1411, '1554', NULL, 'LIVRO', 'Comunicação entre Pais e Filhos', 'Maria Tereza Maldonado', 'SARAIVA', '1987', 'OCLC:816945269', 'f000000002123', 'Desconhecido', 165, 'PT-BR', '2025-04-10 02:23:30', NULL, 2, 1, NULL, '2025-04-09'),
+(1162, '2011-06-03', 3490, '154', NULL, 'LIVRO', 'Comunicação Global a Mágica da Influência', 'Lair Ribeiro', 'OBJETIVA', '1992', '8585363649', 'f000000002125', 'Communication', 131, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1163, '2023-08-10', 7620, '1536', NULL, 'LIVRO', 'COMUNICAÇÃO NÃO-VIOLENTA', 'Marshall B. Rosenberg', 'ÁGORA', '2021', '9788571832657', 'f000000002126', 'Psychology', 219, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1164, '2024-11-13', 11014, '61689143', NULL, 'LIVRO', 'CONCEITO DE MUNDO E DE PESSOA EM GESTALT-TERAPIA:', 'Jorge Ponciano Ribeiro', 'SUMMUS', '2011', '9788532310415', 'f000000002127', 'Psychology', 132, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1165, '2023-08-31', 8784, 'CON401', NULL, 'LIVRO', 'CONCEITOS DE FÍSICA', 'Jose Ivan Cardoso dos Santos', 'ÁTICA', '1986', '850800625X', 'f000000002128', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1166, '2023-08-31', 8787, 'CON554', NULL, 'LIVRO', 'CONCEITOS DE FÍSICA - MECÂNICA 1', 'Osvaldo Pessoa Junior', 'ÁTICA', '2003', '8588325179', 'f000000002129', 'Desconhecido', 204, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1167, '2023-08-31', 8791, 'CON738', NULL, 'LIVRO', 'CONCEITOS DE FÍSICA - TERMOLOGIA, SOM , LUZ - 2', 'Desconhecido', 'ÁTICA', '0000', 'N/A', 'f000000002130', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1168, '2023-09-04', 8903, '370113', NULL, 'LIVRO', 'CONCEPÇÕES, RUPTURAS E PERMANÊNCIAS', 'Camilla de Oliveira Vieira', 'SÃO PAULO', '2025', '9786525068442', 'f000000002131', 'Educação', 284, 'PT-BR', '2025-04-10 02:23:30', NULL, 2, 1, NULL, '2025-04-09'),
+(1169, '2023-10-05', 9561, 'CON413', NULL, 'LIVRO', 'CONCORDÂNCIA INUSITADA', 'EdiCase Publicações', 'SEGMENTO', '2022', 'con096263456', 'f000000002133', 'Educação', 36, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1170, '2010-07-12', 2679, '700', NULL, 'LIVRO', 'Condição Pós-Moderna', 'David Harvey', 'LOYOLA', '1992', '8515006790', 'f000000002134', 'Business & Economics', 356, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1171, '2009-04-29', 77, '616047', NULL, 'LIVRO', 'Condutas Básicas em DOR', 'Janete Maria da Silva, Carla Marzullo Plens, Ellen Protzner Morbeck, Larissa Louise Campanholi, Liliana Tsai, Tânia Tonezzer', 'IATRIA', '2021', '9786555720754', 'f000000002135', 'Medical', 111, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1172, '2023-08-29', 8737, '616025', NULL, 'LIVRO', 'CONDUTAS NA SALA DE EMERGÊNCIA', 'Rômulo Augusto dos Santos', 'GUANABARA KOOGAN', '2022', '8527737752', 'f000000002136', 'Medical', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 2, 1, NULL, '2025-04-09'),
+(1173, '2024-03-07', 10286, '9107', NULL, 'LIVRO', 'CONEXÕES - ESTUDOS DE GEOGRAFIA GERAL E DO BRASIL', 'Regina Araujo, Raul Borges Guimaraes, Lygia Terra', 'MODERNA', '0000', '8516061035', 'f000000002138', 'Desconhecido', 616, 'PT-BR', '2025-04-10 02:23:30', NULL, 2, 1, NULL, '2025-04-09'),
+(1174, '2023-08-31', 8812, '5107', NULL, 'LIVRO', 'CONEXÕES COM A MATEMÁTICAS 3', 'Ruy Madsen Barbosa', 'MODERNA', '2018', '9788582179895', 'f000000002140', 'Mathematics', 180, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1175, '2011-02-15', 3016, '5107', NULL, 'LIVRO', 'Conexões e Educação Matemática', 'Ruy Madsen Barbosa', 'AUTÊNTICA', '2018', '9788582176528', 'f000000002141', 'Mathematics', 189, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1176, '2023-12-04', 10082, '37319', NULL, 'LIVRO', 'CONEXÕES: CIÊNCIAS HUMANAS E SOCIAIS APLICADAS E M', 'Silmara Sartoreto de Oliveira, Vinícius Colussi Bastos', 'MODERNA', '2021', '9786589814146', 'f000000002142', 'Ciência', 161, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1177, '2003-04-11', 938, '6213916', NULL, 'LIVRO', 'Configuração e Montagem de PCs com Inteligência', 'Laércio Vasconcelos', 'ÉRICA', '2001', '8534613443', 'f000000002143', 'Microcomputers', 157, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1178, '2023-09-19', 9248, 'CON612', NULL, 'LIVRO', 'CONFITEOR', 'Manuel Metello', 'SARAIVA', '1964', 'UOM:39015027636235', 'f000000002144', 'Desconhecido', 158, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1179, '2010-01-20', 2211, '928699', NULL, 'LIVRO', 'CONFITEOR :Memórias : Obra Póstuma/Paulo Setúbal', 'Paulo Setúbal', 'NACIONAL', '1983', 'UTEXAS:059173022876426', 'f000000002145', 'Desconhecido', 196, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1180, '2010-12-21', 3133, '371782', NULL, 'LIVRO', 'Conflitos na Escola: Modos de Transformar', 'RUBEM ALVES, Claudia Ceccon', 'CECIP', '2009', '8570607385', 'f000000002146', 'Conflict management', 203, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1181, '2011-07-11', 3632, '6663', NULL, 'LIVRO', 'Congresso Brasileiro de Cerâmica', 'Desconhecido', 'FINEP', '1992', 'OCLC:258627022', 'f000000002147', 'Desconhecido', 0, 'EN', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1182, '2003-04-10', 973, '5369', NULL, 'LIVRO', 'Conhecendo e Trabalhando com Delphi 8', 'Mílton Bender Júnior', 'ÉRICA', '2004', '8588503301', 'f000000002148', 'Desconhecido', 191, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1183, '2003-04-10', 945, '5133', NULL, 'LIVRO', 'Conhecendo e Trabalhando com o Visual BASIC 6.0', 'Pedro Luiz Cortes, Roberto Alessandre Scherr', 'ÉRICA', '1999', '8571945969', 'f000000002149', 'Desconhecido', 322, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1184, '2023-05-25', 7470, 'CON548', NULL, 'LIVRO', 'CONHECENDO O BRASIL POR REGIÕES E POR ESTADOS', 'Ademar da Silva Campos', 'EDUCAÇÃO LITERARIA', '2017', '9788555171291', 'f000000002150', 'Educação', 96, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1185, '2023-12-04', 10081, '37319', NULL, 'LIVRO', 'CONHECER E TRANSFORMAR: PROJETOS INTEGRADORES: MAT', 'Alpha Simonetti, Dulce Satiko, Gabriela Ribeiro Arakaki, Rui Xavier, Yanci Ladeira Maria, Maria Cecilia Guedes Condeixa, Maria Teresinha Figueiredo', 'BRASIL', '2019', '8510075867', 'f000000002151', 'Educação', 0, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1186, '2014-09-05', 5641, '301', NULL, 'LIVRO', 'Conhecimento e Imaginação', 'Maria Ligia de Oliveira Barbosa, Patricia Rivero', 'AUTÊNTICA', '2012', '9788582172407', 'f000000002152', 'Educação', 249, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1187, '2014-09-05', 5640, '301', NULL, 'LIVRO', 'Conhecimento e Imaginação sociologia', 'Maria Ligia de Oliveira Barbosa, Patricia Rivero', 'AUTÊNTICA', '2012', '9788582172407', 'f000000002153', 'Educação', 249, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1188, '2023-04-24', 7411, 'CON507', NULL, 'LIVRO', 'CONHECIMENTO PRÁTICO GUIA DO ENEM', 'Guia Prático do Estudante, Guia do ENEM, Educação, On Line Editora', 'ESCALA', '2016', 'con581916541', 'f000000002154', 'Educação', 145, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1189, '2024-04-17', 10580, 'CON970', NULL, 'LIVRO', 'CONHECIMENTO PRÁTICO GUIA DO ENEM - MATEMÁTICA E S', 'Guia Prático do Estudante, Guia do ENEM, Educação, On Line Editora', 'ESCALA', '2017', 'con818112712', 'f000000002155', 'Educação', 144, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1190, '2022-01-28', 6986, 'B869.3', NULL, 'LIVRO', 'Consciência, consequência', 'Nazaré Lohn', 'UNIVERSO DA LITERATURA', '2024', 'con019879852', 'f000000002156', 'Self-Help', 9, 'PT-BR', '2025-04-10 02:23:30', NULL, 5, 4, NULL, '2025-04-09'),
+(1191, '2003-04-10', 686, '343', NULL, 'LIVRO', 'Consolidação das Leis do Trabalho', 'Câmara dos Deputados, Edições Câmara', 'SARAIVA', '2022', '9788540206953', 'f000000002161', 'Law', 169, 'PT-BR', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1192, '2009-05-13', 164, '3424', NULL, 'LIVRO', 'Constituição - 1988', 'Brazil. [Constitution 1988. Portuguese]., Brazil. Congresso Nacional. Senado Federal. Centro Gráfico', 'SEEP', '1993', 'OCLC:822311413', 'f000000002162', 'Desconhecido', 294, 'EN', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09'),
+(1193, '2023-10-02', 9550, 'CON133', NULL, 'LIVRO', 'CONSTITUIÇÃO 1988', 'Brazil. [Constitution 1988. Portuguese]., Brazil. Congresso Nacional. Senado Federal. Centro Gráfico', 'CENTRO DE DOCUMENTAÇÃO E INFORMAÇÃO', '1993', 'OCLC:822311413', 'f000000002163', 'Desconhecido', 294, 'EN', '2025-04-10 02:23:30', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(1194, '2015-09-11', 5972, '342', NULL, 'LIVRO', 'Constituição da Republica Federativa do Brasil', 'Orione Dantas De Medeiros', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2020', '9788554220167', 'f000000002164', 'Political Science', 788, 'PT-BR', '2025-04-10 02:23:30', NULL, 81, 80, NULL, '2025-04-09'),
+(1195, '2011-03-23', 3253, '3424', NULL, 'LIVRO', 'Constituição da República Federativa do Brasil ...', 'Orione Dantas De Medeiros', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2020', '9788554220167', 'f000000002245', 'Political Science', 788, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1196, '2010-02-18', 2428, '6213', NULL, 'LIVRO', 'Construção Eletromecânica', 'Alfonso Martignoni', 'GLOBO', '1970', 'OCLC:816822522', 'f000000002246', 'Desconhecido', 360, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1197, '2010-12-21', 3322, '363690981', NULL, 'LIVRO', 'Construções do poder I', 'André Rocha, David Calderoni, Marcelo Gomes Justo', 'BARSA PLANETA', '2017', '9788582175903', 'f000000002247', 'Social Science', 430, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1198, '2010-12-21', 3323, '363690981', NULL, 'LIVRO', 'Construções do poder II', 'Desconhecido', 'BARSA PLANETA', '2002', '8439594259', 'f000000002248', 'Desconhecido', 0, 'EN', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1199, '2024-10-24', 10990, '372357', NULL, 'LIVRO', 'CONSTRUINDO CIDADÃOS AMBIENTAIS', 'Ricardo Abramovay', 'INDEPENDENTE', '2002', '8574193151', 'f000000002249', 'Ciência', 448, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1200, '2011-02-15', 3014, '3701934', NULL, 'LIVRO', 'Construindo o Conhecimento: Ecologia', 'Ricardo Abramovay', 'RHJ', '2002', '8574193151', 'f000000002250', 'Ciência', 448, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1201, '2023-09-04', 8915, 'CON725', NULL, 'LIVRO', 'CONSTRUTORES DO BRASIL', 'Aldo Rebelo', 'SÃO PAULO', '2010', 'OCLC:903320106', 'f000000002251', 'Desconhecido', 58, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1202, '2011-08-01', 3693, '3466', NULL, 'LIVRO', 'Consumo Sustentável', 'Desconhecido', 'SECRETARIA DO MEIO AMBIENTE', '2007', '8571397147', 'f000000002252', 'Business & Economics', 164, 'PT-BR', '2025-04-10 02:23:31', NULL, 7, 6, NULL, '2025-04-09'),
+(1203, '2023-08-02', 7510, 'CON182', NULL, 'LIVRO', 'CONTA OIUTRA, VOVÔ', 'Izabel Castanha Gil', 'GRÁFICA OESTE', '2024', '9788536668888', 'f000000002259', 'Educação', 117, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1204, '2010-01-21', 2256, '813', NULL, 'LIVRO', 'Conta Outra Vovô', 'Izabel Castanha Gil', 'ADAMANTINA', '2024', '9788536668888', 'f000000002260', 'Educação', 117, 'PT-BR', '2025-04-10 02:23:31', NULL, 5, 4, NULL, '2025-04-09'),
+(1205, '2009-05-15', 203, '6574', NULL, 'LIVRO', 'Contabilidade Ambiental', 'Gardênia Maria Braga de Carvalho', 'ATLAS', '2008', '9788536221281', 'f000000002265', 'Desconhecido', 216, 'PT-BR', '2025-04-10 02:23:31', NULL, 10, 9, NULL, '2025-04-09'),
+(1206, '2009-05-20', 272, '6573', NULL, 'LIVRO', 'Contabilidade Avançada', 'Osni Hoss, PhD', 'FRASE EDITORA', '2022', '9798840546994', 'f000000002275', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 5, 4, NULL, '2025-04-09'),
+(1207, '2003-04-10', 217, '657076', NULL, 'LIVRO', 'Contabilidade Básica', 'Marcos Travassos', 'ATLAS', '2022', '9786556751436', 'f000000002286', 'Business & Economics', 288, 'PT-BR', '2025-04-10 02:23:31', NULL, 5, 4, NULL, '2025-04-09'),
+(1208, '2003-04-10', 196, '657', NULL, 'LIVRO', 'Contabilidade Básica', 'Marcos Travassos', 'IOB', '2022', '9786556751436', 'f000000002281', 'Business & Economics', 288, 'PT-BR', '2025-04-10 02:23:31', NULL, 5, 4, NULL, '2025-04-09'),
+(1209, '2003-04-10', 569, '657', NULL, 'LIVRO', 'Contabilidade Basica', 'Marcos Travassos', 'SARAIVA', '2022', '9786556751436', 'f000000002280', 'Business & Economics', 288, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1210, '2003-04-10', 673, '657', NULL, 'LIVRO', 'Contabilidade Básica Fácil', 'Osni Moura Ribeiro', 'SARAIVA', '1996', '8502020641', 'f000000002291', 'Desconhecido', 302, 'PT-BR', '2025-04-10 02:23:31', NULL, 6, 5, NULL, '2025-04-09'),
+(1211, '2003-04-10', 555, '657', NULL, 'LIVRO', 'Contabilidade Comercial', 'Sérgio de Iudícibus, José Carlos Marion', 'ATLAS', '2004', '8522437246', 'f000000002302', 'Desconhecido', 353, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1212, '2003-04-10', 171, '657', NULL, 'LIVRO', 'Contabilidade Comercial', 'Sérgio de Iudícibus, José Carlos Marion', 'SARAIVA', '2004', '8522437246', 'f000000002297', 'Desconhecido', 353, 'PT-BR', '2025-04-10 02:23:31', NULL, 8, 7, NULL, '2025-04-09'),
+(1213, '2009-05-18', 225, '65742', NULL, 'LIVRO', 'Contabilidade de Custo', 'José Antonio Stark Ferreira', 'ATLAS', '2007', '1512942405', 'f000000002307', 'Desconhecido', 400, 'PT-BR', '2025-04-10 02:23:31', NULL, 3, 2, NULL, '2025-04-09'),
+(1214, '2009-05-15', 212, '6581511', NULL, 'LIVRO', 'Contabilidade de Custo', 'José Antonio Stark Ferreira', 'PEARSON PRENTICE HALL', '2007', '1512942405', 'f000000002310', 'Desconhecido', 400, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1215, '2003-04-10', 194, '65742', NULL, 'LIVRO', 'Contabilidade de Custo para não Contadores', 'Luís Martins de Oliveira, José Hernandez Perez Junior', 'ATLAS', '2000', '8522425736', 'f000000002311', 'Desconhecido', 280, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1216, '2003-04-10', 423, '342', NULL, 'LIVRO', 'Contabilidade de Custos', 'José Antonio Stark Ferreira', 'ATLAS', '2007', '1512942405', 'f000000002313', 'Desconhecido', 400, 'PT-BR', '2025-04-10 02:23:31', NULL, 7, 6, NULL, '2025-04-09'),
+(1217, '2003-04-10', 213, '6581511', NULL, 'LIVRO', 'Contabilidade de Custos', 'José Antonio Stark Ferreira', 'PEARSON PRENTICE HALL', '2007', '1512942405', 'f000000002323', 'Desconhecido', 400, 'PT-BR', '2025-04-10 02:23:31', NULL, 4, 3, NULL, '2025-04-09'),
+(1218, '2003-04-10', 568, '65742', NULL, 'LIVRO', 'Contabilidade de Custos', 'José Antonio Stark Ferreira', 'SARAIVA', '2007', '1512942405', 'f000000002320', 'Desconhecido', 400, 'PT-BR', '2025-04-10 02:23:31', NULL, 3, 2, NULL, '2025-04-09'),
+(1219, '2023-05-17', 7390, '65742', NULL, 'LIVRO', 'CONTABILIDADE DE CUSTOS FÁCIL', 'Osni Moura Ribeiro', 'SARAIVA', '1997', '8502020609', 'f000000002327', 'Desconhecido', 223, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1220, '2009-05-14', 195, '65742', NULL, 'LIVRO', 'Contabilidade de Custos para não Contadores', 'Luís Martins de Oliveira, José Hernandez Perez Junior', 'ATLAS', '2000', '8522425736', 'f000000002328', 'Desconhecido', 280, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1221, '2009-05-25', 411, '657833', NULL, 'LIVRO', 'Contabilidade de Instituições Financeiras', 'Jorge Katsumi Niyama, Amaro L. Oliveira Gomes', 'ATLAS', '2005', '8522440794', 'f000000002329', 'Desconhecido', 226, 'PT-BR', '2025-04-10 02:23:31', NULL, 5, 4, NULL, '2025-04-09'),
+(1222, '2003-04-10', 547, '6574', NULL, 'LIVRO', 'Contabilidade e Gestão Ambiental', 'Teresa Pereira Eugénio', 'ATLAS', '2004', '9728472609', 'f000000002334', 'Desconhecido', 255, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1223, '2009-05-21', 336, '33639', NULL, 'LIVRO', 'Contabilidade e Gestão Governamental', 'Heraldo da Costa Reis', 'IBAM', '1991', 'UTEXAS:059173020691747', 'f000000002335', 'Finance, Public', 68, 'PT-BR', '2025-04-10 02:23:31', NULL, 4, 3, NULL, '2025-04-09'),
+(1224, '2003-04-10', 185, '657', NULL, 'LIVRO', 'Contabilidade Empresarial', 'Jose Carlos Marion', 'ATLAS', '1993', 'OCLC:817503456', 'f000000002339', 'Desconhecido', 536, 'PT-BR', '2025-04-10 02:23:31', NULL, 11, 10, NULL, '2025-04-09'),
+(1225, '2023-04-20', 7180, '65742', NULL, 'LIVRO', 'CONTABILIDADE FINANCEIRA', 'Simone Alves da Costa', 'ANHANGUERA PUBLICAÇÕES', '2020', '9788539619436', 'f000000002350', 'Business & Economics', 95, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1226, '2023-10-06', 9619, '65', NULL, 'LIVRO', 'CONTABILIDADE GERAL', 'Rafael Jachelli Almeida', 'ATLAS', '2021', '9786599303272', 'f000000002351', 'Business & Economics', 316, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1227, '2023-09-20', 9281, 'CON843', NULL, 'LIVRO', 'CONTABILIDADE GERAL', 'Rafael Jachelli Almeida', 'CEETEPS', '2021', '9786599303272', 'f000000002363', 'Business & Economics', 316, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1228, '2003-04-10', 848, '657', NULL, 'LIVRO', 'Contabilidade Geral', 'Rafael Jachelli Almeida', 'FANEMA', '2021', '9786599303272', 'f000000002353', 'Business & Economics', 316, 'PT-BR', '2025-04-10 02:23:31', NULL, 9, 8, NULL, '2025-04-09'),
+(1229, '2003-04-10', 497, '657', NULL, 'LIVRO', 'Contabilidade Geral', 'Rafael Jachelli Almeida', 'SARAIVA', '2021', '9786599303272', 'f000000002352', 'Business & Economics', 316, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1230, '2023-12-04', 10105, '657', NULL, 'LIVRO', 'CONTABILIDADE GERAL - FUNADMENTOS E PRÁTICAS', 'Selma Culturati Vasquez, Maikol Nascimento Pinto', 'ÉRICA', '2019', '8536530359', 'f000000002364', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1231, '2003-04-10', 763, '657', NULL, 'LIVRO', 'Contabilidade Geral Fácil', 'Osni Moura Ribeiro', 'SARAIVA', '1997', '8502025112', 'f000000002366', 'Desconhecido', 475, 'PT-BR', '2025-04-10 02:23:31', NULL, 3, 2, NULL, '2025-04-09'),
+(1232, '2012-06-15', 4889, '6581511', NULL, 'LIVRO', 'Contabilidade Gerencial', 'Ray H. Garrison, Eric W. Noreen, Peter C. Brewer', 'SARAIVA', '2013', '9788580551624', 'f000000002369', 'Business & Economics', 774, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1233, '2012-05-15', 4694, '6581511', NULL, 'LIVRO', 'Contabilidade gerencial básica', 'Osmar Coronado', 'SARAIVA', '2006', '8502056824', 'f000000002370', 'Desconhecido', 177, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1234, '2009-05-15', 199, '657835', NULL, 'LIVRO', 'Contabilidade Governamental', 'Lino Martins da Silva', 'ATLAS', '2009', '8522461635', 'f000000002371', 'Desconhecido', 376, 'PT-BR', '2025-04-10 02:23:31', NULL, 5, 4, NULL, '2025-04-09'),
+(1235, '2012-06-15', 4888, '657', NULL, 'LIVRO', 'Contabilidade Intermediária', 'Tatiane Antonovz', 'SARAIVA', '2023', '9788539636952', 'f000000002376', 'Business & Economics', 111, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1236, '2009-05-20', 283, '657', NULL, 'LIVRO', 'Contabilidade Internacional Avançada', 'José Luiz dos Santos, Paulo Schmidt, Luciane Alves Fernandes', 'ATLAS', '2007', '852244904X', 'f000000002377', 'Desconhecido', 464, 'PT-BR', '2025-04-10 02:23:31', NULL, 5, 4, NULL, '2025-04-09'),
+(1237, '2009-05-25', 401, '657', NULL, 'LIVRO', 'Contabilidade Introdutória', 'Sergio de Iudicibus', 'ATLAS', '2010', 'OCLC:817131459', 'f000000002382', 'Desconhecido', 335, 'PT-BR', '2025-04-10 02:23:31', NULL, 11, 10, NULL, '2025-04-09'),
+(1238, '2010-01-07', 2070, '65707', NULL, 'LIVRO', 'Contabilidade Introdutória', 'Sergio de Iudicibus', 'CEETEPS', '2010', 'OCLC:817131459', 'f000000002400', 'Desconhecido', 335, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1239, '2003-04-10', 672, '65707', NULL, 'LIVRO', 'Contabilidade Introdutória', 'Sergio de Iudicibus', 'CETEC', '2010', 'OCLC:817131459', 'f000000002398', 'Desconhecido', 335, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1240, '2003-04-10', 563, '65707', NULL, 'LIVRO', 'Contabilidade Introdutória', 'Sergio de Iudicibus', 'TEXTONOVO', '2010', 'OCLC:817131459', 'f000000002393', 'Desconhecido', 335, 'PT-BR', '2025-04-10 02:23:31', NULL, 6, 5, NULL, '2025-04-09'),
+(1241, '2003-04-10', 560, '6581511', NULL, 'LIVRO', 'Contabilidade para Administradores', 'Helio de Paula Leite', 'ATLAS', '1997', '852241663X', 'f000000002401', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 6, 5, NULL, '2025-04-09'),
+(1242, '2023-08-29', 8747, 'CON501', NULL, 'LIVRO', 'CONTABILIDADE PÚBLICA', 'Valmor Slomski', 'ATLAS', '2013', '8522478422', 'f000000002407', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1243, '2003-04-10', 565, '657', NULL, 'LIVRO', 'Contabilidade Teoria e Prática', 'Hamilton Luiz Favero, Mário Lonardoni, Clóvis de Souza, Massakazu Takakura', 'ATLAS', '1997', '8522416419', 'f000000002409', 'Desconhecido', 434, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1244, '2009-05-18', 231, '33639', NULL, 'LIVRO', 'Contablidade e Gestão Governamental', 'Heraldo da Costa Reis', 'IBAM', '1991', 'UTEXAS:059173020691747', 'f000000002410', 'Finance, Public', 68, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1245, '2024-04-10', 10483, '730920981', NULL, 'LIVRO', 'CONTANDO A ARTE DE BRECHERET', 'Sandra Brecheret Pellegrini', 'NOOVHA AMÉRICA', '2003', '8586114278', 'f000000002411', 'Literatura infanto-juvenil / larpcal', 48, 'PT-BR', '2025-04-10 02:23:31', NULL, 4, 3, NULL, '2025-04-09'),
+(1246, '2009-07-30', 1158, '813', NULL, 'LIVRO', 'Conte-me Seus Sonhos', 'Sidney Sheldon', 'RECORD', '2011', '8501094331', 'f000000002415', 'Ficção', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1247, '2014-09-12', 5655, '37289', NULL, 'LIVRO', 'Contextualizar é reconhecer o significado do conhe', 'Desconhecido', 'PHORTE', '0000', 'N/A', 'f000000002417', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1248, '2010-02-23', 2438, '6583', NULL, 'LIVRO', 'Contole Estatistico de Qualidade', 'José Ivo Ribeiro Júnior', 'LIVRO TÉCNICO', '2022', '9786559250509', 'f000000002419', 'Mathematics', 848, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1249, '2023-09-19', 9230, 'CON110', NULL, 'LIVRO', 'CONTOS', 'Sílvio Romero', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '0000', 'STANFORD:36105047678953', 'f000000002421', 'Folk songs, Brazilian', 230, 'PT-BR', '2025-04-10 02:23:31', NULL, 3, 2, NULL, '2025-04-09'),
+(1250, '2016-10-24', 6355, '86993', NULL, 'LIVRO', 'Contos', 'Sílvio Romero', 'CIDADE CULTURAL', '0000', 'STANFORD:36105047678953', 'f000000002420', 'Folk songs, Brazilian', 230, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1251, '2024-04-12', 10547, 'CON165', NULL, 'LIVRO', 'CONTOS', 'Sílvio Romero', 'TRÊS', '0000', 'STANFORD:36105047678953', 'f000000002424', 'Folk songs, Brazilian', 230, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1252, '2023-10-05', 9565, 'CON323', NULL, 'LIVRO', 'CONTOS & CONTOS', 'Geoffrey Chaucer', 'CÂMARA BRASILEIRA DO LIVRO', '2025', '9786555252194', 'f000000002426', 'Ficção', 988, 'EN', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1253, '2023-10-27', 9647, 'AF8693', NULL, 'LIVRO', 'CONTOS AFRICANOS DOS PAÍSES DE LÍNGUA PORTUGUESA', 'Albertino Bragança, Rita Chaves, Apo Fousek', 'ÁTICA', '2009', '8508120540', 'f000000002427', 'Africa', 143, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1254, '2024-04-12', 10556, 'CON780', NULL, 'LIVRO', 'CONTOS AO LUAR', 'Júlio César Machado', 'TRÊS', '1992', '972559147X', 'f000000002428', 'Desconhecido', 171, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1255, '2010-01-20', 2219, '86993', NULL, 'LIVRO', 'Contos Brasileiros Contemporâneos', 'Clarice Lispector', 'MODERNA', '1994', 'UOM:49015002679208', 'f000000002429', 'Brazilian fiction', 84, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1256, '2009-10-15', 1930, '769332', NULL, 'LIVRO', 'Contos Brasileiros de Futebol', 'Desconhecido', 'LGE', '2005', 'STANFORD:36105121902212', 'f000000002430', 'Brazilian fiction', 168, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1257, '2023-12-11', 10154, '8698992301', NULL, 'LIVRO', 'CONTOS CONTIDOS', 'Maria Lúcia Simões', 'BAOBÁ', '1990', 'UTEXAS:059173022992551', 'f000000002431', 'Desconhecido', 84, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1258, '2023-10-30', 9701, 'B8693', NULL, 'LIVRO', 'CONTOS DA INFÂNCIA E DA ADOLESCÊNCIA', 'Luiz Vilela', 'SGE', '1996', '8508061633', 'f000000002432', 'Short stories, Brazilian', 103, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1259, '2023-05-16', 7210, 'B8698', NULL, 'LIVRO', 'CONTOS DAS HISTÓRIAS - ESTÓRIAS DOS CONTOS', 'Antonio Haddad', 'LABRADOR', '2022', '9786556252445', 'f000000002433', 'Ficção', 130, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1260, '2014-01-23', 5487, '86993', NULL, 'LIVRO', 'Contos de Amor Rubem Fonseca', 'Rubem Fonseca', 'VIDA MELHOR', '1996', 'OCLC:45777616', 'f000000002435', 'Desconhecido', 77, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1261, '2014-02-04', 5521, '8093872', NULL, 'LIVRO', 'Contos de Horror', 'Vários autores', 'UNIVERSO', '2013', '9788580868067', 'f000000002436', 'Ficção', 113, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1262, '2010-01-15', 2201, '813', NULL, 'LIVRO', 'Contos de Mark Twain', 'Mark Twain', 'CULTRIX', '1990', 'OCLC:1342007507', 'f000000002437', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1263, '2014-01-21', 5450, '285', NULL, 'LIVRO', 'Contos de Mistérios & assombros', 'Ivan Turguêniev, E. T. A. Hoffmann, Luigi Pirandello, Robert Louis Stevenson, M. R. James, Émile Zola, Washington Irving, Horacio Quiroga, Leonid Andrêiev, João do Rio, Virginia Woolf, Humberto de Campos, Medeiros e Albuquerque, Emilia Pardo Bazán, Edgar Allan Poe, Guy de Maupassant', 'CORTEZ', '2021', '9786586398380', 'f000000002438', 'Ficção', 261, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1264, '2014-01-22', 5463, '7415', NULL, 'LIVRO', 'Contos de Tchekhov', 'Desconhecido', 'ESCALA', '1959', 'OCLC:940039077', 'f000000002439', 'Desconhecido', 317, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1265, '2014-02-04', 5501, '86998', NULL, 'LIVRO', 'CONTOS E CRONICAS PARA LER NA ESCOLA', 'Moacyr Scliar', 'OBJETIVA', '2011', '9788539003105', 'f000000002440', 'Literary Collections', 205, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1266, '2024-04-12', 10535, 'CON931', NULL, 'LIVRO', 'CONTOS E LENDAS', 'Neil Philip', 'TRÊS', '1996', '9724213129', 'f000000002441', 'Desconhecido', 192, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1267, '2010-01-26', 2363, '869', NULL, 'LIVRO', 'Contos e Novelas de Língua Estrangeira', 'Yolanda Lhullier dos Santos, Claudia Santos', 'MINOX', '1965', 'OCLC:683349837', 'f000000002442', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1268, '2011-12-12', 3851, '80883037', NULL, 'LIVRO', 'Contos Fantásticos do Século XIX', 'Italo Calvino', 'CIA. DAS LETRAS', '2004', '9788580864489', 'f000000002444', 'Ficção', 524, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1269, '2024-04-04', 10407, '80883037', NULL, 'LIVRO', 'CONTOS FANTÁSTICOS DO SÉCULO XIX', 'Italo Calvino', 'COMPANHIA DAS LETRAS', '2004', '9788580864489', 'f000000002446', 'Ficção', 524, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1270, '2014-01-22', 5475, '894511', NULL, 'LIVRO', 'Contos Húngaros', 'Desconhecido', 'HEDRA', '1964', 'OCLC:1014913948', 'f000000002447', 'Desconhecido', 117, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1271, '2023-10-30', 9693, '86993', NULL, 'LIVRO', 'CONTOS MACABROS', 'Natália Silva', 'ZIT', '2023', 'EAN:3410005693386', 'f000000002448', 'Juvenile Fiction', 163, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1272, '2011-05-26', 3412, '86993', NULL, 'LIVRO', 'Contos mais que Mínimos', 'Heloisa Seixas', 'TINTA NEGRA BAZAR EDITORIAL', '2010', '8563114018', 'f000000002450', 'Brazilian fiction', 94, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1273, '2014-02-04', 5503, '86993', NULL, 'LIVRO', 'Contos Novos', 'Mário de Andrade', 'EDIOURO', '2023', '9788596037679', 'f000000002451', 'Juvenile Fiction', 205, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1274, '2023-09-18', 9182, 'CON202', NULL, 'LIVRO', 'CONTOS NOVOS', 'Mário de Andrade', 'KLICK', '2023', '9788596037679', 'f000000002452', 'Juvenile Fiction', 205, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1275, '2014-01-21', 5427, '813', NULL, 'LIVRO', 'Contos Obscuros de Edgar Allan Poe', 'Edgar Allan Poe, ROMERO CAVALCANTI, BRAULIO TAVARES', 'CASA DA PALAVRA', '2010', '8577341410', 'f000000002453', 'Desconhecido', 214, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1276, '2011-05-26', 3415, '86993', NULL, 'LIVRO', 'Contos Plausíveis', 'Carlos Drummond de Andrade', 'BEST SELLER', '1985', 'UTEXAS:059173022861553', 'f000000002454', 'Desconhecido', 174, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1277, '2003-04-10', 1451, '869935', NULL, 'LIVRO', 'Contos Reunidos', 'Murilo Rubião', 'CIA. DAS LETRAS', '1998', 'UTEXAS:059173005503047', 'f000000002455', 'Literary Criticism', 284, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1278, '2023-11-01', 9762, '86993', NULL, 'LIVRO', 'CONTOS SATÍRICOS DO CONSELHEIRO XX', 'Desconhecido', 'ZIT', '0000', 'N/A', 'f000000002456', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1279, '2024-04-12', 10557, 'CON622', NULL, 'LIVRO', 'CONTOS SEM PRETENSÃO', 'Guimarães Guimarães Júnior', 'TRÊS', '2015', '1512354058', 'f000000002458', 'Desconhecido', 138, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1280, '2009-08-27', 1546, '8699308', NULL, 'LIVRO', 'Contos Tradicionais do Brasil', 'Luís da Câmara Cascudo', 'GLOBAL', '2015', '9788526018259', 'f000000002459', 'Literary Criticism', 424, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1281, '2021-12-09', 6564, '39820981', NULL, 'LIVRO', 'Contos Tradicionais do Brasil', 'Luís da Câmara Cascudo', 'LDM - LIVRARIA E DIST. MULTICAMPI LTDA.', '2015', '9788526018259', 'f000000002460', 'Literary Criticism', 424, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1282, '2012-08-29', 5250, '82391', NULL, 'LIVRO', 'Contraponto', 'Livio Tragtenberg', 'ABRIL CULTURAL', '2002', '8531402093', 'f000000002461', 'Counterpoint', 278, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1283, '2022-06-30', 7100, 'CON882', NULL, 'LIVRO', 'CONTRATO DE TRABALHO DA PESSOA COM DEFICIÊNCIA', 'Lucas Silva de Castro', 'CDEA CAMPOS EDITORA', '2025', '9788577895946', 'f000000002462', 'Desconhecido', 183, 'EN', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1284, '2011-07-04', 3600, '3431', NULL, 'LIVRO', 'Contravenções Penais', 'Brazil', 'PALOMA', '1976', 'LCCN:77472970', 'f000000002463', 'Contraventions (Criminal law)', 0, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1285, '2023-08-01', 8331, '6151', NULL, 'LIVRO', 'CONTROLE BIOLÓGICO DE QUALIDADE DE P. F. C. E C', 'Desconhecido', 'MANOLE', '0000', 'N/A', 'f000000002464', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1286, '2023-08-01', 8329, '6151', NULL, 'LIVRO', 'CONTROLE BIOLÓGICO DE QUALIDADE DE P. F., C. E COS', 'Desconhecido', 'MANOLE', '0000', 'N/A', 'f000000002465', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1287, '2009-10-07', 1861, '6281688', NULL, 'LIVRO', 'Controle da Qualidade da Água para Consumo Humano', 'Ben-Hur Luttembarck Battalha', 'CETESB', '1977', 'UTEXAS:059173023057770', 'f000000002466', 'Water quality management', 224, 'PT-BR', '2025-04-10 02:23:31', NULL, 13, 12, NULL, '2025-04-09'),
+(1288, '2010-02-23', 2439, '658', NULL, 'LIVRO', 'Controle Estatistico de Qualidade', 'Robert Wayne Samohyl', 'LIVRO TÉCNICO', '2009', '9788535232202', 'f000000002479', 'Quality control', 284, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1289, '2014-05-30', 5575, '620', NULL, 'LIVRO', 'Controle Lógicos Programáveis', 'Fouad Sabry', 'FESTO DIDACTIC', '2025', 'PKEY:6610000716531', 'f000000002480', 'Technology & Engineering', 440, 'PT-BR', '2025-04-10 02:23:31', NULL, 1, 0, NULL, '2025-04-09'),
+(1290, '2009-09-24', 1681, 'B869', NULL, 'LIVRO', 'Conversa com Educadores', 'Ligia Cademartori', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:817038272', 'f000000002481', 'Desconhecido', 58, 'PT-BR', '2025-04-10 02:23:31', NULL, 2, 1, NULL, '2025-04-09'),
+(1291, '2009-08-31', 1551, '8611', NULL, 'LIVRO', 'Conversa com Fernando Pessoa', 'Carlos Felipe Moises', 'ÁTICA', '2009', '8508120990', 'f000000002483', 'Desconhecido', 183, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1292, '2015-04-13', 5768, '700', NULL, 'LIVRO', 'Conversa sobre as artes', 'Wagner Luiz Monteiro Campos', 'SESC - DEPARTAMENTO NACIONAL', '2013', '8589336980', 'f000000002484', 'Artists', 216, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1293, '2023-04-25', 7183, '3713', NULL, 'LIVRO', 'CONVERSAS SOBRE NUMEROS, AÇÕES E OPERAÇÕES', 'Luciana Seabra', 'ÁTICA', '2018', '9788554512712', 'f000000002485', 'Business & Economics', 299, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1294, '2021-12-09', 6586, '8698', NULL, 'LIVRO', 'Conversas sobre política', 'Rubem Alves', 'COMPANHIA EDITORA NACIONAL', '2020', '9788504021790', 'f000000002486', 'Filosofia', 130, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1295, '2011-03-31', 3295, '530', NULL, 'LIVRO', 'Convite à Física', 'Yoav Ben-Dov', 'ZAHAR', '1996', '8571103550', 'f000000002487', 'Ciência', 164, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1296, '2024-02-19', 10219, '1339', NULL, 'LIVRO', 'CONVITE PARA A FÉ - ATITUDES DE SABEDORIA', 'Laredo Rennan', 'CENTRO ESPÍRITA', '2023', '9786589198673', 'f000000002488', 'Religião', 358, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1297, '2010-01-11', 2095, '370', NULL, 'LIVRO', 'Convivência Democrática Inlusão e Exclusão Social', 'Luiz Carlos Bombassaro, Thomas Krüggeler, Ricardo Timm de Souza', 'MINISTÉRIO DA EDUCAÇÃO', '2009', '8574308153', 'f000000002489', 'História', 272, 'ES', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1298, '2010-01-11', 2094, '370', NULL, 'LIVRO', 'Convivência Democrática Protagonismo Juvenil', 'Antonio Carlos Da_Costa Gomes', 'MINISTÉRIO DA EDUCAÇÃO', '2000', '8585023821', 'f000000002490', 'Desconhecido', 331, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1299, '2010-01-11', 2096, '370', NULL, 'LIVRO', 'Convivência Democrática Relações étnico-raciais e', 'Mauro Meirelles, Leandro Raizer', 'MINISTÉRIO DA EDUCAÇÃO', '2016', '8567442214', 'f000000002491', 'Blacks', 271, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1300, '2003-04-10', 869, '334', NULL, 'LIVRO', 'Cooperativismo', 'Meinen, Ênio e Port, Márcio', 'FAT', '2016', '9788582453537', 'f000000002492', 'Business & Economics', 452, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1301, '2023-06-22', 7335, 'COP865', NULL, 'LIVRO', 'COPERNICO', 'Johannes-Jacobus Zimmermann', 'TRÊS', '0000', 'ONB:+Z197378103', 'f000000002493', 'Desconhecido', 180, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1302, '2024-04-04', 10410, 'COR123', NULL, 'LIVRO', 'CORAÇÕES CURADOS', 'Léo Pereira', 'LOYOLA', '2001', '851502263X', 'f000000002494', 'Religião', 236, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1303, '2023-06-23', 7445, '28209', NULL, 'LIVRO', 'CORAÇÕES CURADOS PARA AMAR', 'Léo Pereira', 'PETRA', '2001', '851502263X', 'f000000002495', 'Religião', 236, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1304, '2023-09-25', 9376, 'COR541', NULL, 'LIVRO', 'CORELDRAW', 'Joaquim B. De Souza', 'ABRIL', '2015', 'EAN:3410001970627', 'f000000002496', 'Educação', 69, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1305, '2010-05-07', 2593, '7007', NULL, 'LIVRO', 'Cores Urbanas', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2005', 'OCLC:816997905', 'f000000002497', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1306, '2010-12-21', 3156, '7963340981', NULL, 'LIVRO', 'Corinthians 100 anos Gols ilustrados', 'Silvio Kazushi Sano', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2010', 'STANFORD:36105217832695', 'f000000002498', 'Soccer matches', 172, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1307, '2023-09-21', 9301, 'COR352', NULL, 'LIVRO', 'CORPO HUMANO', 'Rafael Zorzi', 'ABRIL', '2021', '9788539628179', 'f000000002499', 'Medical', 405, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1308, '2009-05-27', 457, '419', NULL, 'LIVRO', 'Correspondência Comercial e Oficial', 'Reinaldo Mathias Ferreira', 'ÁTICA', '1994', '8508019815', 'f000000002500', 'Commercial correspondence, Portuguese', 238, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1309, '2009-07-29', 1149, '285', NULL, 'LIVRO', 'Corrida pela Herança', 'Sidney Sheldon', 'RECORD', '1994', '8501041343', 'f000000002501', 'Desconhecido', 263, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1310, '2010-02-18', 2433, '6201', NULL, 'LIVRO', 'Corte e Dobragem de Chapas', 'F. DE MARCOS', 'HERMUS', '0000', '8528905810', 'f000000002503', 'Desconhecido', 158, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1311, '2024-03-28', 10357, 'COU720', NULL, 'LIVRO', 'COUNT ON ME!', 'Lauren Dane', 'PANINI BRASIL', '2019', '9781488053849', 'f000000002504', 'Ficção', 355, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1312, '2024-05-29', 10651, '813', NULL, 'LIVRO', 'CREPÚSCULO', 'Stephenie Meyer', 'INTRÍNSECA', '2020', '6555600292', 'f000000002505', 'Ficção', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1313, '2014-06-02', 5578, '285', NULL, 'LIVRO', 'Crescendo', 'Becca Fitzpatrick', 'INTRÍNSECA', '2012', '9788580570380', 'f000000002506', 'Ficção', 404, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1314, '2023-11-01', 9755, '285', NULL, 'LIVRO', 'CRESCER É PERIGOSO', 'Marcia Kupstas', 'SCIPIONE', '2015', '8508169124', 'f000000002507', 'Young Adult Fiction', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1315, '2010-01-12', 2128, '37019', NULL, 'LIVRO', 'Criança Ecológica - sou dessa turma', 'Desconhecido', 'SMA/CEA', '0000', '8530808002', 'f000000002508', 'Desconhecido', 104, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1316, '2003-04-10', 988, '5369', NULL, 'LIVRO', 'Crie Planilhas Inteligentes com o Microsoft Office', 'Adalberto Conceição Fraga', 'ÉRICA', '2018', '9788583937531', 'f000000002510', 'Computers', 341, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1317, '2003-04-10', 981, '4678', NULL, 'LIVRO', 'Crie,Anime e Publique seu Site Utilizando Firework', 'Desconhecido', 'ÉRICA', '0000', 'N/A', 'f000000002511', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1318, '2022-01-28', 7007, '285', NULL, 'LIVRO', 'Crime e Castigo', 'Fiódor Dostoiévski', 'EDIOURO', '2019', '9788588808850', 'f000000002512', 'Ficção', 817, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1319, '2009-08-13', 1450, '89173', NULL, 'LIVRO', 'Crime e Castigo', 'Fiódor Dostoiévski', 'EDITORA 34', '2019', '9788588808850', 'f000000002514', 'Ficção', 817, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1320, '2023-10-30', 9739, '7415', NULL, 'LIVRO', 'CRIME E CASTIGO', 'Fiódor Dostoiévski', 'VIA LÁCTEA', '2019', '9788588808850', 'f000000002513', 'Ficção', 817, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1321, '2024-03-28', 10343, '704493641523', NULL, 'LIVRO', 'CRIMES QUE ABALARAM O BRASIL', 'George Moura, Flávio Araújo, Marcelo Faria de Barros', 'GLOBO', '2007', '8525043109', 'f000000002515', 'Criminal law', 320, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1322, '2011-06-15', 3546, '285', NULL, 'LIVRO', 'Crisântemo Amarelo', 'Marcos Silveira Wrege', 'CORTEZ', '1995', 'OCLC:50832497', 'f000000002516', 'Desconhecido', 101, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1323, '2023-04-06', 7158, 'CRI293', NULL, 'LIVRO', 'CRISTO DO PRINCIPIO AO FIM', 'Armando Lencastre', 'PAULINAS', '2013', '9789724746135', 'f000000002517', 'Self-Help', 127, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1324, '2011-06-02', 3479, '2484', NULL, 'LIVRO', 'Cristo Minha vida', 'Clarence Enzler', 'PAULINAS', '2012', '9788535632019', 'f000000002518', 'Religião', 162, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1325, '2014-01-23', 5489, '86993', NULL, 'LIVRO', 'Cristovão Tezza', 'Cristóvão Tezza', 'RECORD', '2018', '8583181020', 'f000000002519', 'Literary Criticism', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1326, '2010-12-21', 3059, '7914375', NULL, 'LIVRO', 'Crítica de Luiz Geraldo de Miranda Leão', 'Desconhecido', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '1983', 'UTEXAS:059172109043403', 'f000000002520', 'Brazilian drama', 202, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1327, '2023-10-27', 9660, '8698', NULL, 'LIVRO', 'CRÔNICA PARA JOVENS: DE BICHOS E PESSOAS', 'João do Rio', 'JPA', '2024', '9786554610599', 'f000000002521', 'Ficção', 284, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1328, '2023-11-01', 9742, 'B8698', NULL, 'LIVRO', 'CRÔNICAS DO VARAL DA CASA AO LADO', 'Ivan Angelo', 'PROSA NOVA', '2015', '9788526019096', 'f000000002522', 'Ficção', 335, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1329, '2023-12-01', 10040, '8698', NULL, 'LIVRO', 'CRÔNICAS PARA JOVENS: DE AMOR E AMIZADE', 'Clarice Lispector', 'LENDO E APRENDENDO', '2010', '9788581225753', 'f000000002523', 'Juvenile Fiction', 98, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1330, '2014-01-21', 5439, '285', NULL, 'LIVRO', 'Crônicas Para Jovens:de Amor e Amizade', 'Clarice Lispector', 'LENDO E APRENDENDO', '2010', '9788581225753', 'f000000002524', 'Juvenile Fiction', 98, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1331, '2011-05-27', 3441, '86998', NULL, 'LIVRO', 'Crônicas para ler na Escola', 'Kledir Ramil', 'FONTANAR', '2014', '9788539005505', 'f000000002525', 'Educação', 154, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1332, '2011-03-23', 3252, '6107361', NULL, 'LIVRO', 'CTI: Atuação, Intervenção e cuidados de enfermagem', 'NEBIA MARIA ALMEIDA DE FIGUEIREDO, CARLOS ROBERTO LYRA DA SILVA', 'YENDIS', '2006', '8598859338', 'f000000002527', 'Desconhecido', 329, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1333, '2012-08-14', 5144, '6107361', NULL, 'LIVRO', 'CTI:Atuação, Intervenção e cuidados de enfermagem', 'NEBIA MARIA ALMEIDA DE FIGUEIREDO, CARLOS ROBERTO LYRA DA SILVA', 'YENDIS', '2006', '8598859338', 'f000000002528', 'Desconhecido', 329, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1334, '2023-05-22', 7372, '917291', NULL, 'LIVRO', 'CUBA EM PERSPECTIVA', 'Fernando Portela, Cesar Alvarez', 'ÁTICA', '2000', '8508116438', 'f000000002529', 'Young Adult Nonfiction', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1335, '2023-09-18', 9175, 'CUC955', NULL, 'LIVRO', 'CUCA 2000', 'Desconhecido', 'NOVO BRASIL', '1987', 'OCLC:803334337', 'f000000002530', 'Desconhecido', 1193, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1336, '2009-04-30', 86, '155412', NULL, 'LIVRO', 'Cuidados com o Desenv. Psicomotor e Emoc. da Crian', 'Guia de Saúde, Saúde e Bem-Estar, Maternidade, On Line Editora', 'IATRIA', '2016', 'cui143206299', 'f000000002531', 'Family & Relationships', 97, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1337, '2023-08-11', 8271, '6107361', NULL, 'LIVRO', 'CUIDADOS CRÍTICOS', 'Marianne Chulay | Suzanne M. Burns', 'REICHMANN & AFFONSO', '2009', '9788580551075', 'f000000002532', 'Medical', 574, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1338, '2010-01-12', 2132, '616028', NULL, 'LIVRO', 'Cuidados Intensivos', 'Lynne Ann Thelan, Fernanda Azevedo Silva', 'GUANABARA KOOGAN', '0000', '9729661022', 'f000000002534', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1339, '2009-04-15', 35, '61073', NULL, 'LIVRO', 'Cuidados intensivos', 'Lynne Ann Thelan, Fernanda Azevedo Silva', 'MCGRAW-HILL', '0000', '9729661022', 'f000000002533', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1340, '2014-06-02', 5585, '3252520981', NULL, 'LIVRO', 'Cultura Amordaçada', 'Alvaro Gonçalves Antunes Andreucci, Valéria Garcia de Oliveira', 'ARQUIVO DO ESTADO', '2002', 'UOM:39015056828489', 'f000000002536', 'Artists', 166, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1341, '2011-04-04', 3340, '30523', NULL, 'LIVRO', 'Cultura Jovens', 'Luana Vilutis', 'ZAHAR', '2009', 'OCLC:1029768132', 'f000000002537', 'Desconhecido', 0, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1342, '2003-04-10', 558, '658001', NULL, 'LIVRO', 'Cultura Organizacional e Cultura Brasileira', 'Fernando C. Prestes Motta, Miguel P. Caldas', 'ATLAS', '1997', '8522417679', 'f000000002538', 'Brazil', 325, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1343, '2003-04-10', 705, '658406', NULL, 'LIVRO', 'Cultura Organizacional:identidade, sedução e cari', 'Maria Ester de Freitas', 'FGV', '1999', '852250282X', 'f000000002539', 'Desconhecido', 178, 'PT-BR', '2025-04-10 02:23:32', NULL, 5, 4, NULL, '2025-04-09'),
+(1344, '2010-12-21', 3126, '92869', NULL, 'LIVRO', 'Cultura Paulista: Antologia 2005', 'Desconhecido', 'ACADEMIA PAULISTA DE LETRAS', '2006', 'UTEXAS:059173022543252', 'f000000002544', 'Academia Paulista de Letras (Sao Paulo, Brazil)', 584, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1345, '2011-03-31', 3298, '907', NULL, 'LIVRO', 'Cultura política e leituras do passado', 'Martha Abreu, Rachel Soihet, Rebeca Gontijo', 'JOSÉ OLYMPIO', '2010', '8503010798', 'f000000002545', 'Desconhecido', 503, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1346, '2009-10-15', 1934, '3064', NULL, 'LIVRO', 'Cultura Popular e Educação', 'André Luiz dos Santos Paiva, Everaldo Fernandes da Silva, Mário de Faria Carvalho, Almir João da Rocha, Angela Ninfa Mendes de Andrade Cabral, Artur Fabiano Araújo de Albuquerque, Carlos Eduardo Galon da Silva, Clécia Pereira, Emanuelle Justino dos Santos, Evandro da Silva Lunardo, Helaynne Rahyssa Sampaio Viana, Hugo Silva Caetano, Jéssica Ribeiro de Oliveira, João Paulo de Azevedo Silva, José Adelson Teixeira dos Santos, Josenildo da Silva Martins, Luís Massilon Silva Filho, Marciano Antonio da Silva, Maria do Carmo Gonçalo Santos, Maria José dos Santos, Ridelma Barbosa de Moura Minhaqui, Rosângela Vieira de Souza, Rosie Marie Nascimento de Medeiros, Rubem Viana de Carvalho, Sheila Borges de Oliveira, Yasmin Janaína Ferreira Marcos', 'SEED', '2022', '9786559395019', 'f000000002546', 'Educação', 402, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1347, '2009-10-30', 1988, '700', NULL, 'LIVRO', 'Cultura Pós-Moderna', 'Steven Connor', 'EDIÇÕES LOYOLA', '1992', '8515006960', 'f000000002547', 'Filosofia', 236, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1348, '2012-04-04', 4501, '3709', NULL, 'LIVRO', 'Cultura, Saberes e Práticas', 'Maria Lucia Mendes de Carvalho', 'CEETEPS', '2011', '8599697099', 'f000000002548', 'Desconhecido', 336, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1349, '2023-05-25', 7468, 'CUP693', NULL, 'LIVRO', 'CUPIDO E PSIQUÊ', 'Apuleu', 'SOL', '2002', '8447207242', 'f000000002550', 'Ficção', 104, 'CA', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1350, '2024-10-01', 10972, '37319', NULL, 'LIVRO', 'CURANDO AS EMOÇÕES FERIDAS: VENCENDO OS MALES DA V', 'Ricardo Castro', 'PAULUS', '2019', '9783966338837', 'f000000002552', 'Religião', 111, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1351, '2023-12-20', 10166, 'CUR760', NULL, 'LIVRO', 'CURRÍCULO ESCOLAR EM LABORATÓRIO: A EDUCAÇÃO PROFI', 'Márcia Castilho de Sales', 'MINISTÉRIO DA EDUCAÇÃO', '2020', '9786555231281', 'f000000002553', 'Educação', 230, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1352, '2023-04-20', 7179, '375', NULL, 'LIVRO', 'CURRICULO, TERRITÓRIO EM DISPUTA', 'Miguel Gonzalez Arroyo', 'EDITORA-VOZES', '2011', 'OCLC:1105867116', 'f000000002554', 'Educação', 374, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1353, '2023-09-01', 8856, '57407', NULL, 'LIVRO', 'CURSO BÁSICO DE BIOLOGIA', 'Jose Mariano Amabis, Gilberto Rodrigues Martho', 'MODERNA', '1985', 'OCLC:816720677', 'f000000002555', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1354, '2017-06-12', 6498, '3433182(81)', NULL, 'LIVRO', 'Curso básico de segurança e higiene ocupacional', 'Tuffi Messias Saliba', 'LTR', '2004', '853610516X', 'f000000002556', 'Desconhecido', 453, 'PT-BR', '2025-04-10 02:23:32', NULL, 4, 3, NULL, '2025-04-09'),
+(1355, '2003-04-10', 674, '657', NULL, 'LIVRO', 'Curso de Contabilidade para não Contadores', 'Sérgio de Iudícibus, José Carlos Marion', 'ATLAS', '2022', '6559773175', 'f000000002560', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1356, '2011-07-05', 3611, '345', NULL, 'LIVRO', 'Curso de Direito Ambiental Brasileiro', 'Celso Antonio Pacheco Fiorillo', 'SARAIVA', '2009', '8502074059', 'f000000002562', 'Desconhecido', 642, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1357, '2024-04-10', 10488, 'CUR588', NULL, 'LIVRO', 'CURSO DE DIREITO PROCESSUAL CIVIL', 'Eduardo Arruda Alvim', 'PODIVM', '2000', 'STANFORD:36105063190974', 'f000000002563', 'Civil procedure', 790, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1358, '2024-04-10', 10489, 'CUR371', NULL, 'LIVRO', 'CURSO DE DIREITO PROCESSUAL CIVIL - 2', 'Marcus Vinicius Rios Gonçalves', 'PODIVM', '2023', '8553623238', 'f000000002564', 'Law', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1359, '2024-04-10', 10490, 'CUR302', NULL, 'LIVRO', 'CURSO DE DIREITO PROCESSUAL CIVIL - 3', 'Humberto Theodoro Júnior', 'PODIVM', '2023', '6559646793', 'f000000002565', 'Law', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1360, '2024-04-10', 10491, 'CUR175', NULL, 'LIVRO', 'CURSO DE DIREITO PROCESSUAL CIVIL - 4', 'Nelson Godoy Bassil Dower', 'PODIVM', '0000', 'OCLC:940047714', 'f000000002566', 'Desconhecido', 411, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1361, '2009-05-29', 484, '330', NULL, 'LIVRO', 'Curso de Economia', 'Herbert Victor Levy', 'ATLAS', '1951', 'LCCN:58022283', 'f000000002567', 'Brazil', 304, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1362, '2011-07-11', 3622, '620', NULL, 'LIVRO', 'Curso de Eletrotécnica', 'Chester L. Dawes', 'HEMUS', '1964', 'OCLC:819711182', 'f000000002568', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 4, 3, NULL, '2025-04-09'),
+(1363, '2013-11-27', 5410, '61073', NULL, 'LIVRO', 'Curso de Enfermagem Básica', 'Tuffi Messias Saliba', 'DIFUSÃO', '2024', '9786558833062', 'f000000002572', 'Law', 470, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1364, '2011-12-07', 3840, '6107307', NULL, 'LIVRO', 'Curso de especialização proficinal de nível técnic', 'Gabriela Rodrigues Manzke', 'FUNDAP', '2021', '9786558681267', 'f000000002573', 'Educação', 85, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1365, '2011-12-07', 3842, '6107307', NULL, 'LIVRO', 'Curso de especialização proficional de nível técni', 'Gabriela Rodrigues Manzke', 'FUNDAP', '2021', '9786558681267', 'f000000002574', 'Educação', 85, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1366, '2003-04-10', 766, '1707', NULL, 'LIVRO', 'Curso de Ética em Administração', 'Félix Ruiz Alonso, Plínio de Lauro Castrucci, Francisco Granizo López', 'ATLAS', '2006', '8522442061', 'f000000002575', 'Desconhecido', 242, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1367, '2010-01-06', 2045, '100', NULL, 'LIVRO', 'Curso de Filosofia', 'Antonio Rezende', 'ZAHAR', '1986', '9788537809013', 'f000000002576', 'Filosofia', 404, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1368, '2010-07-12', 2695, '530', NULL, 'LIVRO', 'Curso de Física', 'João Maria Almeida Lima, Academia das Ciências de Lisboa', 'SCIPIONE', '1923', 'UOM:39015068332629', 'f000000002577', 'Physics', 780, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1369, '2024-10-24', 10993, 'CUR729', NULL, 'LIVRO', 'CURSO DE FÍSICA - MANUAL DO PROFESSOR', 'Antonio Maximo Ribeiro da Luz, Beatriz Alvarenga Alvares', 'SCIPIONE', '2000', '8526231006', 'f000000002578', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1370, '2010-01-12', 2109, '371', NULL, 'LIVRO', 'Curso de Prevenção do Uso se Drogas', 'Denise Santos, Glaucia Silva, Viviane Gontijo', 'MINISTÉRIO DA EDUCAÇÃO', '2019', '9781315454559', 'f000000002579', 'Foreign Language Study', 530, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1371, '2023-08-31', 8794, '54007', NULL, 'LIVRO', 'CURSO DE QUÍMICA', 'Bruce M. Mahan, Rollie J. Myers', 'ÁTICA', '1995', '9788521217374', 'f000000002580', 'Ciência', 605, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1372, '2009-09-16', 1567, '61073', NULL, 'LIVRO', 'Curso Didático de Enfermagem', 'Dirce Laplaca Viana', 'YENDIS', '0000', '8577281744', 'f000000002582', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:23:32', NULL, 7, 6, NULL, '2025-04-09'),
+(1373, '2023-08-11', 8295, '61073', NULL, 'LIVRO', 'CURSO DIDÁTICO DE ENFERMAGEM 2', 'Dirce Laplaca Viana', 'YENDIS', '0000', '8577281744', 'f000000002589', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1374, '2010-02-08', 2398, '16', NULL, 'LIVRO', 'Curso IBM de Programação', 'Desconhecido', 'PLANETA', '0000', 'cur016765110', 'f000000002590', 'Desconhecido', 768, 'ES', '2025-04-10 02:23:32', NULL, 4, 3, NULL, '2025-04-09'),
+(1375, '2024-03-01', 10267, 'CUR707', NULL, 'LIVRO', 'CURSO INTRODUTÓRIO DE DIREITO INTERNACIONAL DO COM', 'Carlos Roberto Husek', 'MANOLE', '2023', '9786558832591', 'f000000002594', 'Law', 372, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1376, '2003-04-10', 863, '657', NULL, 'LIVRO', 'Curso Moderno de Contabilidade Lisa', 'Silverio das Neves, Paulo Eduardo Vilchez Viceconti', 'LISA S/A', '1995', 'OCLC:816960935', 'f000000002595', 'Desconhecido', 691, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1377, '2010-02-23', 2436, '6201', NULL, 'LIVRO', 'Curso Pratico de Leitura de Desenho Tecnico', 'Escola Graphite', 'ALIANÇA PARA O PROGRESSO', '2021', 'cur199246172', 'f000000002596', 'Architecture', 98, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1378, '2011-12-07', 3841, '6107307', NULL, 'LIVRO', 'Curso técnico de nível médio em enfermagem', 'Jairo Ramos', 'FUNDAP', '2019', '9781795367516', 'f000000002598', 'Law', 175, 'PT-BR', '2025-04-10 02:23:32', NULL, 3, 2, NULL, '2025-04-09'),
+(1379, '2023-09-26', 9405, 'CUR130', NULL, 'LIVRO', 'CURSO TÉCNICO DE SEGURANÇA DO TRABALHO', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '1989', 'UTEXAS:059173004441240', 'f000000002601', 'Safety education, Industrial', 70, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1380, '2003-04-10', 745, '65742', NULL, 'LIVRO', 'Custo: Análise e Gestão', 'Antonio Diogo Passos Lima', 'PEARSON PRENTICE HALL', '2022', '9786525262611', 'f000000002602', 'Business & Economics', 112, 'PT-BR', '2025-04-10 02:23:32', NULL, 5, 4, NULL, '2025-04-09'),
+(1381, '2009-05-21', 326, '6581552', NULL, 'LIVRO', 'Custos Industriais', 'Desconhecido', 'IBPEX', '0000', '9788574830476', 'f000000002607', 'Desconhecido', 174, 'EN', '2025-04-10 02:23:32', NULL, 5, 4, NULL, '2025-04-09'),
+(1382, '2024-05-22', 10644, 'CYR831', NULL, 'LIVRO', 'CYRANO DE BERGERAC', 'Edmond Rostand', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2007', 'STANFORD:36105124085338', 'f000000002618', 'Drama', 164, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1383, '2023-11-01', 9752, '285', NULL, 'LIVRO', 'CYRANO DE BERGERAC', 'Edmond Rostand', 'DMR', '2007', 'STANFORD:36105124085338', 'f000000002612', 'Drama', 164, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1384, '2022-10-21', 7120, 'CB696', NULL, 'LIVRO', 'Cyrano de Bergerac', 'Edmond Rostand', 'NOVA CULTURA', '2007', 'STANFORD:36105124085338', 'f000000002613', 'Drama', 164, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1385, '2023-03-30', 7150, 'CYR579', NULL, 'LIVRO', 'CYRANO DE BERGERAC', 'Edmond Rostand', 'SOL', '2007', 'STANFORD:36105124085338', 'f000000002614', 'Drama', 164, 'EN', '2025-04-10 02:23:32', NULL, 4, 3, NULL, '2025-04-09'),
+(1386, '2003-04-10', 881, '16425', NULL, 'LIVRO', 'd Base III Plus', 'Frank Holland, Adam Wilkins', 'MCGRAW-HILL', '2014', '9781908117526', 'f000000002619', 'Biography & Autobiography', 336, 'EN', '2025-04-10 02:23:32', NULL, 3, 2, NULL, '2025-04-09'),
+(1387, '2023-11-06', 9802, '98105', NULL, 'LIVRO', 'D. PEDRO A HISTÓRIA NÃO CONTADA', 'Paulo Rezzutti', 'EUREKA', '2025', '9788501924117', 'f000000002622', 'Biography & Autobiography', 783, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(1388, '2009-08-20', 1518, '9231', NULL, 'LIVRO', 'D. Pedro II', 'Pedro II (Imperador do Brasil)', 'CLAROENIGMA', '1999', 'STANFORD:36105028813371', 'f000000002623', 'Brazil', 170, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1389, '2023-08-01', 8332, 'DAQ336', NULL, 'LIVRO', 'DA QUÍMICA MEDICINAL À QUÍMICA C. E M. MOLECULAR', 'Augusto Correia Cardoso', 'MANOLE', '0000', '9789892622590', 'f000000002624', 'Ciência', 196, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1390, '2022-01-26', 6980, 'DTL904', NULL, 'LIVRO', 'Da Terra à Lua', 'Verne, Jules', 'VITRINE EDITORA', '2017', '9785000641286', 'f000000002625', 'Ficção', 224, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1391, '2023-02-03', 8706, '3707', NULL, 'LIVRO', 'DANÇA - TRAMAS DAS LINGUAGENS', 'Almir Ribeiro', 'ÁTICA', '2025', '9786525068800', 'f000000002626', 'Arte', 204, 'PT-BR', '2025-04-10 02:23:32', NULL, 6, 5, NULL, '2025-04-09'),
+(1392, '2009-08-11', 1423, '37139', NULL, 'LIVRO', 'Dançando na Escola', 'Vinicius Campos', 'CORTEZ', '2019', '9788578162153', 'f000000002632', 'Nature', 84, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1393, '2011-02-15', 2953, '370', NULL, 'LIVRO', 'Darcy Ribeiro', 'Darcy Ribeiro', 'MASSANGANA', '2022', '9786555875157', 'f000000002633', 'Biography & Autobiography', 392, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1394, '2009-04-15', 52, '581634', NULL, 'LIVRO', 'Das ervas medicinais à fitoterapia', 'Melvina Afra Mendes de Araújo', 'ATELIÊ EDITORIAL', '2002', '8574801399', 'f000000002634', 'Ficção', 168, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1395, '2003-04-10', 557, '6580092', NULL, 'LIVRO', 'David Uma Lição de Vida de Marketing', 'David de Mendonça Portes', 'FUTURA', '2003', '8574131822', 'f000000002635', 'Marketing', 107, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1396, '2012-08-29', 5269, '8135', NULL, 'LIVRO', 'De Bar em Bar', 'Judith Rossner', 'ABRIL CULTURAL', '0000', 'OCLC:683558863', 'f000000002636', 'Desconhecido', 260, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1397, '2024-03-28', 10349, '875', NULL, 'LIVRO', 'DE COMO MENINAS GUERREIRAS CONTARAM HEROÍNAS', 'VANIA MEDEIROS, LUCIANA LYRA', 'CONFRARIA', '0000', '856067635X', 'f000000002637', 'Desconhecido', 175, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1398, '2023-06-22', 7331, 'DEG660', NULL, 'LIVRO', 'DE GAULLE', 'Afonso Arinos de Melo Franco', 'TRÊS', '1964', 'OCLC:683410563', 'f000000002638', 'Desconhecido', 0, 'FR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1399, '2017-01-10', 6398, '623181', NULL, 'LIVRO', 'De olho em Zumbi dos Palmares', 'Flávio dos Santos Gomes', 'CLARO ENIGMA', '2011', '8561041935', 'f000000002639', 'Blacks', 119, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1400, '2023-12-20', 10171, '37302', NULL, 'LIVRO', 'DE OLHO NO FUTURO', 'Universidade Federal de Santa Catarina', 'ÁTICA', '2019', 'OCLC:817052801', 'f000000002641', 'Desconhecido', 76, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1401, '2024-03-07', 10285, '372891', NULL, 'LIVRO', 'DE OLHO NO FUTURO GEOGRAFIA', 'Francisca de Lourdes Souza Louro, José Aldemir de Oliveira', 'QUINTETO EDITORIAL LTDA', '2019', '9788577856602', 'f000000002642', 'Manaus (Brazil)', 120, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1402, '2023-12-11', 10159, '285', NULL, 'LIVRO', 'DE VOLTA Á CAIXA DE DESEJOS', 'Pamela Macaluso', 'TORDESILHAS', '2017', '9788491706229', 'f000000002643', 'Ficção', 95, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1403, '2011-06-03', 3485, '843', NULL, 'LIVRO', 'De Volta às Estrelas', 'Erich von Däniken', 'MELHORAMENTOS', '1978', 'OCLC:58986654', 'f000000002644', 'Desconhecido', 216, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1404, '2023-05-17', 7529, '7415', NULL, 'LIVRO', 'DEADPOOL', 'Cullen Bunn', 'PANINI BRASIL', '2021', '9786555128789', 'f000000002645', 'Comics & Graphic Novels', 107, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1405, '2010-01-26', 2358, '853', NULL, 'LIVRO', 'Decamerão', 'Giovanni Boccaccio', 'ABRIL CULTURAL', '2018', '9788520943083', 'f000000002647', 'Ficção', 1404, 'PT-BR', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1406, '2009-08-03', 1255, '853', NULL, 'LIVRO', 'Decamerão', 'Giovanni Boccaccio', 'BOCCACCIO, GIOVANNI', '2018', '9788520943083', 'f000000002646', 'Ficção', 1404, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1407, '2010-07-08', 2670, '5511', NULL, 'LIVRO', 'Decifrando a Terra', 'WILSON TEIXEIRA, FABIO TAIOLI, THOMAS FAIRCHILD, CRISTINA TOLEDO', 'CIA. EDITORA NACIONAL', '2009', '8504014398', 'f000000002649', 'Desconhecido', 623, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1408, '2023-06-22', 7311, 'DEC126', NULL, 'LIVRO', 'DECLARAÇÃO DE FÉ', 'Soli Deo Gloria', 'QUADRANGULAR', '2018', '9788526315662', 'f000000002650', 'Religião', 195, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1409, '2023-09-25', 9370, 'DEF845', NULL, 'LIVRO', 'DEFENDA SEU PC', 'Guia de Informática, Guia de Técnologia, On Line Editora', 'ABRIL', '2017', 'def621293611', 'f000000002651', 'Computers', 113, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1410, '2024-02-27', 10226, 'DEF477', NULL, 'LIVRO', 'DEFENSE DEVIL 1', 'Jessica Beck', 'PANINI BRASIL', '2017', 'def966168946', 'f000000002652', 'Ficção', 148, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1411, '2024-02-27', 10227, 'DEF745', NULL, 'LIVRO', 'DEFENSE DEVIL 3', 'Lori B. Duff', 'PANINI BRASIL', '2024', '9781647427368', 'f000000002653', 'Ficção', 336, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1412, '2024-02-27', 10228, 'DEF383', NULL, 'LIVRO', 'DEFENSE DEVIL 4', 'Patrick L. Stearns', 'PANINI BRASIL', '2020', '9781532683527', 'f000000002654', 'Religião', 117, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1413, '2024-02-27', 10229, 'DEF620', NULL, 'LIVRO', 'DEFENSE DEVIL 5', 'Lori B. Duff', 'PANINI BRASIL', '2024', '9781647427368', 'f000000002655', 'Ficção', 336, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1414, '2024-02-27', 10230, 'DEF607', NULL, 'LIVRO', 'DEFENSE DEVIL 6', 'Lori B. Duff', 'PANINI BRASIL', '2024', '9781647427368', 'f000000002656', 'Ficção', 336, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1415, '2024-03-08', 10291, 'DEF529', NULL, 'LIVRO', 'DEFENSE DEVIL 7', 'Lori B. Duff', 'PANINI BRASIL', '2024', '9781647427368', 'f000000002657', 'Ficção', 336, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1416, '2024-02-27', 10231, 'DEF384', NULL, 'LIVRO', 'DEFENSE DEVIL 8', 'Lori B. Duff', 'PANINI BRASIL', '2024', '9781647427368', 'f000000002658', 'Ficção', 336, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1417, '2024-02-27', 10232, 'DEF720', NULL, 'LIVRO', 'DEFENSE DEVIL 9', 'Lori B. Duff', 'PANINI BRASIL', '2024', '9781647427368', 'f000000002659', 'Ficção', 336, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1418, '2009-07-29', 1115, '574', NULL, 'LIVRO', 'Delphi 2005 Aplicações de Banco de Dados', 'William Pereira Alves', 'ÉRICA', '2005', '853650062X', 'f000000002660', 'Desconhecido', 542, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1419, '2003-04-10', 891, '4', NULL, 'LIVRO', 'Delphi 6', 'Steve Teixeira, Xavier Pacheco', 'VIENA', '2002', '0672321157', 'f000000002661', 'Computers', 1206, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1420, '2022-01-26', 6968, '285', NULL, 'LIVRO', 'Delta: um comando para o tempo', 'Ana Cristina Melo', 'BAMBOLÊ', '2016', '8569470061', 'f000000002662', 'Ficção', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1421, '2023-12-01', 10039, '8693', NULL, 'LIVRO', 'DEMERARA', 'Emília Viotti da Costa', 'MIRAGEM', '1998', '8571647518', 'f000000002663', 'Guyana', 415, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1422, '2011-06-16', 3551, '7415', NULL, 'LIVRO', 'Demolidor: O homen sem medo', 'Frank Miller', 'PANINI BRASIL', '2022', '9786559824243', 'f000000002664', 'Comics & Graphic Novels', 167, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1423, '2023-11-06', 9804, '285', NULL, 'LIVRO', 'DENTE DE LEÃO', 'Andrio Cândido', 'FABBRICA', '2017', 'OCLC:1042814950', 'f000000002665', 'Desconhecido', 73, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1424, '2023-12-20', 10191, 'B8693', NULL, 'LIVRO', 'DENTRO DE MIM NINGUÉM ENTRA', 'José Castello, Bispo Do Rosario', 'BERLENDIS E VERTECCHIA', '2016', '857723083X', 'f000000002666', 'Arte, Brazilian', 160, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1425, '2010-12-21', 3030, '770981', NULL, 'LIVRO', 'Departamento de Museus e Arquivo', 'Desconhecido', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '1994', 'OCLC:925511076', 'f000000002667', 'Desconhecido', 522, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1426, '2021-12-03', 6561, '285', NULL, 'LIVRO', 'Depois daquela viagem', 'Valéria Piassa Polizzi', 'SOMOS SISTEMAS DE ENSINO', '2003', '850808742X', 'f000000002668', 'Desconhecido', 279, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1427, '2023-11-01', 9774, 'DEP707', NULL, 'LIVRO', 'DEPOIS DAQUELE DOMINGO OU A HISTÓRIA DE TERESA E D', '	Vitor Santiago Borges ', 'ANTES', '2017', 'dep745754533', 'f000000002669', 'Desconhecido', 167, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1428, '2024-09-09', 10794, 'DEP647', NULL, 'LIVRO', 'DEPRESSÃO - ONDE ESTÁ DEUS?', 'Roque Marcos Savioli', 'LOYOLA', '2023', '9788594630940', 'f000000002670', 'Religião', 158, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1429, '2024-09-09', 10792, '13393', NULL, 'LIVRO', 'DEPRESSÃO: UMA HISTÓRIA DE SUPERAÇÃO', 'Josué Ribeiro', 'CEAC', '2019', '9788530000271', 'f000000002671', 'Biography & Autobiography', 137, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1430, '2023-08-11', 8297, 'DER489', NULL, 'LIVRO', 'DERMATOLOGIA NA ATENÇÃO BÁSICA', 'Yoan Loyarte Lorenzo', 'MINISTÉRIO DA SAÚDE', '2021', 'PKEY:CLDEAU61937', 'f000000002672', 'Medical', 1095, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1431, '2023-09-06', 8995, '8136', NULL, 'LIVRO', 'DESAFIA-ME', 'Tahereh Mafi', 'UNIVERSO DOS LIVROS', '2019', '9788550304489', 'f000000002673', 'Ficção', 284, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1432, '2009-10-27', 1945, '3725', NULL, 'LIVRO', 'Descobrindo a História da Arte', 'Graça Proença', 'ÁTICA', '2008', '8508114567', 'f000000002674', 'Desconhecido', 248, 'PT-BR', '2025-04-10 02:23:32', NULL, 4, 3, NULL, '2025-04-09'),
+(1433, '2003-04-10', 943, '543', NULL, 'LIVRO', 'Descobrindo o Linux', 'João Eriberto Mota Filho', 'NOVATEC', '2012', '9788575222782', 'f000000002678', 'Computers', 143, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1434, '2003-04-10', 944, '16425', NULL, 'LIVRO', 'Descobrindo o OS/2', 'Desconhecido', 'CAMPUS', '2023', 'des275357063', 'f000000002679', 'Religião', 176, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1435, '2024-03-01', 10258, '6583', NULL, 'LIVRO', 'DESEMPENHO HUMANO NAS EMPRESAS', 'Idalberto Chiavenato', 'MANOLE', '2009', '8520428231', 'f000000002680', 'Desconhecido', 184, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1436, '2022-01-26', 6958, '86991', NULL, 'LIVRO', 'Desengano da vida humana e outros poemas', 'Dalila L. Pereira da Costa', 'EDLAB', '1996', 'UCSC:32106016275494', 'f000000002681', 'Portugal', 156, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1437, '2011-07-11', 3641, '740', NULL, 'LIVRO', 'Desenho - Decorativo- Morfológico', 'Paula da Cruz Landim', 'FANEMA', '2004', '9788571395503', 'f000000002682', 'Architecture', 135, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1438, '2011-06-09', 3514, '6201', NULL, 'LIVRO', 'Desenho de Máquinas', 'Emil Kwaysser', 'EDART', '1967', 'OCLC:819688323', 'f000000002683', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1439, '2010-02-23', 2443, '744', NULL, 'LIVRO', 'Desenho Geometrico', 'Jose Carlos Putnoki', 'AO LIVRO TECNICO S.A', '1993', 'OCLC:816961508', 'f000000002684', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1440, '2011-07-11', 3637, '620', NULL, 'LIVRO', 'Desenho Geométrico', 'Jose Carlos Putnoki', 'UNESP', '1993', 'OCLC:816961508', 'f000000002685', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1441, '2011-07-11', 3640, '744422', NULL, 'LIVRO', 'Desenho Mecânico', 'ANTONIO CARLOS DE SOUZA, HENDERSON JOSE SPECK, Júlio César da Silva, EDISON ROHLEDER, JOSE ARNO SCHEIDT, VIRGÍLIO VIEIRA PEIXOTO', 'E.P.U.', '0000', '8532803768', 'f000000002686', 'Desconhecido', 109, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1442, '2012-10-10', 5301, '6042', NULL, 'LIVRO', 'Desenho Técnico', 'Dittmar Vollmer', 'BASE EDITORIAL', '1966', 'OCLC:819748481', 'f000000002687', 'Desconhecido', 114, 'PT-BR', '2025-04-10 02:23:32', NULL, 3, 2, NULL, '2025-04-09'),
+(1443, '2010-05-07', 2594, '7007', NULL, 'LIVRO', 'Desenho: Arte e Criação', 'Elaine Schmidlin, Mirian Celeste Martins, Gisa Picosque', 'MINISTÉRIO DA EDUCAÇÃO', '2006', 'OCLC:817080897', 'f000000002690', 'Desconhecido', 16, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1444, '2013-05-22', 5375, '5265', NULL, 'LIVRO', 'Desenvolvendo Aplicações com Delphi 5', 'Frank Emanoel De Oliveira Guimarães', 'MAKRON BOOKS', '2011', 'PKEY:CLDEAU16385', 'f000000002691', 'Educação', 237, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1445, '2022-06-30', 7096, '3.5200047309816136E+19', NULL, 'LIVRO', 'DESENVOLVIMENTO GERENCIAL NA ADMINISTRAÇÃO PUBLICA', 'Desconhecido', 'FUNDAP', '2009', '8572851100', 'f000000002692', 'Public administration', 344, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1446, '2022-06-09', 7065, '3583124', NULL, 'LIVRO', 'DESENVOLVIMENTO PESSOAL E PROFISSIONAL', 'MAX EDITORIAL', 'ANHANGUERA PUBLICAÇÕES', '2024', '9781779740212', 'f000000002693', 'Business & Economics', 45, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1447, '2024-04-09', 10461, '6583124', NULL, 'LIVRO', 'DESENVOLVIMENTO PESSOAL E PROFISSIONAL', 'MAX EDITORIAL', 'PEARSON EDUCATION', '2024', '9781779740212', 'f000000002694', 'Business & Economics', 45, 'EN', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1448, '2010-10-06', 2842, '159922', NULL, 'LIVRO', 'Desenvolvimento psicológico e educação', 'César Coll, Álvaro Marchesi, Jesús Palacios', 'ARTMED', '2016', '9788536307770', 'f000000002695', 'Educação', 472, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1449, '2023-04-14', 7229, '7454', NULL, 'LIVRO', 'DESIGN THINKING', 'Desconhecido', 'SARAIVA', '0000', '9788565424004', 'f000000002696', 'Desconhecido', 83, 'EN', '2025-04-10 02:23:32', NULL, 2, 1, NULL, '2025-04-09'),
+(1450, '2023-09-14', 9143, '7452', NULL, 'LIVRO', 'DESIGN: HISTÓRIA, TEORIA E PRÁTICA DO DE D DE PROD', 'Bernhard E. Bürdek', 'EDGARD BLUCHER', '2010', '9788521213239', 'f000000002698', 'Design', 497, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1451, '2010-12-21', 3031, '707', NULL, 'LIVRO', 'Deslocamentos', 'Luiz Antonio Pinto de Oliveira, Antônio Tadeu Ribeiro de Oliveira', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2011', '8524041927', 'f000000002700', 'Brazil', 105, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1452, '2023-10-27', 9678, '285', NULL, 'LIVRO', 'DESLOCAMENTOS', 'Luiz Antonio Pinto de Oliveira, Antônio Tadeu Ribeiro de Oliveira', 'SET EDUCACIONAL', '2011', '8524041927', 'f000000002699', 'Brazil', 105, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1453, '2014-01-22', 5474, '86993', NULL, 'LIVRO', 'DESMUNDO', 'Ana Maria Miranda', 'A PÁGINA', '1996', 'UOM:39015038145242', 'f000000002701', 'Ficção', 220, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1454, '2010-12-21', 3056, '791437098', NULL, 'LIVRO', 'Desmundo: roteiro Sabina Anzuategui', 'Alain Fresnot', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2006', 'UTEXAS:059173022561152', 'f000000002702', 'Motion picture plays', 252, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1455, '2023-03-14', 7138, '80888', NULL, 'LIVRO', 'DESPERTAR INSPIRADO', 'Clóvis de Barros Filho', 'CITADEL- GRUPO EDITORIAL', '2021', '6587885071', 'f000000002703', 'Architecture', 0, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1456, '2012-05-15', 4688, '65885', NULL, 'LIVRO', 'Desperte o vendedor interior;', 'Anthony Robbins', 'QUALITYMARK', '2015', '9789892333878', 'f000000002704', 'Self-Help', 416, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1457, '2024-04-09', 10431, '82899343', NULL, 'LIVRO', 'DESTINADOS A VOAR', 'Diana Yumi', 'FUNDAMENTO', '2022', '9798490727569', 'f000000002705', 'Ficção', 403, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1458, '2009-09-25', 1695, '285', NULL, 'LIVRO', 'Destino: Transilvânia', 'Regina Drummond', 'SCIPIONE', '2006', '8526264427', 'f000000002706', 'Desconhecido', 246, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1459, '2011-04-18', 3351, '3067', NULL, 'LIVRO', 'Desvendando a Sexualidade', 'Cesar Aparecido Nunes', 'PAPIRUS', '2003', '8530804899', 'f000000002707', 'Desconhecido', 150, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1460, '2003-04-10', 765, '6583', NULL, 'LIVRO', 'Desvendando o Departamento de Pessoal', 'Durval Augusto Jr.', 'VIENA', '2020', '9786555290363', 'f000000002708', 'Body, Mind & Spirit', 343, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1461, '2023-04-06', 7159, 'DEU391', NULL, 'LIVRO', 'DEUS É MEU CHÃO', 'EQUIPE PASTORAL DO INSTITUTO SANTO INÁCIO', 'PAULINAS', '2024', '8515009617', 'f000000002709', 'Music', 308, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1462, '2024-03-21', 10312, 'DEU881', NULL, 'LIVRO', 'DEUS POR TESTEMUNHA NUNCA MATEI NINGUEM', 'Alessandro Ferreira da Costa', 'VISEU', '2018', '9788554541569', 'f000000002710', 'Ficção', 274, 'PT-BR', '2025-04-10 02:23:32', NULL, 1, 0, NULL, '2025-04-09'),
+(1463, '2022-01-28', 7006, 'D302', NULL, 'LIVRO', 'Deus por testemunha: nunca matei ninguém', 'Alessandro Ferreira da Costa', 'VISEU', '2018', '9788554541569', 'f000000002711', 'Ficção', 274, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1464, '2014-02-04', 5515, '285', NULL, 'LIVRO', 'Dez anos e nove meses', 'Amílcar Cabral', 'COMBOIO DE CORDA', '1988', 'STANFORD:36105070470146', 'f000000002712', 'National liberation movements', 20, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1465, '2023-11-01', 9769, '3622109747', NULL, 'LIVRO', 'DEZ DIAS NO MANICÔMIO', 'Nellie Bly', 'LETRA E IMAGEM', '2020', '9786586419061', 'f000000002713', 'Biography & Autobiography', 124, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1466, '2009-08-07', 1378, '1581', NULL, 'LIVRO', 'Dez Leis para Ser Feliz', 'Augusto Jorge Cury', 'SEXTANTE', '2003', '8575420569', 'f000000002714', 'Desconhecido', 121, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1467, '2010-10-06', 2845, '155413', NULL, 'LIVRO', 'Dezenho da criança', 'Desconhecido', 'MARTINS FONTES', '0000', 'N/A', 'f000000002715', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1468, '2023-06-22', 7304, 'DIA156', NULL, 'LIVRO', 'DIA A DIA COM DEUS', 'Paschoal Piragine Jr, Alexandre Sombrio, Arnaldo Müller Júnior, David Ferhmann, Elisiane R. Pescini, Elly Claire J. Lopes, Franco Iacomini, Haroldo Portugal, José E. Menegatti, Kate B. Zaqui, Ingo Zwiener, Marcílio de Oliveira, Romildo Prazeres', 'DEVOCIONAL', '2012', '9781680435733', 'f000000002716', 'Bibles', 136, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1469, '2009-09-16', 1573, '86993', NULL, 'LIVRO', 'Dia de São Nunca à Tarde', 'Roberto Drummond', 'GERAÇÃO EDITORIAL', '2004', '8575091050', 'f000000002717', 'Juvenile Fiction', 96, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1470, '2023-10-27', 9676, '86993', NULL, 'LIVRO', 'DIA DE SÃO NUNCA À TARDE', 'Roberto Drummond', 'JARDIM DOS LIVROS', '2004', '8575091050', 'f000000002718', 'Juvenile Fiction', 96, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1471, '2023-09-21', 9314, 'DIA691', NULL, 'LIVRO', 'DIABETES CLÍNICA', 'José Egídio Paulo de Oliveira, Adolpho Milech', 'ATLÂNTICA', '2004', '8573796596', 'f000000002719', 'Desconhecido', 362, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1472, '2015-09-10', 5970, '610', NULL, 'LIVRO', 'Diabetes Mellitus', 'José Egídio Paulo de Oliveira, Adolpho Milech', 'MEDSI', '2004', '8573796596', 'f000000002720', 'Desconhecido', 362, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1473, '2017-02-15', 6485, '6107302', NULL, 'LIVRO', 'Diagnóstico de Enfermagem', 'Marilynn E. DOENGES, Mary Frances MOORHOUSE, Alice C. MURR', 'YENDIS', '2018', '852773365X', 'f000000002721', 'Medical', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1474, '2010-01-12', 2130, '616', NULL, 'LIVRO', 'Diagnóstico de Enfermagem da NANDA', 'Herdman, T. Heather, Kamitsuru, Shigemi, Lopes, Camila T.', 'ARTMED', '2024', '9786558822547', 'f000000002722', 'Medical', 911, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1475, '2009-04-15', 18, '61073', NULL, 'LIVRO', 'Diagnóstico em enfermagem', 'Sheila M. Sparks, Cynthia M. Taylor, Janice G. Dyer', 'REICHMANN & AFFONSO', '2000', '8587148427', 'f000000002723', 'Desconhecido', 458, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1476, '2016-05-05', 6215, '616083', NULL, 'LIVRO', 'Diagnósticos de Enfermagem da NANDA', 'Herdman, T. Heather, Kamitsuru, Shigemi, Lopes, Camila T.', 'ARTMED', '2024', '9786558822547', 'f000000002725', 'Medical', 911, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1477, '2016-05-04', 6214, '616083', NULL, 'LIVRO', 'Diagnósticos de Enfermagem da NANSA', 'Herdman, T. Heather, Kamitsuru, Shigemi, Lopes, Camila T.', 'ARTMED', '2024', '9786558822547', 'f000000002726', 'Medical', 911, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1478, '2010-01-13', 2160, '856', NULL, 'LIVRO', 'Diálogo com Pier Paolo Pasolini', 'Pier Paolo Pasolini', 'NOVA STELLA', '1986', 'OCLC:252927778', 'f000000002727', 'Desconhecido', 208, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1479, '2023-05-17', 7389, '332024', NULL, 'LIVRO', 'DIÁLOGO, REFLEXÃO E PRÁTICA', 'Abrão José Melhem Jr, Aldeni Melo de Oliveira, Ana Telma da Silva Miranda, Andrea Bier Serafim, Andréa Lourdes Ribeiro, Andresa de Souza Ugaya, Antonia Eneide de Lima Silva, Carla Renata Capilé Silva, Celso Flores Pacífico Sobrinho, Clarice Vaz Peres Alves, Cristiane de Sá Dan, Crystian Moraes Silva Gomes, Cynthia Luz Yurgel, Dagmar Aparecida Cynthia França Hunger, David Livingstone Alves Figueiredo, Érico Tadeu Xavier, Francielle Aparecida Garuti de Andrade, Gabriele Obersteiner Scheibler Nunes, Giovanne Tavares Ferreira, Henrique Barbosa Bethoven, Indiamaris Pereira, Isabella Desimone Fernandes, Ivanilde Apoluceno de Oliveira, Jamile Rosane Zanette Antonio, Jeane Morlas Silva, Jorge Santana, Júlio César Gonçalves da Cruz, Karina de Rossi Leocadio Pereira, Karina Nayara Rego Portal, Letícia Seidel Simões, Lilian Gazzoli Zanotelli, Lucy Ferreira Azevedo, Luísa Silva de Matos, Magali Barcelos Miranda, Magda Medhat Pechliye, Marcia Aparecida Amador Mascia, Marcia Maria Hernandes de Abreu de Oliveira Salgueiro, Márcio Evaristo Beltrão, Marcos Machado Chaves, Maria Angélica Rego, Maria Hermínia Cantanhede Coelho Cardoso, Maria Luzinete Rodrigues da Silva, Marina Chaves Moraes, Marion Rodrigues Dariz, Marta Alexandra Gonçalves Nogueira, Miguel Lacerda Moreira, Mônica de Ávila Todaro, Naiara da Silva Farias, Paloma Matos dos Santos, Patrícia Salge Lessa Colin, Paulo Roberto Sehnem, Plínio Marco De Toni, Priscila Braga, Priscila da Rosa Lescano Dias, Rafael Dantas d’Alessandro, Raquel de Sousa Nepomuceno, Reginaldo da Silva Canhete, Renata Dellalibera-Joviliano, Rita de Cássia Araújo Pinheiro, Tânia Aparecida Soares, Thamires da Silva Ribeiro, Thauany Silva Santos, Victor Roberto do Amaral Urbano, Washington Luiz Pedrosa da Silva Junior, Wellington Nardes', 'SENAC', '2022', '9786553681187', 'f000000002728', 'Antiques & Collectibles', 330, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1480, '2017-01-27', 6448, '370', NULL, 'LIVRO', 'Diálogos com o mundo juvenil', 'Ana Paula Corti, Raquel Souza', 'AÇÃO EDUCATIVA', '2005', '8586382051', 'f000000002729', 'Adolescence', 224, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1481, '2017-01-10', 6386, '3724', NULL, 'LIVRO', 'Diálogos na educação de jovens e adultos', 'Leôncio Soares, Maria Amélia Giovanetti, Nilma Lino Gomes', 'BELO,HORIZONTE', '2020', '9788551305348', 'f000000002731', 'Educação', 233, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1482, '2011-05-31', 3467, '338', NULL, 'LIVRO', 'Diálogos para a sustentabilidade Wal-Mart Brasil', 'Desconhecido', 'WAL-MART BRASIL', '0000', 'N/A', 'f000000002733', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1483, '2010-12-21', 3143, '320981', NULL, 'LIVRO', 'Diário de Bordo', 'O. C. Louzada Filho', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '1975', 'UCAL:B3772209', 'f000000002734', 'Desconhecido', 144, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1484, '2023-05-25', 7463, '285', NULL, 'LIVRO', 'DIÁRIO DE PILAR NA CHINA', 'Flávia Lins e Silva', 'PEQUENA ZAHAR', '2020', '8566642562', 'f000000002736', 'Desconhecido', 195, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1485, '2023-05-24', 7217, '285', NULL, 'LIVRO', 'DIARIO DE PILAR NA CHINA', 'Desconhecido', 'ZAHAR', '1988', 'LLMC:FGA46X84QK0S', 'f000000002735', 'Law', 760, 'ES', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1486, '2024-04-17', 10577, 'DIR705', NULL, 'LIVRO', 'DIÁRIO DE UM BANANA', 'Jeff Kinney', 'VERGARA & RIBAS EDITORAS SA', '2022', '9789896237332', 'f000000002737', 'Juvenile Fiction', 226, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1487, '2024-06-19', 10652, '285', NULL, 'LIVRO', 'DIÁRIO DE UM BANANA - DIAS DE CÃO', 'Jeff Kinney', 'VERGARA & RIBAS EDITORAS SA', '2013', '9788576835219', 'f000000002738', 'Juvenile Fiction', 227, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1488, '2023-05-26', 7220, '285', NULL, 'LIVRO', 'DIARIO DE UM BANANA- A GOTA D\'ÁGUA', 'Chico Buarque, Paulo Pontes', 'VERGARA & RIBAS EDITORAS SA', '1975', 'UTEXAS:059172013624912', 'f000000002739', 'Desconhecido', 198, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1489, '2023-05-25', 7214, '285', NULL, 'LIVRO', 'DIARIO DE UM BANANA- A VERDADE NUA E CRUA', 'Desconhecido', 'VERGARA & RIBAS EDITORAS SA', '0000', 'N/A', 'f000000002740', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1490, '2023-05-26', 7213, '285', NULL, 'LIVRO', 'DIARIO DE UM BANANA-BATALHA NEVAL', 'Desconhecido', 'VERGARA & RIBAS EDITORAS SA', '0000', 'N/A', 'f000000002741', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1491, '2024-03-28', 10345, '2537', NULL, 'LIVRO', 'DIÁRIO DE UM SOLDADO', 'Jorge Figueiredo', 'GRAÇA EDITORIAL', '2019', '1689991461', 'f000000002742', 'Desconhecido', 192, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1492, '2024-04-17', 10578, '285', NULL, 'LIVRO', 'DIÁRIO DE UMA GAROTA NADA POPULAR', 'Rachel Renée Russell', 'VERUS EDITORA', '2015', '9788576861164', 'f000000002743', 'Juvenile Fiction', 367, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1493, '2023-10-30', 9727, '813', NULL, 'LIVRO', 'DIÁRIOS DE ADÃO E EVA', 'Mark Twain', 'EDLAB', '2017', '9788577155583', 'f000000002745', 'Literary Collections', 128, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1494, '2022-01-26', 6947, '95691', NULL, 'LIVRO', 'Diários de Raqqa', 'Samer', 'GLOBO KIDS', '2017', '9788525065674', 'f000000002746', 'Biography & Autobiography', 89, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1495, '2010-12-21', 3115, '86993', NULL, 'LIVRO', 'Dias de Faulkner', 'Enrique Larroque', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2010', '9781450055635', 'f000000002747', 'Ficção', 259, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1496, '2011-05-27', 3433, '86993', NULL, 'LIVRO', 'Dias e Dias', 'Joseph C. Miller, Philip J. Havik, David Birmingham', 'A PÁGINA', '2011', 'dia731256357', 'f000000002748', 'História', 338, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1497, '2009-10-09', 1899, '46369', NULL, 'LIVRO', 'Diccíonario para la Enseñanza de la Lengua Español', 'Leticia Rodríguez Pérez', 'MARTINS FONTES', '2005', '9591313500', 'f000000002749', 'Desconhecido', 18, 'ES', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1498, '2012-05-16', 4705, '030=690', NULL, 'LIVRO', 'Dicionário Aurélio da língua portuguesa', 'Aurélio Buarque de Holanda Ferreira', 'POSITIVO', '2009', '8538528254', 'f000000002750', 'Portuguese language', 2120, 'PT-BR', '2025-04-10 02:23:33', NULL, 5, 4, NULL, '2025-04-09'),
+(1499, '2010-01-06', 2042, '103', NULL, 'LIVRO', 'Dicionário Básico de Filosofia', 'Hilton Japiassú', 'ZAHAR', '1990', '9788537803417', 'f000000002755', 'Filosofia', 554, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1500, '2011-09-26', 3786, '6103', NULL, 'LIVRO', 'Dicionário Brasileiro de Saúde', 'Genilda Ferreira Murta', 'DIFUSÃO', '2009', '8578080580', 'f000000002756', 'Medicine', 797, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1501, '2013-05-03', 5315, '4693', NULL, 'LIVRO', 'Dicionário Contemporâneo da Língua Portuguesa', 'Desconhecido', 'LEXIKON EDITORA DIGITAL', '1946', 'LCCN:76241358', 'f000000002757', 'Portuguese language', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 9, 8, NULL, '2025-04-09'),
+(1502, '2009-08-11', 1422, '3711', NULL, 'LIVRO', 'Dicionário Crítico de Educação Física', 'Fernando Jaime González, Paulo Evaldo Fensterseifer', 'UNIJUÍ', '2005', '8574294802', 'f000000002766', 'Physical education and training', 421, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1503, '2013-05-06', 5333, '4693', NULL, 'LIVRO', 'Dicionário da língua portuguesa Evalnildo Bechara', 'Evanildo Bechara, Shahira Mahmud', 'NOVA FRONTEIRA', '2022', '6556403903', 'f000000002767', 'Portuguese language', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1504, '2013-05-06', 5334, '4693', NULL, 'LIVRO', 'Dicionário da Língua portuguesa Evanildo Bechara', 'Evanildo Bechara, Shahira Mahmud', 'NOVA FRONTEIRA', '2022', '6556403903', 'f000000002768', 'Portuguese language', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 8, 7, NULL, '2025-04-09'),
+(1505, '2024-04-02', 10382, 'DIC400', NULL, 'LIVRO', 'DICIONÁRIO DE CIÊNCIAS FÍSICAS E BIOLOGÓGICAS', 'Thomas Nelson Brasil', 'MECA', '2018', '9788578609429', 'f000000002776', 'Reference', 736, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1506, '2003-04-10', 898, '403', NULL, 'LIVRO', 'Dicionário de Informática & Internet', 'Márcia Regina Sawaya', 'NOBEL', '1999', '8521310994', 'f000000002777', 'Computers', 548, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1507, '2013-10-30', 5396, '403', NULL, 'LIVRO', 'Dicionário de Informática e Internet', 'Márcia Regina Sawaya', 'NOBEL', '1999', '8521310994', 'f000000002778', 'Computers', 548, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1508, '2011-07-11', 3630, '6213', NULL, 'LIVRO', 'Dicionário de Rádio, Televisão e Eletrônica', 'Nelson Magor Cooke, John Markus', 'GLOBO', '1966', 'OCLC:683342109', 'f000000002779', 'Desconhecido', 528, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1509, '2012-05-15', 4683, '6103', NULL, 'LIVRO', 'Dicionário de Saúde', 'Tiago Reis Marques, Claudia Pereira de Souza Reis', 'DCL-DIFUSÃO CULTURAL DO LIVRO', '2013', '8581160093', 'f000000002780', 'Medicine', 1376, 'EN', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1510, '2010-01-05', 2021, '3003', NULL, 'LIVRO', 'Dicionário de Sociologia', 'LUCIANO GALLINO', 'JORGE ZAHAR', '2005', '8534921873', 'f000000002782', 'Sociology', 715, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1511, '2009-04-28', 73, '61073', NULL, 'LIVRO', 'DICIONÁRIO DE TERMOS', 'Maria Francisca Xavier', 'OBJETIVO SAÚDE', '0000', 'OCLC:263248747', 'f000000002783', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1512, '2003-04-10', 532, '65003', NULL, 'LIVRO', 'Dicionário de Termos de Negócios', 'Manoel Orlando de Morais Pinho', 'ATLAS', '1997', '852241758X', 'f000000002785', 'Negócios', 447, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1513, '2003-04-10', 546, '6583003', NULL, 'LIVRO', 'Dicionário de Termos de Recursos Humanos', 'B. Milioni', 'FÊNIX', '2006', '8589318044', 'f000000002786', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1514, '2023-05-11', 7194, '6103', NULL, 'LIVRO', 'DICIONÁRIO DE TERMOS DE SAÚDE', 'Marilena Costa', 'PAE', '2002', '8574980366', 'f000000002787', 'Desconhecido', 104, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1515, '2009-04-30', 94, '6103', NULL, 'LIVRO', 'Dicionário de Termos Médicos e de Enfermagem', 'DEOCLECIANO TORRIERI GUIMARAES', 'RIDEEL', '2002', '8533905254', 'f000000002788', 'Desconhecido', 473, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1516, '2010-01-27', 2365, '4', NULL, 'LIVRO', 'Dicionário de Termos Técnicos de Informática/1998', 'Desconhecido', 'ADAMANTINA', '1946', 'LCCN:a48005739', 'f000000002789', 'Chemical elements', 0, 'DE', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1517, '2003-04-10', 899, '1640403', NULL, 'LIVRO', 'Dicionário dos Usuários de Micro Computadores', 'Bryan Pfaffenberger, Walter R. Bruce, Timothy S. Stanley, Fernando Barcellos Ximenes', 'CAMPUS', '1992', '8570017057', 'f000000002790', 'Computers', 524, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1518, '2024-06-19', 10658, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE -1', 'Desconhecido', 'ABRIL', '1979', 'UTEXAS:059173018453611', 'f000000002791', 'Encyclopedias and dictionaries, Portuguese', 1720, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1519, '2024-06-19', 10656, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE -2', 'Alvaro Magalhães', 'ABRIL', '1960', 'UCLA:L0095602728', 'f000000002792', 'Encyclopedias and dictionaries, Portuguese', 1236, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1520, '2024-06-19', 10657, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE -3', 'Desconhecido', 'ABRIL', '1979', 'UTEXAS:059173018453611', 'f000000002793', 'Encyclopedias and dictionaries, Portuguese', 1720, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1521, '2024-06-19', 10655, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE -4', 'Desconhecido', 'ABRIL', '1979', 'UTEXAS:059173018453611', 'f000000002794', 'Encyclopedias and dictionaries, Portuguese', 1720, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1522, '2024-06-19', 10667, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-10', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002795', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1523, '2024-06-19', 10668, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-12', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002796', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1524, '2024-06-19', 10669, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-13', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002797', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1525, '2024-06-19', 10670, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-14', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002798', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1526, '2024-06-19', 10675, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-15', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002799', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1527, '2024-06-19', 10674, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-16', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002800', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1528, '2024-06-19', 10673, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-17', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002801', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1529, '2024-06-19', 10672, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-18', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002802', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1530, '2024-06-19', 10671, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-19', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002803', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1531, '2024-06-19', 10663, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-20', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002804', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1532, '2024-06-19', 10661, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-21', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002805', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1533, '2024-06-19', 10660, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-23', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002807', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1534, '2024-06-19', 10659, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-24', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002808', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1535, '2024-06-19', 10654, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-5', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002809', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1536, '2024-06-19', 10653, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-6', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002810', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1537, '2024-06-19', 10664, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-7', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002811', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1538, '2024-06-19', 10665, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-8', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002812', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1539, '2024-06-19', 10666, '30', NULL, 'LIVRO', 'DICIONÁRIO ENCICLOPÉDICO ILUSTRADO: V. LAROUSSE-9', 'LAROUSSE EDITORIAL', 'ABRIL', '2007', '8576352451', 'f000000002813', 'Desconhecido', 1855, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1540, '2023-09-13', 9101, 'DIC388', NULL, 'LIVRO', 'DICIONÁRIO ESCOLAR', 'Desconhecido', 'LONGMAN', '0000', 'N/A', 'f000000002814', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1541, '2022-01-24', 6643, '4693', NULL, 'LIVRO', 'Dicionário escolar da língua portuguesa', 'Domingos Paschoal Cegalla', 'TODOLIVRO EDITORA', '2005', '8504008266', 'f000000002815', 'Portuguese language', 960, 'PT-BR', '2025-04-10 02:23:33', NULL, 14, 13, NULL, '2025-04-09'),
+(1542, '2013-05-06', 5342, '4693', NULL, 'LIVRO', 'Dicionário Houaiss Conciso', 'Desconhecido', 'MODERNA', '1977', 'STANFORD:36105037228579', 'f000000002829', 'Portuguese language', 776, 'PT-BR', '2025-04-10 02:23:33', NULL, 9, 8, NULL, '2025-04-09'),
+(1543, '2011-03-21', 3158, '610', NULL, 'LIVRO', 'Dicionário Ilustrado de Saude', 'Carlos Roberto Lyra da Silva, Dirce Laplaca Viana', 'YENDIS', '2010', '8577281566', 'f000000002838', 'Medicine', 1046, 'PT-BR', '2025-04-10 02:23:33', NULL, 3, 2, NULL, '2025-04-09'),
+(1544, '2023-09-12', 9050, 'DIC815', NULL, 'LIVRO', 'DICIONÁRIO INGLÊS>PORTUGUÊS PORTUGUÊS>INGLÊS', 'Leonel Vallandro', 'DISAL', '1990', 'UTEXAS:059173019190904', 'f000000002841', 'English language', 1016, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1545, '2023-05-08', 7186, 'DIC146', NULL, 'LIVRO', 'DICIONARIO PRÁTICO ILUSTRADO', 'Desconhecido', 'LIVRARIA CHARDRON', '1962', 'OCLC:79814453', 'f000000002842', 'Encyclopedias and dictionaries, Portuguese', 1966, 'FR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1546, '2009-10-09', 1892, '46369', NULL, 'LIVRO', 'Dicionário Santillana para Estudantes', 'Miguel Díaz y García-Talavera', 'MODERNA', '2014', '8516093956', 'f000000002843', 'Foreign Language Study', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 6, 5, NULL, '2025-04-09'),
+(1547, '2015-05-12', 5854, '610', NULL, 'LIVRO', 'Dicionário Termos Técnicos de Saúde', 'Marilena Costa', 'MARTINARI', '2002', '8574980366', 'f000000002849', 'Desconhecido', 104, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1548, '2013-05-06', 5324, '469', NULL, 'LIVRO', 'Dicionário Unesp do português contemporânio', 'Francisco da Silva Borba', 'PIÁ', '2005', '8571395764', 'f000000002850', 'Foreign Language Study', 1500, 'PT-BR', '2025-04-10 02:23:33', NULL, 9, 8, NULL, '2025-04-09'),
+(1549, '2009-04-30', 95, '61073', NULL, 'LIVRO', 'Dicionários de Enfermagem', 'Herbert Andreas Welker', 'DIFUSÃO', '2006', 'STANFORD:36105124230900', 'f000000002859', 'Encyclopedias and dictionaries', 542, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1550, '2023-05-02', 7495, 'DIC960', NULL, 'LIVRO', 'DICTIONARY OF COMMON ERRORS', 'John Brian Heaton, Nigel D. Turton', 'PEARSON EDUCATION', '1988', '0582019869', 'f000000002860', 'Language Arts & Disciplines', 68, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1551, '2023-09-04', 8902, '22ED3713', NULL, 'LIVRO', 'DIDÁTICA', 'José Carlos Libâneo', 'UNICESUMAR', '2017', '9788524925573', 'f000000002861', 'Educação', 445, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1552, '2011-03-02', 3015, '540', NULL, 'LIVRO', 'Didática da Química', 'Alfredo Braga Furtado', 'DIMENSÃO', '2018', '8545512279', 'f000000002862', 'Desconhecido', 368, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1553, '2011-04-07', 3346, '37071', NULL, 'LIVRO', 'Didática e Avaliação da Aprendizagem no Ensino de', 'Desconhecido', 'SARAIVA', '0000', '9788578380717', 'f000000002863', 'Desconhecido', 161, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1554, '2011-03-31', 3309, '5307', NULL, 'LIVRO', 'Didática e avaliação em física', 'Desconhecido', 'SARAIVA', '0000', '9788578380366', 'f000000002864', 'Desconhecido', 169, 'EN', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1555, '2022-01-26', 6912, '61073', NULL, 'LIVRO', 'Didático de enfermagem: teoria e prática, v. 1', 'Bessie L. Marquis, Carol Jorgensen Huston', 'EUREKA', '2005', '8536303751', 'f000000002865', 'Desconhecido', 477, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1556, '2022-01-26', 6913, '61073', NULL, 'LIVRO', 'Didático de enfermagem: teoria e prática, v. 2', 'Aline Morais Venancio de Alencar, João Paulo Xavier Silva', 'EUREKA', '2023', '9786553811706', 'f000000002866', 'Ciência', 112, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1557, '2022-01-26', 6914, '61073', NULL, 'LIVRO', 'Didático de enfermagem: teoria e prática, v. 3', 'Bessie L. Marquis, Carol Jorgensen Huston', 'EUREKA', '2005', '8536303751', 'f000000002867', 'Desconhecido', 477, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1558, '2023-11-01', 9758, 'B869', NULL, 'LIVRO', 'DINAMENE', 'Luís de Camões', 'RONIN', '1944', 'STANFORD:36105036100324', 'f000000002868', 'Desconhecido', 94, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1559, '2003-04-10', 507, '3023', NULL, 'LIVRO', 'Dinâmica de Grupo na Empresa, no Lar e na Escola', 'Lauro de Oliveira Lima', 'VOZES', '2005', '8532631517', 'f000000002869', 'Desconhecido', 309, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1560, '2003-04-10', 509, '37136', NULL, 'LIVRO', 'Dinâmicas Criativas', 'Adriana Friedmann', 'VOZES', '2004', '853262975X', 'f000000002870', 'Desconhecido', 191, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1561, '2003-04-10', 530, '3023', NULL, 'LIVRO', 'Dinâmicas de Grupo', 'Gattai Maria Cristina Pinto', 'VOZES', '2019', '9788539607945', 'f000000002871', 'Social Science', 154, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1562, '2003-04-10', 525, '3023', NULL, 'LIVRO', 'Dinâmicas de Recreação e Jogos', 'José Ricardo da Silva Ramos', 'VOZES', '2008', '8598271454', 'f000000002872', 'Arte', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1563, '2009-08-11', 1416, '79015', NULL, 'LIVRO', 'Dinâmicas para Encontros de Grupo', 'Volney J. Berkenbrock', 'VOZES', '2010', '9788532640499', 'f000000002873', 'Family & Relationships', 150, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1564, '2024-10-25', 10994, 'DIN176', NULL, 'LIVRO', 'DINOSSAUROS', 'Luiz Eduardo Anelli', 'CIRANDA CULTURAL EDITORA E DISTRIBUIDORA', '2010', '8575961772', 'f000000002874', 'Dinosaurs', 222, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1565, '2003-04-10', 396, '35', NULL, 'LIVRO', 'Direito Administrativo', 'Thiago Marrara', 'ATLAS', '2022', '9786555155792', 'f000000002875', 'Law', 453, 'PT-BR', '2025-04-10 02:23:33', NULL, 6, 5, NULL, '2025-04-09'),
+(1566, '2010-12-21', 3280, '3233520981', NULL, 'LIVRO', 'Direito ao futuro', 'Juarez Freitas', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2019', '854500589X', 'f000000002881', 'Ficção', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1567, '2011-07-05', 3610, '347', NULL, 'LIVRO', 'Direito Civil', 'Portugal', 'ATLAS', '1955', 'OCLC:18003768', 'f000000002882', 'Civil law', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1568, '2011-07-04', 3601, '3431', NULL, 'LIVRO', 'Direito Constitucional', 'Jorge Bacelar Gouveia', 'PALOMA', '2023', '9789724098838', 'f000000002883', 'Law', 804, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1569, '2011-07-05', 3612, '345', NULL, 'LIVRO', 'Direito do Ambiente', 'Eduardo Mendes Simba, Pedro Kinanga dos Santos', 'REVISTA DOS TIBUNAIS', '2018', '9892087453', 'f000000002884', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1570, '2024-03-01', 10268, '34331', NULL, 'LIVRO', 'DIREITO DO TRABALHO PARA ADMINISTRADORES', 'ROBERTO MACHADO MOREIRA', 'MANOLE', '0000', '8578680669', 'f000000002885', 'Law', 368, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1571, '2023-08-02', 7496, 'DIR428', NULL, 'LIVRO', 'DIREITO ELEITORAL', 'Flávio Vieira', 'JUSPODIVM', '2023', '9798393341817', 'f000000002886', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1572, '2011-07-04', 3598, '3421', NULL, 'LIVRO', 'Direito Penal -  Parte Geral', 'Humberto Barrionuevo Fabretti, Gianpaolo Poggio Smanio', 'PALOMA', '2019', '8597016450', 'f000000002887', 'Law', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1573, '2011-07-05', 3605, '343', NULL, 'LIVRO', 'Direito Penal - Parte Geral', 'Humberto Barrionuevo Fabretti, Gianpaolo Poggio Smanio', 'SARAIVA', '2019', '8597016450', 'f000000002888', 'Law', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1574, '2011-07-05', 3609, '343', NULL, 'LIVRO', 'Direito Penal Parte Especial', 'Cleber Masson', 'MPM', '2023', '6559646742', 'f000000002889', 'Law', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1575, '2024-04-11', 10506, 'DIR563', NULL, 'LIVRO', 'DIREITO PROCESSUAL CIVIL BRASILEIRO', 'Ernane Fidélis dos Santos', 'SARAIVA', '1978', 'LCCN:84100659', 'f000000002890', 'Civil procedure', 327, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(1576, '2017-01-10', 6442, '32909', NULL, 'LIVRO', 'Direitos humanos', 'Vera Maria Candau, Marcelo Andrade, Maria da Consolação Lucinda, Viviane Amorim, Iliana Aida Paulo, Susana Beatriz Sacavino', 'BRASIL', '2016', '9788524922473', 'f000000002891', 'Educação', 223, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1577, '2010-01-11', 2097, '370', NULL, 'LIVRO', 'Direitos Humanos Protagonismo Juvenil', 'Tânia Suely Antonelli Marcelino Brabo, Martha dos Reis', 'MINISTÉRIO DA EDUCAÇÃO', '2012', '9788579832574', 'f000000002893', 'Political Science', 179, 'PT-BR', '2025-04-10 02:23:33', NULL, 2, 1, NULL, '2025-04-09'),
+(1578, '2010-01-11', 2099, '370', NULL, 'LIVRO', 'Direitos Humanos Relações étnico-raciais e de gêne', 'Matheus Estevão Ferreira da Silva, Tânia Suely Antonelli Marcelino Brabo, Alessandra de Morais, Ana Laura Bonini, Camila Fernanda da Silva-Bandeira, Dayenne Karoline Chimiti Pelegrini, Eliane Giachetto Saravali, Érica Ribeiro Magi, Eunice Macedo, Fernando Marhuenda, Jessica Sampaio Fiorini, Késia dos Anjos Rocha, Leonardo Lemos de Souza, Otília Andressa Dal Evedove Pinto, Paulo Rennes Marçal Ribeiro, Rosane Michelli de Castro, Talita Santana Maciel, Vanilda Gonçalves de Lima, Vinícius Bozzano Nunes, Wagner Antonio Junior, Wilson Roberto Batista, Wiliam Siqueira Peres, Arilda Inês Miranda Ribeiro, Vagner Matias do Prado,  Willian Marcel Barberino', 'MINISTÉRIO DA EDUCAÇÃO', '2020', '9786559540143', 'f000000002895', 'Educação', 442, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1579, '2010-01-21', 2228, '35481035', NULL, 'LIVRO', 'Direitos Humanos:', 'Vera Maria Candau, Marcelo Andrade, Maria da Consolação Lucinda, Viviane Amorim, Iliana Aida Paulo, Susana Beatriz Sacavino', 'MINISTÉRIO DA JUSTIÇÃ', '2016', '9788524922473', 'f000000002896', 'Educação', 223, 'PT-BR', '2025-04-10 02:23:33', NULL, 9, 8, NULL, '2025-04-09'),
+(1580, '2023-09-21', 9312, 'DIR179', NULL, 'LIVRO', 'DIRETRIZES PARA O CONTROLE DA SÍFILIS CONGÊNITA', 'Programa Nacional de Doenças Sexualmente Transmissíveis/AIDS (Brazil)', 'MINISTÉRIO DA SAÚDE', '2005', 'LCCN:2006335244', 'f000000002905', 'Desconhecido', 51, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1581, '2024-03-28', 10321, 'DIS138', NULL, 'LIVRO', 'DISCURSO DO MÉTODO - REGRAS PARA A DIREÇÃO DO ESPI', 'René Descartes', 'MARTIN CLARET', '1954', '0847707059', 'f000000002906', 'Filosofia', 340, 'ES', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1582, '2010-12-21', 3123, '3288105', NULL, 'LIVRO', 'Discursos Parlamentares', 'Aliomar Baleeiro', 'FUNDAP', '1994', 'UTEXAS:059173004853972', 'f000000002907', 'Brazil', 594, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1583, '2023-04-24', 7413, 'DIS746', NULL, 'LIVRO', 'DISCUTINDO LITERATURA ESPECIAL', 'Desconhecido', 'ESCOLA EDUCACIONAL', '2004', 'UTEXAS:059173003708694', 'f000000002908', 'Foreign Language Study', 0, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1584, '2010-08-13', 2828, '5745', NULL, 'LIVRO', 'Diversidade da Vida', 'Edward O. Wilson', 'CIA. DAS LETRAS', '2012', '9788580865080', 'f000000002909', 'Ciência', 390, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1585, '2011-03-31', 3299, '306430981', NULL, 'LIVRO', 'Diversidade, espaço e relações étnico-raciais', 'Renato Emerson dos Santos', 'GUTENBERG', '2023', '9786559283460', 'f000000002910', 'Social Science', 264, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1586, '2023-12-20', 10178, '371102', NULL, 'LIVRO', 'DIVERSIFICAR É PRECISO', 'Léa Depresbiteris, Marialva Rossi Tavares', 'SENAC', '2017', '9788539604722', 'f000000002911', 'Educação', 197, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1587, '2009-08-04', 1304, '8805', NULL, 'LIVRO', 'Divina Comédia', 'Dante Alighieri, José Pedro Xavier Pinheiro', 'MARTIN CLARET', '2020', '9786555520071', 'f000000002912', 'Ficção', 504, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1588, '2010-07-06', 2656, '57286', NULL, 'LIVRO', 'DNA : O secredo da vida', 'James D. Watson, Andrew Berry', 'CIA. DAS LETRAS', '2005', '8535907165', 'f000000002913', 'Desconhecido', 470, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1589, '2011-05-27', 3434, '285', NULL, 'LIVRO', 'Do Coração de Telmah', 'Luís Dill', 'ARTES E OFÍCIOS', '2009', '8574211257', 'f000000002914', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:23:33', NULL, 1, 0, NULL, '2025-04-09'),
+(1590, '2023-08-07', 7945, 'B8698', NULL, 'LIVRO', 'DO ROCK AO CLÁSSICO', 'Arthur Dapieve', 'BOM DE LER', '2019', '9788522006687', 'f000000002915', 'Biography & Autobiography', 256, 'PT-BR', '2025-04-10 02:23:33', NULL, 115, 114, NULL, '2025-04-09'),
+(1591, '2010-07-12', 2678, '981', NULL, 'LIVRO', 'Do telhado das Américas à teoria da evolução', 'Nélio Marco Vincenzo Bizzo', 'ODYSSEUS', '2002', '858802330X', 'f000000003030', 'Desconhecido', 229, 'PT-BR', '2025-04-10 02:24:50', NULL, 1, 0, NULL, '2025-04-09'),
+(1592, '2009-10-06', 1848, '46907', NULL, 'LIVRO', 'Do Texto ao Texto', 'Ulisses Infante', 'SCIPIONE', '2002', '8526233432', 'f000000003031', 'Portuguese language', 312, 'PT-BR', '2025-04-10 02:24:50', NULL, 2, 1, NULL, '2025-04-09'),
+(1593, '2023-08-11', 8279, 'DOC326', NULL, 'LIVRO', 'DOCUMENTOS BÁSICOS DE ENFERMAGEM', 'Conselho Regional de Enfermagem de São Paulo', 'COREN', '2001', 'OCLC:50831024', 'f000000003033', 'Desconhecido', 363, 'PT-BR', '2025-04-10 02:24:50', NULL, 3, 2, NULL, '2025-04-09'),
+(1594, '2023-09-18', 9173, '3012981', NULL, 'LIVRO', 'DOCUMENTOS HISTÓRICOS BRASILEIROS', 'Ivoncísio Meira de Medeiros', 'FENAME', '2005', 'LCCN:2006450277', 'f000000003036', 'Brazil', 354, 'PT-BR', '2025-04-10 02:24:50', NULL, 1, 0, NULL, '2025-04-09'),
+(1595, '2017-02-07', 6481, '61635', NULL, 'LIVRO', 'Doença Hemorroidária', 'Geraldo Magela Gomes da Cruz', 'YENDIS', '2008', '857728073X', 'f000000003037', 'Desconhecido', 716, 'PT-BR', '2025-04-10 02:24:50', NULL, 1, 0, NULL, '2025-04-09'),
+(1596, '2016-05-05', 6218, '6169', NULL, 'LIVRO', 'DOENÇAS INFECCIOSAS E PARASITÁRIAS', 'Tatiana Paschoalette Rodrigues Bachur, Denise Barguil Nepomuceno', 'MINISTÉRIO DA SAÚDE', '2023', '9786553811201', 'f000000003038', 'Ciência', 355, 'PT-BR', '2025-04-10 02:24:50', NULL, 1, 0, NULL, '2025-04-09'),
+(1597, '2023-04-14', 7244, 'DOE464', NULL, 'LIVRO', 'DOENÇAS OCUPACIONAIS', 'José Washington Souza', 'ÉRICA', '2023', '9786525277295', 'f000000003039', 'Law', 131, 'PT-BR', '2025-04-10 02:24:50', NULL, 2, 1, NULL, '2025-04-09'),
+(1598, '2023-09-21', 9305, 'DOE626', NULL, 'LIVRO', 'DOENÇAS SEXUALMENTE TRANSMISSÍVEIS', 'Dr. Roberto Martins De Souza', 'BIOLOGIA&SAÚDE', '2018', 'PKEY:CLDEAU34686', 'f000000003041', 'Ciência', 120, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1599, '2024-04-10', 10480, 'DOI100', NULL, 'LIVRO', 'DOIDÃO', 'José Mauro de Vasconcelos', 'MELHORAMENTOS', '2013', '9788506071137', 'f000000003042', 'Desconhecido', 84, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1600, '2022-06-29', 7081, '028-5', NULL, 'LIVRO', 'DOIS AMIGO E UM CHATO', 'Stanislaw Ponte Preta', 'MODERNA', '2014', '8516084531', 'f000000003043', 'Young Adult Fiction', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1601, '2023-10-30', 9722, '285', NULL, 'LIVRO', 'DOIS AMIGOS E UM CHATO', 'Stanislaw Ponte Preta', 'MODERNA', '2014', '8516084531', 'f000000003044', 'Young Adult Fiction', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1602, '2011-05-26', 3411, '86991', NULL, 'LIVRO', 'Dois em Um', 'Carlos Augusto Prates De Menezes', 'ILUMINURAS', '2017', 'PKEY:CLDEAU31824', 'f000000003045', 'Drama', 99, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1603, '2009-10-15', 1928, '869935', NULL, 'LIVRO', 'Dois irmãos', 'Milton Hatoum', 'CIA. DAS LETRAS', '2006', '9788580861631', 'f000000003046', 'Ficção', 202, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1604, '2024-11-05', 11004, '86993', NULL, 'LIVRO', 'DOM CASMURO / MACHADO DE ASSIS', 'Machado de Assis', 'ESCOLA EDUCACIONAL', '1971', 'OCLC:352075168', 'f000000003047', 'Desconhecido', 238, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1605, '2009-08-05', 1309, '86993', NULL, 'LIVRO', 'Dom Casmurro', 'Machado de Assis', 'ÁTICA', '2014', 'dom085874481', 'f000000003048', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 5, 4, NULL, '2025-04-09'),
+(1606, '2023-11-13', 9934, 'DOM859', NULL, 'LIVRO', 'DOM CASMURRO', 'Machado de Assis', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2014', 'dom207530870', 'f000000003092', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1607, '2016-10-24', 6353, '86993', NULL, 'LIVRO', 'Dom Casmurro', 'Machado de Assis', 'CIDADE CULTURAL', '2014', 'dom536884258', 'f000000003089', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1608, '2014-05-30', 5564, '86993', NULL, 'LIVRO', 'Dom Casmurro', 'Machado de Assis', 'ESCOLA EDUCACIONAL', '2014', 'dom181712986', 'f000000003075', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1609, '2022-01-28', 7004, 'DC736', NULL, 'LIVRO', 'Dom Casmurro', 'Machado de Assis', 'KLICK', '2014', 'dom550672148', 'f000000003090', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1610, '2011-03-23', 3206, '86993', NULL, 'LIVRO', 'Dom Casmurro', 'Machado de Assis', 'MARTIN CLARET', '2014', 'dom026150210', 'f000000003053', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 24, 23, NULL, '2025-04-09'),
+(1611, '2012-08-03', 4890, '86993', NULL, 'LIVRO', 'Dom Casmurro', 'Machado de Assis', 'RIDEEL', '2014', 'dom174537886', 'f000000003064', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 10, 9, NULL, '2025-04-09'),
+(1612, '2011-03-01', 3247, '86993', NULL, 'LIVRO', 'Dom Casmurro', 'Machado de Assis', 'SOL', '2014', 'dom599823062', 'f000000003063', 'Ficção', 293, 'EN', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1613, '2021-12-13', 6625, '7415', NULL, 'LIVRO', 'Dom Casmurro de Machado de Assis', 'Machado de Assis', 'NEMO', '2022', '9783752494105', 'f000000003093', 'Ficção', 182, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1614, '2009-09-21', 1642, '7415', NULL, 'LIVRO', 'Dom Quixote', 'Miguel de Cervantes', 'L&PM', '2020', '9786556120195', 'f000000003095', 'Juvenile Fiction', 120, 'PT-BR', '2025-04-10 02:24:51', NULL, 11, 10, NULL, '2025-04-09'),
+(1615, '2022-06-29', 7079, '028-5', NULL, 'LIVRO', 'DOM QUIXOTE', 'Miguel de Cervantes', 'LOG& PRINT GRÁFICA E LOGISTICA S/A', '2020', '9786556120195', 'f000000003106', 'Juvenile Fiction', 120, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1616, '2023-09-15', 9148, '285', NULL, 'LIVRO', 'DOM QUIXOTE', 'Miguel de Cervantes', 'RICHMOND', '2020', '9786556120195', 'f000000003094', 'Juvenile Fiction', 120, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1617, '2023-10-30', 9724, '285', NULL, 'LIVRO', 'DOM QUIXOTE DE LA PLANCHA', 'Laura Bergallo', 'ESCRITA FINA', '2011', '856387716X', 'f000000003107', 'Desconhecido', 124, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1618, '2010-01-25', 2321, '285', NULL, 'LIVRO', 'Dom Quixote/ Miguel de Cervantes', 'Miguel de Cervantes', 'FTD', '2020', '9786556120195', 'f000000003108', 'Juvenile Fiction', 120, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1619, '2013-05-22', 5373, '5265', NULL, 'LIVRO', 'Dominando o Delphi', 'Marco Cantù', 'MAKRON BOOKS', '2003', '8534615187', 'f000000003109', 'Desconhecido', 801, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1620, '2003-04-10', 896, '5265', NULL, 'LIVRO', 'Dominando o Delphi 2', 'M. Cantu', 'MAKRON BOOKS', '1996', '8534606269', 'f000000003110', 'Desconhecido', 1192, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1621, '2013-05-22', 5374, '5265', NULL, 'LIVRO', 'Dominando o Delphi 5 - A Bíblia', 'Marco Cantù', 'MAKRON BOOKS', '2000', '853461184X', 'f000000003111', 'Desconhecido', 860, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1622, '2012-04-23', 4646, '52762', NULL, 'LIVRO', 'Dominando PHP e MYSQL', 'Walter Ulises Ayllapan', 'ALTA BOOKS', '2025', 'dom622380767', 'f000000003112', 'Arte', 372, 'ES', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1623, '2011-02-15', 2982, '370', NULL, 'LIVRO', 'Domingo Sarmiento', 'William H. Katra', 'MASSANGANA', '1985', 'UOM:39015019071268', 'f000000003114', 'Biography & Autobiography', 264, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1624, '2014-01-22', 5464, '7415', NULL, 'LIVRO', 'Domínio Público', 'José Cretella Júnior', 'DCL-DIFUSÃO CULTURAL DO LIVRO', '1984', 'UTEXAS:059173026659667', 'f000000003115', 'Eminent domain', 640, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1625, '2009-08-31', 1557, '74165', NULL, 'LIVRO', 'Domínio Público', 'José Cretella Júnior', 'DIFUSÃO', '1984', 'UTEXAS:059173026659667', 'f000000003116', 'Eminent domain', 640, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1626, '2011-06-06', 3504, '863', NULL, 'LIVRO', 'Don Quixote - O Cavaleiro da triste Figura', 'Miguel de Cervantes Saavedra', 'SCIPIONE', '1999', '8526205412', 'f000000003117', 'Don Quixote (Fictitious character)', 134, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1627, '2010-01-22', 2281, '8693', NULL, 'LIVRO', 'Dona Flor e Seus Dois Maridos', 'Jorge Amado', 'MARTINS', '2018', '9722064584', 'f000000003118', 'Desconhecido', 508, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1628, '2024-04-12', 10529, 'DON540', NULL, 'LIVRO', 'DONA GUIDINHA DO POÇO', 'Manuel de Oliveira Paiva', 'TRÊS', '2020', '9788582651797', 'f000000003119', 'Ficção', 206, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1629, '2015-04-13', 5769, '91811', NULL, 'LIVRO', 'Dos Andes ao Atlântico', 'Henry Lister Maw', 'ARTE ENSAIO', '0000', 'BL:A0020790053', 'f000000003120', 'Desconhecido', 344, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1630, '2003-04-11', 930, '4', NULL, 'LIVRO', 'DOS The Complete Reference', 'Kris Jamsa', 'MCGRAW-HILL', '1993', 'UVA:X002309904', 'f000000003122', 'Computers', 1160, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1631, '2010-12-21', 3188, '32349092', NULL, 'LIVRO', 'Dossiê Ditadura: 1964 - 1985', 'Desconhecido', 'IEVE', '2009', 'UTEXAS:059173031981192', 'f000000003123', 'Disappeared persons', 780, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1632, '2021-12-09', 6587, '868993613', NULL, 'LIVRO', 'Doze contos peregrinos', 'Gabriel García Márquez', 'RECORD', '2019', '9788501116574', 'f000000003124', 'Ficção', 181, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1633, '2024-03-28', 10369, 'DOZ716', NULL, 'LIVRO', 'DOZE TRABALHOS DE HÉRCULES II, HISTÓRIAS DIVERSAS', 'Monteiro Lobato', 'CÍRCULO DO LIVRO', '2018', '9788525067555', 'f000000003126', 'Young Adult Fiction', 284, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1634, '2023-06-01', 7405, 'DRC646', NULL, 'LIVRO', 'DRÁCULA', 'Bram Stoker', 'ON LINE', '2017', '9788537816585', 'f000000003127', 'Ficção', 596, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1635, '2023-11-01', 9772, 'IR820', NULL, 'LIVRO', 'DRACULA\'S GUEST', 'Bram Stoker', 'AMARE', '2006', '1840225289', 'f000000003128', 'Ficção', 236, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1636, '2010-12-21', 3313, '363690981', NULL, 'LIVRO', 'Dragões de Komodo', 'Jaime Freire', 'BARSA PLANETA', '2001', 'OCLC:248065489', 'f000000003129', 'Desconhecido', 29, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1637, '2024-04-11', 10503, '1339', NULL, 'LIVRO', 'DRAMAS DA PAIXÃO', 'Ana Cristina Vargas', 'BOA NOVA', '2024', '9786588599969', 'f000000003130', 'Ficção', 307, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1638, '2009-10-07', 1878, '55148', NULL, 'LIVRO', 'Drenagem Urbana - Água', 'Desconhecido', 'CETESB', '0000', 'OCLC:683265933', 'f000000003131', 'Desconhecido', 0, 'DE', '2025-04-10 02:24:51', NULL, 3, 2, NULL, '2025-04-09'),
+(1639, '2010-07-06', 2659, '613', NULL, 'LIVRO', 'Drogas : Saiba o mal que elas fazem à nossa saúde', 'United States. Office of National Drug Control Policy', 'MIGUEL DE PIER', '0000', 'STANFORD:36105131417367', 'f000000003134', 'Drug abuse', 132, 'ES', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1640, '2023-09-22', 9326, '616992061', NULL, 'LIVRO', 'DROGRAS ANTIBLÁSTICAS', 'Eloita Pereira Neves, Vera Radunz, Universidade Federal de Santa Catarina', 'FLORENSE', '1983', 'OCLC:19130863', 'f000000003135', 'Desconhecido', 62, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1641, '2011-06-17', 3553, '89173', NULL, 'LIVRO', 'Duas Narrativas Fantásticas', 'Fyodor Dostoyevsky', 'EDITORA 34', '2009', '8573262710', 'f000000003136', 'Ficção', 134, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1642, '2023-12-11', 10149, '8693', NULL, 'LIVRO', 'DUAS TARDES E OUTROS ENCONTROS SILENCIOSOS', 'João Anzanello Carrascoza', 'BOITEMPO', '2002', 'UTEXAS:059173012219236', 'f000000003137', 'Desconhecido', 120, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1643, '2011-05-27', 3442, '285', NULL, 'LIVRO', 'Duas Vidas, Dois Destinos', 'Katherine Paterson, Ana María Machado, José Carlos Brito', 'SALAMANDRA', '2006', '8516050505', 'f000000003138', 'Sisters', 230, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1644, '2011-06-07', 3509, '6201', NULL, 'LIVRO', 'Dubbel-Manual da Construção de Máquinas', 'HEINRICH DUBBEL, F. SASS, C. BOUCHE, A. LEITNER', 'HEMUS', '0000', '8528902706', 'f000000003140', 'Desconhecido', 2020, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1645, '2023-10-27', 9687, 'IR823', NULL, 'LIVRO', 'DUBLINENSES', 'James Joyce', 'ANDORINHAS', '2019', '9788583863052', 'f000000003142', 'Ficção', 270, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1646, '2011-02-15', 2954, '370', NULL, 'LIVRO', 'Durmeval Trigueiro', 'Maria de Lourdes de Albuquerque Fávero, Osmar Favero, Fundação Joaquim Nabuco', 'MASSANGANA', '2010', '8570195087', 'f000000003143', 'Desconhecido', 156, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1647, '2023-10-27', 9688, '9737115092', NULL, 'LIVRO', 'E EU NÃO SOU MULHER?', 'Sojourner Truth, Olive Gilbert', 'LIVROS DE CRIAÇÃO', '2020', '9786586419016', 'f000000003144', 'Social Science', 139, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1648, '2023-11-30', 10003, '37015', NULL, 'LIVRO', 'É POSSÍVEL SUPERAR A VIOLÊNCIA NA ESCOLA?', 'Luciene Regina Paulina Tognetta | Telma Pileggi Vinha', 'BRASIL', '0000', '9788510054744', 'f000000003145', 'Desconhecido', 146, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1649, '2016-05-03', 6209, '111', NULL, 'LIVRO', 'E SE. os nazitas tivessem ganho a segunda guerra', 'Valmir Nascimento', 'ABRIL', '2018', '9788526318052', 'f000000003147', 'Religião', 172, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1650, '2023-04-14', 7240, '6583', NULL, 'LIVRO', 'E SOCIAL', 'Mardele Eugênia Teixeira Rezende, Edgard Duarte Filho, Ricardo Alexander Gabriel', 'SARAIVA', '2018', '8536527242', 'f000000003148', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1651, '2023-04-14', 7289, '38433', NULL, 'LIVRO', 'E-COMMERCE', 'Bruno de Oliveira', 'SARAIVA', '2018', '9788545202721', 'f000000003156', 'Business & Economics', 184, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1652, '2023-09-11', 8998, 'EAS655', NULL, 'LIVRO', 'EASY READING SELECTIONS IN ENGLISH', 'Robert J. Dixson', 'AO LIVRO TÉCNICO S.A.', '1993', '3507716038', 'f000000003150', 'American literature', 104, 'DE', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1653, '2024-05-29', 10649, '813', NULL, 'LIVRO', 'ECLIPSE', 'Stephenie Meyer', 'INTELÍTERA', '2008', '9895575718', 'f000000003151', 'Cullen, Edward (Fictitious character)', 601, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1654, '2011-05-16', 3571, '3496', NULL, 'LIVRO', 'Ecocidadão', 'Silva Domingues Ana Carolina', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2015', '384170574X', 'f000000003153', 'Desconhecido', 124, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1655, '2010-07-06', 2663, '3496', NULL, 'LIVRO', 'Ecocidadão', 'Silva Domingues Ana Carolina', 'SECRETARIA DO MEIO AMBIENTE', '2015', '384170574X', 'f000000003152', 'Desconhecido', 124, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1656, '2009-10-08', 1890, '3042', NULL, 'LIVRO', 'Ecologia e Cidadania', 'EDITORA SENAC - SP', 'MODERNA', '0000', '8585746548', 'f000000003154', 'Desconhecido', 158, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1657, '2010-01-11', 2084, '370', NULL, 'LIVRO', 'Ecologia Uma Proposta para Ensino de 2ª Grau', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO E CULTURA', '1979', 'OCLC:1368991615', 'f000000003155', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1658, '2023-09-21', 9319, '33007', NULL, 'LIVRO', 'ECONOMIA', 'Werner Baer', 'MCGRAW-HILL', '2003', '8521311974', 'f000000003158', 'Brazil', 516, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1659, '2003-04-10', 371, '330981', NULL, 'LIVRO', 'Economia Brasileira', 'Leite,antonio', 'ATLAS', '2004', '9788535216745', 'f000000003159', 'Business & Economics', 254, 'PT-BR', '2025-04-10 02:24:51', NULL, 5, 4, NULL, '2025-04-09'),
+(1660, '2003-04-10', 554, '330', NULL, 'LIVRO', 'ECONOMIA E MERCADOS', 'César Roberto Leite da Silva, Sinclayr Luiz', 'SARAIVA', '1990', '850200011X', 'f000000003164', 'Desconhecido', 206, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1661, '2009-05-20', 288, '33007', NULL, 'LIVRO', 'Economia Fundamentos e Aplicações', 'Judas Tadeu Grassi Mendes', 'PEARSON PRENTICE HALL', '2004', '858791880X', 'f000000003166', 'Desconhecido', 309, 'PT-BR', '2025-04-10 02:24:51', NULL, 5, 4, NULL, '2025-04-09'),
+(1662, '2009-05-13', 166, '33007', NULL, 'LIVRO', 'Economia Fundamentos e Prat.à Realid. Brasileira', 'CARLOS EDUARDO DE FREITAS VIAN, ANDERSON CÉSAR GOMES TEIXEIRA PELLEGRINO, CLÁUDIO CESAR DE PAIVA', 'ALINEA', '2005', '8575161202', 'f000000003171', 'Desconhecido', 373, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1663, '2009-05-13', 167, '33007', NULL, 'LIVRO', 'Economia Fundamentos e Práticas', 'CARLOS EDUARDO DE FREITAS VIAN, ANDERSON CÉSAR GOMES TEIXEIRA PELLEGRINO, CLÁUDIO CESAR DE PAIVA', 'ALINEA', '2005', '8575161202', 'f000000003172', 'Desconhecido', 373, 'PT-BR', '2025-04-10 02:24:51', NULL, 3, 2, NULL, '2025-04-09'),
+(1664, '2009-05-13', 165, '33007', NULL, 'LIVRO', 'Economia Fundamentos e Práticas Apl.à Real.Brasile', 'CARLOS EDUARDO DE FREITAS VIAN, ANDERSON CÉSAR GOMES TEIXEIRA PELLEGRINO, CLÁUDIO CESAR DE PAIVA', 'ALINEA', '2005', '8575161202', 'f000000003175', 'Desconhecido', 373, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1665, '2023-10-27', 9664, '1427', NULL, 'LIVRO', 'ECOS DE UM MUNDO NÃO PERCEBIDO', 'Elsa Margarida Rodrigues', 'ALMADA', '2012', '9789892601403', 'f000000003176', 'Desconhecido', 182, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1666, '2010-07-13', 2706, '5770981', NULL, 'LIVRO', 'Ecossistemas do Brasil', 'Aziz Nacib Ab\'Sáber, Luiz Claudio Marigo', 'METALIVROS', '2006', '8585371668', 'f000000003177', 'Biotic communities', 299, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1667, '2023-08-02', 7515, 'ECO249', NULL, 'LIVRO', 'ECOTURISMO', 'Pires Paulo Dos Santos', 'SECRETARIA DO MEIO AMBIENTE', '2019', '9788539605941', 'f000000003178', 'Business & Economics', 261, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1668, '2011-02-15', 2970, '370', NULL, 'LIVRO', 'Edgard Roquette-Pinto', 'Desconhecido', 'MASSANGANA', '1984', 'OCLC:940054747', 'f000000003179', 'Desconhecido', 67, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1669, '2023-09-05', 8959, '370113', NULL, 'LIVRO', 'EDIFÍCIOS, PATRONOS E DIVERSIDADE NA GESTÃO ESCOLA', 'Maurício Reis Nascimento', 'SÃO PAULO', '2017', '1522011293', 'f000000003180', 'Desconhecido', 64, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1670, '2022-01-26', 6969, '880882', NULL, 'LIVRO', 'Édipo rei', 'Sófocles', 'SCRIPTORIUM', '2017', '9788577995585', 'f000000003181', 'Performing Arts', 206, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1671, '2010-12-21', 3062, '7914375', NULL, 'LIVRO', 'Edmar Pereira: razão e sensibilidade', 'Edmar Pereira', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2006', 'UTEXAS:059173022563588', 'f000000003182', 'Motion picture plays', 212, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1672, '2011-02-15', 2983, '370', NULL, 'LIVRO', 'Édouard Claparede', 'Daniel Hameline, Fundação Joaquim Nabuco', 'MASSANGANA', '2010', '8570195613', 'f000000003183', 'Desconhecido', 146, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1673, '2010-01-11', 2073, '370', NULL, 'LIVRO', 'Educação', 'JOSE CARLOS LIBANEO, JOAO FERREIRA DE OLIVEIRA', 'IMESP', '0000', '8524918608', 'f000000003184', 'Desconhecido', 544, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1674, '2014-09-05', 5638, '36370071', NULL, 'LIVRO', 'Educação Ambiental', 'Genebaldo Freire Dias, Sebastião Salgado', 'MEDIAÇÃO', '2023', '9786586223378', 'f000000003185', 'Nature', 567, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1675, '2023-05-02', 7476, '370981', NULL, 'LIVRO', 'EDUCAÇÃO COMO PRÁTICA DA LIBERDADE', 'Paulo Freire', 'PAZ E TERRA', '2014', '9788577532193', 'f000000003187', 'Educação', 207, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1676, '2023-09-04', 8887, '658001', NULL, 'LIVRO', 'EDUCAÇÃO CORPORATIVA', 'Daniela Conte', 'ATLAS', '2020', '9788539627363', 'f000000003188', 'Business & Economics', 240, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1677, '2017-01-10', 6450, '370115', NULL, 'LIVRO', 'Educação de jovens e adulto', 'Desconhecido', 'CORTEZ', '2008', '8571774412', 'f000000003189', 'Adult education', 162, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1678, '2017-01-26', 6410, '374012', NULL, 'LIVRO', 'Educação de jovens e adultos', 'Desconhecido', 'CURITIBA', '2008', '8571774412', 'f000000003191', 'Adult education', 162, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1679, '2023-04-20', 7178, '374981', NULL, 'LIVRO', 'EDUCAÇÃO DE JOVENS E ADULTOS', 'Desconhecido', 'IBPEX', '2008', '8571774412', 'f000000003193', 'Adult education', 162, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1680, '2024-09-30', 10876, '370117', NULL, 'LIVRO', 'Educação e Diversidade', 'Mario Sergio Michaliszyn', 'VOZES', '2012', '9788582120187', 'f000000003194', 'Educação', 133, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1681, '2010-01-05', 2036, '370', NULL, 'LIVRO', 'Educação e Metodologia', 'Argicely Leda de Azevedo Vilaça, Hebert Balieiro Teixeira, Aliny Leda de Azevedo Souza', 'PIONEIRA', '2023', '9798391680406', 'f000000003195', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1682, '2023-05-02', 7484, '3701', NULL, 'LIVRO', 'EDUCAÇÃO E MUDANÇA', 'Paulo Freire', 'PAZ E TERRA', '2014', '9788577532209', 'f000000003196', 'Educação', 114, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1683, '2010-01-05', 2023, '370193', NULL, 'LIVRO', 'Educação e Sociedade', 'Desconhecido', 'NACIONAL', '2022', '9786553790704', 'f000000003197', 'Educação', 166, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1684, '2023-04-20', 7177, '37100981', NULL, 'LIVRO', 'EDUCAÇÃO ESCOLAR', 'JOSE CARLOS LIBANEO, JOAO FERREIRA DE OLIVEIRA', 'CORTEZ EDITORA', '0000', '8524918608', 'f000000003198', 'Desconhecido', 544, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1685, '2010-01-11', 2090, '370', NULL, 'LIVRO', 'Educação Especial: Tendências atuais', 'Lúcia de Araújo Ramos Martins, Luzia Guacira dos Santos Silva', 'SEED', '2023', '9786525042794', 'f000000003199', 'Educação', 238, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1686, '2023-02-03', 8700, '79607', NULL, 'LIVRO', 'EDUCAÇÃO FÍSICA', 'Fernando Jaime González, Alex Branco Fraga', 'MODERNA', '2012', '9788536011110', 'f000000003200', 'Educação', 209, 'PT-BR', '2025-04-10 02:24:51', NULL, 6, 5, NULL, '2025-04-09'),
+(1687, '2010-01-11', 2105, '371425', NULL, 'LIVRO', 'Educação para a Escolha Profissiona', 'Sebastião Marcos Ribeiro de Carvalho, Patricia Unger Raphael Bataglia', 'ATLAS', '2012', '9788579833403', 'f000000003206', 'Educação', 239, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1688, '2010-01-11', 2106, '371425', NULL, 'LIVRO', 'Educação para a Escolha Profissional', 'Sebastião Marcos Ribeiro de Carvalho, Patricia Unger Raphael Bataglia', 'ATLAS', '2012', '9788579833403', 'f000000003207', 'Educação', 239, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1689, '2023-11-30', 10007, 'EDU414', NULL, 'LIVRO', 'EDUCAÇÃO PROFISSIONAL E SUPERVISÃO EDUCACIONAL', 'Desconhecido', 'BRASIL', '2001', 'UTEXAS:059173016225140', 'f000000003208', 'Educação', 296, 'PT', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1690, '2014-11-18', 5688, '370', NULL, 'LIVRO', 'Educação Profissional e tecnológica na sociedade', 'José Augusto de Melo Neto, Maria Lucimar Jacinto de Sousa, Abel de Oliveira Costa Filho, Antônio Eules Ferreira da Costa, Alanna Silva Coelho, Bruno Angioletti, Bruno de Oliveira Santos, Davi Pontes de Oliveira, Debora Lopes Tavares, Denise Xisto de Matos, Dennis Migueis do Carmo, Dorisnei Xisto de Matos, Clisivânia Duarte de Souza, Fabiano Lima da Silva, Josiany Dantas da Mota, Maiane Rodrigues de Almeida, Marlison Jorge Monte Canto, Rita de Cássia Gomes Mendonça, Rosileide Mendes Rodrigues, Salatiel da Rocha Gomes, Waldirene Oliveira da Silva Marques', 'CEETEPS', '2022', '9786556063430', 'f000000003209', 'Educação', 252, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1691, '2023-05-02', 7479, '37133', NULL, 'LIVRO', 'EDUCAR COM A MÍDIA', 'Paulo Freire', 'PAZ E TERRA', '2014', '9788577532216', 'f000000003210', 'Educação', 248, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1692, '2011-03-31', 3291, '370115', NULL, 'LIVRO', 'Educar para a sustentabilidade', 'Moacir Gadotti', 'ED,L', '2008', 'OCLC:1029767580', 'f000000003211', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1693, '2014-09-05', 5644, '301', NULL, 'LIVRO', 'Educar pela Sociologia', 'Nestor L. J. Beck', 'RHJ', '1996', 'edu246379432', 'f000000003212', 'Desconhecido', 152, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1694, '2016-04-05', 6207, '377', NULL, 'LIVRO', 'Educar por competências na formação profissional', 'José Gimeno Sacristán, Ángel I. Pérez Gómez, Juan Bautista Martínez Rodríguez, Jurjo Torres Santomé, Félix Angulo Rasco, Juan Manuel Álvarez Méndez', 'CEETEPS', '2016', '9788536324418', 'f000000003214', 'Educação', 264, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1695, '2024-04-02', 10386, 'EGI223', NULL, 'LIVRO', 'EGITOMANIA 1 - O FASCINANTE MUNDO DO ANTIGO EGITO', 'Desconhecido', 'PLANETA', '0000', 'N/A', 'f000000003215', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1696, '2024-04-02', 10385, 'EGI369', NULL, 'LIVRO', 'EGITOMANIA 2 - O FASCINANTE MUNDO DO ANTIGO EGITO', 'Desconhecido', 'PLANETA', '0000', 'N/A', 'f000000003216', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1697, '2024-04-02', 10384, 'EGI301', NULL, 'LIVRO', 'EGITOMANIA 3 - O FASCINANTE MUNDO DO ANTIGO EGITO', 'Desconhecido', 'PLANETA', '0000', 'N/A', 'f000000003217', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1698, '2023-09-19', 9250, 'EGO180', NULL, 'LIVRO', 'EGO', 'Sigmund Freud, José Sonensegel', 'ABRIL CULTURAL', '0000', 'ego140825357', 'f000000003218', 'Psychology', 41, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1699, '2011-06-03', 3483, '261', NULL, 'LIVRO', 'Einstein- O Enigma do Universo', 'Huberto Rohden', 'PAULINAS', '1981', '8572321616', 'f000000003219', 'Desconhecido', 238, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1700, '2024-05-10', 10633, '285', NULL, 'LIVRO', 'ELA DISSE, ELE DISSE', 'Thalita Rebouças', 'ROCCO', '2022', '9786555951585', 'f000000003220', 'Juvenile Fiction', 210, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1701, '2021-12-09', 6574, '8691', NULL, 'LIVRO', 'Elas por elas', 'Ana Carvalho, Mábel De Bonis', 'NOVA FRONTEIRA', '2023', '9786525455594', 'f000000003221', 'Ficção', 58, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1702, '2010-12-21', 3096, '7792092', NULL, 'LIVRO', 'Elba : 20 anos: ensaio fotográfico', 'Desconhecido', 'UNB.BR', '2000', 'LCCN:2003338479', 'f000000003222', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1703, '2023-09-11', 9008, 'ELE772', NULL, 'LIVRO', 'ELEMENTARY READEES IN ENGLISH', 'James V. Hoffman, Diane Lemonnier Schallert', 'AO LIVRO TÉCNICO S.A.', '2004', '9781135628901', 'f000000003223', 'Educação', 241, 'EN', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1704, '2010-02-18', 2432, '6218', NULL, 'LIVRO', 'Elementos de Máquinas', 'Júlio Cesar de Almeida, Key Fonseca de Lima, Renato Barbieri', 'ÉRICA', '2017', '9788535253979', 'f000000003225', 'Technology & Engineering', 769, 'PT-BR', '2025-04-10 02:24:51', NULL, 3, 2, NULL, '2025-04-09'),
+(1705, '2014-08-21', 5608, '621815', NULL, 'LIVRO', 'Elementos de Maquinas', 'Gustav Niemann', 'LTC LIVROS TÉCNICOS E CIENTIFICOS', '1971', '9788521214250', 'f000000003224', 'Technology & Engineering', 233, 'PT-BR', '2025-04-10 02:24:51', NULL, 2, 1, NULL, '2025-04-09'),
+(1706, '2011-07-11', 3636, '6201', NULL, 'LIVRO', 'Elementos de Mecanica - Fluidomecanica', 'John King Vennard, Robert L. Street', 'NOBEL', '1978', 'OCLC:816823109', 'f000000003229', 'Desconhecido', 687, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1707, '2023-10-27', 9646, '8692', NULL, 'LIVRO', 'ELES NÃO USAM BLACK - TIE', 'Gianfrancesco Guarnieri', 'CIVILIZAÇÃO BRASILEIA', '1966', 'STANFORD:36105004668096', 'f000000003230', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1708, '2009-08-10', 1395, '86992', NULL, 'LIVRO', 'Eles não Usam Black-tie', 'Gianfrancesco Guarnieri', 'CIVILIZAÇÃO BRASILEIA', '1966', 'STANFORD:36105004668096', 'f000000003231', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:24:51', NULL, 4, 3, NULL, '2025-04-09'),
+(1709, '2023-10-02', 9553, 'ELE385', NULL, 'LIVRO', 'ELETRICIDADE 6', 'Newton C. Braga', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2017', '9788565051316', 'f000000003235', 'Technology & Engineering', 213, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1710, '2011-07-11', 3626, '620', NULL, 'LIVRO', 'Eletricidade e Eletrônica', 'Wilson Jose Tucci, Ademir E. Brandassi', 'RECORD', '0000', '8521300026', 'f000000003236', 'Desconhecido', 415, 'PT-BR', '2025-04-10 02:24:51', NULL, 4, 3, NULL, '2025-04-09'),
+(1711, '2023-10-05', 9611, 'ELE972', NULL, 'LIVRO', 'ELETRICIDADE SOLAR', 'N. F. Maciel', 'BRASIL', '2007', 'OCLC:709530547', 'f000000003240', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1712, '2022-06-29', 7082, '621381', NULL, 'LIVRO', 'ELETRÔNICA BÁSICA', 'Herbert Souza', 'AO LIVRO TECNICO S.A', '2024', '9798873570836', 'f000000003245', 'Educação', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 1, 0, NULL, '2025-04-09'),
+(1713, '2022-06-29', 7083, '62131', NULL, 'LIVRO', 'ELETRÔNICA BÁSICA', 'Herbert Souza', 'LIVRARIAS FREITAS BASTOS', '2024', '9798873570836', 'f000000003241', 'Educação', 0, 'PT-BR', '2025-04-10 02:24:51', NULL, 4, 3, NULL, '2025-04-09'),
+(1714, '2011-07-11', 3616, '620', NULL, 'LIVRO', 'Eletrônica Industrial', 'Lourenço Nassib Chehab, Aderbal Alves Borges', 'HERMUS', '1971', 'OCLC:71311110', 'f000000003246', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 3, 2, NULL, '2025-04-09'),
+(1715, '2023-08-01', 8325, '616740645', NULL, 'LIVRO', 'ELETROTERAPIA CLÍNICA', 'Karen W. Hayes, Roger M. Nelson, Dean P. Currier', 'MANOLE', '2003', '852041284X', 'f000000003249', 'Desconhecido', 578, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1716, '2010-12-21', 3019, '70981', NULL, 'LIVRO', 'Eliseu Visconti', 'Frederico Barata', 'UNICAMP', '1944', 'NYPL:33433105081941', 'f000000003250', 'Desconhecido', 248, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1717, '2009-08-04', 1298, '823', NULL, 'LIVRO', 'Elogio da Loucura', 'Erasmo de Rotterdam', 'MARTIN CLARET', '2023', '9786556601007', 'f000000003251', 'Filosofia', 186, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1718, '2009-04-15', 51, '64794', NULL, 'LIVRO', 'Em busca da hospitalidade', 'Desconhecido', 'MANOLE', '2004', '8520415067', 'f000000003252', 'Desconhecido', 454, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1719, '2023-11-01', 9757, '285', NULL, 'LIVRO', 'EM BUSCA DO PASSADO PERDIDO', 'Jéssica Spilla', 'BONBINI', '2021', '6586389836', 'f000000003253', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1720, '2010-12-21', 3027, '695098161', NULL, 'LIVRO', 'Em Tempo, Sem Tempo', 'Maria Cecília França Lourenço', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2005', 'UTEXAS:059173019640964', 'f000000003254', 'Arte, Brazilian', 128, 'EN', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1721, '2024-02-19', 10208, 'EMA981', NULL, 'LIVRO', 'EMAGRECER... É SOPA', 'Macieira Soares', 'BEST SELLER', '2024', '9798343784961', 'f000000003255', 'Culinária', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1722, '2015-11-04', 6017, '61814', NULL, 'LIVRO', 'Embolização das Artérias Uterinas', 'Desconhecido', 'YENDIS', '0000', 'OCLC:181052726', 'f000000003256', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1723, '2012-08-06', 5141, '6107361', NULL, 'LIVRO', 'Emergência Atendimento e cuidados de Enfermagem', 'NEBIA MARIA ALMEIDA DE FIGUEIREDO', 'YENDIS', '0000', '8598859451', 'f000000003257', 'Desconhecido', 320, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1724, '2009-05-12', 158, '6107361', NULL, 'LIVRO', 'Emergência de Enfermagem', 'São Camilo', 'YENDIS', '2012', '9788535255935', 'f000000003258', 'Medical', 615, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1725, '2009-04-15', 48, '6107361', NULL, 'LIVRO', 'Emergência: atendimento e cuidados de enfermagem', 'NEBIA MARIA ALMEIDA DE FIGUEIREDO', 'YENDIS', '0000', '8598859451', 'f000000003259', 'Desconhecido', 320, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1726, '2009-04-15', 31, '61073', NULL, 'LIVRO', 'EMERGENCIAS', 'Christopher M. Loftus', 'MCGRAW-HILL', '2017', '9781284187267', 'f000000003260', 'Medical', 489, 'EN', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1727, '2009-05-06', 130, '616', NULL, 'LIVRO', 'Emergências e Atendedimentos Pré-Hospitalares', 'National Association of Emergency Medical Technicians (NAEMT)', 'OBJETIVO SAÚDE', '2022', '9786558820512', 'f000000003262', 'Medical', 983, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1728, '2009-04-28', 70, '61073', NULL, 'LIVRO', 'Emergências e Atendimentos', 'National Association of Emergency Medical Technicians (NAEMT)', 'OBJETIVO SAÚDE', '2022', '9786558820512', 'f000000003263', 'Medical', 983, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1729, '2009-05-05', 117, '616028', NULL, 'LIVRO', 'Emergências Mèdicas e Terapia Intenciva', 'Luisa Toscano', 'GUANABARA KOOGAN', '2016', '9788535284195', 'f000000003264', 'Medical', 501, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1730, '2011-08-24', 3760, '6160252', NULL, 'LIVRO', 'Emergências Pré-Hospitalares e Segurança do Trabal', 'Desconhecido', 'SAÚDE TOTAL', '0000', 'N/A', 'f000000003265', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1731, '2023-04-14', 7262, 'EME737', NULL, 'LIVRO', 'EMERGÊNCIAS PSIQUIÁTRICAS', 'Alexandra Sterian', 'ARTMED', '2000', '8573960760', 'f000000003266', 'Desconhecido', 106, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1732, '2023-09-01', 8874, '7789', NULL, 'LIVRO', 'EMERGENTES', 'Roberto Bernardes, Felipe Mendes Borini, Dennys Eduardo Rossetto, Rafael Morais Pereira', 'SÃO PAULO', '2020', '9788539623921', 'f000000003268', 'Business & Economics', 463, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1733, '2009-05-05', 124, '61073698', NULL, 'LIVRO', 'EMFERMAGEM', 'CHOMPRE Roseni Rosangela', 'ATHENEU', '1992', 'OCLC:491319260', 'f000000003271', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1734, '2009-05-04', 105, '61073699', NULL, 'LIVRO', 'EMFERMAGEM', 'CHOMPRE Roseni Rosangela', 'SENAC', '1992', 'OCLC:491319260', 'f000000003272', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1735, '2009-05-05', 125, '61073', NULL, 'LIVRO', 'EMFERMAGEM', 'CHOMPRE Roseni Rosangela', 'YENDIS', '1992', 'OCLC:491319260', 'f000000003269', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1736, '2009-04-28', 72, '61673', NULL, 'LIVRO', 'Emfermagem e Medicina', 'Desconhecido', 'OBJETIVO SAÚDE', '0000', 'N/A', 'f000000003273', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1737, '2011-02-15', 2984, '370', NULL, 'LIVRO', 'Émile Durkhein', 'Émile Durkheim', 'MASSANGANA', '1995', '8508027672', 'f000000003274', 'Desconhecido', 208, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1738, '2024-03-28', 10376, 'EML283', NULL, 'LIVRO', 'EMÍLIA NO PAÍS DA GRAMÁTICA, ARITMÉTICA DA EMÍLIA', 'Monteiro Lobato', 'CÍRCULO DO LIVRO', '1987', 'OCLC:817037280', 'f000000003275', 'Desconhecido', 296, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1739, '2010-12-21', 3040, '791092', NULL, 'LIVRO', 'Emiliano Queiroz: na sobremesa da vida', 'Emiliano Queiroz, Maria Letícia', 'IMPRENSA OFICIAL DO ESTADO DE SÃO PAULO', '2006', 'UIUC:30112071742750', 'f000000003277', 'Biography & Autobiography', 436, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1740, '2023-04-06', 7157, '6168917', NULL, 'LIVRO', 'EMOÇÕES NO DIVÃ DE EDUARDO MASCARENHAS', 'Eduardo Mascarenhas', 'GUANABARA KOOGAN', '1985', 'UTEXAS:059173010534571', 'f000000003278', 'Psychoanalysis', 236, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1741, '2024-04-09', 10460, '658022', NULL, 'LIVRO', 'EMPREENDEDORISMO', 'Cesar Salim, Nelson Silva', 'CAMPUS', '2013', '9788535267488', 'f000000003279', 'Educação', 244, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1742, '2023-12-04', 10103, '658421', NULL, 'LIVRO', 'EMPREENDEDORISMO - TRANSFORMANDO IDEIAS EM NEGÓCIO', 'José Dornelas', 'ATLAS', '2021', '9786587052090', 'f000000003280', 'Business & Economics', 286, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1743, '2023-12-04', 10111, '6584', NULL, 'LIVRO', 'EMPREENDEDORISMO UMA PERSPECTIVA MULTIDISCIPLINAR', 'Patricia Patricio', 'LTC LIVROS TÉCNICOS E CIENTIFICOS', '2016', '8521630433', 'f000000003282', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1744, '2023-10-30', 9729, '800', NULL, 'LIVRO', 'ENAMORADOS', 'Dom Beto Breis ofm', 'CLB', '2018', '9788534947824', 'f000000003284', 'Religião', 138, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1745, '2023-03-23', 7146, 'ENC334', NULL, 'LIVRO', 'ENCARNAÇÃO', 'José de Alencar', 'ESCALA', '2018', '9788594862389', 'f000000003285', 'Literary Collections', 56, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1746, '2024-06-20', 10725, 'ENC159', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 1', 'Cyndi Dale', 'ABRIL', '2021', '9786557360910', 'f000000003286', 'Body, Mind & Spirit', 480, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1747, '2024-06-20', 10719, 'ENC416', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 10', 'Julio Seabra Inglez Souza, Aristeu Mendes Peixoto, Francisco Ferraz de Toledo', 'ABRIL', '1995', '8531401291', 'f000000003287', 'Technology & Engineering', 516, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1748, '2024-06-20', 10713, 'ENC433', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 11', 'Julio Seabra Inglez Souza, Aristeu Mendes Peixoto, Francisco Ferraz de Toledo', 'ABRIL', '1995', '8531408148', 'f000000003288', 'Technology & Engineering', 732, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1749, '2024-06-20', 10712, 'ENC153', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 12', 'Mark Water', 'ABRIL', '2020', '9788577422982', 'f000000003289', 'Religião', 1427, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1750, '2024-06-20', 10711, 'ENC280', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 13', 'Carol Proner, Barbara Caramuru Teles', 'ABRIL', '2024', '9786585622554', 'f000000003290', 'Law', 247, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1751, '2024-06-20', 10715, 'ENC423', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 14', 'Julio Seabra Inglez Souza, Aristeu Mendes Peixoto, Francisco Ferraz de Toledo', 'ABRIL', '1995', '8531408148', 'f000000003291', 'Technology & Engineering', 732, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1752, '2024-06-20', 10714, 'ENC512', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 15', 'Desconhecido', 'ABRIL', '1959', 'UVA:X030221906', 'f000000003292', 'Encyclopedias and dictionaries, Portuguese', 982, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1753, '2024-06-20', 10724, 'ENC324', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 2', 'Carol Proner, Mírian Gonçalves', 'ABRIL', '2024', '9786585622516', 'f000000003293', 'Law', 247, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1754, '2024-06-20', 10723, 'ENC974', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 3', 'Edino Garcia, Wagner Mendes', 'ABRIL', '2019', '9786556751528', 'f000000003294', 'Business & Economics', 718, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1755, '2024-06-20', 10722, 'ENC135', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 4', 'Vários', 'ABRIL', '2007', '9789897163586', 'f000000003295', 'História', 642, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1756, '2024-06-20', 10718, 'ENC493', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 5', 'Gustavo Piqueira', 'ABRIL', '2007', 'STANFORD:36105133572201', 'f000000003296', 'Commercial art', 224, 'EN', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1757, '2024-06-20', 10717, 'ENC153', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 6', 'Marilia Morosini', 'ABRIL', '2022', '9786556230108', 'f000000003297', 'Educação', 303, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1758, '2024-06-20', 10716, 'ENC917', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 7', 'Julio Seabra Inglez Souza, Aristeu Mendes Peixoto, Francisco Ferraz de Toledo', 'ABRIL', '1995', '8531408148', 'f000000003298', 'Technology & Engineering', 732, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1759, '2024-06-20', 10721, 'ENC934', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 8', 'Filipe Costa Pinto', 'ABRIL', '0000', '9789892013923', 'f000000003299', 'Desconhecido', 740, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1760, '2024-06-20', 10720, 'ENC676', NULL, 'LIVRO', 'ENCICLOPÉDIA ABRIL - 9', 'Vários', 'ABRIL', '2007', '9789897163586', 'f000000003300', 'História', 642, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1761, '2010-01-27', 2380, '30', NULL, 'LIVRO', 'Enciclopédia Barsa Universal', 'Desconhecido', 'PLANETA', '2010', '8575182544', 'f000000003301', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 18, 17, NULL, '2025-04-09'),
+(1762, '2024-06-20', 10734, 'ENC385', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 1', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003319', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1763, '2024-06-20', 10728, 'ENC285', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 10', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003320', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1764, '2024-06-20', 10732, 'ENC615', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 11', 'Barsa Planeta', 'BARSA PLANETA', '2007', '8575182900', 'f000000003321', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1765, '2024-06-20', 10731, 'ENC362', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 12', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003322', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1766, '2024-06-20', 10730, 'ENC686', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 13', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003323', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(1767, '2024-06-20', 10742, 'ENC732', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 15', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003324', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1768, '2024-06-20', 10741, 'ENC561', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 16', 'Donaldson M. Garschagen, Barsa Planeta Internacional Ltda', 'BARSA PLANETA', '2010', '8575182552', 'f000000003325', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1769, '2024-06-20', 10740, 'ENC758', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 17', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003327', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1770, '2024-06-20', 10739, 'ENC761', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 18', 'Barsa Planeta', 'BARSA PLANETA', '2007', '8575182900', 'f000000003328', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1771, '2024-06-20', 10733, 'ENC212', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 2', 'Donaldson M. Garschagen, Barsa Planeta Internacional Ltda', 'BARSA PLANETA', '2010', '8575182552', 'f000000003329', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1772, '2024-06-20', 10736, 'ENC250', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 3', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003330', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1773, '2024-06-20', 10735, 'ENC567', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 4', 'Barsa Planeta', 'BARSA PLANETA', '2007', '8575182900', 'f000000003331', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1774, '2024-06-20', 10738, 'ENC559', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 5', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003332', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1775, '2024-06-20', 10737, 'ENC754', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 6', 'Barsa Planeta', 'BARSA PLANETA', '2007', '8575182900', 'f000000003333', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1776, '2024-06-20', 10727, 'ENC355', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 7', 'Desconhecido', 'BARSA PLANETA', '2010', '8575182544', 'f000000003334', 'Encyclopedias and dictionaries, Portuguese', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1777, '2024-06-20', 10726, 'ENC575', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 8', 'Barsa Planeta', 'BARSA PLANETA', '2007', '8575182900', 'f000000003335', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1778, '2024-06-20', 10729, 'ENC818', NULL, 'LIVRO', 'ENCICLOPÉDIA BARSA UNIVERSAL - 9', 'Barsa Planeta', 'BARSA PLANETA', '2007', '8575182900', 'f000000003336', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1779, '2003-04-10', 770, '657', NULL, 'LIVRO', 'Enciclopédia Contábil Brasileira', 'Antônio Calderelli', 'FORMAR LTDA', '1967', 'UTEXAS:059173023711705', 'f000000003337', 'Accounting', 272, 'PT-BR', '2025-04-10 02:24:52', NULL, 6, 5, NULL, '2025-04-09'),
+(1780, '2003-04-10', 650, '65703', NULL, 'LIVRO', 'Enciclopédia Contábil e Comercial Brasileira', 'Rfb - Senji Takai\'', 'CETEC', '2022', 'EAN:3410004666862', 'f000000003343', 'Business & Economics', 202, 'PT-BR', '2025-04-10 02:24:52', NULL, 3, 2, NULL, '2025-04-09'),
+(1781, '2009-10-27', 1949, '709', NULL, 'LIVRO', 'Enciclopédia da Civilização e da Arte', 'M. B. Ugolotti', 'MARTINS', '0000', 'OCLC:683353807', 'f000000003346', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1782, '2023-08-31', 8823, 'ENC333', NULL, 'LIVRO', 'ENCICLOPÉDIA DA VIDA SENVAGEM', 'Desconhecido', 'ALTAYA', '1997', 'OCLC:46751841', 'f000000003347', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1783, '2023-09-21', 9302, 'ENC291', NULL, 'LIVRO', 'ENCICLOPÉDIA DE PEDIATRIA', 'Desconhecido', 'ABRIL CULTURAL', '1971', 'LCCN:96216847', 'f000000003348', 'Child rearing', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1784, '2023-09-19', 10679, 'ENC865', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  1', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003349', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1785, '2023-09-19', 10685, 'ENC655', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  10', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003350', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1786, '2023-09-19', 10684, 'ENC634', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  11', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003351', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1787, '2023-09-19', 10683, 'ENC663', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  12', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003352', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1788, '2023-09-19', 10678, 'ENC738', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  2', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003353', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1789, '2023-09-19', 9249, 'ENC518', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  3', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003354', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1790, '2023-09-19', 10676, 'ENC304', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  4', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003355', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1791, '2023-09-19', 10677, 'ENC442', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  5', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003356', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1792, '2023-09-19', 10682, 'ENC329', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  6', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003357', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1793, '2023-09-19', 10681, 'ENC961', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  7', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003358', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1794, '2023-09-19', 10680, 'ENC735', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  8', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003359', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1795, '2023-09-19', 10686, 'ENC150', NULL, 'LIVRO', 'ENCICLOPÉDIA DELTA JÚNIOR -  9', 'Abrahão Koogan', 'DELTA', '1964', 'OCLC:714343751', 'f000000003360', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1796, '2024-04-29', 10589, 'ENC987', NULL, 'LIVRO', 'ENCICLOPÉDIA DISNEY - GRANDES INVENÇÕES, COMUNICAÇ', 'Desconhecido', 'PLANETA', '0000', 'N/A', 'f000000003361', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1797, '2024-04-02', 10383, '46903', NULL, 'LIVRO', 'ENCICLOPÉDIA DO ESTUDANTE - REDAÇÃO E COMUNICAÇÃO', 'Fernando César Capovilla', 'MODERNA', '2004', '8531409020', 'f000000003362', 'Brazilian Sign Language', 952, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1798, '2024-04-29', 10582, 'ENC497', NULL, 'LIVRO', 'ENCICLOPÉDIA DOS FATOS 1', 'Mark Water', 'GLOBO', '2020', '9788577422982', 'f000000003363', 'Religião', 1427, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1799, '2024-04-29', 10586, 'ENC453', NULL, 'LIVRO', 'ENCICLOPÉDIA DOS FATOS 6', 'Serva Rosemary Gomes', 'GLOBO', '2021', '9786500364262', 'f000000003364', 'Religião', 316, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1800, '2024-04-29', 10592, 'ENC989', NULL, 'LIVRO', 'ENCICLOPÉDIA DOS FATOS 8', 'Mark Water', 'GLOBO', '2020', '9788577422982', 'f000000003365', 'Religião', 1427, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1801, '2010-05-17', 2615, 'EGO181', NULL, 'LIVRO', 'Enciclopédia Galáctica, O Futuro da Terra', 'Desconhecido', 'ABRIL', '1959', 'UVA:X030221906', 'f000000003366', 'Encyclopedias and dictionaries, Portuguese', 982, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1802, '2023-08-31', 8828, 'ENC541', NULL, 'LIVRO', 'ENCICLOPÉDIA ILUSTRADA DA CIÊNCIA 1', 'P. Barnett, J.G. Bateman, M.G. Desebrock', 'GLOBO', '1983', 'OCLC:835275007', 'f000000003367', 'Desconhecido', 735, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1803, '2023-08-31', 8827, 'ENC247', NULL, 'LIVRO', 'ENCICLOPÉDIA ILUSTRADA DA CIÊNCIA 2', 'Gustavo Piqueira', 'GLOBO', '2007', 'STANFORD:36105133572201', 'f000000003368', 'Commercial art', 224, 'EN', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1804, '2023-08-31', 8826, 'ENC581', NULL, 'LIVRO', 'ENCICLOPÉDIA ILUSTRADA DA CIÊNCIA 3', 'Gustavo Piqueira', 'GLOBO', '2007', 'STANFORD:36105133572201', 'f000000003369', 'Commercial art', 224, 'EN', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1805, '2023-08-31', 8825, 'ENC963', NULL, 'LIVRO', 'ENCICLOPÉDIA ILUSTRADA DA CIÊNCIA 4', 'Luiz Gonzaga De Alvarenga', 'GLOBO', '0000', 'PKEY:CLDEAU31625', 'f000000003371', 'Desconhecido', 114, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1806, '2024-04-29', 10591, 'ENC201', NULL, 'LIVRO', 'ENCICLOPÉDIA ILUSTRADA DA CIÊNCIA 5', 'Luiz Gonzaga De Alvarenga', 'GLOBO', '0000', 'PKEY:CLDEAU31626', 'f000000003372', 'Desconhecido', 246, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1807, '2023-11-06', 9785, 'ENC926', NULL, 'LIVRO', 'ENCICLOPÉDIA MINECRAFT', 'Pró Games Minecraft, Pró Games, On Line Editora', 'GEEK', '2016', 'enc909634332', 'f000000003373', 'Games & Activities', 161, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1808, '2010-05-24', 2627, 'EVU365', NULL, 'LIVRO', 'Enciclopedia Varsa Universal-Multimídia', 'Desconhecido', 'COPYRIGTHT', '2007', '8575183095', 'f000000003374', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1809, '2023-12-11', 10153, '920936466', NULL, 'LIVRO', 'ENCONTRANDO A LIBERDADE', 'Jarvis Jay Masters', 'CASA DOS MUNDOS', '2020', '9786556430201', 'f000000003375', 'Biography & Autobiography', 186, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1810, '2023-10-27', 9639, '285', NULL, 'LIVRO', 'ENCONTROS À HORA MORTA', 'Eve Babitz', 'CONFRARIA', '2025', '9786585854214', 'f000000003376', 'Ficção', 162, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1811, '2014-09-05', 5620, '70907', NULL, 'LIVRO', 'Encontros com Arte e Cultura', 'Maria Isabel Ferraz Pereira Leite, Luciana Esmeralda Ostetto', 'FTD', '2005', '8530807782', 'f000000003377', 'Arte', 184, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1812, '2014-05-30', 5565, '86993', NULL, 'LIVRO', 'Encontros com o Brasil', 'Paulo Ronai', 'BATEL', '2018', '9788567854427', 'f000000003379', 'Literary Criticism', 200, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1813, '2009-08-04', 1302, '880', NULL, 'LIVRO', 'Eneida', 'Virgílio', 'MARTIN CLARET', '2022', '9788551307922', 'f000000003380', 'Poesia', 450, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1814, '2009-07-29', 1116, '873', NULL, 'LIVRO', 'Eneida/Vírgilio', 'Desconhecido', 'UNICAMP', '0000', 'N/A', 'f000000003381', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:52', NULL, 5, 4, NULL, '2025-04-09'),
+(1815, '2023-11-29', 9968, 'ENE407', NULL, 'LIVRO', 'ENEM 2023 - BRAILLE', 'Desconhecido', 'INEP', '0000', 'N/A', 'f000000003386', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1816, '2023-04-24', 7412, '37319', NULL, 'LIVRO', 'ENEM COMENTADO', 'Wander Garcia, Alexandre Moreira Nascimento, Ana Paula Dompieri, André Moreira Nascimento, Anna Carolina Müller Queiroz, Elson Garcia, Felipe Vasconcellos Bandeira, Gabriel Kenji Godoy Shimanuki, Leila Satin', 'FTD', '2023', '9786555158168', 'f000000003388', 'Educação', 921, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1817, '2009-09-30', 1707, '370', NULL, 'LIVRO', 'ENEM-Exame Nacional do Ensino Médio', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2001', 'UTEXAS:059173003987893', 'f000000003389', 'Educational tests and measurements', 164, 'PT-BR', '2025-04-10 02:24:52', NULL, 6, 5, NULL, '2025-04-09'),
+(1818, '2023-09-11', 9040, 'ENE985', NULL, 'LIVRO', 'ENERGIA SOLAR PAULISTA', 'André Luiz Veiga Gimenes, Miguel Edgar Morales Udaeta, Silvio Giuseppe Di Santo, Katia Gregio Di Santo', 'SÃO PAULO', '2020', '9786587782416', 'f000000003395', 'Technology & Engineering', 297, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1819, '2009-05-05', 118, '61073677', NULL, 'LIVRO', 'ENFERMAGEM', 'Florence Nightingale', 'MANOLE', '0000', '9781526045119', 'f000000003396', 'Medical', 187, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1820, '2023-09-18', 9168, '61073678', NULL, 'LIVRO', 'ENFERMAGEM ABSTÉTRICA BÁSICA', 'Baston', 'INTERAMERICANA', '2010', '9788535246483', 'f000000003397', 'Medical', 287, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1821, '2011-07-01', 3586, '61514', NULL, 'LIVRO', 'Enfermagem Cálculo e Administração de Medicamentos', 'Arlete M. M. Giovani', 'RIDEEL', '2002', '8586270156', 'f000000003398', 'Desconhecido', 240, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1822, '2012-05-15', 4691, '6107343', NULL, 'LIVRO', 'Enfermagem Comunitária', 'KAWAMOTO', 'E.P.U.', '2009', '851212640X', 'f000000003399', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1823, '2011-08-08', 3752, '610', NULL, 'LIVRO', 'Enfermagem de Centro Cirúrgico', 'William Malagutti, Isabel Miranda Bonfim', 'FLORENSE', '0000', '858978892X', 'f000000003400', 'Desconhecido', 336, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1824, '2016-05-03', 6213, '61073', NULL, 'LIVRO', 'Enfermagem dia a dia:segurança do paciente', 'Alba Lucia Bottura Leite de Barros, Juliana de Lima Lopes, Sheila Coelho Ramalho Vasconcelos Morais', 'YENDIS', '2019', '9788582715727', 'f000000003402', 'Medical', 317, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1825, '2017-04-17', 6492, '610736', NULL, 'LIVRO', 'Enfermagem do Trabalho', 'Ivone Bulhoes', 'DCL-DIFUSÃO CULTURAL DO LIVRO', '1986', 'OCLC:69766151', 'f000000003403', 'Desconhecido', 463, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1826, '2009-04-15', 37, '6169803', NULL, 'LIVRO', 'Enfermagem do trabalho', 'Ivone Bulhoes', 'E.P.U.', '1986', 'OCLC:69766151', 'f000000003405', 'Desconhecido', 463, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1827, '2009-04-28', 71, '6160024613', NULL, 'LIVRO', 'Enfermagem e Medicina', 'Ricardo Almeida', 'OBJETIVO SAÚDE', '2024', '9798344629568', 'f000000003406', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1828, '2011-08-24', 3761, '61073', NULL, 'LIVRO', 'Enfermagem e Medicina Clínico-Cirúrgico e Radiolog', 'Desconhecido', 'SAÚDE TOTAL', '0000', 'N/A', 'f000000003407', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1829, '2024-09-18', 10803, 'ENF262', NULL, 'LIVRO', 'ENFERMAGEM EM CENTRO CIRÚRGICO: ATUALIDADES E PERS', 'William Malagutti, Isabel Miranda Bonfim', 'MARTINARI', '0000', '858978892X', 'f000000003408', 'Desconhecido', 336, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1830, '2009-04-15', 28, '61073677', NULL, 'LIVRO', 'Enfermagem em centro de material e esterilização', 'Desconhecido', 'SENAC', '2006', 'OCLC:691654256', 'f000000003409', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1831, '2022-08-16', 7107, '610.73/610.73677', NULL, 'LIVRO', 'ENFERMAGEM EM CLÍNICA CIRÚRGIA', 'Emilia Emi Kawamoto', 'EDITORA PEDAGÓGICA E UNIVERSITÁRIA LTDA', '1986', 'OCLC:20172228', 'f000000003410', 'Desconhecido', 162, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1832, '2009-04-15', 41, '61073699', NULL, 'LIVRO', 'Enfermagem em doenças transmissíveis', 'EVANISA MARIA ARONE, MARIA LUCIA DOS SANTOS PHILIPPI', 'E.P.U.', '0000', '8573597755', 'f000000003411', 'Desconhecido', 288, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1833, '2023-03-23', 7137, '610-73699-NLM-WY 153', NULL, 'LIVRO', 'ENFERMAGEM EM DOENÇAS TRANSMISSÍVEIS', 'EVANISA MARIA ARONE, MARIA LUCIA DOS SANTOS PHILIPPI', 'SENAC', '0000', '8573597755', 'f000000003412', 'Desconhecido', 288, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1834, '2022-08-25', 7117, '610736', NULL, 'LIVRO', 'ENFERMAGEM EM EMERGÊNCIA', 'São Camilo', 'ELSEVIER', '2012', '9788535255935', 'f000000003413', 'Medical', 615, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1835, '2009-05-07', 133, '61444', NULL, 'LIVRO', 'Enfermagem em Ginecologia e Obstetrícia', 'Ana Paula Mantovani Puglia', 'COPIDART', '2020', '9788539628582', 'f000000003414', 'Medical', 330, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1836, '2009-04-15', 50, '61073699', NULL, 'LIVRO', 'Enfermagem em infectologia', 'Marcia de Souza', 'ATHENEU', '2000', '8573792779', 'f000000003416', 'Desconhecido', 351, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1837, '2009-05-07', 132, '6168', NULL, 'LIVRO', 'Enfermagem em Neuro Psiquatria', 'Sheila L. Videbeck', 'COPIDART', '2016', '9788536327297', 'f000000003417', 'Medical', 535, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1838, '2009-04-15', 43, '61073', NULL, 'LIVRO', 'Enfermagem em pronto-socorro', 'Paulo Bruno, Cyntia Oldenburg', 'SENAC', '2005', '8574581801', 'f000000003418', 'Desconhecido', 133, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1839, '2009-05-05', 115, '61073', NULL, 'LIVRO', 'Enfermagem Fundamentos do Processo de Cuidar', 'Isabel M. Sancho Avello, Carme Ferré i Grau, Ariadne Da Silva Fonseca', 'DIFUSÃO', '2003', '8573386118', 'f000000003419', 'Desconhecido', 551, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1840, '2023-08-29', 8755, 'ENF786', NULL, 'LIVRO', 'ENFERMAGEM GERONTOLÓGICA', 'Charlotte Eliopoulos', 'ARTMED', '0000', '9788582714829', 'f000000003421', 'Medical', 803, 'PT-BR', '2025-04-10 02:24:52', NULL, 2, 1, NULL, '2025-04-09'),
+(1841, '2009-04-30', 96, '61073', NULL, 'LIVRO', 'Enfermagem Gerontológica', 'Charlotte Eliopoulos', 'GUANABARA KOOGAN', '0000', '9788582714829', 'f000000003420', 'Medical', 803, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1842, '2023-08-11', 8269, '6107367', NULL, 'LIVRO', 'ENFERMAGEM MATERNO INFANTIL', 'Camilo Teixeira, Helton, Itamires Laiz Coimbra da Silva, Rosa Maria Ferreira de Almeida', 'REICHMANN & AFFONSO', '2023', '6525136946', 'f000000003423', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1843, '2009-04-15', 16, '6107367', NULL, 'LIVRO', 'Enfermagem materno-infantil', 'Camilo Teixeira, Helton, Itamires Laiz Coimbra da Silva, Rosa Maria Ferreira de Almeida', 'REICHMANN & AFFONSO', '2023', '6525136946', 'f000000003424', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1844, '2009-04-28', 75, '6107367', NULL, 'LIVRO', 'Enfermagem Matrno-infantil', 'Camilo Teixeira, Helton, Itamires Laiz Coimbra da Silva, Rosa Maria Ferreira de Almeida', 'REICHMANN & AFFONSO', '2023', '6525136946', 'f000000003425', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1845, '2009-05-04', 98, '61073', NULL, 'LIVRO', 'Enfermagem Médica Cirúrgica', 'Barbara Kubn Timby', 'REICHMANN & AFFONSO', '2005', '8520417108', 'f000000003426', 'Desconhecido', 1286, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1846, '2009-05-05', 122, '61373', NULL, 'LIVRO', 'Enfermagem Médico-Cirúrgica', 'Barbara Kubn Timby', 'GUANABARA KOOGAN', '2005', '8520417108', 'f000000003428', 'Desconhecido', 1286, 'PT-BR', '2025-04-10 02:24:52', NULL, 6, 5, NULL, '2025-04-09'),
+(1847, '2009-05-04', 97, '61073', NULL, 'LIVRO', 'Enfermagem Médico-Cirúrgica', 'Barbara Kubn Timby', 'REICHMANN & AFFONSO', '2005', '8520417108', 'f000000003427', 'Desconhecido', 1286, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1848, '2009-05-06', 127, '6107369', NULL, 'LIVRO', 'Enfermagem Médico-Cirúrgica', 'Barbara Kubn Timby', 'SENAC', '2005', '8520417108', 'f000000003434', 'Desconhecido', 1286, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1849, '2023-08-11', 8294, '61073', NULL, 'LIVRO', 'ENFERMAGEM MÉDICO-CIRÚRGICA 2', 'Janice L. Hinkle, Kerry H. Cheever, Kristen J. Overbaugh', 'REICHMANN & AFFONSO', '2023', '8527739496', 'f000000003435', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1850, '2023-08-11', 8293, '61073', NULL, 'LIVRO', 'ENFERMAGEM MÉDICO-CIRÚRGICA 3', 'Barbara Kubn Timby', 'REICHMANN & AFFONSO', '2005', '8520417108', 'f000000003436', 'Desconhecido', 1286, 'PT-BR', '2025-04-10 02:24:52', NULL, 1, 0, NULL, '2025-04-09'),
+(1851, '2009-04-15', 22, '61073677', NULL, 'LIVRO', 'Enfermagem médico-cirúrgica aplicada', 'Evanisa Maria Arone, Maria Lucia Dos Santos Philippi', 'SENAC', '0000', '8573597283', 'f000000003437', 'Desconhecido', 112, 'PT-BR', '2025-04-10 02:24:52', NULL, 6, 5, NULL, '2025-04-09'),
+(1852, '2023-08-29', 8739, '6169940231', NULL, 'LIVRO', 'ENFERMAGEM NA ONCOLOGIA', 'Ana de Oliveira', 'ATHENEU', '2024', '9798878194150', 'f000000003443', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1853, '2009-04-15', 59, '610733', NULL, 'LIVRO', 'Enfermagem na prevenção e controle da infecção hos', 'Nívea Cristina Moreira Santos', 'IATRIA', '2003', '8576140098', 'f000000003445', 'Desconhecido', 124, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1854, '2009-05-18', 216, '61073', NULL, 'LIVRO', 'Enfermagem na Unidade de Centro Cirúrgico', 'Maria d\'Apparecida Andrade Silva', 'E.P.U.', '1982', 'OCLC:69788438', 'f000000003446', 'Desconhecido', 80, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1855, '2003-04-10', 505, '61073', NULL, 'LIVRO', 'Enfermagem na Unidade de Terapia Intensiva', 'Cátia Millene Dell Agnolo', 'E.P.U.', '2021', 'OCLC:1265042526', 'f000000003448', 'Desconhecido', 129, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1856, '2009-04-30', 90, '6189201', NULL, 'LIVRO', 'Enfermagem na UTI Neonatal', 'Raquel Tamez', 'GUANABARA KOOGAN', '2017', '8527731401', 'f000000003449', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1857, '2009-04-15', 15, '6107362', NULL, 'LIVRO', 'Enfermagem neonatal', 'Raquel N. Tamez', 'REICHMANN & AFFONSO', '2023', '8527738597', 'f000000003450', 'Medical', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 3, 2, NULL, '2025-04-09'),
+(1858, '2009-04-15', 40, '61073677', NULL, 'LIVRO', 'Enfermagem no tratamento dos queimados', 'Eni-Leci Monteiro de Menezes, Maria Jose da Silva', 'E.P.U.', '1988', '8512123907', 'f000000003453', 'Desconhecido', 125, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1859, '2023-09-18', 9176, 'ENF538', NULL, 'LIVRO', 'ENFERMAGEM OBSTÉTRICA E NEONATAL', 'Wanda Escobar Freddi', 'ATHENEU', '1983', 'OCLC:69788431', 'f000000003454', 'Desconhecido', 59, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1860, '2009-04-15', 39, '6107362', NULL, 'LIVRO', 'Enfermagem pediátrica', 'FABIANE DE AMORIM ALMEIDA, ANA LLONCH SABATES', 'E.P.U.', '2008', '8520422012', 'f000000003455', 'Desconhecido', 421, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1861, '2024-11-04', 10998, 'ENF440', NULL, 'LIVRO', 'ENFERMAGEM PEDIÁTRICA', 'FABIANE DE AMORIM ALMEIDA, ANA LLONCH SABATES', 'MARTINARI', '2008', '8520422012', 'f000000003456', 'Desconhecido', 421, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1862, '2023-08-29', 8765, '618920231', NULL, 'LIVRO', 'ENFERMAGEM PEDIÁTRICA E NEONATAL', 'Dráuzio Viegas', 'MANOLE', '1996', 'OCLC:319218247', 'f000000003457', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1863, '2009-04-15', 46, '6168', NULL, 'LIVRO', 'Enfermagem psiquiátrica', 'Maria Cecília Manzolli', 'GUANABARA KOOGAN', '1996', '8527703483', 'f000000003459', 'Desconhecido', 149, 'PT-BR', '2025-04-10 02:24:53', NULL, 3, 2, NULL, '2025-04-09'),
+(1864, '2009-04-15', 11, '6107368', NULL, 'LIVRO', 'Enfermagem psiquiátrica', 'Maria Cecília Manzolli', 'REICHMANN & AFFONSO', '1996', '8527703483', 'f000000003460', 'Desconhecido', 149, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1865, '2010-02-18', 2430, '62853', NULL, 'LIVRO', 'Engenharia de Ventilação Industrial', 'Armando Luis de Souza Mesquita', 'CETESB', '1985', 'OCLC:817926766', 'f000000003464', 'Desconhecido', 442, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1866, '2023-09-11', 9013, 'ENG905', NULL, 'LIVRO', 'ENGLISH FOR BRAZILIANS', 'Fernando Cezar Oliveira, Fernando Cezar, Melo De Oliveira', 'LÉ', '2010', '9781599423159', 'f000000003465', 'Desconhecido', 0, 'EN', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1867, '2023-09-11', 9005, 'ENG927', NULL, 'LIVRO', 'ENGLISH FOR TODAY', 'National Council of Teachers of English', 'LIBRARY OF CONGRESS CATALOGING IN PUBLI', '1975', '0070994676', 'f000000003466', 'Ingles', 0, 'EN', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1868, '2023-09-01', 8840, 'ENG391', NULL, 'LIVRO', 'ENGLISH POINT', 'Eliana Aun, Maria Clara Prete de Moraes, Neuza Bilia Sansanovicz', 'SARAIVA', '1985', 'OCLC:819742448', 'f000000003467', 'Desconhecido', 82, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1869, '2023-09-11', 9011, 'ENJ291', NULL, 'LIVRO', 'ENJOY IT AN ENGLISH COURSE', 'Yugal Kishore Tiwari', 'ATUAL', '2022', '9789391257361', 'f000000003468', 'Language Arts & Disciplines', 244, 'EN', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1870, '2023-10-30', 9734, 'P8693', NULL, 'LIVRO', 'ENSAIO SOBRE A CEGUEIRA', 'José Saramago', 'ZAHAR', '2022', '9786557826003', 'f000000003469', 'Ficção', 375, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1871, '2010-12-21', 3256, '320', NULL, 'LIVRO', 'Ensaio sobre ciência política na Itália', 'José Adelino Maltez', 'UNB.BR', '1991', 'UVA:X002107661', 'f000000003470', 'Political science', 362, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1872, '2024-04-10', 10482, 'ENS517', NULL, 'LIVRO', 'ENSAIOS SOBRE A POLITICA ADAMANTINENSE E OUTROS ES', 'Desconhecido', 'ADAMANTINA', '0000', 'N/A', 'f000000003471', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1873, '2009-04-15', 7, '6107362', NULL, 'LIVRO', 'Ensinando a cuidar da criança', 'NEBIA MARIA ALMEIDA DE FIGUEIREDO', 'DIFUSÃO', '0000', '8588489066', 'f000000003472', 'Desconhecido', 416, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1874, '2009-04-15', 5, '61073', NULL, 'LIVRO', 'Ensinando a cuidar da mulher,do homem e do recém-n', 'Nébia Maria Almeida de Figueiredo', 'DIFUSÃO', '2005', '8598859052', 'f000000003474', 'Desconhecido', 522, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1875, '2009-04-15', 6, '610736', NULL, 'LIVRO', 'Ensinando a cuidar de clientes em situações clínic', 'NEBIA MARIA ALMEIDA DE FIGUEIREDO', 'DIFUSÃO', '2005', '8598859036', 'f000000003475', 'Desconhecido', 488, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1876, '2023-06-07', 7396, '79644083', NULL, 'LIVRO', 'ENSINANDO GINÁSTICA PARA CRIANÇA', 'JEFFREY L. BROWN', 'MAM', '0000', '8532305687', 'f000000003476', 'Desconhecido', 124, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1877, '2011-02-15', 3017, '7807', NULL, 'LIVRO', 'Ensinando Música Musicalmente', 'Keith Swanwick', 'MODERNA', '2003', '8516039072', 'f000000003477', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1878, '2023-06-07', 7393, 'ENS129', NULL, 'LIVRO', 'ENSINANDO VOLEIBOL PARA JOVENS', 'American Sport Education Program', 'MANOLE', '1999', '8520407781', 'f000000003478', 'Desconhecido', 155, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1879, '2011-02-15', 3007, '107', NULL, 'LIVRO', 'Ensinar Filosofia', 'Marcos Nobre', 'ATTA MÍDIA E EDUCAÇÃO', '2007', '8530808371', 'f000000003479', 'Desconhecido', 120, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1880, '2010-01-11', 2082, '370', NULL, 'LIVRO', 'Ensino de 2º Grau Habilitação Profissional', 'Brasil Ministerio da Educação e Cultura (mec) Secretaria de Ensino de 1 e 2 Graus', 'MINISTÉRIO DA EDUCAÇÃO E CULTURA', '1979', 'OCLC:683408244', 'f000000003480', 'Desconhecido', 96, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1881, '2011-03-31', 3303, '37071', NULL, 'LIVRO', 'Ensino de biologia', 'Guilherme Trópia', 'CORTEZ', '2021', '9786558202219', 'f000000003481', 'Ciência', 102, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1882, '2011-02-15', 3009, '37071', NULL, 'LIVRO', 'Ensino de Filosofia no Ensino Médio', 'Daniel Salésio Vandresen', 'CORTEZ', '2021', '9786559540426', 'f000000003482', 'Educação', 248, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1883, '2014-09-15', 5665, '4207', NULL, 'LIVRO', 'Ensino de língua inglesa no ensino médio', 'Annallena de Souza Guedes, Carolina Vianini, Marina Morena dos Santos e Silva, Patrícia Mara de Carvalho Costa Leite', 'SM', '2021', '9786559392292', 'f000000003483', 'Foreign Language Study', 255, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1884, '2014-09-15', 5664, '4207', NULL, 'LIVRO', 'Ensino de língua inglesa: Foco em Estratégias', 'Priscila Fernanda Furlanetto', 'DISAL', '2019', '9788522701452', 'f000000003485', 'Foreign Language Study', 168, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1885, '2014-09-15', 5663, '4207', NULL, 'LIVRO', 'Ensino de Língua Inglesa:Foco em estratégias', 'Denise Santos', 'DISAL', '2012', '8578441052', 'f000000003486', 'Foreign Language Study', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1886, '2014-09-12', 5657, '469507', NULL, 'LIVRO', 'Ensino de língua portuguesa', 'Maria Lúcia de Castro Gomes', 'CENGAGE LEARNING', '2024', 'ens238524695', 'f000000003487', 'Foreign Language Study', 197, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1887, '2011-02-15', 3010, '807', NULL, 'LIVRO', 'Ensino de Literatura', 'Artur Emílio Arlarcon Vaz', 'SARAIVA', '2019', '9786550280024', 'f000000003489', 'Educação', 252, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1888, '2011-02-15', 3012, '42824', NULL, 'LIVRO', 'Ensino e Aprendizagem de Língua Inglesa', 'Desconhecido', 'PARÁBOLA', '2005', 'OCLC:181025822', 'f000000003490', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1889, '2010-12-21', 3139, '373501842', NULL, 'LIVRO', 'Ensino médio noturno', 'Maria Socorro Gonçalves Torquato', 'SECRETARIA DA EDUCAÇÃO', '2002', 'OCLC:55910845', 'f000000003491', 'Desconhecido', 130, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1890, '2003-04-10', 499, '370668', NULL, 'LIVRO', 'Ensino:Como Encantar o Aluno e Vencer a Concorrênc', 'Andre Marques', 'DISAL', '2007', '8589533689', 'f000000003492', 'Educação', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1891, '2003-04-10', 995, '53', NULL, 'LIVRO', 'Entendendo e Dominando o Excel', 'EDUARDO MORAZ', 'DIGERATI BOOKS', '0000', '9788577020720', 'f000000003493', 'Computers', 256, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1892, '2012-04-12', 4641, '513', NULL, 'LIVRO', 'Entendendo e Dominando o Java', 'Oziel Moreira Neto', 'DIGERATI BOOKS', '2006', '9788577020416', 'f000000003494', 'Computers', 320, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1893, '2009-08-27', 1536, '86993', NULL, 'LIVRO', 'Entre a Seca e a Garoa', 'Ricardo Ramos', 'ABRIL', '2009', '853640549X', 'f000000003496', 'Desconhecido', 88, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1894, '2009-09-25', 1687, 'B869.1', NULL, 'LIVRO', 'Entre as Junturas dos Ossos', 'Vera Lúcia de Oliveira', 'MINISTÉRIO DA EDUCAÇÃO', '2006', '8529600479', 'f000000003497', 'Desconhecido', 69, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1895, '2010-12-21', 3092, '770952', NULL, 'LIVRO', 'Entre Gueixas e Samurais', 'Desconhecido', 'EDUSP', '2008', '8531411009', 'f000000003499', 'Geishas', 183, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1896, '2021-12-03', 6549, '9405318', NULL, 'LIVRO', 'Entre mundos', 'Vander Saints', 'PERSPECTIVA', '2019', 'PKEY:CLDEAU41963', 'f000000003500', 'Ciência', 183, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1897, '2021-12-09', 6567, '808899282', NULL, 'LIVRO', 'Entre silêncios e gestos', 'Marcos Arthur', 'FGV', '2020', '9788510072328', 'f000000003501', 'Young Adult Fiction', 135, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1898, '2009-05-05', 113, '61073', NULL, 'LIVRO', 'Epidemiologia Teoria e Prática', 'Mauricio Gomes Pereira', 'GUANABARA KOOGAN', '1999', 'OCLC:69975686', 'f000000003502', 'Desconhecido', 596, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1899, '2009-08-18', 1503, '98103', NULL, 'LIVRO', 'Era no Tempo do Rei', 'Ruy Castro', 'OBJETIVA', '2007', '9788579620478', 'f000000003503', 'Ficção', 247, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1900, '2023-05-25', 7215, '285', NULL, 'LIVRO', 'ERA UMA VEZ A PRIMEIRA VEZ', 'João de Deus Gomes (Djunga)', 'ROCCO', '2013', '9781481777179', 'f000000003504', 'Ficção', 163, 'EN', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1901, '2010-07-12', 2680, '981061', NULL, 'LIVRO', 'Era Vargas: a modernização conservadora', 'Luciano Aronne de Abreu, Marco Aurélio Vannucchi', 'ÁTICA', '2022', '9786556231884', 'f000000003505', 'Political Science', 427, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1902, '2011-06-03', 3487, '843', NULL, 'LIVRO', 'Eram os Deuses Astronautas?', 'Erich von Däniken', 'MELHORAMENTOS', '2022', '9786555394481', 'f000000003506', 'Body, Mind & Spirit', 290, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1903, '2010-01-25', 2324, '86993', NULL, 'LIVRO', 'Éramos Seis', 'Maria José Dupré', 'ÁTICA', '1960', 'STANFORD:36105036026487', 'f000000003507', 'Desconhecido', 214, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1904, '2023-10-27', 9685, 'B8693', NULL, 'LIVRO', 'ÉRAMOS SEIS', 'Maria José Dupré', 'SGE', '1960', 'STANFORD:36105036026487', 'f000000003508', 'Desconhecido', 214, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1905, '2010-01-22', 2288, '843', NULL, 'LIVRO', 'Eran os Deuses Astronautas', 'Erich von Däniken', 'MELHORAMENTOS', '1994', '850601414X', 'f000000003509', 'Desconhecido', 181, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1906, '2023-04-14', 7248, '62082', NULL, 'LIVRO', 'ERGONOMIA', 'Uanderson Rébula De Oliveira', 'BLUCHER', '2017', 'PKEY:CLDEAU32630', 'f000000003510', 'Business & Economics', 302, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1907, '2010-01-11', 2093, '370', NULL, 'LIVRO', 'Érica Relações étnico-raciais e de gênero', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2007', '8598171751', 'f000000003512', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1908, '2014-02-04', 5533, '86993', NULL, 'LIVRO', 'Erico Verissimo Incidente em Antares', 'Desconhecido', 'CLARO ENIGMA', '2006', '8575281569', 'f000000003513', 'Desconhecido', 330, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1909, '2021-12-13', 6630, '285', NULL, 'LIVRO', 'Eros e Psiquê, Píramo e Tisbe', 'Erich Neumann', 'ESCRITA FINA', '2017', '8531613906', 'f000000003514', 'Psychology', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1910, '2012-08-07', 4910, '86993', NULL, 'LIVRO', 'Esaú e Jacó', 'Machado de Assis', 'RIDEEL', '2013', '9788520933565', 'f000000003515', 'Ficção', 351, 'PT-BR', '2025-04-10 02:24:53', NULL, 10, 9, NULL, '2025-04-09'),
+(1911, '2023-06-22', 7316, 'ESB666', NULL, 'LIVRO', 'ESBOÇOS', 'Sociedade Bíblica do Brasil, Editora Evangélica Esperança', 'VINDE COMUNICAÇÕES', '2013', 'esb980719689', 'f000000003525', 'Bibles', 6133, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1912, '2023-10-27', 9667, '915942', NULL, 'LIVRO', 'ESCALANDO SONHOS', 'aldivan teixeira torres', 'KETS', '2018', '9788873048039', 'f000000003526', 'Comics & Graphic Novels', 69, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1913, '2010-01-12', 2120, '370', NULL, 'LIVRO', 'Escola em Movimento', 'São Paulo (Estado). Secretaria da Educação', 'SE/CENP', '1994', 'OCLC:57023963', 'f000000003527', 'Desconhecido', 207, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1914, '2010-01-06', 2060, '370', NULL, 'LIVRO', 'Escola Inovadoras', 'Desconhecido', 'UNESCO', '2019', '8544430619', 'f000000003528', 'Educação', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1915, '2023-09-05', 8977, 'ESC173', NULL, 'LIVRO', 'ESCOLAS PROFISSIONAIS PÚBLICAS DO ESTADO DE SP', 'Desconhecido', 'SÃO PAULO', '2002', 'LCCN:2006336097', 'f000000003529', 'Vocational education', 239, 'PT-BR', '2025-04-10 02:24:53', NULL, 14, 13, NULL, '2025-04-09'),
+(1916, '2011-05-26', 3410, '920994053', NULL, 'LIVRO', 'Escondendo Edith', 'Kathy Kacer', 'MCGRAW-HILL', '2013', '9788506068922', 'f000000003543', 'Juvenile Fiction', 210, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1917, '2010-12-21', 3179, '32609816', NULL, 'LIVRO', 'Escravismo em São Paulo e Minas Gerais', 'Francisco Vidal Luna, Iraci del Nero da Costa, Herbert S. Klein, Horácio Gutiérrez', 'EDUSP', '2009', '8531411416', 'f000000003544', 'Slavery', 621, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1918, '2003-04-10', 951, '16', NULL, 'LIVRO', 'Escravos da Internet Net Slaves', 'Desconhecido', 'MAKRON BOOKS', '0000', 'N/A', 'f000000003545', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1919, '2009-07-29', 1137, '813', NULL, 'LIVRO', 'Escrito nas Estrelas', 'Bárbara Norton de Matos', 'RECORD', '2010', '9892310470', 'f000000003546', 'Desconhecido', 247, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1920, '2011-03-31', 3307, '371102', NULL, 'LIVRO', 'Escritos sobre jornal e educação', 'Nelson De Luca Pretto', 'GLOBAL', '2017', '9788544902431', 'f000000003548', 'Computers', 343, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1921, '2023-05-17', 7384, 'ESC224', NULL, 'LIVRO', 'ESCRITURAÇÃO CONTÁBIL S. PARA MICRO E P. EMPRESA', 'Manoel de Almeida Henrique', 'CONSELHO FEDERAL DE CONTABILIDADE', '2016', '9788599519929', 'f000000003549', 'Business & Economics', 319, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1922, '2011-05-31', 3466, '338', NULL, 'LIVRO', 'Esgoto Sanitário', 'Ariovaldo Nuvolari', 'FAT', '2021', '9788521217749', 'f000000003551', 'Technology & Engineering', 567, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1923, '2010-01-21', 2259, '8083', NULL, 'LIVRO', 'Esgritura Conquistada', 'Desconhecido', 'FUNDAÇÃO BIBLIOTECA NACIONAL', '0000', 'N/A', 'f000000003552', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1924, '2011-06-15', 3536, '92072', NULL, 'LIVRO', 'Esmeralda: por que não dancei', 'Esmeralda do Carmo Ortiz', 'NOVO CONTINENTE', '2000', 'UTEXAS:059173010075667', 'f000000003553', 'Crack (Drug)', 220, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1925, '2010-07-13', 2703, '910', NULL, 'LIVRO', 'Espaço e Técnica', 'Mílton Santos', 'COPIDART', '2002', '8531407133', 'f000000003554', 'Antropogeografia', 394, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1926, '2010-12-21', 3315, '363690981', NULL, 'LIVRO', 'Espaços Naturais de Espanha', 'Desconhecido', 'BARSA PLANETA', '2002', '8575180835', 'f000000003555', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1927, '2023-09-12', 9052, '370113', NULL, 'LIVRO', 'ESPAÇOS, OBJETOS E PRÁTICAS', 'Desconhecido', 'SÃO PAULO', '2021', '9786556520865', 'f000000003556', 'História', 284, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1928, '2010-01-25', 2294, '8135', NULL, 'LIVRO', 'Espártaco', 'Jacques Martin', 'ABRIL CULTURAL', '2004', '9724140490', 'f000000003557', 'Desconhecido', 48, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1929, '2009-04-27', 66, '616', NULL, 'LIVRO', 'Especialidades Médicas', 'Ronaldo Ribeiro Jacobina, Eduardo José Farias Borges dos Reis, Lorene Louise Silva Pinto', 'OBJETIVO SAÚDE', '2022', '6556304050', 'f000000003559', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 4, 3, NULL, '2025-04-09'),
+(1930, '2010-12-21', 3034, '809', NULL, 'LIVRO', 'Espelho Diário', 'Rosângela Rennó, Alícia Duarte Penna', 'UFMG', '2008', 'STANFORD:36105210708033', 'f000000003563', 'Desconhecido', 488, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1931, '2023-10-30', 9728, '808899282', NULL, 'LIVRO', 'ESPELHOS', 'Everardo Rocha', 'GUIA DOS CURIOSOS COMUNICAÇÕES', '2003', '8574781010', 'f000000003564', 'Social Science', 144, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1932, '2023-06-22', 7302, '2488', NULL, 'LIVRO', 'ESPERANÇA PARA A FAMÍLIA', 'Willie e Elaine Oliver', 'CASA PUBLICADORA BRASILEIRA', '2019', '9788534527118', 'f000000003565', 'Religião', 78, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1933, '2023-05-16', 7207, '230', NULL, 'LIVRO', 'ESPERANÇA VIVA', 'Desconhecido', 'CASA PUBLICADORA BRASILEIRA', '2009', 'OCLC:927456359', 'f000000003566', 'Evangelistic work', 111, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1934, '2014-09-15', 5667, '79607', NULL, 'LIVRO', 'Esporte para a vida no ensino médio', 'Cristiana Pinciroli', 'TELOS', '2021', '9786586119633', 'f000000003568', 'Biography & Autobiography', 529, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1935, '2011-06-21', 3578, '86991', NULL, 'LIVRO', 'Espumas Flutuantes', 'Castro Alves', 'BIBLIOTECA FOLHA', '2024', '9788582851968', 'f000000003576', 'Poesia', 460, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1936, '2009-08-05', 1346, '86991', NULL, 'LIVRO', 'Espumas Flutuantes', 'Castro Alves', 'FTD', '2024', '9788582851968', 'f000000003570', 'Poesia', 460, 'PT-BR', '2025-04-10 02:24:53', NULL, 6, 5, NULL, '2025-04-09'),
+(1937, '2009-08-14', 1472, '882', NULL, 'LIVRO', 'Ésquilo Orestéia I Agamemnon', 'Trajano Vieira', 'ILUMINURAS', '2020', '9788527312110', 'f000000003577', 'Drama', 200, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1938, '2009-08-14', 1473, '882', NULL, 'LIVRO', 'Ésquilo Orestéia II Coéforas', 'Ésquilo', 'ILUMINURAS', '2004', '8573212055', 'f000000003578', 'Desconhecido', 157, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1939, '2009-08-14', 1474, '882', NULL, 'LIVRO', 'Ésquilo Orestéia III Eumênides', 'Guilherme Fulgêncio Vieira', 'ILUMINURAS', '2023', '9786525272801', 'f000000003579', 'Law', 193, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1940, '2014-01-21', 5423, '86991', NULL, 'LIVRO', 'Esquimó', 'Fabrício Corsaletti', 'A PÁGINA', '2010', '9788580860344', 'f000000003580', 'Poesia', 84, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1941, '2009-08-20', 1513, '86993', NULL, 'LIVRO', 'Essa Terra', 'Antônio Torres', 'CIVILIZAÇÃO BRASILEIA', '2011', '9788501097453', 'f000000003581', 'Ficção', 132, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1942, '2021-12-09', 6584, '285', NULL, 'LIVRO', 'Essas pequenas ocasiões que nos fazem quem somos', 'Desconhecido', 'HUM PUBLICAÇÕES', '0000', 'N/A', 'f000000003582', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1943, '2014-02-04', 5502, '86998', NULL, 'LIVRO', 'Esse Nosso Português', 'Joana Fernandes', 'EDIOURO', '1993', 'WISC:89052055381', 'f000000003583', 'Indians of South America', 154, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1944, '2023-12-06', 10130, '8693', NULL, 'LIVRO', 'ESSES LIVROS DENTRO DA GENTE: UMA CONVERSA COM A P', 'Jorge Elmano Pintinha Bártolo', 'IMPERIAL NOVO MILÊNIO', '2022', '9786555297911', 'f000000003584', 'Ficção', 143, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1945, '2023-09-11', 9007, 'ESS289', NULL, 'LIVRO', 'ESSETIAL IDIOMS IN ENGLISH', 'Robert James Dixson', 'AO LIVRO TÉCNICO S.A.', '2004', '0131411764', 'f000000003585', 'Foreign Language Study', 276, 'EN', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1946, '2009-08-31', 1562, '36566', NULL, 'LIVRO', 'Estação Carandiru', 'Drauzio Varella', 'CIA. DAS LETRAS', '2005', '9788580864250', 'f000000003586', 'Social Science', 236, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1947, '2023-04-06', 7152, 'EST225', NULL, 'LIVRO', 'ESTAÇÕES', 'Mario Sergio Cortella, Rossandro Klinjey', 'CEAC', '2023', '9786555920468', 'f000000003587', 'Filosofia', 166, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1948, '2010-02-23', 2440, '77', NULL, 'LIVRO', 'Estampos', 'Sérgio da Cruz', 'EDITORA MESTRE JOU', '2008', '8528905608', 'f000000003588', 'Desconhecido', 227, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1949, '2011-05-26', 3414, '86993', NULL, 'LIVRO', 'Estas Estórias', 'João Guimarães Rosa', 'EDIOURO', '2021', '9786556120898', 'f000000003589', 'Ficção', 352, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1950, '2003-04-10', 826, '2140', NULL, 'LIVRO', 'Estatistíca', 'Angola. Repartição de Estatística Geral', 'COPIDART', '1956', '9788522704606', 'f000000003590', 'Angola', 308, 'PT-BR', '2025-04-10 02:24:53', NULL, 5, 4, NULL, '2025-04-09'),
+(1951, '2003-04-10', 567, '3107', NULL, 'LIVRO', 'Estatística', 'Nelson Pereira Castanheira', 'SARAIVA', '2023', '9788522704606', 'f000000003595', 'Mathematics', 308, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1952, '2009-05-19', 259, '519024658', NULL, 'LIVRO', 'Estatística Aplicada à Administração', 'David Ray Anderson, Dennis J. Sweeney, Thomas A. Williams', 'HARPER & ROW DO BRASIL', '2002', '8522102473', 'f000000003596', 'Desconhecido', 642, 'PT-BR', '2025-04-10 02:24:53', NULL, 5, 4, NULL, '2025-04-09'),
+(1953, '2023-04-14', 7225, '5195024658', NULL, 'LIVRO', 'ESTATISTICA APLICADA À GESTÃO EMPRESARIAL', 'Adriano Leal Bruni', 'ATLAS', '2000', '8522480915', 'f000000003601', 'Industrial management', 413, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1954, '2009-05-27', 458, '5195', NULL, 'LIVRO', 'Estatistica Básica', 'Pedro A. Morettin, Wilton O. Bussab', 'SARAIVA', '2023', '6587958494', 'f000000003603', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1955, '2009-05-27', 460, '658562', NULL, 'LIVRO', 'Estatística para a Qualidade', 'SONIA VIEIRA', 'ELSEVIER', '0000', '8535244905', 'f000000003604', 'Desconhecido', 280, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1956, '2010-01-21', 2237, '340', NULL, 'LIVRO', 'Estatuto da Criança e do Adolencente', 'HOME SALE DIGITAL', 'MINISTÉRIO DA SAÚDE', '0000', 'est058917203', 'f000000003605', 'Study Aids', 628, 'PT-BR', '2025-04-10 02:24:53', NULL, 9, 8, NULL, '2025-04-09'),
+(1957, '2023-08-02', 7494, 'EST265', NULL, 'LIVRO', 'ESTATUTO DA CRIANÇA E DO ADOLESCENTE', 'HOME SALE DIGITAL', 'ATLAS', '0000', 'est368562576', 'f000000003615', 'Study Aids', 628, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1958, '2009-05-12', 162, '310320', NULL, 'LIVRO', 'Estatuto da Criança e do Adolescente', 'HOME SALE DIGITAL', 'MINISTÉRIO DA SAÚDE', '0000', 'est347398283', 'f000000003614', 'Study Aids', 628, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1959, '2009-09-16', 1577, '86993', NULL, 'LIVRO', 'Este seu Olhar', 'Alcione Araújo', 'MODERNA', '2006', 'UOM:39015068822983', 'f000000003616', 'Young Adult Fiction', 110, 'PT-BR', '2025-04-10 02:24:53', NULL, 1, 0, NULL, '2025-04-09'),
+(1960, '2014-09-05', 5648, '11185', NULL, 'LIVRO', 'Estética Filosófica', 'Fernando R. de Moraes Barros', 'AUTÊNTICA', '2017', '9788582178232', 'f000000003617', 'Social Science', 165, 'PT-BR', '2025-04-10 02:24:53', NULL, 2, 1, NULL, '2025-04-09'),
+(1961, '2023-09-06', 8991, '8186', NULL, 'LIVRO', 'ESTILHAÇA-ME', 'Tahereh Mafi', 'UNIVERSO DOS LIVROS', '2012', '9788581630892', 'f000000003619', 'Ficção', 335, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09');
+INSERT INTO `tblivros_acervo_real` (`codigo`, `data_aquisicao`, `tombo`, `cdd_cutter`, `nome_escola`, `classe`, `titulo`, `autor`, `editora`, `ano_publicacao`, `isbn`, `isbn_falso`, `genero`, `num_paginas`, `idioma`, `data_edicao`, `edicao`, `quantidade`, `qnt_emp_disponivel`, `cadastrado_por`, `data_cadastro`) VALUES
+(1962, '2014-11-24', 5694, '65872', NULL, 'LIVRO', 'Estoque e Compras : Introdução às práticas da Gest', 'Nestor Alberto Rancich Filho', 'VIENA', '2024', '9788559725612', 'f000000003620', 'Business & Economics', 175, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1963, '2023-12-04', 10099, '658787', NULL, 'LIVRO', 'ESTOQUES E ARMAZENAGEM', 'Renato Jardim Parducci', 'ÉRICA', '2023', '9788539640935', 'f000000003621', 'Business & Economics', 145, 'PT-BR', '2025-04-10 02:24:54', NULL, 2, 1, NULL, '2025-04-09'),
+(1964, '2024-03-01', 10262, '6584063', NULL, 'LIVRO', 'ESTRATÉGIA DE INOVAÇÃO OPORTUNIDADES E COMPETÊNCIA', 'Daniel Pacheco Lacerda, Rafael Teixeira, Junico Antunes, Secundino L. H. Corcini Neto', 'MANOLE', '2014', '9788582601525', 'f000000003623', 'Business & Economics', 468, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1965, '2023-12-04', 10085, '6580546', NULL, 'LIVRO', 'ESTRATÉGIAS DE MARKETING DIGITAL E E-COMMERCE', 'Sandra R Turchi', 'ATLAS', '2018', '8597014695', 'f000000003624', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:24:54', NULL, 2, 1, NULL, '2025-04-09'),
+(1966, '2023-08-01', 8312, '79601', NULL, 'LIVRO', 'ESTRATÉGIAS DE NUTRIÇÃO E SUPLEMENTAÇÃO NO ESPORTE', 'Simone Biesek, Letícia Azen Alves, Isabela Guerra', 'MANOLE', '0000', '9788520447161', 'f000000003626', 'Desconhecido', 819, 'EN', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1967, '2011-03-31', 3308, '4607', NULL, 'LIVRO', 'Estratégias motivacionais para aulas de espanhol', 'Márcia Baima Taleires de Vasconcelos, Maria Valdênia Falcão do Nascimento', 'CIA. EDITORA NACIONAL', '2022', '9786525230542', 'f000000003627', 'Language Arts & Disciplines', 73, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1968, '2009-08-17', 1487, '86991', NULL, 'LIVRO', 'Estrela da Vida Inteira', 'Manuel Bandeira', 'NOVA FRONTEIRA', '2007', '8520919758', 'f000000003628', 'Desconhecido', 574, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1969, '2023-10-27', 9654, '285', NULL, 'LIVRO', 'ESTRELA DE RABO E MAIS HISTÓRIAS', 'Nilma Lacerda', 'VITRINE EDITORA', '2021', '9786556402994', 'f000000003629', 'Juvenile Fiction', 89, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1970, '2024-05-10', 10634, '285', NULL, 'LIVRO', 'ESTRELAS TORTAS', 'Walcyr Carrasco, Getúlio Delphin', 'MODERNA', '1997', '8516015963', 'f000000003630', 'Brazil', 95, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1971, '2023-09-04', 8893, '22ED370', NULL, 'LIVRO', 'ESTRTURA E FUNCIONAMENTO DA EDUCAÇÃO BÁSICA', 'Nelson Valente', 'UNICESUMAR', '2000', '8586437506', 'f000000003631', 'Desconhecido', 236, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1972, '2009-05-13', 180, '658402', NULL, 'LIVRO', 'Estrutura das Organizações', 'Eduardo Vasconcellos, James R. Hemsley', 'CENGAGE LEARNING', '1997', '8522100632', 'f000000003632', 'Desconhecido', 207, 'PT-BR', '2025-04-10 02:24:54', NULL, 5, 4, NULL, '2025-04-09'),
+(1973, '2012-05-15', 4686, '6573', NULL, 'LIVRO', 'Estrutura e Análise de Balanços', 'Alexandre Assaf Neto', 'SARAIVA', '1987', '8522402493', 'f000000003637', 'Desconhecido', 94, 'PT-BR', '2025-04-10 02:24:54', NULL, 2, 1, NULL, '2025-04-09'),
+(1974, '2003-04-10', 767, '65815', NULL, 'LIVRO', 'Estrutura e Análise de Balanços Fácil', 'Osni Moura Ribeiro', 'SARAIVA', '2009', '8502078771', 'f000000003639', 'Desconhecido', 254, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1975, '2013-10-17', 5394, '51', NULL, 'LIVRO', 'Estruturas de Dados e Algoritmos', '	 Basant Agarwal', 'CAMPUS', '2023', '9788575228500', 'f000000003640', 'Computers', 17, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1976, '2023-09-12', 9088, 'EST677', NULL, 'LIVRO', 'ESTUDANDO O NOSSO CORPO', 'John Land Carth', 'IBEP', '2015', 'PKEY:CLDEAU25371', 'f000000003641', 'Religião', 163, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1977, '2009-08-10', 1407, '1432', NULL, 'LIVRO', 'Estudo de Caso : Uma Estratégia de Pesquisa', 'Gilberto de Andrade Martins', 'ATLAS', '2006', '8522443513', 'f000000003642', 'Desconhecido', 101, 'PT-BR', '2025-04-10 02:24:54', NULL, 2, 1, NULL, '2025-04-09'),
+(1978, '2003-04-10', 963, '53', NULL, 'LIVRO', 'Estudo Dirigido de Microsoft Office Excel 2003', 'André Luiz Navarro Garcia Manzano', 'ÉRICA', '2008', '8536500115', 'f000000003644', 'Desconhecido', 214, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1979, '2003-04-10', 964, '5369', NULL, 'LIVRO', 'Estudo Dirigido Delphi 8', 'Mílton Bender Júnior', 'ÉRICA', '2004', '8588503301', 'f000000003645', 'Desconhecido', 191, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1980, '2023-05-17', 7381, '3727', NULL, 'LIVRO', 'ESTUDO GOSTOSO DE MATEMÁTICA', 'Toru Kumon, KUMON INSTITUTO DE EDUCAÇÃO.', 'DTPHOENIX EDITORAL', '1997', 'OCLC:45781115', 'f000000003646', 'Desconhecido', 111, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1981, '2023-09-12', 9059, '3727', NULL, 'LIVRO', 'ESTUDO GOSTOSO DE MATEMÁTICA', 'Toru Kumon, KUMON INSTITUTO DE EDUCAÇÃO.', 'EDIOURO', '1997', 'OCLC:45781115', 'f000000003647', 'Desconhecido', 111, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1982, '2024-09-30', 10899, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 1 - LINGUAGEM NO PROCESSO DE', 'Nara Hiroko Takaki, Gabriela Claudino Grande, Alan Victor Freitas de Andrade, Ana Karina de Oliveira Nascimento, Andréa Machado de Almeida Mattos, Berenice Alves da Silva Altafini, Daniel Ferraz, Emmilly Keymi Imaoka, Fernanda Belarmino de Santana Scaini, Leandro Queiroz, Gislaine Sartório Andrade, Jany Baena Fernandez, Maria Gabrielly Vilaça Rodrigues, Mario Marcio Godoy, Milena Oliveira Reis, Noelene da Costa Lima Silva, Raissa Menezes Mesquita, Rosana Daza de Garcia, Vinícius de Oliveira', 'FTD', '2023', 'est829535875', 'f000000003648', 'Educação', 211, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1983, '2024-09-30', 10890, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 10 - NOMEAR', 'Alex Alves Egido, Josimayre Novelli', 'FTD', '2022', '9786587090610', 'f000000003649', 'Educação', 248, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1984, '2024-09-30', 10889, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 11 - CARACTERIZAR', 'Rita de Cássia Souto Maior Rita, Maria Diniz Zozzoli , Geison Araujo Silva ', 'FTD', '2020', '9786599282409', 'f000000003650', 'Language Arts & Disciplines', 631, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1985, '2024-09-30', 10888, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 12 - CONTAR E ESPECIFICAR', 'Desconhecido', 'FTD', '1978', 'STANFORD:36105131111085', 'f000000003651', 'Africa', 170, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1986, '2024-09-30', 10898, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 2 - DIVERSIDADES COMPÕEM A LÍ', 'Luzia Schalkoski Dias, Maria Lúcia de Castro Gomes', 'FTD', '2023', '9788522705207', 'f000000003652', 'Language Arts & Disciplines', 159, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1987, '2024-09-30', 10896, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 4 - NOSSA LÍNGUA PORTUGUESA', 'Clarinda de Azevedo Maia, Isabel Almeida Santos', 'FTD', '2019', '9789892617558', 'f000000003653', 'Language Arts & Disciplines', 564, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1988, '2024-09-30', 10895, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 5 - O PAPEL DO CONTEXTO', 'Aldenir Chagas Alves, Aline Moreira Fonseca Nascimento, Anair Valênia Martins Dias, Annaihê Catherine dos Anjos Ribeiro, Bruno Franceschini, Carlos Henrique Alves Vieira, Edna Cristina Muniz da Silva, Eduardo Antônio Borges dos Santos, Elvis de Souza Alves, Fabíola Aparecida Sartin Dutra Parreira Almeida, Fernanda Gurgel Prefeito, Gabriela Assunção Santos, Geane do Socorro Rovere Leal Pinheiro, Hellyana Rocha e Silva, Ingride Chagas Gomes , Jéssica Cantele de Freitas, Joaquim Generoso de Freitas Neto, Kézia Viana da Silva, Leandra Aparecida Mendes dos Santos Rodrigues , Lucas Eduardo Marques- Santos, Luciana Borges, Luciane Guimarães de Paula, Maiune de Oliveira Silva, Ludimilla Moreira Marques, Maximiano Antônio Pereira, Mirna Cibelle Barcelos de Aguiar, Neuzamar Marques Barbosa, Pabrícia Abadia Pereira Félix , Sara Regina Scotta Cabral, Sheila de Carvalho Pereira Gonçalves, Silvania Aparecida Alvarenga Nascimento, Terezinha de Assis Oliveira, Thainá Pereira Gonçalves, Vanessa Regina Duarte Xavier, Wáquila Pereira Neigrames', 'FTD', '2023', '9786559398164', 'f000000003654', 'Language Arts & Disciplines', 514, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1989, '2024-09-30', 10894, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 6 - RELAÇÕES DE SENTIDO ENTRE', 'Desconhecido', 'FTD', '1995', 'UTEXAS:059173005731518', 'f000000003655', 'Linguistics', 616, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1990, '2024-09-30', 10893, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 7 - PALAVRA EM FORMAÇÃO I', 'Adriana Rodrigues Mendonça, Adriano Martins Soler, Caroline Alves Soler, Cristiane Freire de Sá, Debora Gabriele dos Santos Pinto, Érika Cristina Silva Alves, Isadora Lima Santana da Silva, Juliana Bastos Rodrigues, Manoella Vitória dos Santos Francisco, Miryam Borges de Matos, Rosely Diniz da Silva Machado, Rosemeire Rodrigues de Oliveira, Rubens Lacerda de Sá, Vinícius Siqueira de Lima', 'FTD', '2024', '9788572211475', 'f000000003656', 'Language Arts & Disciplines', 240, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1991, '2024-09-30', 10892, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 8 - PALAVRAS EM FORMAÇÃO II', 'C. G. Jung', 'FTD', '2019', '9788532662347', 'f000000003657', 'Psychology', 456, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1992, '2024-09-30', 10891, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUAGEM 9 - EFEITOS ESPECIAIS DE ARTI', 'Alex Alves Egido, Josimayre Novelli', 'FTD', '2022', '9786587090610', 'f000000003658', 'Educação', 248, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1993, '2024-09-30', 10897, '37319', NULL, 'LIVRO', 'ESTUDOS DA LINGUGEM 3 - COMUNICAÇÃO CARREGADA DE S', 'Desconhecido', 'FTD', '0000', '9788539701339', 'f000000003659', 'Desconhecido', 208, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1994, '2023-09-13', 9110, 'EST610', NULL, 'LIVRO', 'ESTUDOS DE HISTÓRIA DO BRASIL', 'Francisco Maria Pires Teixeira, José Dantas', 'MODERNA', '1971', 'OCLC:164653091', 'f000000003660', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1995, '2024-04-09', 10449, 'ETA257', NULL, 'LIVRO', 'ETANOL E BIODIESEL', 'Carolina Roberta Alves de Matos', 'SÃO PAULO', '2012', '8586624829', 'f000000003665', 'Biodiesel fuels', 104, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1996, '2023-08-23', 8571, 'ETA153', NULL, 'LIVRO', 'ETANOL E BIODIESEL', 'Carolina Roberta Alves de Matos', 'SECRETARIA DO MEIO AMBIENTE', '2012', '8586624829', 'f000000003661', 'Biodiesel fuels', 104, 'PT-BR', '2025-04-10 02:24:54', NULL, 4, 3, NULL, '2025-04-09'),
+(1997, '2023-10-27', 9629, '285', NULL, 'LIVRO', 'ETERNO', 'William Siniscalchi', 'NACIONAL', '2017', '9788582454770', 'f000000003666', 'Poesia', 39, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1998, '2010-01-27', 2368, '3704', NULL, 'LIVRO', 'Ética e Cidadania', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '1997', '8530804589', 'f000000003667', 'Educação', 120, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(1999, '2002-06-10', 2831, '1720981', NULL, 'LIVRO', 'Ética e Cidadania', 'Desconhecido', 'MODERNA', '1997', '8530804589', 'f000000003668', 'Educação', 120, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(2000, '2023-04-14', 7232, '370114', NULL, 'LIVRO', 'ÉTICA E CIDADANIA ORGANIZACIONAL', 'Paulo Roberto Barsano', 'ÉRICA', '2012', '8536504129', 'f000000003669', 'Technology & Engineering', 0, 'PT-BR', '2025-04-10 02:24:54', NULL, 2, 1, NULL, '2025-04-09'),
+(2001, '2009-05-29', 495, '1744081', NULL, 'LIVRO', 'Ética Empresarial', 'Desconhecido', 'VOZES', '0000', '9788578386337', 'f000000003671', 'Desconhecido', 30, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(2002, '2010-01-11', 2092, '370', NULL, 'LIVRO', 'Ética Inclusão e Exclusão Social', 'Eduardo Carlos Bianca Bittar', 'MINISTÉRIO DA EDUCAÇÃO', '2004', '8520421350', 'f000000003672', 'Desconhecido', 292, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(2003, '2023-08-02', 7500, '1744', NULL, 'LIVRO', 'ÉTICA NA GESTÃO EMPRESARIAL', 'Francisco Gomes de Matos', 'SARAIVA', '2016', '8547209794', 'f000000003673', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:24:54', NULL, 1, 0, NULL, '2025-04-09'),
+(2004, '2009-05-26', 445, '174', NULL, 'LIVRO', 'Ética Profissional', 'Antônio Lopes de Sá', 'ATLAS', '2019', '8597021225', 'f000000003674', 'Business & Economics', 0, 'PT-BR', '2025-04-10 02:24:54', NULL, 5, 4, NULL, '2025-04-09'),
+(2005, '2012-03-13', 4241, '37327', NULL, 'LIVRO', 'Ética Profissional e Cidadania Organizacional', 'Paulo Roberto Barsano', 'FUNDAÇÃO PADRE ANCHIETA', '2012', '8536504129', 'f000000003679', 'Technology & Engineering', 0, 'PT-BR', '2025-04-10 02:24:54', NULL, 128, 127, NULL, '2025-04-09'),
+(2006, '2010-01-11', 2091, '370', NULL, 'LIVRO', 'Ética Protagonismo Juvenil', 'Desconhecido', 'MINISTÉRIO DA EDUCAÇÃO', '2007', '8598171743', 'f000000003807', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2007, '2003-04-10', 641, '302', NULL, 'LIVRO', 'Ética, Cidadania e Trabalho', 'Desconhecido', 'COPIDART', '1997', '8530804589', 'f000000003808', 'Educação', 120, 'PT-BR', '2025-04-10 02:24:55', NULL, 4, 3, NULL, '2025-04-09'),
+(2008, '2014-01-22', 5470, '285', NULL, 'LIVRO', 'Eu e o Silêncio do meu pai', 'Caio Riter', 'BIRUTA', '2019', '9788578482558', 'f000000003812', 'Juvenile Fiction', 99, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2009, '2009-08-06', 1362, '80881', NULL, 'LIVRO', 'Eu e Outras Poesias', 'Augusto dos Anjos', 'MARTIN CLARET', '1998', '9788525428349', 'f000000003813', 'Poesia', 279, 'PT-BR', '2025-04-10 02:24:55', NULL, 3, 2, NULL, '2025-04-09'),
+(2010, '2023-10-27', 9683, '869', NULL, 'LIVRO', 'EU ESTAVA AQUI... E VOCÊ?', 'Lenice Shymidt', 'N2I', '2021', '9789895280650', 'f000000003816', 'Ficção', 181, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2011, '2024-02-09', 10195, 'B8693', NULL, 'LIVRO', 'EU MATEI JK', 'Desconhecido', 'PANDECTAS', '0000', 'N/A', 'f000000003817', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2012, '2010-12-21', 3181, '869909', NULL, 'LIVRO', 'Eu sou atlântica', 'Alex Ratts', 'INSTITUTO KUANZA', '2007', 'STANFORD:36105132324570', 'f000000003818', 'Black people', 148, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2013, '2024-10-01', 10974, '92072', NULL, 'LIVRO', 'EU SOU MALALA', 'Malala Yousafzai, Patricia McCormick', 'COMPANHIA DAS LETRAS', '2015', '9788543802732', 'f000000003820', 'Young Adult Nonfiction', 199, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2014, '2023-08-08', 8585, '92072', NULL, 'LIVRO', 'EU SOU MALALA', 'Malala Yousafzai, Patricia McCormick', 'SCHWARCZ', '2015', '9788543802732', 'f000000003819', 'Young Adult Nonfiction', 199, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2015, '2021-12-09', 6576, '37082095491', NULL, 'LIVRO', 'Eu sou Malala', 'Malala Yousafzai, Patricia McCormick', 'SEGUINTE', '2015', '9788543802732', 'f000000003821', 'Young Adult Nonfiction', 199, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2016, '2023-12-04', 10075, '8691', NULL, 'LIVRO', 'EU(S): PEQUENA ANTOLOGIA', 'Maria Teresa Horta', 'PARÁBOLA', '2019', '9789722067324', 'f000000003822', 'Poesia', 257, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2017, '2023-08-01', 7474, '285', NULL, 'LIVRO', 'EU, DETETIVE O CASO DO SUMIÇO', 'Stella Carr', 'MODERNA', '2005', '8516035891', 'f000000003823', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2018, '2023-05-26', 7219, '285', NULL, 'LIVRO', 'EU, DETETIVE- O CASO DO SUMIÇO', 'Stella Carr', 'MODERNA', '2005', '8516035891', 'f000000003824', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2019, '2023-11-07', 9848, '813', NULL, 'LIVRO', 'EU, MINHA IRMÃ E SEU UNIVERSO PARTICULAR', 'Eileen Garvin', 'ASTRAL', '2019', '9788522006878', 'f000000003825', 'Ficção', 218, 'PT-BR', '2025-04-10 02:24:55', NULL, 40, 39, NULL, '2025-04-09'),
+(2020, '2023-12-01', 10035, '8130876', NULL, 'LIVRO', 'EU, ROBÔ', 'Isaac Asimov', 'ALEPH', '2015', '9788576572039', 'f000000003865', 'Ficção', 323, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2021, '2023-11-06', 9805, 'EUC365', NULL, 'LIVRO', 'EUCLIDES DA CUNHA EM QUADRINHOS', 'Adelino Brandão', 'DIRETA', '2001', 'UTEXAS:059173010383319', 'f000000003866', 'Authors, Brazilian', 800, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2022, '2010-12-21', 3279, '581981', NULL, 'LIVRO', 'Eugen Warming e o cerrado brasileiro: um século de', 'Aldo Luiz Klein', 'UNESP', '2000', '8571393540', 'f000000003867', 'Botany', 168, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2023, '2012-08-29', 5236, '843', NULL, 'LIVRO', 'Eugênia Grandet', 'Honoré de Balzac', 'ABRIL CULTURAL', '2022', '9786558300380', 'f000000003868', 'Ficção', 94, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2024, '2024-04-12', 10524, 'EUR749', NULL, 'LIVRO', 'EURICO, O PRESBÍTERO', 'Alexandre Herculano', 'TRÊS', '1972', 'IND:39000003952806', 'f000000003869', 'Portuguese language', 394, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2025, '2024-03-28', 10354, 'EVE181', NULL, 'LIVRO', 'EVERYDAY ADVENTURES', 'Desconhecido', 'PANINI BRASIL', '1920', 'OCLC:727182213', 'f000000003870', 'Desconhecido', 0, 'EN', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2026, '2023-09-11', 9009, 'EVE903', NULL, 'LIVRO', 'EVERYDAY DIALOGUES IN ENGLISH', 'Lydia Winter, Zigzag English', 'AO LIVRO TÉCNICO S.A.', '2023', '9781914911064', 'f000000003872', 'Study Aids', 114, 'EN', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2027, '2024-04-11', 10504, 'EVI168', NULL, 'LIVRO', 'EVIDÊNCIA CRIMINAL - AL CAPONE E OUTROS QUE ABALAR', 'Desconhecido', 'LIVRO ESCALA', '0000', 'N/A', 'f000000003873', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2028, '2003-04-10', 551, '61073084', NULL, 'LIVRO', 'Exame Clínico de Enfermagem do Adulto', 'Vera Lúcia Regina Maria', 'IATRIA', '2003', '8576140144', 'f000000003874', 'Desconhecido', 286, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2029, '2024-09-18', 10811, 'EXA917', NULL, 'LIVRO', 'EXAME FÍSICO NO ADULTO', 'VARIOS AUTORES', 'MARTINARI', '0000', '8581160115', 'f000000003875', 'Desconhecido', 230, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2030, '2010-01-26', 2336, '1642', NULL, 'LIVRO', 'Excel 7.0 passo a passo básico', 'A. S. Kalra', 'TERRA', '1998', '1864412860', 'f000000003876', 'Juvenile Nonfiction', 76, 'EN', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2031, '2003-04-10', 961, '5369', NULL, 'LIVRO', 'Excel Avançado', 'Antonio Fernando Cinto , Wilson Moraes Góes', 'NOVATEC', '2015', '9788575224267', 'f000000003877', 'Computers', 45, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2032, '2011-07-05', 3608, '373', NULL, 'LIVRO', 'Execução Penal', 'Julio Fabbrini Mirabete, Renato N. Fabbrini', 'ATLAS', '2024', '9786561201452', 'f000000003879', 'Law', 865, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2033, '2023-09-12', 9061, 'EXE950', NULL, 'LIVRO', 'EXERCÍCIOS DE GEOMETRIA PLANA', 'Alberto Nunes Serrão', 'LIVRARIA NOBEL S.A.', '1971', 'OCLC:46758253', 'f000000003880', 'Desconhecido', 136, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2034, '2023-09-14', 9121, 'EXE135', NULL, 'LIVRO', 'EXERCICIOS DE QUÍMICA', 'Desconhecido', 'LUMEN', '1941', 'OCLC:912527750', 'f000000003881', 'Desconhecido', 175, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2035, '2010-01-06', 2043, '12168', NULL, 'LIVRO', 'Exercícios Filosóficos', 'Ilaria Gaspari', 'MARTINS FONTES', '2020', '6586683483', 'f000000003882', 'Ficção', 0, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2036, '2024-08-13', 10761, 'EXE633', NULL, 'LIVRO', 'EXERCÍCIOS ORIENTAÇÃO DE ESTUDO - HISTÓRIA, GEOGRA', 'Ana Chrystina Mignot', 'OBJETIVO', '2024', '9786525166087', 'f000000003883', 'Educação', 227, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2037, '2024-08-13', 10760, 'EXE388', NULL, 'LIVRO', 'EXERCÍCIOS ORIENTAÇÃO DE ESTUDO - MATEMÁTICA, FÍSI', 'Alex Souto Maior', 'OBJETIVO', '2011', '9788576554660', 'f000000003884', 'Medical', 348, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2038, '2023-09-11', 8997, 'EXE294', NULL, 'LIVRO', 'EXERCISES IN ENGLISH CONVERSATION', 'George Henry Bateson WRIGHT', 'AO LIVRO TECNICO S.A', '0000', 'OCLC:503898175', 'f000000003885', 'Desconhecido', 0, 'EN', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2039, '2023-05-11', 7190, '9301', NULL, 'LIVRO', 'EXISTIU OUTRA HUMANIDADE', 'J.J. Benitez', 'RECORD', '2012', '9788576659457', 'f000000003886', 'História', 234, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2040, '2012-08-29', 5263, '813', NULL, 'LIVRO', 'Exodus', 'Benno Jacob', 'ABRIL CULTURAL', '1992', '0881250287', 'f000000003887', 'Religião', 1256, 'EN', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2041, '2023-11-06', 9806, '86993', NULL, 'LIVRO', 'EXPEDIÇÃO VERA CRUZ', 'Ronaldo Luiz Souza', 'VERMELHO MARINHO', '2017', '8582650981', 'f000000003888', 'Fantasy fiction, Brazilian', 0, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2042, '2016-05-03', 6212, '37311', NULL, 'LIVRO', 'Experiências inovadoras de ensino e aprendizagem', 'Ana Carolina Parolini Borges Durante, Ana Laura da Silva, Bianca Soares de Oliveira Gonçalves, Camila Vilela de Queiroz, Cláudia Almeida Rodrigues Murta, Demétrius Faria dos Santos, Fernanda Ribeiro, Gyzely Suely Lima, Irene Izilda da Silva, Juliana de Fátima Batista, Keila Adriana Magalhães Ferreira, Marco Aurélio Costa Pontes, Marilane de Abreu Lima Miranda, Raphael Marco Oliveira Carneiro, Valeska Virgínia Soares Souza', 'CENTRO UNIVERSITÁRIO FEI CPS', '2022', '9786553681576', 'f000000003889', 'Antiques & Collectibles', 215, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2043, '2009-10-30', 1984, '100', NULL, 'LIVRO', 'Explicando a Filosofia com Arte', 'Benedito Nunes', 'EDIOURO', '1989', '8508032498', 'f000000003890', 'Desconhecido', 128, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2044, '2022-11-29', 7128, 'EXP645', NULL, 'LIVRO', 'EXPLORANDO O ENSINO DA MATEMÁTICA', 'Suely Druck, Brasil. Secretaria Nacional de Educação Básica', 'MINISTÉRIO DA EDUCAÇÃO', '2004', '8598171131', 'f000000003892', 'Desconhecido', 288, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2045, '2023-09-12', 9079, 'EXP846', NULL, 'LIVRO', 'EXPLORANDO O ENSINO DA MATEMÁTICA 1', 'Suely Druck, Brasil. Secretaria Nacional de Educação Básica', 'MINISTÉRIO DA EDUCAÇÃO', '2004', '8598171131', 'f000000003893', 'Desconhecido', 288, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2046, '2023-09-12', 9064, 'EXP972', NULL, 'LIVRO', 'EXPLORANDO O ENSINO DA MATEMÁTICA 2', 'Suely Druck, Brasil. Secretaria Nacional de Educação Básica', 'MINISTÉRIO DA EDUCAÇÃO', '2004', '859817114X', 'f000000003894', 'Desconhecido', 176, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2047, '2010-01-07', 2067, '3701', NULL, 'LIVRO', 'Explorando o Universo da Música', 'Nicole Jeandot', 'SCIPIONE', '2008', '8526267914', 'f000000003895', 'Desconhecido', 174, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2048, '2023-10-06', 9621, 'EXP820', NULL, 'LIVRO', 'EXPLORER DICIONÁRIO DE TERMOS TÉCNICOS DE INFORMÁT', 'Desconhecido', 'ETEC', '1980', 'UOM:39015027460412', 'f000000003896', 'Artificial satellites', 652, 'EN', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2049, '2009-10-07', 1859, '5115', NULL, 'LIVRO', 'Expressões Regulares Uma Abordagem Divertida', 'Aurelio Marinho Jargas', 'NOVATEC', '2016', '9788575224755', 'f000000003897', 'Computers', 173, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2050, '2023-05-02', 7481, '3701', NULL, 'LIVRO', 'EXTENÇÃO OU COMUNICAÇÃO', 'Paulo Freire, Rosisca Darcy Oliveira', 'PAZ E TERRA', '1979', 'OCLC:816823911', 'f000000003898', 'Desconhecido', 93, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2051, '2014-01-22', 5473, '8690', NULL, 'LIVRO', 'Fábulas Entortadas', 'ISRAEL JELIN, SEBASTIAO NUNES', 'DUBOLSINHO', '0000', '8581090508', 'f000000003899', 'Desconhecido', 104, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2052, '2003-04-10', 958, '38433', NULL, 'LIVRO', 'Faça um Site Comércio Eletrônico com ASP + HTML', 'Desconhecido', 'ÉRICA', '0000', 'N/A', 'f000000003900', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2053, '2011-05-31', 3457, '5369', NULL, 'LIVRO', 'Faça um Site Dreamweaver 8 para Windows', 'Dori Smith', 'ÉRICA', '2005', '9780132798303', 'f000000003901', 'Computers', 764, 'EN', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2054, '2003-04-10', 971, '5133', NULL, 'LIVRO', 'Faça um Site HTML 4.0: Conceito e Aplicações', 'C. A.J. Oliviero', 'ÉRICA', '2007', 'OCLC:709525413', 'f000000003902', 'Desconhecido', 270, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2055, '2003-04-10', 959, '5133', NULL, 'LIVRO', 'Faça um Site JavaScript - Orientado por Projeto', 'Desconhecido', 'ÉRICA', '0000', 'N/A', 'f000000003903', 'Desconhecido', 0, 'Desconhecido', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2056, '2023-09-13', 9102, 'FAL759', NULL, 'LIVRO', 'FALA E ESCREVE CORRETAMENTE A TUA LÍNGUA', 'Luiz A. P. Victoria', 'EDIÇÕES DE OURO', '1980', 'OCLC:246344116', 'f000000003904', 'Desconhecido', 130, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2057, '2009-08-14', 1477, '30523', NULL, 'LIVRO', 'FALA SÉRIO', 'THALITA REBOUÇAS', 'VIEIRA & LENT', '0000', '8579801036', 'f000000003905', 'Desconhecido', 188, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2058, '2023-08-11', 8272, '285', NULL, 'LIVRO', 'FALANDO PELOS COTOVELOS', 'Lúcia Pimentel de Sampaio Góes, ... Osnei', 'RICHMOND', '1990', 'OCLC:253462566', 'f000000003906', 'Desconhecido', 31, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2059, '2023-06-22', 7305, '2342', NULL, 'LIVRO', 'FALE A VERDADE', 'Matt Abrahams', 'GRAÇA EDITORIAL', '2025', '9786558372042', 'f000000003907', 'Self-Help', 310, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2060, '2009-09-24', 1677, 'B869.2', NULL, 'LIVRO', 'Família Composta', 'Pellegrini Júnior Pellegrini Jr.', 'MINISTÉRIO DA EDUCAÇÃO', '2006', '8529600495', 'f000000003908', 'One-act plays, Brazilian', 65, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2061, '2023-06-22', 7300, 'FAM910', NULL, 'LIVRO', 'FAMÍLIA: MEU MAIOR PATRIMÔNIO!', 'Luis Lobão, Rosania Rodrigues', 'MENSAGEM PARA TODOS', '2024', '9788551862087', 'f000000003910', 'Business & Economics', 184, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2062, '2023-11-01', 9770, '86993081', NULL, 'LIVRO', 'FANTINA', 'Francisco Coelho Duarte Badaró', 'CHÃO', '2023', '9786580341108', 'f000000003912', 'Ficção', 162, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2063, '2023-08-01', 8305, '3621782', NULL, 'LIVRO', 'FARMACÊUTICO HOSPITALAR', 'Hospital Israelita Albert Einstein', 'MANOLE', '1996', 'OCLC:298932470', 'f000000003913', 'Desconhecido', 173, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2064, '2023-08-01', 8319, '6151', NULL, 'LIVRO', 'FARMÁCIA CLÍNICA', 'Fernanda Valente Gheler', 'MANOLE', '2019', '9788539700608', 'f000000003915', 'Desconhecido', 124, 'EN', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2065, '2023-08-01', 8323, '6151', NULL, 'LIVRO', 'FARMÁCIA CLÍNICA E ATENÇÃO FARMACÊUTICA', 'Silvia et al Storpirtis', 'MANOLE', '2008', '8527713802', 'f000000003917', 'Desconhecido', 489, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2066, '2023-08-01', 8338, '615532', NULL, 'LIVRO', 'FARMÁCIA HOMEOPÁTICA', 'Olney Leite Fontes', 'MANOLE', '2005', '8520423914', 'f000000003919', 'Desconhecido', 354, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2067, '2009-10-13', 1901, '61444', NULL, 'LIVRO', 'Farmacologia', 'Roberto Delucia (org.)', 'CEETEPS', '2012', 'PKEY:CLDEAU7422', 'f000000003922', 'Ciência', 378, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2068, '2023-08-01', 8330, '6151', NULL, 'LIVRO', 'FARMACOLOGIA', 'Roberto Delucia (org.)', 'ELSEVIER', '2012', 'PKEY:CLDEAU7422', 'f000000003920', 'Ciência', 378, 'PT-BR', '2025-04-10 02:24:55', NULL, 3, 2, NULL, '2025-04-09'),
+(2069, '2009-04-30', 91, '61073', NULL, 'LIVRO', 'Farmacologia para Enfermagem', 'MARY KAYE ASPERHEIM', 'GUANABARA KOOGAN', '0000', '8535235345', 'f000000003924', 'Desconhecido', 328, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2070, '2011-06-15', 3537, '86992', NULL, 'LIVRO', 'Farsa da boa preguiça', 'Ariano Suassuna', 'JOSÉ OLYMPIO', '2013', '9788503012225', 'f000000003925', 'Ficção', 317, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2071, '2023-09-11', 9037, '285', NULL, 'LIVRO', 'FAUNA E FLORA', 'Desconhecido', 'PAE', '2000', 'LCCN:2005456058', 'f000000003926', 'Animals', 209, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2072, '2023-10-27', 9645, '285', NULL, 'LIVRO', 'FAUSTO 1', 'Johann Wolfgang von Goethe, Christine Röhrig', 'SÃO PAULO', '2006', '8599520199', 'f000000003928', 'Desconhecido', 72, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2073, '2022-11-08', 7123, 'FAU134', NULL, 'LIVRO', 'FAUSTO WERTHER', 'Johann Wolfgang von Goethe', 'NOVA CULTURA', '1983', 'OCLC:817779263', 'f000000003929', 'Desconhecido', 436, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2074, '2010-10-05', 2837, '8690', NULL, 'LIVRO', 'Feche os olhos para ver melhor', 'Sérgio Sá', 'SÁ EDITORA', '2004', '8588193213', 'f000000003931', 'Desconhecido', 110, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2075, '2011-05-30', 3452, '920936276', NULL, 'LIVRO', 'Feia: a história real de uma infância sem amor', 'Claudia Tajes', 'BERTRAND BRASIL', '2010', '9788525421777', 'f000000003933', 'Literary Collections', 85, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2076, '2009-08-31', 1560, '86993', NULL, 'LIVRO', 'Felicidade Clandestina', 'Clarice Lispector', 'ROCCO', '1998', 'UTEXAS:059173011866657', 'f000000003934', 'Short stories, Brazilian', 172, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2077, '2011-05-30', 3451, '89173', NULL, 'LIVRO', 'Felicidade Conjugal', 'Liev Tolstoi', 'EDITORA 34', '2020', '9798674133964', 'f000000003935', 'Desconhecido', 120, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2078, '2011-07-05', 3615, '869', NULL, 'LIVRO', 'Feliz Ano Velho', 'Marcelo Rubens Paiva', 'BRASILIENSE', '2015', '9788579624186', 'f000000003936', 'Biography & Autobiography', 239, 'PT-BR', '2025-04-10 02:24:55', NULL, 2, 1, NULL, '2025-04-09'),
+(2079, '2014-05-30', 5569, 'B869', NULL, 'LIVRO', 'Feliz Ano Velho', 'Marcelo Rubens Paiva', 'OBJETIVA', '2015', '9788579624186', 'f000000003937', 'Biography & Autobiography', 239, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2080, '2024-02-28', 10240, '1339', NULL, 'LIVRO', 'FELIZES PARA SEMPRE', 'Dione Angela Da Silva', 'EME', '2024', '9786589972631', 'f000000003939', 'Religião', 95, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2081, '2023-06-01', 7403, '285', NULL, 'LIVRO', 'FELPO FILVA', 'Eva Furnari', 'MODERNA', '2007', '851605182X', 'f000000003940', 'Children\'s stories, Portuguese', 56, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2082, '2024-11-13', 11013, '61689143', NULL, 'LIVRO', 'FENOMENOLOGIA E GESTALT-TERAPIA', 'Marcos José Muller-Granzotto', 'SUMMUS', '2007', '8532304028', 'f000000003941', 'Psychology', 372, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2083, '2009-04-30', 92, '617106', NULL, 'LIVRO', 'Feridas', 'Erisson Moura Coelho', 'GUANABARA KOOGAN', '2021', 'EAN:3410003923096', 'f000000003942', 'Medical', 113, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2084, '2023-06-23', 7452, '23291', NULL, 'LIVRO', 'FERIDAS DA ALMA', 'Padre Reginaldo Manzotti', 'AGIR', '2012', '9788522014279', 'f000000003943', 'Self-Help', 254, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2085, '2024-09-18', 10808, 'FER824', NULL, 'LIVRO', 'FERIDAS: CONCEITOS E ATUALIDADES', 'Marcio Cesar Guimarães', 'MARTINARI', '2011', '9788577710584', 'f000000003944', 'Medical', 35, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2086, '2011-02-15', 2955, '370', NULL, 'LIVRO', 'Fernando de Azevedo', 'Fernando de Azevedo', 'MASSANGANA', '2012', '9893100283', 'f000000003945', 'Arte, Portuguese', 263, 'PT-BR', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2087, '2021-12-13', 6640, '7415', NULL, 'LIVRO', 'Fernando Pessoa e outras pessoas', 'K. David Jackson', 'SARAIVA', '2010', '9780190452926', 'f000000003946', 'Literary Criticism', 304, 'EN', '2025-04-10 02:24:55', NULL, 1, 0, NULL, '2025-04-09'),
+(2088, '2015-09-09', 5951, '861', NULL, 'LIVRO', 'Ferozes Inválidos de volta dos Trópicos', 'TOM ROBBINS', 'NOVA CULTURA', '0000', '8571237433', 'f000000003947', 'Desconhecido', 392, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2089, '2003-04-10', 1014, '1642', NULL, 'LIVRO', 'Ferramentas Avançadas em Turbo Pascal', 'F. Dutton', 'CIÊNCIA MODERNA', '1990', 'OCLC:45774265', 'f000000003948', 'Desconhecido', 396, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2090, '2011-06-07', 3511, '684', NULL, 'LIVRO', 'Ferramentas Manuais para madeira', 'Leo P. McDonnell', 'RECORD', '1990', 'OCLC:50837117', 'f000000003949', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2091, '2009-08-10', 1389, '8693', NULL, 'LIVRO', 'Ferréz Capão Pecado', 'Ferréz ((pseud. ;)', 'OBJETIVA', '0000', '9724141756', 'f000000003950', 'Desconhecido', 174, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2092, '2017-02-07', 6479, '61637', NULL, 'LIVRO', 'Fibrose Cística', 'Paz de Albuquerque,Elizabeth, Battello,Celso', 'YENDIS', '2017', '9788594860958', 'f000000003951', 'Health & Fitness', 69, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2093, '2023-08-29', 8727, 'FIL411', NULL, 'LIVRO', 'FILOSOFANDO - INTRODUÇÃO À FILOSOFIA', 'Maria Lucia de Arruda Aranha', 'MODERNA', '1988', 'OCLC:683547059', 'f000000003952', 'Desconhecido', 443, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2094, '2010-01-06', 2046, '107', NULL, 'LIVRO', 'Filosofando, Introdução à Filosofia', 'Maria Lucia de Arruda Aranha', 'MODERNA', '1988', 'OCLC:683547059', 'f000000003953', 'Desconhecido', 443, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2095, '2024-09-30', 10879, '37319', NULL, 'LIVRO', 'FILOSOFIA 10 - NO MUNDO DAS IDEIAS', 'Desconhecido', 'FTD', '2001', 'UOM:39015066136030', 'f000000003954', 'Filosofia', 224, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2096, '2024-09-30', 10878, '37319', NULL, 'LIVRO', 'FILOSOFIA 11 - O MUNDO EXISTE?', 'Luiz Felipe Pondé', 'FTD', '2022', '9786558810926', 'f000000003955', 'Filosofia', 110, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2097, '2024-09-30', 10886, '37319', NULL, 'LIVRO', 'FILOSOFIA 2 - RAZÃO FILOSÓFICA', 'Theodoro de Almeida', 'FTD', '0000', 'HARVARD:HN3B9S', 'f000000003956', 'Desconhecido', 510, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2098, '2024-09-30', 10885, '37319', NULL, 'LIVRO', 'FILOSOFIA 4 - O NASCIMENTO DA FILOSOFIA OCIDENTAL', 'Bertrand Russell', 'FTD', '2016', '9788520928349', 'f000000003957', 'Filosofia', 1551, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2099, '2024-09-30', 10884, '37319', NULL, 'LIVRO', 'FILOSOFIA 5 - OS PROBLEMAS FILOSÓFICOS', 'Edgar Indalecio Smaniotto', 'FTD', '2021', '9786555366365', 'f000000003958', 'Filosofia', 147, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2100, '2024-09-30', 10882, '37319', NULL, 'LIVRO', 'FILOSOFIA 7 - A QUESTÃO DE VERDADE', 'Claudio Donato', 'FTD', '2018', 'PKEY:CLDEAU38902', 'f000000003959', 'Educação', 200, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2101, '2024-09-30', 10881, '37319', NULL, 'LIVRO', 'FILOSOFIA 8 - O QUE É CONHECER?', 'Desconhecido', 'FTD', '2024', '9786553684652', 'f000000003960', 'Antiques & Collectibles', 137, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2102, '2024-09-30', 10883, '37319', NULL, 'LIVRO', 'FILOSOFIA 8 - OS PRÉ-SOCRÁTICOS', 'Miguel Spinelli', 'FTD', '1998', '8574300071', 'f000000003961', 'Filosofia, Ancient', 400, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2103, '2024-09-30', 10880, '37319', NULL, 'LIVRO', 'FILOSOFIA 9 - A FILOSOFIA E OS SOFISTAS', 'Jonas Madureira', 'FTD', '2016', '9788527506571', 'f000000003962', 'Filosofia', 193, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2104, '2010-01-06', 2048, '107', NULL, 'LIVRO', 'Filosofia Caminho para seu Ensino', 'WALTER OMAR KOHAN', 'LAMPARINA', '2004', '8574903191', 'f000000003963', 'Desconhecido', 196, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2105, '2014-09-05', 5650, '10712', NULL, 'LIVRO', 'Filosofia em sala de aula', 'Lidia Maria Rodrigo', 'AUTORES ASSOCIADOS', '2021', '9786588717561', 'f000000003964', 'Educação', 182, 'PT-BR', '2025-04-10 02:24:56', NULL, 2, 1, NULL, '2025-04-09'),
+(2106, '2010-01-06', 2047, '100', NULL, 'LIVRO', 'Filosofia para não filósofos', 'Neidson Rodrigues', 'CAMPUS', '0000', '8524902140', 'f000000003966', 'Desconhecido', 95, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2107, '2014-09-05', 5646, '107', NULL, 'LIVRO', 'Filosofia: Ensinar e Aprender', 'Augusto Rodrigues', 'SARAIVA', '2024', '9786559545407', 'f000000003967', 'Educação', 235, 'PT-BR', '2025-04-10 02:24:56', NULL, 2, 1, NULL, '2025-04-09'),
+(2108, '2011-03-31', 3290, '1092', NULL, 'LIVRO', 'Filósofos na sala de aula', 'Desconhecido', 'BERLENDIS & VERTECCHIA EDITORES', '2006', 'OCLC:230870214', 'f000000003969', 'Desconhecido', 237, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2109, '2023-02-03', 8687, '5307', NULL, 'LIVRO', 'FÍSICA', 'Wolfgang Bauer, Gary D. Westfall, Helio Dias', 'BRASIL', '2013', '9788580552034', 'f000000003977', 'Ciência', 366, 'PT-BR', '2025-04-10 02:24:56', NULL, 6, 5, NULL, '2025-04-09'),
+(2110, '2010-07-12', 2687, '372', NULL, 'LIVRO', 'Física', 'Wolfgang Bauer, Gary D. Westfall, Helio Dias', 'EDART', '2013', '9788580552034', 'f000000003970', 'Ciência', 366, 'PT-BR', '2025-04-10 02:24:56', NULL, 3, 2, NULL, '2025-04-09'),
+(2111, '2023-08-01', 8346, 'FSI795', NULL, 'LIVRO', 'FÍSICA', 'Wolfgang Bauer, Gary D. Westfall, Helio Dias', 'FTD', '2013', '9788580552034', 'f000000003983', 'Ciência', 366, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2112, '2023-09-01', 8837, 'FSI103', NULL, 'LIVRO', 'FÍSICA', 'Wolfgang Bauer, Gary D. Westfall, Helio Dias', 'SCIPIONE', '2013', '9788580552034', 'f000000003984', 'Ciência', 366, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2113, '2010-07-12', 2683, '3735', NULL, 'LIVRO', 'Física', 'Wolfgang Bauer, Gary D. Westfall, Helio Dias', 'SECRETARIA DA EDUCAÇÃO', '2013', '9788580552034', 'f000000003973', 'Ciência', 366, 'PT-BR', '2025-04-10 02:24:56', NULL, 4, 3, NULL, '2025-04-09'),
+(2114, '2024-09-27', 10828, '373189', NULL, 'LIVRO', 'FÍSICA - A LINGUAGEM VETORIAL', 'Randall D. Knight', 'FTD', '2000', '9788577805198', 'f000000003985', 'Ciência', 494, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2115, '2024-09-27', 10827, '37319', NULL, 'LIVRO', 'FÍSICA - AS LEIS DE NEWTON', 'Randall D. Knight', 'FTD', '2000', '9788577805198', 'f000000003986', 'Ciência', 494, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2116, '2023-12-20', 10169, '53007', NULL, 'LIVRO', 'FÍSICA - AULA POR AULA - 2', 'Fernando Jaime González, Alex Branco Fraga', 'FTD', '2012', '9788536011110', 'f000000003987', 'Educação', 209, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2117, '2023-12-20', 10170, '53007', NULL, 'LIVRO', 'FÍSICA - AULA POR AULA - 3', 'Randall D. Knight', 'FTD', '2000', '9788577805198', 'f000000003988', 'Ciência', 494, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2118, '2024-03-26', 10314, '53007', NULL, 'LIVRO', 'FÍSICA - CIÊNCIA E TECNOLOGIA 1', 'Paul Allen Tipler, Gene Mosca', 'MODERNA', '2004', '8429144110', 'f000000003989', 'Ciência', 664, 'ES', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2119, '2024-03-26', 10316, '53007', NULL, 'LIVRO', 'FÍSICA - CIÊNCIA E TECNOLOGIA 2', 'Paul Allen Tipler, Gene Mosca', 'MODERNA', '2004', '8429144129', 'f000000003990', 'Ciência', 700, 'ES', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2120, '2024-03-26', 10315, '53007', NULL, 'LIVRO', 'FÍSICA - CIÊNCIA E TECNOLOGIA 3', 'Jucimar Peruzzo', 'MODERNA', '2013', '9788591339853', 'f000000003991', 'Mathematics', 314, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2121, '2024-09-27', 10823, '37319', NULL, 'LIVRO', 'FÍSICA - CONSERVAÇÃO DA ENERGIA', 'Randall D. Knight', 'FTD', '2000', '9788577805198', 'f000000003992', 'Ciência', 494, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2122, '2024-09-27', 10822, '37319', NULL, 'LIVRO', 'FÍSICA - CONSERVAÇÃO DA QUANTIDADE DE MOVIMENTO', 'Ricardo Pante', 'FTD', '2021', '9788547104429', 'f000000003993', 'Educação', 133, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2123, '2024-09-27', 10824, '37319', NULL, 'LIVRO', 'FÍSICA - ENERGIA', 'Rogério Vogt Cardoso dos Santos, José Alves da Silva', 'FTD', '2004', 'OCLC:59139491', 'f000000003994', 'Desconhecido', 48, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2124, '2024-09-27', 10821, '37319', NULL, 'LIVRO', 'FÍSICA - GRAVITAÇÃO', 'Adir Moysés Luiz', 'FTD', '2007', '8588325845', 'f000000003995', 'Ficção', 308, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2125, '2024-09-27', 10826, '37319', NULL, 'LIVRO', 'FÍSICA - LEIS DE NEWTON E SUAS APLICAÇOES', 'Randall D. Knight', 'FTD', '2000', '9788577805198', 'f000000003996', 'Ciência', 494, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2126, '2011-07-11', 3650, '53107', NULL, 'LIVRO', 'Física - Mecânica', 'Francisco Ramalho Junior, Nicolau Gilberto Ferraro, Paulo António de Toledo Saores', 'NOVA GERAÇÃO', '1993', '8516009165', 'f000000003997', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2127, '2011-07-01', 3593, '371214', NULL, 'LIVRO', 'Física - Mecânica Termologia', 'Aníbal Freitas', 'CIA. EDITORA NACIONAL', '1937', 'OCLC:83150053', 'f000000003998', 'Desconhecido', 0, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2128, '2023-08-31', 8781, 'FSI287', NULL, 'LIVRO', 'FÍSICA - MECÂNICA, ELETRICIDADE, TER., OND., OP GE', 'Randall D. Knight', 'FTD', '2000', '9788577805198', 'f000000003999', 'Ciência', 494, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2129, '2024-09-27', 10825, '37319', NULL, 'LIVRO', 'FÍSICA - TRABALHO E POTÊNCIA', 'Randall D. Knight', 'FTD', '2000', '9788577805198', 'f000000004000', 'Ciência', 494, 'PT', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2130, '2023-08-31', 8795, 'FSI623', NULL, 'LIVRO', 'FÍSICA 1', 'Grupo de Reelaboração do Ensino de Física', 'CERED-CENTRO DE RECURSOS EDUCACIONAIS', '2002', '8531400147', 'f000000004001', 'Desconhecido', 340, 'PT-BR', '2025-04-10 02:24:56', NULL, 1, 0, NULL, '2025-04-09'),
+(2131, '2012-08-06', 5140, '6107362', NULL, 'LIVRO', 'Manual de Procedimentos em Pediatria', 'Desconhecido', 'YENDIS', '2008', '8577280357', 'f000000000004', 'Desconhecido', 538, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09'),
+(2132, '2023-07-07', 7317, '230', NULL, 'LIVRO', 'O BATISMO NO ESPÍRITO SANTO', 'R. A. Torrey', 'SANTORINI', '2018', '9781547540402', 'f000000000005', 'Religião', 55, 'PT-BR', '2025-04-10 02:20:52', NULL, 2, 1, NULL, '2025-04-09'),
+(2133, '2010-01-25', 2329, '9286991', NULL, 'LIVRO', 'O Poeta da Paixão - Vinicius de Moraes', 'José Castello', 'CIA. DAS LETRAS', '1994', 'UOM:39015034008378', 'f000000000007', 'Biography & Autobiography', 468, 'PT-BR', '2025-04-10 02:20:52', NULL, 1, 0, NULL, '2025-04-09');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbmidias`
+--
+
+CREATE TABLE `tbmidias` (
+  `codigo` int(11) NOT NULL,
+  `nome_escola` text NOT NULL,
+  `classe` text NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `data_lancamento` date DEFAULT NULL,
+  `genero` varchar(100) DEFAULT NULL,
+  `diretor_artista` varchar(255) DEFAULT NULL,
+  `duracao` text DEFAULT NULL,
+  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estante` text DEFAULT NULL,
+  `prateleira` text DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbmidias`
+--
+
+INSERT INTO `tbmidias` (`codigo`, `nome_escola`, `classe`, `titulo`, `data_lancamento`, `genero`, `diretor_artista`, `duracao`, `data_adicao`, `estante`, `prateleira`, `quantidade`) VALUES
+(1, 'Prof Eudécio Luiz Vicente', 'Midia', 'Midia Teste', '2006-05-02', 'Educacional', 'Artista Teste', '6:01', '2024-07-04 00:45:09', '1', '1', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbpedidos`
+--
+
+CREATE TABLE `tbpedidos` (
+  `id_pedido` int(11) NOT NULL,
+  `ra_aluno` varchar(20) DEFAULT NULL,
+  `nome_aluno` text NOT NULL,
+  `isbn_falso` text NOT NULL,
+  `isbn` text NOT NULL,
+  `nome_livro` int(11) NOT NULL,
+  `data_pedido_emprestado` datetime DEFAULT current_timestamp(),
+  `status` enum('pendente','aprovado','recusado','cancelado') DEFAULT NULL,
+  `tipo` enum('emprestado','pedido') CHARACTER SET armscii8 COLLATE armscii8_general_ci NOT NULL,
+  `data_pedido_prevista` datetime NOT NULL,
+  `data_pedido_devolucao` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbprofessores`
+--
+
+CREATE TABLE `tbprofessores` (
+  `codigo` int(11) NOT NULL,
+  `nome` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `telefone` text DEFAULT NULL,
+  `celular` text DEFAULT NULL,
+  `cpf` text DEFAULT NULL,
+  `codigo_escola` text DEFAULT NULL,
+  `acesso` text DEFAULT NULL,
+  `cadastrado_por` varchar(50) DEFAULT NULL,
+  `data_cadastro` datetime DEFAULT NULL,
+  `codigo_autenticacao` varchar(8) DEFAULT NULL,
+  `chave_recuperar_senha` varchar(220) DEFAULT NULL,
+  `data_codigo_autenticacao` datetime DEFAULT NULL,
+  `statusDev` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbprofessores`
+--
+
+INSERT INTO `tbprofessores` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
+(1, 'Professor Teste', 'professor@teste.com', '$2y$10$vgDrWrxGXFLMhKdJlwoJcu.DBDEXxSgaYDwMSviPBkfCv0uaWfUiG', '', '18991599472', '09739704805', '055', 'professor', NULL, NULL, 'a0S7FY', NULL, '2025-05-18 21:56:04', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbtcc`
+--
+
+CREATE TABLE `tbtcc` (
+  `codigo` int(11) NOT NULL,
+  `nome_escola` text NOT NULL,
+  `classe` text NOT NULL,
+  `titulo` text NOT NULL,
+  `autor` text NOT NULL,
+  `orientador` text NOT NULL,
+  `curso` text NOT NULL,
+  `ano` year(4) NOT NULL,
+  `data_adicao` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estante` text DEFAULT NULL,
+  `prateleira` text DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbtcc`
+--
+
+INSERT INTO `tbtcc` (`codigo`, `nome_escola`, `classe`, `titulo`, `autor`, `orientador`, `curso`, `ano`, `data_adicao`, `estante`, `prateleira`, `quantidade`) VALUES
+(1, 'Prof Eudécio Luiz Vicente', 'Tcc', 'Tcc Teste', 'Felipe Ivasco', 'Professor André Luis', 'Desenvolvimento de Sistemas', '2024', '2024-07-04 00:45:48', '1', '2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_fluxo_biblioteca`
+--
+
+CREATE TABLE `tb_fluxo_biblioteca` (
+  `id_fluxo` int(11) NOT NULL,
+  `data_registro` date NOT NULL,
+  `quantidade` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_fluxo_biblioteca`
+--
+
+INSERT INTO `tb_fluxo_biblioteca` (`id_fluxo`, `data_registro`, `quantidade`) VALUES
+(1, '2025-04-21', 10),
+(2, '2025-04-18', 20),
+(3, '2025-05-12', 10),
+(4, '2025-04-22', 20);
+
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices de tabela `dados_etec`
+--
+ALTER TABLE `dados_etec`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `historico_usuarios`
+--
+ALTER TABLE `historico_usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `tbadmin`
+--
+ALTER TABLE `tbadmin`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbalunos`
+--
+ALTER TABLE `tbalunos`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbbibliotecario`
+--
+ALTER TABLE `tbbibliotecario`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbclasse`
+--
+ALTER TABLE `tbclasse`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbcursos`
+--
+ALTER TABLE `tbcursos`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbdev`
+--
+ALTER TABLE `tbdev`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbdevolucao`
+--
+ALTER TABLE `tbdevolucao`
+  ADD PRIMARY KEY (`id_devolucao`);
+
+--
+-- Índices de tabela `tbemprestimos`
+--
+ALTER TABLE `tbemprestimos`
+  ADD PRIMARY KEY (`id_emprestimo`);
+
+--
+-- Índices de tabela `tbescola`
+--
+ALTER TABLE `tbescola`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbfuncionarios`
+--
+ALTER TABLE `tbfuncionarios`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbjogoseducativos`
+--
+ALTER TABLE `tbjogoseducativos`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbjornal_revista`
+--
+ALTER TABLE `tbjornal_revista`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tblistaespera`
+--
+ALTER TABLE `tblistaespera`
+  ADD PRIMARY KEY (`id_lista_espera`);
 
 --
 -- Índices de tabela `tblivros`
@@ -1072,14 +4067,177 @@ ALTER TABLE `tblivros`
   ADD PRIMARY KEY (`codigo`);
 
 --
+-- Índices de tabela `tblivros_acervo_real`
+--
+ALTER TABLE `tblivros_acervo_real`
+  ADD PRIMARY KEY (`codigo`),
+  ADD UNIQUE KEY `isbn_falso` (`isbn_falso`);
+
+--
+-- Índices de tabela `tbmidias`
+--
+ALTER TABLE `tbmidias`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbpedidos`
+--
+ALTER TABLE `tbpedidos`
+  ADD PRIMARY KEY (`id_pedido`);
+
+--
+-- Índices de tabela `tbprofessores`
+--
+ALTER TABLE `tbprofessores`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tbtcc`
+--
+ALTER TABLE `tbtcc`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Índices de tabela `tb_fluxo_biblioteca`
+--
+ALTER TABLE `tb_fluxo_biblioteca`
+  ADD PRIMARY KEY (`id_fluxo`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `dados_etec`
+--
+ALTER TABLE `dados_etec`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+
+--
+-- AUTO_INCREMENT de tabela `historico_usuarios`
+--
+ALTER TABLE `historico_usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+
+--
+-- AUTO_INCREMENT de tabela `tbadmin`
+--
+ALTER TABLE `tbadmin`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de tabela `tbalunos`
+--
+ALTER TABLE `tbalunos`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tbbibliotecario`
+--
+ALTER TABLE `tbbibliotecario`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tbclasse`
+--
+ALTER TABLE `tbclasse`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `tbcursos`
+--
+ALTER TABLE `tbcursos`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de tabela `tbdev`
+--
+ALTER TABLE `tbdev`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de tabela `tbdevolucao`
+--
+ALTER TABLE `tbdevolucao`
+  MODIFY `id_devolucao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de tabela `tbemprestimos`
+--
+ALTER TABLE `tbemprestimos`
+  MODIFY `id_emprestimo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de tabela `tbescola`
+--
+ALTER TABLE `tbescola`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT de tabela `tbfuncionarios`
+--
+ALTER TABLE `tbfuncionarios`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tbjogoseducativos`
+--
+ALTER TABLE `tbjogoseducativos`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tbjornal_revista`
+--
+ALTER TABLE `tbjornal_revista`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tblistaespera`
+--
+ALTER TABLE `tblistaespera`
+  MODIFY `id_lista_espera` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tblivros`
 --
 ALTER TABLE `tblivros`
   MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
+
+--
+-- AUTO_INCREMENT de tabela `tblivros_acervo_real`
+--
+ALTER TABLE `tblivros_acervo_real`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2134;
+
+--
+-- AUTO_INCREMENT de tabela `tbmidias`
+--
+ALTER TABLE `tbmidias`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tbpedidos`
+--
+ALTER TABLE `tbpedidos`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbprofessores`
+--
+ALTER TABLE `tbprofessores`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tbtcc`
+--
+ALTER TABLE `tbtcc`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tb_fluxo_biblioteca`
+--
+ALTER TABLE `tb_fluxo_biblioteca`
+  MODIFY `id_fluxo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

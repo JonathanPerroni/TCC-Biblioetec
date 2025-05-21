@@ -17,9 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmelivro'])) {
       $livros = [];
       $index = 0;
       while ($row = $result->fetch_assoc()) {
-          $row['quantidade_solicitada'] = (int)($quantidadesLivros[$index] ?? 1);
-          $livros[] = $row;
-          $index++;
+      $quantidadeSolicitada = (int)($quantidadesLivros[$index] ?? 1);
+      $row['quantidade_solicitada'] = $quantidadeSolicitada;
+      $livros[] = $row;
+      $index++;
       }
 
       // 🔍 Verifica disponibilidade
@@ -60,11 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmelivro'])) {
           if ($disponivel < 1) {
               $livrosIndisponiveis[] = "Livro \"{$titulo}\" da editora \"{$editora}\" está com todos os exemplares emprestados.";
           }
+
+          $_SESSION['livros'] = $livros;
+   
       }
 
       if (!empty($livrosIndisponiveis)) {
           $mensagem = implode("\\n", $livrosIndisponiveis);
-          echo "<script>alert('Os seguintes livros não estão disponíveis:\\n$mensagem'); window.location.href='emprestimo_etapa2.php';</script>";
+          echo "<script>alert('Os seguintes livros não estão disponíveis:\\n$mensagem'); window.location.href='formulario_pesquisa_livro.php';</script>";
           exit;
       }
 

@@ -4,28 +4,27 @@ ob_start();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../../../conexao/conexao.php");
 
+echo "Recebido via GET: " . htmlspecialchars($nEmprestimo) . "<br>";
+
+
+
 // DEBUG: mostre o que chegou em GET['n']
-if (!isset($_GET['n'])) {
+if (!isset($_GET['n']) || empty(trim($_GET['n']))) {
     echo "Número de empréstimo não informado.";
     exit;
 }
-$nEmprestimo = trim($_GET['n']);
-echo "<pre>DEBUG: GET['n'] = '{$nEmprestimo}'</pre>";
+$nEmprestimo = preg_replace('/[^a-zA-Z0-9\-]/', '', $_GET['n']);
 
-// DEBUG: liste os últimos 10 valores de n_emprestimo na tabela
-$resultAll = $conn->query("
-    SELECT DISTINCT n_emprestimo
-    FROM tbemprestimos
-    ORDER BY id_emprestimo DESC
-    LIMIT 10
-");
-$recent = $resultAll->fetch_all(MYSQLI_ASSOC);
-echo "<pre>DEBUG: Últimos 10 n_emprestimo na tabela:\n";
-foreach ($recent as $r) {
-    echo " - {$r['n_emprestimo']}\n";
+/*
+echo "Recebido via GET: " . $nEmprestimo . "<br>";
+
+// E opcionalmente veja os registros:
+$resultDebug = $conn->query("SELECT n_emprestimo FROM tbemprestimos ORDER BY id_emprestimo DESC LIMIT 5");
+while ($row = $resultDebug->fetch_assoc()) {
+    echo "No banco: " . $row['n_emprestimo'] . "<br>";
 }
-echo "</pre>";
-
+exit;
+*/
 // Agora sua query normal
 $stmt = $conn->prepare("
     SELECT *
@@ -33,13 +32,18 @@ $stmt = $conn->prepare("
     WHERE n_emprestimo = ?
     ORDER BY id_emprestimo
 ");
+
+$resultDebug = $conn->query("SELECT n_emprestimo FROM tbemprestimos ORDER BY id_emprestimo DESC LIMIT 5");
+while ($row = $resultDebug->fetch_assoc()) {
+    echo "No banco: " . $row['n_emprestimo'] . "<br>";
+}
+
 $stmt->bind_param("s", $nEmprestimo);
 $stmt->execute();
 $result = $stmt->get_result();
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-// DEBUG: quantas linhas retornou
-echo "<pre>DEBUG: count(rows) = " . count($rows) . "</pre>";
+
 
 if (count($rows) === 0) {
     echo "Dados do empréstimo não encontrados.";
