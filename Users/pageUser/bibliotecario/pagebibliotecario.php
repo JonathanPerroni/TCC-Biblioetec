@@ -360,7 +360,7 @@ if ($etapa == 3 && isset($_POST['confirmar_emprestimo'])) {
      <div class ="main-container">
             <!-- araa de informação do bd, botões redirecionados -->                                                          
         <div class="info">
-              <a href="./emprestimo/emprestimo.php">
+              <a href="./emprestimo//aluno/pesquisa_aluno.php">
                   <div><img src="../icon/books.svg" alt=""></div>
                   EMPRESTIMO                                               
               </a>
