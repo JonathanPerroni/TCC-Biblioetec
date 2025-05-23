@@ -2,6 +2,13 @@
 session_start();
 ob_start();
 
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // Não exibe erros na tela
+ini_set('log_errors', 1);
+ini_set('error_log', 'php_errors.log'); // Salva erros em um arquivo
+
+
+
 date_default_timezone_set('America/Sao_Paulo');
 require '../../../../../conexao/conexao.php';
 header('Content-Type: application/json');
@@ -57,11 +64,14 @@ try {
         echo json_encode($livros);
     }
 
-} catch(Exception $e) {
-    // Log do erro no servidor
+}catch(Exception $e) {
     error_log("ERRO em busca_livros.php: " . $e->getMessage());
     
-    // Retorne um array vazio em caso de erro para o frontend não quebrar
-    echo json_encode([]);
+    // Retorne um JSON com estrutura clara
+    echo json_encode([
+        'success' => false,
+        'error' => $e->getMessage()
+    ]);
+    exit;
 }
 ?>

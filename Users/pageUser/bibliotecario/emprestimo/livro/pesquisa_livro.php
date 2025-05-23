@@ -136,7 +136,7 @@ $bibliotecario = $_SESSION['bibliotecario'];
             document.getElementById('pesquisa-livro').focus();
         });
 
-      document.getElementById('pesquisa-livro').addEventListener('input', function() {
+  document.getElementById('pesquisa-livro').addEventListener('input', function() {
     const query = this.value.trim();
     const resultsContainer = document.getElementById('autocomplete-results');
     
@@ -145,22 +145,24 @@ $bibliotecario = $_SESSION['bibliotecario'];
         return;
     }
 
-    // Mostra loading enquanto busca
     resultsContainer.innerHTML = '<div class="autocomplete-item">Buscando livros...</div>';
     
-    // Adicione um timestamp para evitar cache
-    const timestamp = new Date().getTime();
-    
-        fetch(`./busca_livros.php?q=${encodeURIComponent(query)}`)
+    // TRECHO CORRIGIDO AQUI:
+    fetch(`./busca_livros.php?q=${encodeURIComponent(query)}`)
         .then(response => {
-            if(!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
             }
-            return response.json();
+            return response.json().catch(() => {
+                throw new Error("Resposta não é JSON válido");
+            });
         })
         .then(data => {
-            console.log('Dados recebidos:', data); // Para debug no console
+            if (data.success === false) {
+                throw new Error(data.error || "Erro desconhecido");
+            }
             
+            console.log('Dados recebidos:', data);
             resultsContainer.innerHTML = '';
             
             if(!data || data.length === 0) {
@@ -187,8 +189,8 @@ $bibliotecario = $_SESSION['bibliotecario'];
             });
         })
         .catch(error => {
-            console.error('Erro na busca:', error);
-            resultsContainer.innerHTML = '<div class="autocomplete-item text-danger">Erro ao buscar livros. Verifique o console.</div>';
+            console.error("Erro na busca:", error);
+            resultsContainer.innerHTML = `<div class="autocomplete-item text-danger">${error.message}</div>`;
         });
 });
 

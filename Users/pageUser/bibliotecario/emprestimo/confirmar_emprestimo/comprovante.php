@@ -7,7 +7,7 @@ $emprestimo_id = $_GET['id'] ?? 0;
 // Consulta o empréstimo
 $sql_emprestimo = "SELECT e.*, a.nome as aluno_nome, a.ra_aluno, a.nome_curso, a.periodo,
                   b.nome as bibliotecario_nome
-                  FROM tbemprestimo e
+                  FROM tbemprestimos e  -- Nome corrigido para tbemprestimos
                   JOIN tbalunos a ON e.ra_aluno = a.ra_aluno
                   JOIN tbbibliotecario b ON e.id_bibliotecario = b.codigo
                   WHERE e.id_emprestimo = ?";

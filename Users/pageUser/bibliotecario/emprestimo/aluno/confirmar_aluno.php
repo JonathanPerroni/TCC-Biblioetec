@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+var_dump($bibliotecario); // Deve mostrar ['codigo' => X, 'nome' => '...']
 ob_start();
 
 date_default_timezone_set('America/Sao_Paulo');
@@ -15,7 +16,7 @@ $aluno = $_SESSION['aluno_emprestimo'];
 $email_sessao = $_SESSION['email'];
 
 // Consulta o nome do bibliotecário
-$sql = "SELECT nome FROM tbbibliotecario WHERE email = ?";
+$sql = "SELECT codigo, nome FROM tbbibliotecario WHERE email = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $email_sessao);
 $stmt->execute();

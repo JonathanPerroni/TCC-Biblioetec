@@ -39,7 +39,7 @@ try {
     $estoque = $result->fetch_assoc();
     
     // ADICIONE AQUI O CÁLCULO DE DISPONÍVEIS E GARANTIA DE VALORES NUMÉRICOS
-    $livro['disponiveis'] = (int)($estoque['total_exemplares'] ?? 0) - (int)($emprestimos['total'] ?? 0);
+   $livro['disponiveis'] = ($estoque['total_exemplares'] ?? 0) - ($emprestimos['total'] ?? 0);
     $livro['total_exemplares'] = (int)($estoque['total_exemplares'] ?? 0);
     // Calcular empréstimos ativos
     $sqlEmprestimos = "SELECT COUNT(*) as total

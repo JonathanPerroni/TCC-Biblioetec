@@ -7,7 +7,7 @@ include_once('../../seguranca.php');
 if (!isset($_SESSION['aluno_emprestimo']) || !isset($_SESSION['livros_emprestimo'])) {
     $_SESSION['msg'] = "Dados do empréstimo não encontrados!";
     $_SESSION['msg_type'] = "danger";
-    header('Location: pesquisa_aluno.php');
+    header('Location: ../aluno/pesquisa_aluno.php');
     exit;
 }
 
