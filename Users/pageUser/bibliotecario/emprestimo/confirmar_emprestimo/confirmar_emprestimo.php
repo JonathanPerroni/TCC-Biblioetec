@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require '../../../../../conexao/conexao.php';
 include_once('../../seguranca.php');
 
@@ -46,19 +47,20 @@ $aluno_completo = $stmt->get_result()->fetch_assoc();
                             <tr><th>Nome</th><td><?= htmlspecialchars($aluno_completo['nome']) ?></td></tr>
                             <tr><th>RA</th><td><?= htmlspecialchars($aluno_completo['ra_aluno']) ?></td></tr>
                             <tr><th>Curso</th><td><?= htmlspecialchars($aluno_completo['nome_curso']) ?></td></tr>
+                            <tr><th>Período</th><td><?= htmlspecialchars($aluno_completo['periodo']) ?></td></tr>
                         </table>
                     </div>
                     <div class="col-md-6">
-                        <h5>Bibliotecário</h5>
+                        <h5>Responsável</h5>
                         <table class="table table-bordered">
-                            <tr><th>Nome</th><td><?= htmlspecialchars($bibliotecario['nome']) ?></td></tr>
+                            <tr><th>Bibliotecário</th><td><?= htmlspecialchars($bibliotecario['nome']) ?></td></tr>
                             <tr><th>Data</th><td><?= date('d/m/Y H:i') ?></td></tr>
                         </table>
                     </div>
                 </div>
 
                 <h5 class="mt-4">Livros Selecionados</h5>
-                <?php foreach($livros as $livro): ?>
+                <?php foreach($livros as $index => $livro): ?>
                 <div class="card livro-card mb-3">
                     <div class="card-body">
                         <div class="row">
@@ -66,11 +68,13 @@ $aluno_completo = $stmt->get_result()->fetch_assoc();
                                 <h6><?= htmlspecialchars($livro['titulo']) ?></h6>
                                 <p><strong>Autor:</strong> <?= htmlspecialchars($livro['autor']) ?></p>
                                 <p><strong>ISBN Falso:</strong> <?= htmlspecialchars($livro['isbn_falso']) ?></p>
+                               <p><strong>Tombo:</strong> <?= isset($livro['tombo']) ? htmlspecialchars($livro['tombo']) : 'Não informado' ?></p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong>Devolução:</strong> <?= date('d/m/Y', strtotime($livro['data_devolucao'])) ?></p>
+                                <p><strong>Data Devolução:</strong> <?= date('d/m/Y', strtotime($livro['data_devolucao'])) ?></p>
+                                <p><strong>Disponíveis:</strong> <?= isset($livro['disponiveis']) ? $livro['disponiveis'] : 0 ?> de <?= $livro['total_exemplares'] ?></p>
                                 <?php if($livro['sobrepor_regra']): ?>
-                                <span class="badge bg-warning">Regra sobrescrita</span>
+                                <span class="badge bg-warning">Regra de 1 exemplar sobrescrita</span>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -79,7 +83,7 @@ $aluno_completo = $stmt->get_result()->fetch_assoc();
                 <?php endforeach; ?>
 
                 <div class="d-flex justify-content-between mt-4">
-                    <a href="pesquisa_livros.php" class="btn btn-secondary">Corrigir</a>
+                    <a href="../livro/pesquisa_livro.php" class="btn btn-secondary">Corrigir</a>
                     <button id="btn-confirmar" class="btn btn-success">Confirmar Empréstimo</button>
                 </div>
             </div>
@@ -88,32 +92,47 @@ $aluno_completo = $stmt->get_result()->fetch_assoc();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('btn-confirmar').addEventListener('click', function() {
-            this.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processando...';
-            this.disabled = true;
-            
-            fetch('finalizar_emprestimo.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    aluno_id: <?= $aluno_completo['codigo'] ?>
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    window.location.href = 'comprovante.php?id=' + data.emprestimo_id;
-                } else {
-                    alert('Erro: ' + (data.error || 'Erro ao finalizar'));
-                    window.location.reload();
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Falha na requisição');
-                window.location.reload();
-            });
+document.getElementById('btn-confirmar').addEventListener('click', async function() {
+    const btn = this;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processando...';
+    btn.disabled = true;
+
+    try {
+        const response = await fetch('finalizar_emprestimo.php', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ confirmacao: true })
         });
+
+        let data;
+        const responseClone = response.clone(); // declara aqui, antes do try
+
+        try {
+            data = await response.json();
+        } catch (jsonError) {
+            const text = await responseClone.text();
+            throw new Error('Resposta não é JSON válido: ' + text);
+        }
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Erro na requisição');
+        }
+
+        if (data.success) {
+            window.location.href = 'comprovante.php?id=' + data.emprestimo_id;
+        } else {
+            throw new Error(data.error || 'Erro ao finalizar empréstimo');
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        alert(error.message);
+        btn.innerHTML = 'Confirmar Empréstimo';
+        btn.disabled = false;
+    }
+});
     </script>
 </body>
 </html>

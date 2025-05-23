@@ -192,14 +192,21 @@ $bibliotecario = $_SESSION['bibliotecario'];
         });
 });
 
-        function carregarDetalhesLivro(isbn) {
-            fetch(`carrega_livro.php?isbn=${isbn}`)
-                .then(response => response.json())
-                .then(data => {
-                    if(data.error) {
-                        alert(data.error);
-                        return;
-                    }
+       // Modifique a função carregarDetalhesLivro():
+function carregarDetalhesLivro(isbn) {
+    fetch(`carrega_livro.php?isbn=${isbn}`)
+        .then(response => response.json())
+        .then(data => {
+            if(data.error) {
+                alert(data.error);
+                return;
+            }
+
+            // Garantir que os valores numéricos existam
+            data.total_exemplares = data.total_exemplares || 0;
+            data.emprestados = data.emprestados || 0;
+            data.disponiveis = data.total_exemplares - data.emprestados;
+
 
                     livroAtual = data;
                     document.getElementById('form-pesquisa').style.display = 'none';

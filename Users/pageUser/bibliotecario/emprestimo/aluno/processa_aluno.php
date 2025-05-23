@@ -58,7 +58,7 @@ try {
     $_SESSION['aluno_emprestimo'] = $aluno;
     $_SESSION['bibliotecario_emprestimo'] = $_SESSION['bibliotecario'];
     
-    header('Location: ../../livro/pesquisa_livro.php');
+    header('Location: ../livro/pesquisa_livro.php');
     exit;
 
 } catch(Exception $e) {

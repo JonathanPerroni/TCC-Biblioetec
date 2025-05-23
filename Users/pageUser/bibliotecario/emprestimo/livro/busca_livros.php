@@ -31,7 +31,7 @@ try {
     $conn->set_charset("utf8mb4");
 
     // Consulta SQL corrigida
-    $sql = "SELECT titulo, autor, isbn_falso 
+    $sql = "SELECT titulo, autor, isbn_falso, tombo
             FROM tblivros 
             WHERE titulo LIKE CONCAT('%', ?, '%') 
                OR isbn_falso LIKE CONCAT('%', ?, '%')

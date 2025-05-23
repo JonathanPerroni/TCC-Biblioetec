@@ -3,91 +3,118 @@ session_start();
 require '../../../../../conexao/conexao.php';
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['bibliotecario']) || !isset($_SESSION['livros_emprestimo'])) {
-    echo json_encode(['success' => false, 'error' => 'Acesso não autorizado']);
+// Verificação robusta de acesso
+if (!isset($_SESSION['bibliotecario']) || !isset($_SESSION['aluno_emprestimo']) || !isset($_SESSION['livros_emprestimo'])) {
+    echo json_encode(['success' => false, 'error' => 'Acesso não autorizado ou sessão inválida']);
     exit;
 }
 
 try {
+    // Decodifica os dados JSON recebidos
     $input = json_decode(file_get_contents('php://input'), true);
-    $aluno_id = $input['aluno_id'] ?? 0;
-    $bibliotecario_id = $_SESSION['bibliotecario']['codigo'];
+    
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception('Dados inválidos recebidos');
+    }
+
+    $aluno = $_SESSION['aluno_emprestimo'];
+    $bibliotecario = $_SESSION['bibliotecario'];
     $livros = $_SESSION['livros_emprestimo'];
 
     if (empty($livros)) {
-        throw new Exception('Nenhum livro selecionado');
+        throw new Exception('Nenhum livro selecionado para empréstimo');
     }
 
-    // Consulta dados do aluno
-    $sql_aluno = "SELECT codigo, nome, ra_aluno FROM tbalunos WHERE codigo = ?";
-    $stmt = $conn->prepare($sql_aluno);
-    $stmt->bind_param("i", $aluno_id);
-    $stmt->execute();
-    $aluno = $stmt->get_result()->fetch_assoc();
-
-    if (!$aluno) {
-        throw new Exception('Aluno não encontrado');
+    if (empty($aluno['ra_aluno'])) {
+        throw new Exception('RA do aluno não encontrado na sessão.');
     }
 
+    // Inicia transação
     $conn->begin_transaction();
 
-    // 1. Cria o registro do empréstimo
-    $sql_emprestimo = "INSERT INTO tbemprestimos 
-                      (ra_aluno, nome_aluno, data_emprestimo, data_devolucao_prevista) 
-                      VALUES (?, ?, NOW(), ?)";
-    $stmt = $conn->prepare($sql_emprestimo);
-    
-    // Calcula data de devolução (padrão 7 dias)
-    $data_devolucao = date('Y-m-d', strtotime('+7 days'));
-    $stmt->bind_param("iss", 
-        $aluno['ra_aluno'],
-        $aluno['nome'],
-        $data_devolucao
-    );
-    $stmt->execute();
+    // Inserir empréstimo
+    $sql_emprestimo = "INSERT INTO tbemprestimos (ra_aluno, emprestado_por, data_emprestimo) VALUES (?, ?, NOW())";
+    if (!$stmt = $conn->prepare($sql_emprestimo)) {
+        throw new Exception("Erro no prepare tbemprestimos: " . $conn->error);
+    }
+    if (!$stmt->bind_param("ss", $aluno['ra_aluno'], $bibliotecario['codigo'])) {
+        throw new Exception("Erro no bind_param tbemprestimos: " . $stmt->error);
+    }
+    if (!$stmt->execute()) {
+        throw new Exception("Erro no execute tbemprestimos: " . $stmt->error);
+    }
     $emprestimo_id = $conn->insert_id;
+    $stmt->close();
 
-    // 2. Atualiza estoque e registra livros
+    // Processar cada livro
     foreach ($livros as $livro) {
-        // Atualiza estoque
-        $sql_estoque = "UPDATE tblivros_estoque 
-                       SET total_exemplares = total_exemplares - 1 
-                       WHERE isbn_falso = ?";
-        $stmt = $conn->prepare($sql_estoque);
-        $stmt->bind_param("s", $livro['isbn_falso']);
-        $stmt->execute();
+        // Verificar disponibilidade com FOR UPDATE
+        $sql_verifica = "SELECT disponiveis FROM tblivros WHERE isbn_falso = ? FOR UPDATE";
+        if (!$stmt = $conn->prepare($sql_verifica)) {
+            throw new Exception("Erro no prepare tblivros: " . $conn->error);
+        }
+        if (!$stmt->bind_param("s", $livro['isbn_falso'])) {
+            throw new Exception("Erro no bind_param tblivros: " . $stmt->error);
+        }
+        if (!$stmt->execute()) {
+            throw new Exception("Erro no execute tblivros: " . $stmt->error);
+        }
+        $result = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
 
-        // Registra livro emprestado
-        $sql_livro = "INSERT INTO tblivros 
-                     (isbn_falso, titulo, autor, data_edicao, edicao, quantidade) 
-                     VALUES (?, ?, ?, ?, ?, ?) 
-                     ON DUPLICATE KEY UPDATE 
-                     titulo = VALUES(titulo), autor = VALUES(autor)";
-        $stmt = $conn->prepare($sql_livro);
-        $stmt->bind_param("sssssi",
-            $livro['isbn_falso'],
-            $livro['titulo'],
-            $livro['autor'],
-            date('Y-m-d'),
-            '1ª Edição',
-            1
-        );
-        $stmt->execute();
+        if (!$result || $result['disponiveis'] <= 0) {
+            throw new Exception("Livro {$livro['titulo']} não disponível para empréstimo");
+        }
+
+        // Inserir item empréstimo
+        $sql_item = "INSERT INTO tbitens_emprestimo (id_emprestimo, isbn_falso, data_devolucao_prevista) VALUES (?, ?, ?)";
+        if (!$stmt = $conn->prepare($sql_item)) {
+            throw new Exception("Erro no prepare tbitens_emprestimo: " . $conn->error);
+        }
+        $data_devolucao = date('Y-m-d', strtotime($livro['data_devolucao']));
+        if (!$stmt->bind_param("iss", $emprestimo_id, $livro['isbn_falso'], $data_devolucao)) {
+            throw new Exception("Erro no bind_param tbitens_emprestimo: " . $stmt->error);
+        }
+        if (!$stmt->execute()) {
+            throw new Exception("Erro no execute tbitens_emprestimo: " . $stmt->error);
+        }
+        $stmt->close();
+
+        // Atualizar estoque
+        $sql_atualiza = "UPDATE tblivros SET disponiveis = disponiveis - 1 WHERE isbn_falso = ?";
+        if (!$stmt = $conn->prepare($sql_atualiza)) {
+            throw new Exception("Erro no prepare UPDATE tblivros: " . $conn->error);
+        }
+        if (!$stmt->bind_param("s", $livro['isbn_falso'])) {
+            throw new Exception("Erro no bind_param UPDATE tblivros: " . $stmt->error);
+        }
+        if (!$stmt->execute()) {
+            throw new Exception("Erro no execute UPDATE tblivros: " . $stmt->error);
+        }
+        $stmt->close();
     }
 
+    // Commit se tudo ocorrer bem
     $conn->commit();
+
+    // Limpa a sessão dos livros
     unset($_SESSION['livros_emprestimo']);
 
     echo json_encode([
         'success' => true,
-        'emprestimo_id' => $emprestimo_id
+        'emprestimo_id' => $emprestimo_id,
+        'message' => 'Empréstimo registrado com sucesso'
     ]);
 
 } catch (Exception $e) {
-    $conn->rollback();
+    if ($conn->in_transaction) {
+        $conn->rollback();
+    }
+    error_log("Erro no empréstimo: " . $e->getMessage());
+
     echo json_encode([
         'success' => false,
-        'error' => $e->getMessage()
+        'error' => 'Erro ao processar empréstimo: ' . $e->getMessage()
     ]);
 }
 ?>

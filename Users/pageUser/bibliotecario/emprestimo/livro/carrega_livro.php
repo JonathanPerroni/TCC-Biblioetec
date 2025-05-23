@@ -11,7 +11,7 @@ if(empty($isbn)) {
 
 try {
     // Obter informações básicas do livro
-    $sqlLivro = "SELECT titulo, autor, isbn_falso 
+    $sqlLivro = "SELECT titulo, autor, isbn_falso, tombo
                  FROM tblivros 
                  WHERE isbn_falso = ? 
                  LIMIT 1";
@@ -38,8 +38,9 @@ try {
     $result = $stmt->get_result();
     $estoque = $result->fetch_assoc();
     
-    $livro['total_exemplares'] = $estoque['total_exemplares'] ?? 0;
-
+    // ADICIONE AQUI O CÁLCULO DE DISPONÍVEIS E GARANTIA DE VALORES NUMÉRICOS
+    $livro['disponiveis'] = (int)($estoque['total_exemplares'] ?? 0) - (int)($emprestimos['total'] ?? 0);
+    $livro['total_exemplares'] = (int)($estoque['total_exemplares'] ?? 0);
     // Calcular empréstimos ativos
     $sqlEmprestimos = "SELECT COUNT(*) as total
                        FROM tbemprestimos e
