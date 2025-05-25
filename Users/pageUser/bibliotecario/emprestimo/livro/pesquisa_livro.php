@@ -10,9 +10,19 @@ if (!isset($_SESSION['aluno_emprestimo'])) {
     header('Location: pesquisa_aluno.php');
     exit;
 }
-
+$email_sessao = $_SESSION['email'];
 $aluno = $_SESSION['aluno_emprestimo'];
-$bibliotecario = $_SESSION['bibliotecario'];
+// Consulta o nome do bibliotecário
+$sql = "SELECT nome FROM tbbibliotecario WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email_sessao);
+$stmt->execute();
+$result = $stmt->get_result();
+$bibliotecario = $result->fetch_assoc();
+?>
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -64,6 +74,7 @@ $bibliotecario = $_SESSION['bibliotecario'];
                     <div class="card-header bg-primary text-white">
                         <h4>Pesquisar Livros para Empréstimo</h4>
                         <p class="mb-0">Aluno: <?= htmlspecialchars($aluno['nome']) ?> (RA: <?= htmlspecialchars($aluno['ra_aluno']) ?>)</p>
+                          <small>Bibliotecário: <?= htmlspecialchars($bibliotecario['nome']) ?></small>
                     </div>
                     <div class="card-body">
                         <?php if(isset($_SESSION['msg'])): ?>

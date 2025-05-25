@@ -2,26 +2,52 @@
 session_start();
 require '../../../../../conexao/conexao.php';
 
-$emprestimo_id = $_GET['id'] ?? 0;
+$id = $_GET['id_emprestimo'] ?? null;
+if (!$id) {
+    exit('ID do empréstimo não fornecido');
+}
 
-// Consulta o empréstimo
-$sql_emprestimo = "SELECT e.*, a.nome as aluno_nome, a.ra_aluno, a.nome_curso, a.periodo,
-                  b.nome as bibliotecario_nome
-                  FROM tbemprestimos e  -- Nome corrigido para tbemprestimos
-                  JOIN tbalunos a ON e.ra_aluno = a.ra_aluno
-                  JOIN tbbibliotecario b ON e.id_bibliotecario = b.codigo
-                  WHERE e.id_emprestimo = ?";
-$stmt = $conn->prepare($sql_emprestimo);
-$stmt->bind_param("i", $emprestimo_id);
-$stmt->execute();
-$emprestimo = $stmt->get_result()->fetch_assoc();
+// CONSULTA PRINCIPAL COM OS CAMPOS REAIS
+$sql = "SELECT 
+            e.*,
+            e.nome_aluno,
+            a.ra_aluno, 
+            a.nome_curso, 
+            a.período AS periodo,
+            b.nome AS bibliotecario_nome
+        FROM tbemprestimos e
+        LEFT JOIN tbalunos a ON e.ra_aluno = a.ra_aluno
+        LEFT JOIN tbbibliotecario b ON e.id_bibliotecario = b.codigo
+        WHERE e.id_empresimo = ?";
 
-// Consulta os livros emprestados
-$sql_livros = "SELECT l.titulo, l.autor, l.isbn_falso, l.tombo 
-              FROM tblivros l
-              WHERE l.isbn_falso = ?";
+$stmt = $conn->prepare($sql);
+if (!$stmt) {
+    die("Erro ao preparar a consulta: " . $conn->error);
+}
+
+$stmt->bind_param("i", $id);
+if (!$stmt->execute()) {
+    die("Erro ao executar a consulta: " . $stmt->error);
+}
+
+$result = $stmt->get_result();
+$emprestimo = $result->fetch_assoc();
+
+if (!$emprestimo) {
+    exit('Empréstimo não encontrado');
+}
+
+// CONSULTA DE LIVROS - AJUSTADA PARA SUA ESTRUTURA
+$sql_livros = "SELECT 
+                nome_livro AS titulo,
+                '' AS autor,  // Não existe na sua tabela
+                isbn_falso,
+                tombo
+               FROM tbemprestimos
+               WHERE id_empresimo = ?";
+
 $stmt = $conn->prepare($sql_livros);
-$stmt->bind_param("s", $emprestimo['isbn_falso']);
+$stmt->bind_param("i", $id);
 $stmt->execute();
 $livros = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -54,15 +80,14 @@ $livros = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         <p>Nº <?= str_pad($emprestimo_id, 6, '0', STR_PAD_LEFT) ?></p>
     </div>
     
-    <div class="info">
-        <div class="info-item"><strong>Aluno:</strong> <?= htmlspecialchars($emprestimo['aluno_nome']) ?></div>
-        <div class="info-item"><strong>RA:</strong> <?= htmlspecialchars($emprestimo['ra_aluno']) ?></div>
-        <div class="info-item"><strong>Curso:</strong> <?= htmlspecialchars($emprestimo['nome_curso']) ?></div>
-        <div class="info-item"><strong>Período:</strong> <?= htmlspecialchars($emprestimo['periodo']) ?></div>
-        <div class="info-item"><strong>Data Empréstimo:</strong> <?= date('d/m/Y H:i', strtotime($emprestimo['data_emprestimo'])) ?></div>
-        <div class="info-item"><strong>Devolução Prevista:</strong> <?= date('d/m/Y', strtotime($emprestimo['data_devolucao_prevista'])) ?></div>
-        <div class="info-item"><strong>Bibliotecário:</strong> <?= htmlspecialchars($emprestimo['bibliotecario_nome']) ?></div>
-    </div>
+    <div class="info"> <?php
+echo htmlspecialchars($emprestimo['aluno_nome']);
+echo htmlspecialchars($emprestimo['ra_aluno']);
+echo htmlspecialchars($emprestimo['nome_curso']);
+echo htmlspecialchars($emprestimo['periodo']);
+echo date('d/m/Y H:i', strtotime($emprestimo['data_emprestimo']));
+echo date('d/m/Y', strtotime($emprestimo['data_devolucao_prevista']));
+echo htmlspecialchars($emprestimo['bibliotecario_nome']);  ?> </div>
     
     <table>
         <thead>
@@ -102,9 +127,7 @@ $livros = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             // Imprime automaticamente e redireciona após 3 segundos
             setTimeout(function() {
                 window.print();
-                setTimeout(function() {
-                    window.location.href = 'pesquisa_aluno.php';
-                }, 3000);
+              
             }, 500);
         };
     </script>

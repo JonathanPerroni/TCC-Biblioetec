@@ -11,9 +11,21 @@ if (!isset($_SESSION['aluno_emprestimo']) || !isset($_SESSION['livros_emprestimo
     exit;
 }
 
+$email_sessao = $_SESSION['email'];
+
+// Consulta o nome do bibliotecário
+$sql = "SELECT nome FROM tbbibliotecario WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email_sessao);
+$stmt->execute();
+$result = $stmt->get_result();
+$bibliotecario = $result->fetch_assoc();
+
+
+
 $aluno = $_SESSION['aluno_emprestimo'];
 $livros = $_SESSION['livros_emprestimo'];
-$bibliotecario = $_SESSION['bibliotecario'];
+
 
 // Consulta dados completos do aluno
 $sql_aluno = "SELECT * FROM tbalunos WHERE codigo = ?";
@@ -32,7 +44,7 @@ $aluno_completo = $stmt->get_result()->fetch_assoc();
         .livro-card { border-left: 4px solid #0d6efd; margin-bottom: 15px; }
         .header-confirmacao { background-color: #198754; color: white; }
     </style>
-</head>
+</head> 
 <body>
     <div class="container mt-4">
         <div class="card">
@@ -122,7 +134,7 @@ document.getElementById('btn-confirmar').addEventListener('click', async functio
         }
 
         if (data.success) {
-            window.location.href = 'comprovante.php?id=' + data.emprestimo_id;
+            window.location.href = 'comprovante.php?id_emprestimo=' + data.emprestimo_id;
         } else {
             throw new Error(data.error || 'Erro ao finalizar empréstimo');
         }
