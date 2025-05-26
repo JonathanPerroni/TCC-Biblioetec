@@ -278,10 +278,10 @@ function carregarDetalhesLivro(isbn) {
             // Adicionar livro à lista
             livrosSelecionados.push({
                 ...livroAtual,
+                tombo: livroAtual.tombo, // Garanta que o tombo está incluso
                 data_devolucao: dataDevolucao,
                 sobrepor_regra: sobreporRegra
             });
-            
             atualizarListaLivros();
             resetarFormulario();
         });

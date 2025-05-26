@@ -10,15 +10,15 @@ if (!$id) {
 // CONSULTA PRINCIPAL COM OS CAMPOS REAIS
 $sql = "SELECT 
             e.*,
-            e.nome_aluno,
+            a.nome AS nome, 
             a.ra_aluno, 
             a.nome_curso, 
-            a.período AS periodo,
+            a.periodo,
             b.nome AS bibliotecario_nome
         FROM tbemprestimos e
         LEFT JOIN tbalunos a ON e.ra_aluno = a.ra_aluno
         LEFT JOIN tbbibliotecario b ON e.id_bibliotecario = b.codigo
-        WHERE e.id_empresimo = ?";
+        WHERE e.id_emprestimo = ?";
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
@@ -39,12 +39,13 @@ if (!$emprestimo) {
 
 // CONSULTA DE LIVROS - AJUSTADA PARA SUA ESTRUTURA
 $sql_livros = "SELECT 
-                nome_livro AS titulo,
-                '' AS autor,  // Não existe na sua tabela
-                isbn_falso,
-                tombo
-               FROM tbemprestimos
-               WHERE id_empresimo = ?";
+                l.titulo,
+                l.autor,
+                i.isbn_falso,
+                i.tombo 
+               FROM tbitens_emprestimo i
+               INNER JOIN tblivros l ON i.isbn_falso = l.isbn_falso
+               WHERE i.id_emprestimo = ?";
 
 $stmt = $conn->prepare($sql_livros);
 $stmt->bind_param("i", $id);
@@ -77,49 +78,55 @@ $livros = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <div class="header">
         <h1>Biblioteca Escolar</h1>
         <h2>Comprovante de Empréstimo</h2>
-        <p>Nº <?= str_pad($emprestimo_id, 6, '0', STR_PAD_LEFT) ?></p>
+        <p>Nº <?= str_pad($emprestimo['id_emprestimo'], 6, '0', STR_PAD_LEFT) ?></p>
     </div>
     
-    <div class="info"> <?php
-echo htmlspecialchars($emprestimo['aluno_nome']);
-echo htmlspecialchars($emprestimo['ra_aluno']);
-echo htmlspecialchars($emprestimo['nome_curso']);
-echo htmlspecialchars($emprestimo['periodo']);
-echo date('d/m/Y H:i', strtotime($emprestimo['data_emprestimo']));
-echo date('d/m/Y', strtotime($emprestimo['data_devolucao_prevista']));
-echo htmlspecialchars($emprestimo['bibliotecario_nome']);  ?> </div>
+<div class="info">
+    <div class="info-item">Aluno: <?= htmlspecialchars($emprestimo['nome']) ?></div>
+    <div class="info-item">RA: <?= htmlspecialchars($emprestimo['ra_aluno']) ?></div>
+    <div class="info-item">Curso: <?= htmlspecialchars($emprestimo['nome_curso']) ?></div>
+    <div class="info-item">Período: <?= htmlspecialchars($emprestimo['periodo']) ?></div>
+    <div class="info-item">Data Empréstimo: <?= date('d/m/Y H:i', strtotime($emprestimo['data_emprestimo'])) ?></div>
+    <div class="info-item">Devolução Prevista: <?= date('d/m/Y', strtotime($emprestimo['data_devolucao_prevista'])) ?></div>
+    <div class="info-item">Bibliotecário: <?= htmlspecialchars($emprestimo['bibliotecario_nome']) ?></div>
+</div>
     
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>ISBN Falso</th>
-                <th>Tombo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($livros as $index => $livro): ?>
-            <tr>
-                <td><?= $index + 1 ?></td>
-                <td><?= htmlspecialchars($livro['titulo']) ?></td>
-                <td><?= htmlspecialchars($livro['autor']) ?></td>
-                <td><?= htmlspecialchars($livro['isbn_falso']) ?></td>
-                <td><?= htmlspecialchars($livro['tombo']) ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+   <table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>ISBN Falso</th>
+            <th>Tombo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($livros as $index => $livro): ?>
+        <tr>
+            <td><?= $index + 1 ?></td>
+            <td><?= htmlspecialchars($livro['titulo']) ?></td>
+            <td><?= htmlspecialchars($livro['autor']) ?></td>
+            <td><?= htmlspecialchars($livro['isbn_falso']) ?></td>
+            <td><?= htmlspecialchars($livro['tombo']) ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
     
     <div class="assinatura">
         <div class="assinatura-line"></div>
         <p>Assinatura do Bibliotecário</p>
     </div>
 
+     <div class="assinatura">
+        <div class="assinatura-line"></div>
+        <p>Assinatura do Aluno</p>
+    </div>
+
     <div class="footer no-print">
         <button onclick="window.print()" class="btn btn-primary">Imprimir</button>
-        <a href="pesquisa_aluno.php" class="btn btn-secondary">Voltar</a>
+        <a href="../../pagebibliotecario.php" class="btn btn-secondary">voltar ao inicio</a>
     </div>
 
     <script>
@@ -133,3 +140,9 @@ echo htmlspecialchars($emprestimo['bibliotecario_nome']);  ?> </div>
     </script>
 </body>
 </html>
+
+
+
+
+
+

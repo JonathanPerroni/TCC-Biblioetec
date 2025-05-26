@@ -1,0 +1,8 @@
+[26-May-2025 04:12:02 Europe/Berlin] Exceção não capturada: The number of elements in the type definition string must match the number of bind variables
+[26-May-2025 04:12:06 Europe/Berlin] Exceção não capturada: The number of elements in the type definition string must match the number of bind variables
+[26-May-2025 05:18:28 Europe/Berlin] Exceção não capturada: The number of variables must match the number of parameters in the prepared statement
+[26-May-2025 05:18:50 Europe/Berlin] Exceção não capturada: The number of variables must match the number of parameters in the prepared statement
+[26-May-2025 05:21:33 Europe/Berlin] Exceção não capturada: The number of elements in the type definition string must match the number of bind variables
+[26-May-2025 05:21:43 Europe/Berlin] Exceção não capturada: The number of elements in the type definition string must match the number of bind variables
+[26-May-2025 05:25:36 Europe/Berlin] PHP Warning:  Undefined property: mysqli::$in_transaction in C:\xampp\htdocs\TCC-Biblioetec\Users\pageUser\bibliotecario\emprestimo\confirmar_emprestimo\finalizar_emprestimo.php on line 148
+[26-May-2025 05:25:36 Europe/Berlin] ERRO FINALIZAR EMPRESTIMO: Column 'id_bibliotecario' cannot be null

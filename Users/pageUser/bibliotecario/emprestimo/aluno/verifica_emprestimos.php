@@ -14,11 +14,12 @@ if (empty($ra)) {
 }
 
 // Verifica empréstimos não devolvidos
+// Consulta original (erro comum):
 $sql = "SELECT COUNT(*) as total 
         FROM tbemprestimos 
         WHERE ra_aluno = ? AND data_devolucao_efetiva IS NULL";
 $stmt = $conn->prepare($sql);
-$stmt->execute([$ra]);
+$stmt->execute([$ra]); // Correto (1 parâmetro)
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($result['total'] > 0) {
