@@ -6,3 +6,8 @@
 [26-May-2025 05:21:43 Europe/Berlin] Exceção não capturada: The number of elements in the type definition string must match the number of bind variables
 [26-May-2025 05:25:36 Europe/Berlin] PHP Warning:  Undefined property: mysqli::$in_transaction in C:\xampp\htdocs\TCC-Biblioetec\Users\pageUser\bibliotecario\emprestimo\confirmar_emprestimo\finalizar_emprestimo.php on line 148
 [26-May-2025 05:25:36 Europe/Berlin] ERRO FINALIZAR EMPRESTIMO: Column 'id_bibliotecario' cannot be null
+[27-May-2025 11:41:39 Europe/Berlin] Exceção não capturada: The number of elements in the type definition string must match the number of bind variables
+[27-May-2025 11:47:00 Europe/Berlin] PHP Warning:  Undefined property: mysqli::$in_transaction in C:\xampp\htdocs\TCC-Biblioetec\Users\pageUser\bibliotecario\emprestimo\confirmar_emprestimo\finalizar_emprestimo.php on line 163
+[27-May-2025 11:47:00 Europe/Berlin] ERRO FINALIZAR EMPRESTIMO: Livro SABER SE MOTIVAR NA VIDA E NO TRABALHO não disponível no momento da confirmação
+[27-May-2025 12:07:18 Europe/Berlin] PHP Warning:  Undefined property: mysqli::$in_transaction in C:\xampp\htdocs\TCC-Biblioetec\Users\pageUser\bibliotecario\emprestimo\confirmar_emprestimo\finalizar_emprestimo.php on line 163
+[27-May-2025 12:07:18 Europe/Berlin] ERRO FINALIZAR EMPRESTIMO: Livro BANCO DE QUESTÕES 2010 não disponível no momento da confirmação
