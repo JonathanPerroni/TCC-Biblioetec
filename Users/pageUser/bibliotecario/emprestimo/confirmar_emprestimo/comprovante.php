@@ -1,150 +1,310 @@
 <?php
-ini_set('display_errors', 0);
+// ===========================
+// comprovante.php (Corrigido v4 - Busca por n_emprestimo)
+// ===========================
+
+// Configurações de erro e sessão
+ini_set("display_errors", 0); // Idealmente 0 em produção
 error_reporting(E_ALL);
-ini_set('log_errors', 1);
-ini_set('error_log', 'php_errors.log');
+ini_set("log_errors", 1);
+ini_set("error_log", "php_errors.log"); // Certifique-se que o servidor web tem permissão para escrever neste arquivo
 
-session_start();
-require '../../../../../conexao/conexao.php';
-header('Content-Type: application/json');
+// Inclui segurança (que inicia sessão e verifica login)
+require_once __DIR__ . 
+    "/../../seguranca.php"; // Ajuste o caminho conforme necessário
 
-set_exception_handler(function ($exception) {
-    error_log("Exceção não capturada: " . $exception->getMessage());
-    echo json_encode(['success' => false, 'error' => 'Erro interno no servidor']);
-    exit;
-});
+// Inclui conexão com o banco
+require_once __DIR__ . 
+    "/../../../../../conexao/conexao.php"; // Ajuste o caminho conforme necessário
 
-if (!isset($_SESSION['bibliotecario']) || !isset($_SESSION['aluno_emprestimo']) || !isset($_SESSION['livros_emprestimo'])) {
-    echo json_encode(['success' => false, 'error' => 'Acesso não autorizado ou sessão inválida']);
+// Verifica se a conexão foi estabelecida em conexao.php
+if (!isset($conn) || !($conn instanceof mysqli)) {
+    error_log("Erro: Conexão com banco de dados não estabelecida em comprovante.php.");
+    die("Erro crítico: Não foi possível conectar ao banco de dados.");
+}
+
+// --- Lógica para buscar e exibir o comprovante por NÚMERO DO GRUPO ---
+
+// ** MUDANÇA: Buscar por n_emprestimo **
+$n_emprestimo_grupo = filter_input(INPUT_GET, "n_emprestimo", FILTER_VALIDATE_INT);
+$emprestimo_geral_dados = null; // Dados gerais do empréstimo (pego da primeira linha)
+$livros_emprestados = []; // Lista de livros individuais deste grupo
+
+if (!$n_emprestimo_grupo) {
+    $_SESSION["msg"] = "Número do grupo de empréstimo inválido ou não fornecido.";
+    $_SESSION["msg_type"] = "danger";
+    header("Location: ../aluno/pesquisa_aluno.php"); // Ajuste o caminho
     exit;
 }
 
 try {
-    $input = json_decode(file_get_contents('php://input'), true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception('Dados inválidos recebidos');
-    }
-
-    $aluno = $_SESSION['aluno_emprestimo'];
-    $bibliotecario = $_SESSION['bibliotecario'];
-    $livros = $_SESSION['livros_emprestimo'];
-
-    if (empty($livros)) {
-        throw new Exception('Nenhum livro selecionado para empréstimo');
-    }
-
-    // Pega os detalhes do primeiro livro para inserir em tbemprestimos
-    $primeiro_livro = $livros[0];
-    $isbn_falso_primeiro = $primeiro_livro['isbn_falso'] ?? '';
-    $isbn_primeiro = ''; // ISBN real não disponível na sessão
-    $tombo_primeiro = $primeiro_livro['tombo'] ?? '';
-    $nome_livro_primeiro = $primeiro_livro['titulo'] ?? ''; 
-
-    if (empty($aluno['ra_aluno'])) {
-        throw new Exception('RA do aluno não encontrado na sessão');
-    }
-
-    $qntd_livros = count($livros);
-    $data_devolucao_geral = date('Y-m-d', strtotime(' + 7 days')); 
-
-    $conn->begin_transaction();
-
-    // Inserir empréstimo principal (tbemprestimos)
-    $sql_emprestimo = "INSERT INTO tbemprestimos (
-        ra_aluno, nome_aluno, isbn_falso, isbn, tombo, nome_livro, 
-        qntd_livros, data_emprestimo, data_devolucao_prevista, 
-        emprestado_por, id_bibliotecario
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?)";
-    $stmt = $conn->prepare($sql_emprestimo);
-    if (!$stmt) {
-        throw new Exception("Erro ao preparar empréstimo: " . $conn->error);
-    }
-    $stmt->bind_param("ssssssissi",
-        $aluno['ra_aluno'], $aluno['nome'], $isbn_falso_primeiro, $isbn_primeiro, 
-        $tombo_primeiro, $nome_livro_primeiro, $qntd_livros, $data_devolucao_geral, 
-        $bibliotecario['nome'], $bibliotecario['codigo']
-    );
-    if (!$stmt->execute()) {
-        throw new Exception("Erro ao registrar empréstimo: " . $stmt->error);
-    }
-    $emprestimo_id = $conn->insert_id;
-    $stmt->close();
-
-    // Atualiza o n_emprestimo
-    $sql_n_emprestimo = "UPDATE tbemprestimos SET n_emprestimo = ? WHERE id_emprestimo = ?";
-    $stmt = $conn->prepare($sql_n_emprestimo);
-    if (!$stmt) { throw new Exception("Erro ao preparar atualização n_emprestimo: " . $conn->error); }
-    $stmt->bind_param("ii", $emprestimo_id, $emprestimo_id);
-    if (!$stmt->execute()) { throw new Exception("Erro ao atualizar n_emprestimo: " . $stmt->error); }
-    $stmt->close();
-
-    // Processar cada livro para tbitens_emprestimo
-    foreach ($livros as $livro) {
-        // Verificar disponibilidade (lógica original mantida)
-        $sql_verifica = "SELECT (e.total_exemplares - (SELECT COUNT(*) FROM tbitens_emprestimo i WHERE i.isbn_falso = l.isbn_falso AND i.data_devolucao_efetiva IS NULL)) AS disponiveis FROM tblivros l JOIN tblivro_estoque e ON l.isbn_falso = e.isbn_falso WHERE l.isbn_falso = ? FOR UPDATE";
-        $stmt = $conn->prepare($sql_verifica);
-        if (!$stmt) { throw new Exception("Erro ao preparar verificação estoque: " . $conn->error); }
-        $stmt->bind_param("s", $livro['isbn_falso']);
-        if (!$stmt->execute()) { throw new Exception("Erro na verificação estoque: " . $stmt->error); }
-        $result = $stmt->get_result()->fetch_assoc();
-        $stmt->close();
-
-        if (!$result || $result['disponiveis'] <= 0) {
-            throw new Exception("Livro {$livro['titulo']} (Tombo: {$livro['tombo']}) não disponível no momento da confirmação"); 
-        }
-
-        // --- MODIFICAÇÃO PARA INCLUIR TOMBO EM tbitens_emprestimo ---
-        // Registrar item do empréstimo incluindo o tombo
-        $sql_item = "INSERT INTO tbitens_emprestimo (
-            id_emprestimo, isbn_falso, tombo, data_devolucao_prevista
-        ) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql_item);
-        if (!$stmt) {
-            throw new Exception("Erro ao preparar item empréstimo: " . $conn->error);
-        }
-        $data_devolucao_item = date('Y-m-d', strtotime($livro['data_devolucao'] ?? ' + 7 days'));
-        $tombo_item = $livro['tombo'] ?? ''; // Pega o tombo específico deste item
-        // Bind: integer, string, string, string
-        $stmt->bind_param("isss", 
-            $emprestimo_id, 
-            $livro['isbn_falso'], 
-            $tombo_item, 
-            $data_devolucao_item
+    // 1. Busca os dados GERAIS do empréstimo pegando a PRIMEIRA linha do grupo
+    //    e junta com dados do aluno (garantindo que colunas inexistentes não são buscadas)
+    $sql_geral = "SELECT 
+                        e.id_emprestimo, e.n_emprestimo, e.ra_aluno, e.nome_aluno, 
+                        e.data_emprestimo, e.data_devolucao_prevista, -- Pega a data geral da primeira linha
+                        e.emprestado_por, e.id_bibliotecario,
+                        a.nome_curso, a.periodo 
+                    FROM tbemprestimos e
+                    LEFT JOIN tbalunos a ON e.ra_aluno = a.ra_aluno
+                    WHERE e.n_emprestimo = ? 
+                    ORDER BY e.id_emprestimo ASC -- Garante pegar a primeira linha
+                    LIMIT 1"; // Pega apenas uma linha para dados gerais
+    $stmt_geral = $conn->prepare($sql_geral);
+    if (!$stmt_geral) {
+        throw new Exception(
+            "Erro ao preparar consulta geral do empréstimo: " . $conn->error
         );
+    }
+    $stmt_geral->bind_param("i", $n_emprestimo_grupo);
+    $stmt_geral->execute();
+    $result_geral = $stmt_geral->get_result();
+    $emprestimo_geral_dados = $result_geral->fetch_assoc();
+    $stmt_geral->close();
 
-        if (!$stmt->execute()) {
-            error_log("Erro ao registrar item empréstimo: " . $stmt->error);
-            throw new Exception("Erro ao registrar item empréstimo: " . $stmt->error);
-        }
-        $stmt->close();
-
-        // Atualizar estoque (lógica original mantida - verificar se está correta para seu fluxo)
-        $sql_atualiza = "UPDATE tblivro_estoque SET total_exemplares = total_exemplares - 1 WHERE isbn_falso = ?";
-        $stmt = $conn->prepare($sql_atualiza);
-        if (!$stmt) { throw new Exception("Erro ao preparar atualização estoque: " . $conn->error); }
-        $stmt->bind_param("s", $livro['isbn_falso']);
-        if (!$stmt->execute()) { throw new Exception("Erro na atualização do estoque: " . $stmt->error); }
-        $stmt->close();
+    if (!$emprestimo_geral_dados) {
+        $_SESSION["msg"] = "Empréstimo com Nº Grupo {$n_emprestimo_grupo} não encontrado.";
+        $_SESSION["msg_type"] = "warning";
+        header("Location: ../aluno/pesquisa_aluno.php"); // Ajuste o caminho
+        exit;
     }
 
-    $conn->commit();
-    unset($_SESSION['livros_emprestimo']);
+    // 2. Busca TODAS as linhas de livros para este n_emprestimo
+    //    Agora buscamos diretamente de tbemprestimos, pois cada linha é um livro
+    $sql_livros = "SELECT 
+                        e.isbn_falso, e.tombo, e.nome_livro, 
+                        e.data_devolucao_prevista AS data_devolucao_item, -- Data pode variar por item?
+                        l.autor -- Busca o autor da tblivros
+                    FROM tbemprestimos e
+                    LEFT JOIN tblivros l ON e.isbn_falso = l.isbn_falso -- Junta para pegar o autor
+                    WHERE e.n_emprestimo = ?
+                    ORDER BY e.nome_livro"; // Ordena por nome do livro
+    
+    $stmt_livros = $conn->prepare($sql_livros);
+    if (!$stmt_livros) {
+        throw new Exception("Erro ao preparar consulta dos livros: " . $conn->error);
+    }
+    $stmt_livros->bind_param("i", $n_emprestimo_grupo);
+    $stmt_livros->execute();
+    $result_livros = $stmt_livros->get_result();
+    while ($row = $result_livros->fetch_assoc()) {
+        $livros_emprestados[] = $row;
+    }
+    $stmt_livros->close();
 
-    echo json_encode([
-        'success' => true,
-        'emprestimo_id' => $emprestimo_id,
-        'message' => 'Empréstimo registrado com sucesso'
-    ]);
+    // Calcula a quantidade total de livros (simplesmente contando as linhas encontradas)
+    $quantidade_total_livros = count($livros_emprestados);
 
 } catch (Exception $e) {
-    if (isset($conn) && method_exists($conn, 'rollback') && $conn->in_transaction) {
-        $conn->rollback();
-    }
-    error_log("ERRO FINALIZAR EMPRESTIMO: " . $e->getMessage());
-    echo json_encode([
-        'success' => false,
-        'error' => 'Erro ao processar empréstimo: ' . $e->getMessage()
-    ]);
+    error_log("Erro ao buscar dados do comprovante (n_emprestimo: {$n_emprestimo_grupo}): " . $e->getMessage());
+    $_SESSION["msg"] = "Erro ao carregar dados do comprovante. Tente novamente.";
+    $_SESSION["msg_type"] = "danger";
+    header("Location: ../aluno/pesquisa_aluno.php"); // Ajuste o caminho
     exit;
 }
+
 ?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprovante de Empréstimo - Nº Grupo <?= htmlspecialchars(
+        $n_emprestimo_grupo
+    ) ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .comprovante-card { 
+            max-width: 800px; 
+            margin: 2rem auto; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: none;
+        }
+        .comprovante-header { background-color: #0d6efd; color: white; }
+        .comprovante-footer { background-color: #e9ecef; }
+        .table th { background-color: #f8f9fa; }
+        .assinatura { margin-top: 40px; text-align: center; }
+        .linha-assinatura { 
+            display: inline-block; 
+            width: 250px; 
+            border-top: 1px solid #000; 
+            margin-top: 5px; 
+        }
+        @media print {
+            body * { visibility: hidden; }
+            .printable-area, .printable-area * { visibility: visible; }
+            .printable-area { 
+                position: absolute; 
+                left: 0; 
+                top: 0; 
+                width: 100%; 
+                margin: 0; 
+                padding: 0; 
+                box-shadow: none;
+                border: none;
+            }
+            .no-print { display: none; }
+            .comprovante-card { max-width: 100%; }
+            .assinatura { page-break-inside: avoid; } 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card comprovante-card printable-area">
+            <div class="card-header comprovante-header text-center">
+                <h4>Comprovante de Empréstimo</h4>
+            </div>
+            <div class="card-body p-4">
+                
+                <?php if (isset($_SESSION["msg"])): ?>
+                    <div class="alert alert-<?= htmlspecialchars(
+                        $_SESSION["msg_type"]
+                    ) ?> alert-dismissible fade show no-print" role="alert">
+                        <?= htmlspecialchars($_SESSION["msg"]) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php unset($_SESSION["msg"], $_SESSION["msg_type"]); ?>
+                <?php endif; ?>
+
+                <div class="text-center mb-4">
+                    <!-- Mostra o número do GRUPO -->
+                    <h5>Empréstimo Nº Grupo: <?= htmlspecialchars(
+                        $n_emprestimo_grupo
+                    ) ?></h5> 
+                    <p>Data do Empréstimo: <?= htmlspecialchars(
+                        date(
+                            "d/m/Y H:i",
+                            strtotime($emprestimo_geral_dados["data_emprestimo"])
+                        )
+                    ) ?></p>
+                </div>
+
+                <h6>Dados do Aluno</h6>
+                <table class="table table-bordered table-sm mb-4">
+                    <tbody>
+                        <tr><th style="width: 100px;">Nome</th><td><?= htmlspecialchars(
+                            $emprestimo_geral_dados["nome_aluno"]
+                        ) ?></td></tr>
+                        <tr><th>RA</th><td><?= htmlspecialchars(
+                            $emprestimo_geral_dados["ra_aluno"]
+                        ) ?></td></tr>
+                        <tr><th>Curso</th><td><?= htmlspecialchars(
+                            $emprestimo_geral_dados["nome_curso"] ?? "N/A"
+                        ) ?></td></tr>
+                        <tr><th>Período</th><td><?= htmlspecialchars(
+                            $emprestimo_geral_dados["periodo"] ?? "N/A"
+                        ) ?></td></tr>
+                    </tbody>
+                </table>
+
+                <!-- Tabela de Livros (Lista Individual) -->
+                <h6>Livros Emprestados (Total: <?= htmlspecialchars(
+                    $quantidade_total_livros
+                ) ?>)</h6>
+                <table class="table table-bordered table-striped table-sm mb-4">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>ISBN Falso</th>
+                            <th>Tombo</th>
+                            <th>Devolução Prevista</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($livros_emprestados)): ?>
+                            <tr><td colspan="5" class="text-center">Nenhum livro encontrado para este empréstimo.</td></tr>
+                        <?php else: ?>
+                            <?php foreach ($livros_emprestados as $livro): ?>
+                            <tr>
+                                <td><?= htmlspecialchars(
+                                    $livro["nome_livro"] ?? "N/A"
+                                ) ?></td>
+                                <td><?= htmlspecialchars(
+                                    $livro["autor"] ?? "N/A"
+                                ) ?></td>
+                                <td><?= htmlspecialchars(
+                                    $livro["isbn_falso"] ?? "N/A"
+                                ) ?></td>
+                                <td><?= htmlspecialchars(
+                                    $livro["tombo"] ?? "N/A"
+                                ) ?></td>
+                                <td><?= htmlspecialchars(
+                                    date(
+                                        "d/m/Y",
+                                        strtotime(
+                                            $livro["data_devolucao_item"]
+                                        )
+                                    )
+                                ) ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+
+                <h6>Informações Adicionais</h6>
+                <table class="table table-bordered table-sm mb-4">
+                    <tbody>
+                        <tr><th style="width: 250px;">Data Prevista para Devolução Geral</th><td><?= htmlspecialchars(
+                            date(
+                                "d/m/Y",
+                                strtotime(
+                                    $emprestimo_geral_dados["data_devolucao_prevista"]
+                                )
+                            )
+                        ) ?></td></tr>
+                        <tr><th>Bibliotecário Responsável</th><td><?= htmlspecialchars(
+                            $emprestimo_geral_dados["emprestado_por"]
+                        ) ?></td></tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-warning" role="alert">
+                    <strong>Atenção:</strong> A não devolução dos livros na data prevista implicará em penalidades conforme o regulamento da biblioteca.
+                </div>
+
+                <!-- Áreas de Assinatura -->
+                <div class="row assinatura">
+                    <div class="col-md-6">
+                        <span class="linha-assinatura"></span>
+                        <p class="mt-1">Assinatura do Aluno</p>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="linha-assinatura"></span>
+                        <p class="mt-1">Assinatura do Bibliotecário</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer comprovante-footer text-center p-3 no-print">
+                <button class="btn btn-secondary" onclick="window.print();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                    </svg>
+                    Imprimir Comprovante
+                </button>
+                <a href="../aluno/pesquisa_aluno.php" class="btn btn-primary">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                    Novo Empréstimo
+                </a>
+                 <a href="../../pageUser/bibliotecario/pagebibliotecario.php" class="btn btn-outline-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                    </svg>
+                    Início
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

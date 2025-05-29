@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/05/2025 às 06:48
+-- Tempo de geração: 29/05/2025 às 02:39
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -460,7 +460,13 @@ INSERT INTO `tbdevolucao` (`id_devolucao`, `id_emprestimo`, `n_emprestimo`, `ra_
 (18, 18, 'np000001', '123456789', 'Aluno Teste da Silva', 'f000000000001', '9786556405377', '', 'O CORCUNDA DE NOTRE DAME', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-20 23:33:25', 'emprestado'),
 (19, 19, 'np000001', '123456789', 'Aluno Teste da Silva', 'f000000000002', 'OCLC:683401996', '', 'COMO CONQUISTAR, FALANDO', 1, '2025-05-20 00:00:00', '2025-05-29 00:00:00', '2025-05-21 00:21:41', 'emprestado'),
 (20, 27, '', '123456789', '', '', '', '', '', 0, '2025-05-23 01:36:02', NULL, '2025-05-23 01:38:02', 'emprestado'),
-(21, 28, '', '123456789', '', '', '', '', '', 0, '2025-05-23 01:38:47', NULL, '2025-05-23 01:44:07', 'emprestado');
+(21, 28, '', '123456789', '', '', '', '', '', 0, '2025-05-23 01:38:47', NULL, '2025-05-23 01:44:07', 'emprestado'),
+(22, 29, '', '123456789', '', '', '', '', '', 0, '2025-05-23 01:45:22', NULL, '2025-05-25 21:21:11', 'emprestado'),
+(23, 30, '', '123456789', '', '', '', '', '', 0, '2025-05-25 21:22:15', NULL, '2025-05-25 23:07:51', 'emprestado'),
+(24, 33, '', '123456789', '', '', '', '', '', 0, '2025-05-25 23:22:34', NULL, '2025-05-26 00:17:09', 'emprestado'),
+(25, 34, '34', '123456789', 'Aluno Teste da Silva', '', '', '', '', 2, '2025-05-26 00:28:15', '2025-06-02 00:00:00', '2025-05-27 06:41:03', 'emprestado'),
+(26, 36, '36', '123456789', 'Aluno Teste da Silva', 'f000000000667', '', '10307', 'BANCO DE QUESTÕES 2010', 1, '2025-05-27 06:47:35', '2025-06-03 00:00:00', '2025-05-27 07:06:38', 'emprestado'),
+(27, 38, '38', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-27 07:13:27', '2025-06-03 00:00:00', '2025-05-28 21:33:56', 'emprestado');
 
 -- --------------------------------------------------------
 
@@ -483,7 +489,7 @@ CREATE TABLE `tbemprestimos` (
   `data_devolucao_efetiva` datetime DEFAULT NULL,
   `tipo` enum('emprestado','pedido') CHARACTER SET armscii8 COLLATE armscii8_general_ci NOT NULL,
   `emprestado_por` text DEFAULT NULL,
-  `id_bibliotecario` int(11) NOT NULL
+  `id_bibliotecario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -491,7 +497,7 @@ CREATE TABLE `tbemprestimos` (
 --
 
 INSERT INTO `tbemprestimos` (`id_emprestimo`, `n_emprestimo`, `ra_aluno`, `nome_aluno`, `isbn_falso`, `isbn`, `tombo`, `nome_livro`, `qntd_livros`, `data_emprestimo`, `data_devolucao_prevista`, `data_devolucao_efetiva`, `tipo`, `emprestado_por`, `id_bibliotecario`) VALUES
-(29, '', '123456789', '', '', '', '', '', 0, '2025-05-23 01:45:22', NULL, NULL, 'emprestado', NULL, 0);
+(39, '39', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-28 21:37:00', '2025-06-05 00:00:00', NULL, 'emprestado', 'Funcionário Teste', NULL);
 
 -- --------------------------------------------------------
 
@@ -570,6 +576,7 @@ CREATE TABLE `tbitens_emprestimo` (
   `id_item` int(11) NOT NULL,
   `id_emprestimo` int(11) DEFAULT NULL,
   `isbn_falso` varchar(50) DEFAULT NULL,
+  `tombo` varchar(50) DEFAULT NULL,
   `data_devolucao_prevista` date DEFAULT NULL,
   `data_devolucao_efetiva` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -578,10 +585,19 @@ CREATE TABLE `tbitens_emprestimo` (
 -- Despejando dados para a tabela `tbitens_emprestimo`
 --
 
-INSERT INTO `tbitens_emprestimo` (`id_item`, `id_emprestimo`, `isbn_falso`, `data_devolucao_prevista`, `data_devolucao_efetiva`) VALUES
-(3, 27, 'f000000000109', '2025-05-30', NULL),
-(4, 28, 'f000000000015', '2025-05-30', NULL),
-(5, 29, 'f000000000686', '2025-05-30', NULL);
+INSERT INTO `tbitens_emprestimo` (`id_item`, `id_emprestimo`, `isbn_falso`, `tombo`, `data_devolucao_prevista`, `data_devolucao_efetiva`) VALUES
+(3, 27, 'f000000000109', NULL, '2025-05-30', NULL),
+(4, 28, 'f000000000015', NULL, '2025-05-30', NULL),
+(5, 29, 'f000000000686', NULL, '2025-05-30', NULL),
+(6, 30, 'f000000000664', NULL, '2025-05-31', NULL),
+(7, 30, 'f000000000669', NULL, '2025-05-31', NULL),
+(8, 33, 'f000000000019', NULL, '2025-05-31', NULL),
+(9, 33, 'f000000000004', NULL, '2025-05-31', NULL),
+(10, 34, 'f000000000667', NULL, '2025-06-02', NULL),
+(11, 34, 'f000000000669', NULL, '2025-06-02', NULL),
+(13, 36, 'f000000000667', NULL, '2025-06-03', NULL),
+(14, 38, 'f000000000260', NULL, '2025-06-03', NULL),
+(15, 39, 'f000000000260', NULL, '2025-06-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -3891,7 +3907,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (1, 'f000000000001', 1),
 (2, 'f000000000002', 1),
 (3, 'f000000000003', 1),
-(4, 'f000000000004', 1),
+(4, 'f000000000004', 0),
 (5, 'f000000000005', 1),
 (6, 'f000000000006', 1),
 (7, 'f000000000007', 1),
@@ -3906,7 +3922,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (16, 'f000000000016', 0),
 (17, 'f000000000017', 1),
 (18, 'f000000000018', 2),
-(19, 'f000000000019', 1),
+(19, 'f000000000019', 0),
 (20, 'f000000000020', 1),
 (21, 'f000000000021', 1),
 (22, 'f000000000022', 1),
@@ -4147,7 +4163,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (257, 'f000000000257', 1),
 (258, 'f000000000258', 1),
 (259, 'f000000000259', 1),
-(260, 'f000000000260', 11),
+(260, 'f000000000260', 9),
 (261, 'f000000000261', 2),
 (262, 'f000000000262', 1),
 (263, 'f000000000263', 1),
@@ -4551,12 +4567,12 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (661, 'f000000000661', 1),
 (662, 'f000000000662', 1),
 (663, 'f000000000663', 1),
-(664, 'f000000000664', 1),
+(664, 'f000000000664', 0),
 (665, 'f000000000665', 1),
 (666, 'f000000000666', 1),
-(667, 'f000000000667', 3),
+(667, 'f000000000667', 1),
 (668, 'f000000000668', 1),
-(669, 'f000000000669', 3),
+(669, 'f000000000669', 1),
 (670, 'f000000000670', 1),
 (671, 'f000000000671', 1),
 (672, 'f000000000672', 1),
@@ -5143,13 +5159,13 @@ ALTER TABLE `tbdev`
 -- AUTO_INCREMENT de tabela `tbdevolucao`
 --
 ALTER TABLE `tbdevolucao`
-  MODIFY `id_devolucao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_devolucao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `tbemprestimos`
 --
 ALTER TABLE `tbemprestimos`
-  MODIFY `id_emprestimo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_emprestimo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de tabela `tbescola`
@@ -5167,7 +5183,7 @@ ALTER TABLE `tbfuncionarios`
 -- AUTO_INCREMENT de tabela `tbitens_emprestimo`
 --
 ALTER TABLE `tbitens_emprestimo`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `tbjogoseducativos`

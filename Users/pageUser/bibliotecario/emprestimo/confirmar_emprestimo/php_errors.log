@@ -11,3 +11,5 @@
 [27-May-2025 11:47:00 Europe/Berlin] ERRO FINALIZAR EMPRESTIMO: Livro SABER SE MOTIVAR NA VIDA E NO TRABALHO não disponível no momento da confirmação
 [27-May-2025 12:07:18 Europe/Berlin] PHP Warning:  Undefined property: mysqli::$in_transaction in C:\xampp\htdocs\TCC-Biblioetec\Users\pageUser\bibliotecario\emprestimo\confirmar_emprestimo\finalizar_emprestimo.php on line 163
 [27-May-2025 12:07:18 Europe/Berlin] ERRO FINALIZAR EMPRESTIMO: Livro BANCO DE QUESTÕES 2010 não disponível no momento da confirmação
+[29-May-2025 03:42:00 Europe/Berlin] Erro ao buscar dados do comprovante: Unknown column 'a.telefone' in 'field list'
+
