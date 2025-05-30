@@ -1,166 +1,198 @@
 <?php
-ini_set('display_errors', 0);
+ob_start(); // Inicia o buffer de saída no início
+
+ini_set("display_errors", 0);
 error_reporting(E_ALL);
-ini_set('log_errors', 1);
-ini_set('error_log', 'php_errors.log');
+ini_set("log_errors", 1);
+ini_set("error_log", "php_errors.log"); // Certifique-se que este arquivo tem permissão de escrita pelo servidor web
 
 session_start();
 
+// *** Define que esta é uma requisição AJAX ANTES de incluir segurança ***
+define("IS_AJAX_REQUEST", true);
+
 // Inclui segurança (que inicia sessão, verifica login e carrega dados do bibliotecário)
-require_once __DIR__ . '/../../seguranca.php'; // Ajuste o caminho se necessário
+require_once __DIR__ . "/../../seguranca.php"; // Ajuste o caminho se necessário
 
 // Inclui conexão com o banco
-require_once __DIR__ . '/../../../../../conexao/conexao.php'; // Ajuste o caminho se necessário
+require_once __DIR__ . "/../../../../../conexao/conexao.php"; // Ajuste o caminho se necessário
 
-header('Content-Type: application/json');
+// Garante que o tipo de conteúdo seja JSON
+header("Content-Type: application/json");
 
 // Verifica se a conexão foi estabelecida
 if (!isset($conn) || !($conn instanceof mysqli)) {
-    error_log("Erro: Conexão com banco de dados não estabelecida em finalizar_emprestimo.php.");
-    echo json_encode(['success' => false, 'error' => 'Erro interno no servidor (conexão)']);
-    exit;
+    error_log(
+        "Erro: Conexão com banco de dados não estabelecida em finalizar_emprestimo.php."
+    );
+    ob_end_clean(); // Limpa buffer
+    echo json_encode([
+        "success" => false,
+        "error" => "Erro interno no servidor (conexão)",
+    ]);
+    exit();
 }
 
 // Verifica se as sessões necessárias existem
-if (!isset($_SESSION['bibliotecario']) || !isset($_SESSION['aluno_emprestimo']) || !isset($_SESSION['livros_emprestimo'])) {
-    echo json_encode(['success' => false, 'error' => 'Acesso não autorizado ou sessão inválida']);
-    exit;
+if (
+    !isset($_SESSION["bibliotecario"]) ||
+    !isset($_SESSION["aluno_emprestimo"]) ||
+    !isset($_SESSION["livros_emprestimo"])
+) {
+    ob_end_clean(); // Limpa buffer
+    echo json_encode([
+        "success" => false,
+        "error" => "Acesso não autorizado ou sessão inválida",
+    ]);
+    exit();
 }
 
-$conn->begin_transaction();
 $numero_emprestimo_grupo = null; // Guarda o n_emprestimo comum para esta transação
 $primeiro_emprestimo_id = null; // Guarda o id_emprestimo da primeira linha inserida
 
 try {
-    $aluno = $_SESSION['aluno_emprestimo'];
-    $bibliotecario = $_SESSION['bibliotecario'];
-    $livros = $_SESSION['livros_emprestimo'];
+    // --- DEBUG: Determinar o n_emprestimo ANTES de iniciar a transação ---
+    $sql_get_next_n = "SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos";
+    error_log("DEBUG N_EMPRESTIMO: Executando consulta: " . $sql_get_next_n); // Log 1
+    $result_n = $conn->query($sql_get_next_n);
+    if (!$result_n) {
+        error_log("DEBUG N_EMPRESTIMO: Erro na consulta MAX: " . $conn->error); // Log erro consulta
+        throw new Exception(
+            "Erro ao buscar próximo n_emprestimo: " . $conn->error
+        );
+    }
+    $row_n = $result_n->fetch_assoc();
+    error_log("DEBUG N_EMPRESTIMO: Resultado da consulta MAX: " . print_r($row_n, true)); // Log 2
+    // Garante que mesmo se max_n for NULL (tabela vazia), o resultado seja 1
+    $max_n_valor = intval($row_n["max_n"] ?? 0); // Pega o valor ou 0
+    error_log("DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): " . $max_n_valor); // Log 3
+    $numero_emprestimo_grupo = $max_n_valor + 1; // Calcula o próximo
+    error_log("DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: " . $numero_emprestimo_grupo); // Log 4
+    $result_n->free();
+    // --- FIM DEBUG ---
+
+    // --- Iniciar a transação APÓS determinar o número do grupo ---
+    $conn->begin_transaction();
+
+    $aluno = $_SESSION["aluno_emprestimo"];
+    $bibliotecario = $_SESSION["bibliotecario"];
+    $livros = $_SESSION["livros_emprestimo"];
 
     if (empty($livros)) {
-        throw new Exception('Nenhum livro selecionado para empréstimo');
+        throw new Exception("Nenhum livro selecionado para empréstimo");
     }
 
     // Validações essenciais
-    if (empty($aluno['ra_aluno'])) {
-        throw new Exception('RA do aluno não encontrado na sessão');
+    if (empty($aluno["ra_aluno"])) {
+        throw new Exception("RA do aluno não encontrado na sessão");
     }
-    if (empty($bibliotecario['codigo']) || empty($bibliotecario['nome'])) {
-         throw new Exception('Dados do bibliotecário incompletos na sessão');
+    if (empty($bibliotecario["codigo"]) || empty($bibliotecario["nome"])) {
+        throw new Exception("Dados do bibliotecário incompletos na sessão");
     }
-
-    // --- NOVA LÓGICA: Determinar o n_emprestimo do grupo --- 
-    // Pega o maior n_emprestimo existente e soma 1. 
-    // CUIDADO: Isso pode ter problemas de concorrência em sistemas com muitos usuários simultâneos.
-    // Uma sequência ou UUID seria mais robusto para gerar o ID do grupo.
-    // Usando MAX + 1 por simplicidade conforme lógica anterior implícita.
-    $sql_get_next_n = "SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos";
-    $result_n = $conn->query($sql_get_next_n);
-    if (!$result_n) {
-        throw new Exception("Erro ao buscar próximo n_emprestimo: " . $conn->error);
-    }
-    $row_n = $result_n->fetch_assoc();
-    $numero_emprestimo_grupo = ($row_n['max_n'] ?? 0) + 1;
-    $result_n->free();
 
     // --- Preparar statements fora do loop --- 
-
-    // SQL para inserir linha individual em tbemprestimos
     $sql_emprestimo_individual = "INSERT INTO tbemprestimos (
         n_emprestimo, ra_aluno, nome_aluno, isbn_falso, isbn, tombo, nome_livro,
         qntd_livros, data_emprestimo, data_devolucao_prevista,
         emprestado_por, id_bibliotecario
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, 1, NOW(), ?, ?, ?)"; // qntd_livros é sempre 1
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, 1, NOW(), ?, ?, ?)";
     $stmt_emprestimo = $conn->prepare($sql_emprestimo_individual);
     if (!$stmt_emprestimo) {
-        throw new Exception("Erro ao preparar empréstimo individual: " . $conn->error);
+        throw new Exception(
+            "Erro ao preparar empréstimo individual: " . $conn->error
+        );
     }
 
-    // SQL para inserir em tbitens_emprestimo (mantido conforme solicitado)
-    // Vinculado ao ID do PRIMEIRO registro inserido em tbemprestimos para este grupo
     $sql_item = "INSERT INTO tbitens_emprestimo (
                     id_emprestimo, isbn_falso, tombo, data_devolucao_prevista
                 ) VALUES (?, ?, ?, ?)";
     $stmt_item = $conn->prepare($sql_item);
-     if (!$stmt_item) {
+    if (!$stmt_item) {
         throw new Exception("Erro ao preparar item empréstimo: " . $conn->error);
     }
 
-    // SQL para atualizar estoque
     $sql_atualiza = "UPDATE tblivro_estoque SET total_exemplares = total_exemplares - 1 WHERE isbn_falso = ?";
     $stmt_estoque = $conn->prepare($sql_atualiza);
     if (!$stmt_estoque) {
-         error_log("Erro ao preparar atualização estoque: " . $conn->error);
-         // Considerar lançar exceção se a atualização de estoque for crítica
-         // throw new Exception("Erro ao preparar atualização estoque: " . $conn->error);
+        error_log("Erro ao preparar atualização estoque: " . $conn->error);
     }
 
     // --- Loop para processar cada livro --- 
     foreach ($livros as $index => $livro) {
-        // Validações para cada livro
-        if (empty($livro['isbn_falso'])) {
-             throw new Exception("Livro sem ISBN Falso na lista de empréstimo.");
+        if (empty($livro["isbn_falso"])) {
+            throw new Exception(
+                "Livro sem ISBN Falso na lista de empréstimo."
+            );
         }
-        if (empty($livro['tombo'])) {
-             throw new Exception("Livro '{$livro['titulo']}' sem TOMBO definido na seleção.");
+        if (empty($livro["tombo"])) {
+            throw new Exception(
+                "Livro {" . ($livro["titulo"] ?? "Desconhecido") . "} sem TOMBO definido na seleção."
+            );
         }
 
-        // (Opcional) Verificar disponibilidade novamente aqui para evitar race conditions
-        // ... (código de verificação de estoque omitido para brevidade, mas recomendado) ...
+        $isbn_falso_livro = $livro["isbn_falso"];
+        $isbn_livro = "";
+        $tombo_livro = $livro["tombo"];
+        $nome_livro = $livro["titulo"] ?? "";
+        $data_devolucao_livro = date(
+            "Y-m-d",
+            strtotime($livro["data_devolucao"] ?? " + 7 days")
+        );
 
-        $isbn_falso_livro = $livro['isbn_falso'];
-        $isbn_livro = ''; // Assumindo que ainda não está disponível
-        $tombo_livro = $livro['tombo'];
-        $nome_livro = $livro['titulo'] ?? '';
-        $data_devolucao_livro = date('Y-m-d', strtotime($livro['data_devolucao'] ?? ' + 7 days'));
-
-        // 1. Inserir linha em tbemprestimos para este livro
-        // Bind: int(n_emp), string(ra), string(nome_a), string(isbn_f), string(isbn), string(tombo), string(nome_l), string(data_dev), string(nome_b), int(id_b)
-        $stmt_emprestimo->bind_param("issssssssi",
-            $numero_emprestimo_grupo, // n_emprestimo comum
-            $aluno['ra_aluno'],
-            $aluno['nome'],
+        // 1. Inserir linha em tbemprestimos
+        $stmt_emprestimo->bind_param(
+            "issssssssi",
+            $numero_emprestimo_grupo,
+            $aluno["ra_aluno"],
+            $aluno["nome"],
             $isbn_falso_livro,
             $isbn_livro,
             $tombo_livro,
             $nome_livro,
-            $data_devolucao_livro, // Data específica do item ou geral?
-            $bibliotecario['nome'],
-            $bibliotecario['codigo']
+            $data_devolucao_livro,
+            $bibliotecario["nome"],
+            $bibliotecario["codigo"]
         );
-
         if (!$stmt_emprestimo->execute()) {
-            throw new Exception("Erro ao registrar empréstimo para Tombo {$tombo_livro}: " . $stmt_emprestimo->error);
+            throw new Exception(
+                "Erro ao registrar empréstimo para Tombo {$tombo_livro}: " .
+                    $stmt_emprestimo->error
+            );
         }
-        $current_emprestimo_id = $conn->insert_id; // Pega o ID desta linha específica
+        $current_emprestimo_id = $conn->insert_id;
 
-        // Guarda o ID da primeira linha inserida para vincular os itens
         if ($index === 0) {
             $primeiro_emprestimo_id = $current_emprestimo_id;
         }
 
-        // 2. Inserir linha em tbitens_emprestimo (vinculada ao primeiro ID)
-        // Certifique-se que $primeiro_emprestimo_id foi definido
+        // 2. Inserir linha em tbitens_emprestimo
         if ($primeiro_emprestimo_id === null) {
-             throw new Exception("Erro crítico: ID do primeiro empréstimo não definido para vincular itens.");
+            throw new Exception(
+                "Erro crítico: ID do primeiro empréstimo não definido para vincular itens."
+            );
         }
-        // Bind: int(id_emp_primeiro), string(isbn_f), string(tombo), string(data_dev)
-        $stmt_item->bind_param("isss",
-            $primeiro_emprestimo_id, // Vincula ao ID da primeira linha de tbemprestimos deste grupo
+        $stmt_item->bind_param(
+            "isss",
+            $primeiro_emprestimo_id,
             $isbn_falso_livro,
             $tombo_livro,
             $data_devolucao_livro
         );
-         if (!$stmt_item->execute()) {
-            error_log("Erro ao registrar item empréstimo (Tombo: {$tombo_livro}): " . $stmt_item->error);
-            throw new Exception("Erro ao registrar item empréstimo (Tombo: {$tombo_livro}): " . $stmt_item->error);
+        if (!$stmt_item->execute()) {
+            throw new Exception(
+                "Erro ao registrar item empréstimo (Tombo: {$tombo_livro}): " .
+                    $stmt_item->error
+            );
         }
 
-        // 3. Atualizar estoque (se o statement foi preparado com sucesso)
+        // 3. Atualizar estoque
         if ($stmt_estoque) {
             $stmt_estoque->bind_param("s", $isbn_falso_livro);
             if (!$stmt_estoque->execute()) {
-                error_log("Erro na atualização do estoque para ISBN {$isbn_falso_livro}: " . $stmt_estoque->error);
-                // Decidir se lança exceção ou apenas loga
+                error_log(
+                    "Erro na atualização do estoque para ISBN {$isbn_falso_livro}: " .
+                        $stmt_estoque->error
+                );
             }
         }
     } // Fim do loop foreach
@@ -174,28 +206,37 @@ try {
 
     $conn->commit();
 
-    unset($_SESSION['livros_emprestimo']);
+    unset($_SESSION["livros_emprestimo"]);
 
+    ob_end_clean(); // Limpa buffer antes do JSON final
     // Retorna o número do grupo de empréstimo
     echo json_encode([
-        'success' => true,
-        'n_emprestimo' => $numero_emprestimo_grupo, // Retorna o número do grupo
-        'message' => 'Empréstimo registrado com sucesso! (Nº Grupo: ' . $numero_emprestimo_grupo . ')'
+        "success" => true,
+        "n_emprestimo" => $numero_emprestimo_grupo,
+        "message" =>
+            "Empréstimo registrado com sucesso! (Nº Grupo: " .
+            $numero_emprestimo_grupo .
+            ")",
     ]);
+    exit(); // Garante que nada mais seja executado
 
 } catch (Exception $e) {
     // Garante rollback em caso de erro
     if (isset($conn) && $conn->ping() && $conn->in_transaction) {
         $conn->rollback();
     }
-    error_log("ERRO FINALIZAR EMPRESTIMO (Reestruturado): " . $e->getMessage());
+    error_log(
+        "ERRO FINALIZAR EMPRESTIMO (Debug N Emp): " . $e->getMessage()
+    );
+    ob_end_clean(); // Limpa buffer em caso de erro
     echo json_encode([
-        'success' => false,
-        'error' => 'Erro ao processar empréstimo. Verifique os logs ou contate o suporte.'
-        // 'error_debug' => $e->getMessage() // Descomentar para debug apenas
+        "success" => false,
+        "error" =>
+            "Erro ao processar empréstimo. Verifique os logs ou contate o suporte.",
+        // uncomment the line below for debugging only
+        // "error_debug" => $e->getMessage()
     ]);
-    exit;
+    exit();
 }
 
 ?>
-

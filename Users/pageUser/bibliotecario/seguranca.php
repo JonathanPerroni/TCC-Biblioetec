@@ -1,6 +1,6 @@
 <?php
 // ===========================
-// segurança.php (Modificado e Corrigido)
+// segurança.php (Modificado v2 - CSRF Condicional)
 // ===========================
 
 // Inicia a sessão, se ainda não estiver iniciada
@@ -161,6 +161,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 */
 
-// Gera o token para ser usado nos formulários das páginas que incluem este arquivo
-// É importante que as páginas que usam POST incluam um campo oculto com este token:
-// <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($token_csrf); ?>
+// *** CORREÇÃO: Gera o token CSRF apenas se não for uma requisição AJAX ***
+// A constante IS_AJAX_REQUEST deve ser definida ANTES de incluir este arquivo, se for AJAX.
+if (!defined('IS_AJAX_REQUEST')) {
+    // Gera o token para ser usado nos formulários das páginas que incluem este arquivo
+    // É importante que as páginas que usam POST incluam um campo oculto com este token:
+    // <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($token_csrf); ">
+    $token_csrf = gerarTokenCSRF();
+}
+
+// NÃO ADICIONE O FECHAMENTO ?> AQUI PARA EVITAR SAÍDA INDESEJADA
+

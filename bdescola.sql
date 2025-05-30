@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/05/2025 às 02:39
+-- Tempo de geração: 30/05/2025 às 09:54
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -292,7 +292,7 @@ CREATE TABLE `tbalunos` (
 --
 
 INSERT INTO `tbalunos` (`codigo`, `nome`, `data_nascimento`, `endereco`, `cidade`, `estado`, `cpf`, `ra_aluno`, `celular`, `periodo`, `situacao`, `responsavel`, `nome_escola`, `nome_curso`, `email`, `tipo_ensino`, `password`, `acesso`, `cadastrado_por`, `data_cdadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `status`) VALUES
-(1, 'Aluno Teste da Silva', '1994-11-22', 'Rua Teste, 552', 'Adamantina', 'SP', '413.735.168', '123456789', '18991599472', 'noite', 'a cursar', 'Maria Teste', 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', 'aluno@teste.com', 'tecnico', '$2y$10$JcSCQzzMKtXK17nGTogu2epkBt4/Ic9kNlvXTeiDBqg0zHmtbXyhC', 'aluno', NULL, NULL, 'a0S7FY', '$2y$10$uUi0xSOFyGZ62SDzmCe.m.H7K6qXpYqjiQ2TSvnSOMjAMxarWcnIu', '2025-05-18 21:56:04', 1);
+(1, 'Aluno Teste da Silva', '1994-11-22', 'Rua Teste, 552', 'Adamantina', 'SP', '413.735.168', '123456789', '18991599472', 'noite', 'a cursar', 'Maria Teste', 'Prof Eudécio Luiz Vicente', 'Desenvolvimento de Sistemas', 'aluno@teste.com', 'tecnico', '$2y$10$JcSCQzzMKtXK17nGTogu2epkBt4/Ic9kNlvXTeiDBqg0zHmtbXyhC', 'aluno', NULL, NULL, 'c6WT6b', '$2y$10$uUi0xSOFyGZ62SDzmCe.m.H7K6qXpYqjiQ2TSvnSOMjAMxarWcnIu', '2025-05-28 22:27:10', 1);
 
 -- --------------------------------------------------------
 
@@ -466,7 +466,19 @@ INSERT INTO `tbdevolucao` (`id_devolucao`, `id_emprestimo`, `n_emprestimo`, `ra_
 (24, 33, '', '123456789', '', '', '', '', '', 0, '2025-05-25 23:22:34', NULL, '2025-05-26 00:17:09', 'emprestado'),
 (25, 34, '34', '123456789', 'Aluno Teste da Silva', '', '', '', '', 2, '2025-05-26 00:28:15', '2025-06-02 00:00:00', '2025-05-27 06:41:03', 'emprestado'),
 (26, 36, '36', '123456789', 'Aluno Teste da Silva', 'f000000000667', '', '10307', 'BANCO DE QUESTÕES 2010', 1, '2025-05-27 06:47:35', '2025-06-03 00:00:00', '2025-05-27 07:06:38', 'emprestado'),
-(27, 38, '38', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-27 07:13:27', '2025-06-03 00:00:00', '2025-05-28 21:33:56', 'emprestado');
+(27, 38, '38', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-27 07:13:27', '2025-06-03 00:00:00', '2025-05-28 21:33:56', 'emprestado'),
+(28, 39, '39', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-28 21:37:00', '2025-06-05 00:00:00', '2025-05-28 22:29:14', 'emprestado'),
+(29, 40, '40', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 2, '2025-05-28 22:42:00', '2025-06-05 00:00:00', '2025-05-28 22:50:25', 'emprestado'),
+(30, 41, '41', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 2, '2025-05-28 22:51:35', '2025-06-05 00:00:00', '2025-05-28 23:07:59', 'emprestado'),
+(31, 42, '42', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 2, '2025-05-28 23:09:17', '2025-06-05 00:00:00', '2025-05-29 00:32:38', 'emprestado'),
+(32, 43, '1', '123456789', 'Aluno Teste da Silva', 'f000000000917', '', '10014', 'INSPEÇÃO PREDIAL DE SISTEMAS DE CHUVEIROS AUTOMÁTI', 1, '2025-05-29 00:33:26', '2025-06-05 00:00:00', '2025-05-29 00:34:37', 'emprestado'),
+(33, 44, '1', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-29 00:33:26', '2025-06-05 00:00:00', '2025-05-29 00:34:40', 'emprestado'),
+(34, 45, '1', '123456789', 'Aluno Teste da Silva', 'f000000000917', '', '10014', 'INSPEÇÃO PREDIAL DE SISTEMAS DE CHUVEIROS AUTOMÁTI', 1, '2025-05-29 00:35:14', '2025-06-05 00:00:00', '2025-05-29 00:41:26', 'emprestado'),
+(35, 46, '1', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-29 00:35:14', '2025-06-05 00:00:00', '2025-05-29 00:41:35', 'emprestado'),
+(36, 47, '1', '123456789', 'Aluno Teste da Silva', 'f000000000001', '', '11019', 'O CORCUNDA DE NOTRE DAME', 1, '2025-05-29 00:42:05', '2025-06-05 00:00:00', '2025-05-29 00:51:00', 'emprestado'),
+(37, 48, '1', '123456789', 'Aluno Teste da Silva', 'f000000000420', '', '10577', 'DIÁRIO DE UM BANANA', 1, '2025-05-29 00:42:05', '2025-06-05 00:00:00', '2025-05-29 00:51:05', 'emprestado'),
+(38, 49, '1', '123456789', 'Aluno Teste da Silva', 'f000000000123', '', '10897', 'ESTUDOS DA LINGUGEM 3 - COMUNICAÇÃO CARREGADA DE S', 1, '2025-05-29 00:51:35', '2025-06-05 00:00:00', '2025-05-29 00:56:38', 'emprestado'),
+(39, 50, '1', '123456789', 'Aluno Teste da Silva', 'f000000000532', '', '10457', 'A CABANA', 1, '2025-05-29 00:51:35', '2025-06-05 00:00:00', '2025-05-29 00:56:46', 'emprestado');
 
 -- --------------------------------------------------------
 
@@ -497,7 +509,8 @@ CREATE TABLE `tbemprestimos` (
 --
 
 INSERT INTO `tbemprestimos` (`id_emprestimo`, `n_emprestimo`, `ra_aluno`, `nome_aluno`, `isbn_falso`, `isbn`, `tombo`, `nome_livro`, `qntd_livros`, `data_emprestimo`, `data_devolucao_prevista`, `data_devolucao_efetiva`, `tipo`, `emprestado_por`, `id_bibliotecario`) VALUES
-(39, '39', '123456789', 'Aluno Teste da Silva', 'f000000000260', '', '10754', 'CIDADANIA FINANCEIRA - EDUCAÇÃO FINANCEIRA NO ENSI', 1, '2025-05-28 21:37:00', '2025-06-05 00:00:00', NULL, 'emprestado', 'Funcionário Teste', NULL);
+(51, '1', '123456789', 'Aluno Teste da Silva', 'f000000000547', '', '10442', 'O MONTE CINCO', 1, '2025-05-29 00:57:17', '2025-06-05 00:00:00', NULL, 'emprestado', 'Funcionário Teste', 1),
+(52, '1', '123456789', 'Aluno Teste da Silva', 'f000000000125', '', '10895', 'ESTUDOS DA LINGUAGEM 5 - O PAPEL DO CONTEXTO', 1, '2025-05-29 00:57:18', '2025-06-05 00:00:00', NULL, 'emprestado', 'Funcionário Teste', 1);
 
 -- --------------------------------------------------------
 
@@ -564,7 +577,7 @@ CREATE TABLE `tbfuncionarios` (
 --
 
 INSERT INTO `tbfuncionarios` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(1, 'Funcionário Teste', 'funcionario@email.com', '$2y$10$uhYMPZ./bkkDWNYhqHduteEpwAcWiBj3wniIf4V8VNYViGdCY9QdK', '', '18997005573', '06968841358', '055', 'funcionario', NULL, NULL, 'a0S7FY', NULL, '2025-05-18 21:56:04', NULL);
+(1, 'Funcionário Teste', 'funcionario@email.com', '$2y$10$uhYMPZ./bkkDWNYhqHduteEpwAcWiBj3wniIf4V8VNYViGdCY9QdK', '', '18997005573', '06968841358', '055', 'funcionario', NULL, NULL, 'c6WT6b', NULL, '2025-05-28 22:27:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -597,7 +610,23 @@ INSERT INTO `tbitens_emprestimo` (`id_item`, `id_emprestimo`, `isbn_falso`, `tom
 (11, 34, 'f000000000669', NULL, '2025-06-02', NULL),
 (13, 36, 'f000000000667', NULL, '2025-06-03', NULL),
 (14, 38, 'f000000000260', NULL, '2025-06-03', NULL),
-(15, 39, 'f000000000260', NULL, '2025-06-05', NULL);
+(15, 39, 'f000000000260', NULL, '2025-06-05', NULL),
+(16, 40, 'f000000000260', NULL, '2025-06-05', NULL),
+(17, 40, 'f000000000917', NULL, '2025-06-05', NULL),
+(18, 41, 'f000000000260', NULL, '2025-06-05', NULL),
+(19, 41, 'f000000000917', NULL, '2025-06-05', NULL),
+(20, 42, 'f000000000260', '10754', '2025-06-05', NULL),
+(21, 42, 'f000000000917', '10014', '2025-06-05', NULL),
+(22, 43, 'f000000000917', '10014', '2025-06-05', NULL),
+(23, 43, 'f000000000260', '10754', '2025-06-05', NULL),
+(24, 45, 'f000000000917', '10014', '2025-06-05', NULL),
+(25, 45, 'f000000000260', '10754', '2025-06-05', NULL),
+(26, 47, 'f000000000001', '11019', '2025-06-05', NULL),
+(27, 47, 'f000000000420', '10577', '2025-06-05', NULL),
+(28, 49, 'f000000000123', '10897', '2025-06-05', NULL),
+(29, 49, 'f000000000532', '10457', '2025-06-05', NULL),
+(30, 51, 'f000000000547', '10442', '2025-06-05', NULL),
+(31, 51, 'f000000000125', '10895', '2025-06-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -3904,7 +3933,7 @@ CREATE TABLE `tblivro_estoque` (
 --
 
 INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
-(1, 'f000000000001', 1),
+(1, 'f000000000001', 0),
 (2, 'f000000000002', 1),
 (3, 'f000000000003', 1),
 (4, 'f000000000004', 0),
@@ -4026,9 +4055,9 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (120, 'f000000000120', 1),
 (121, 'f000000000121', 1),
 (122, 'f000000000122', 1),
-(123, 'f000000000123', 1),
+(123, 'f000000000123', 0),
 (124, 'f000000000124', 1),
-(125, 'f000000000125', 1),
+(125, 'f000000000125', 0),
 (126, 'f000000000126', 1),
 (127, 'f000000000127', 1),
 (128, 'f000000000128', 1),
@@ -4163,7 +4192,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (257, 'f000000000257', 1),
 (258, 'f000000000258', 1),
 (259, 'f000000000259', 1),
-(260, 'f000000000260', 9),
+(260, 'f000000000260', 4),
 (261, 'f000000000261', 2),
 (262, 'f000000000262', 1),
 (263, 'f000000000263', 1),
@@ -4323,7 +4352,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (417, 'f000000000417', 1),
 (418, 'f000000000418', 1),
 (419, 'f000000000419', 2),
-(420, 'f000000000420', 1),
+(420, 'f000000000420', 0),
 (421, 'f000000000421', 1),
 (422, 'f000000000422', 1),
 (423, 'f000000000423', 1),
@@ -4435,7 +4464,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (529, 'f000000000529', 1),
 (530, 'f000000000530', 1),
 (531, 'f000000000531', 1),
-(532, 'f000000000532', 1),
+(532, 'f000000000532', 0),
 (533, 'f000000000533', 1),
 (534, 'f000000000534', 1),
 (535, 'f000000000535', 1),
@@ -4450,7 +4479,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (544, 'f000000000544', 1),
 (545, 'f000000000545', 1),
 (546, 'f000000000546', 1),
-(547, 'f000000000547', 1),
+(547, 'f000000000547', 0),
 (548, 'f000000000548', 1),
 (549, 'f000000000549', 1),
 (550, 'f000000000550', 1),
@@ -4820,7 +4849,7 @@ INSERT INTO `tblivro_estoque` (`id`, `isbn_falso`, `total_exemplares`) VALUES
 (914, 'f000000000914', 2),
 (915, 'f000000000915', 5),
 (916, 'f000000000916', 5),
-(917, 'f000000000917', 5),
+(917, 'f000000000917', 0),
 (918, 'f000000000918', 1),
 (919, 'f000000000919', 1);
 
@@ -4901,7 +4930,7 @@ CREATE TABLE `tbprofessores` (
 --
 
 INSERT INTO `tbprofessores` (`codigo`, `nome`, `email`, `password`, `telefone`, `celular`, `cpf`, `codigo_escola`, `acesso`, `cadastrado_por`, `data_cadastro`, `codigo_autenticacao`, `chave_recuperar_senha`, `data_codigo_autenticacao`, `statusDev`) VALUES
-(1, 'Professor Teste', 'professor@teste.com', '$2y$10$vgDrWrxGXFLMhKdJlwoJcu.DBDEXxSgaYDwMSviPBkfCv0uaWfUiG', '', '18991599472', '09739704805', '055', 'professor', NULL, NULL, 'a0S7FY', NULL, '2025-05-18 21:56:04', NULL);
+(1, 'Professor Teste', 'professor@teste.com', '$2y$10$vgDrWrxGXFLMhKdJlwoJcu.DBDEXxSgaYDwMSviPBkfCv0uaWfUiG', '', '18991599472', '09739704805', '055', 'professor', NULL, NULL, 'c6WT6b', NULL, '2025-05-28 22:27:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -5159,13 +5188,13 @@ ALTER TABLE `tbdev`
 -- AUTO_INCREMENT de tabela `tbdevolucao`
 --
 ALTER TABLE `tbdevolucao`
-  MODIFY `id_devolucao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_devolucao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de tabela `tbemprestimos`
 --
 ALTER TABLE `tbemprestimos`
-  MODIFY `id_emprestimo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_emprestimo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `tbescola`
@@ -5183,7 +5212,7 @@ ALTER TABLE `tbfuncionarios`
 -- AUTO_INCREMENT de tabela `tbitens_emprestimo`
 --
 ALTER TABLE `tbitens_emprestimo`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de tabela `tbjogoseducativos`
