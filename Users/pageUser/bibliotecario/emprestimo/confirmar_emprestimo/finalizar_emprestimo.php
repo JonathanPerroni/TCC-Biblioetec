@@ -49,6 +49,7 @@ if (
 
 $numero_emprestimo_grupo = null; // Guarda o n_emprestimo comum para esta transação
 $primeiro_emprestimo_id = null; // Guarda o id_emprestimo da primeira linha inserida
+$tombos_inseridos_nesta_transacao = []; // <<< ADICIONADO: Array para rastrear tombos já inseridos nesta transação
 
 try {
     // --- DEBUG: Determinar o n_emprestimo ANTES de iniciar a transação ---
@@ -119,34 +120,50 @@ try {
 
     // --- Loop para processar cada livro --- 
     foreach ($livros as $index => $livro) {
+        // Validação crucial: Verifica se o tombo existe no array do livro
+        if (empty($livro["tombo"])) {
+            error_log("AVISO: Livro sem tombo definido na sessão durante finalização: " . print_r($livro, true));
+            // Decide se quer pular ou lançar erro. Pular é mais seguro para não travar tudo.
+            continue; 
+        }
+        $tombo_livro = $livro["tombo"];
+
+        // <<< INÍCIO DA VERIFICAÇÃO DE DUPLICIDADE NO SERVIDOR >>>
+        if (in_array($tombo_livro, $tombos_inseridos_nesta_transacao)) {
+            // Se o tombo já foi inserido NESTA transação, loga um aviso e pula para o próximo livro
+            error_log("AVISO: Tentativa de inserir tombo duplicado {$tombo_livro} para n_emprestimo {$numero_emprestimo_grupo} detectada na sessão. Pulando inserção.");
+            continue; // Pula para o próximo livro
+        }
+        // <<< FIM DA VERIFICAÇÃO DE DUPLICIDADE NO SERVIDOR >>>
+
+        // <<< ADICIONADO: Adiciona o tombo ao array de rastreamento APÓS a verificação >>>
+        $tombos_inseridos_nesta_transacao[] = $tombo_livro;
+
+        // Se não for duplicado, prossiga com as inserções e atualizações
         if (empty($livro["isbn_falso"])) {
             throw new Exception(
                 "Livro sem ISBN Falso na lista de empréstimo."
             );
         }
-        if (empty($livro["tombo"])) {
-            throw new Exception(
-                "Livro {" . ($livro["titulo"] ?? "Desconhecido") . "} sem TOMBO definido na seleção."
-            );
-        }
+        // Note: A validação de tombo vazio já foi feita acima
 
         $isbn_falso_livro = $livro["isbn_falso"];
-        $isbn_livro = "";
-        $tombo_livro = $livro["tombo"];
+        $isbn_livro = ""; // Assumindo que ISBN real não é usado aqui
+        // $tombo_livro já definido acima
         $nome_livro = $livro["titulo"] ?? "";
         $data_devolucao_livro = date(
             "Y-m-d",
-            strtotime($livro["data_devolucao"] ?? " + 7 days")
+            strtotime($livro["data_devolucao"] ?? " + 7 days") // Usar data da sessão ou padrão
         );
 
         // 1. Inserir linha em tbemprestimos
         $stmt_emprestimo->bind_param(
-            "issssssssi",
+            "issssssssi", // Ajustado para 10 parâmetros (i para n_emprestimo, s para os strings, i para id_bibliotecario)
             $numero_emprestimo_grupo,
             $aluno["ra_aluno"],
             $aluno["nome"],
             $isbn_falso_livro,
-            $isbn_livro,
+            $isbn_livro, // Vazio
             $tombo_livro,
             $nome_livro,
             $data_devolucao_livro,
@@ -161,19 +178,21 @@ try {
         }
         $current_emprestimo_id = $conn->insert_id;
 
+        // Guarda o ID do primeiro empréstimo inserido para usar na tbitens_emprestimo
         if ($index === 0) {
             $primeiro_emprestimo_id = $current_emprestimo_id;
         }
 
         // 2. Inserir linha em tbitens_emprestimo
         if ($primeiro_emprestimo_id === null) {
+            // Isso não deveria acontecer se o loop rodou pelo menos uma vez
             throw new Exception(
                 "Erro crítico: ID do primeiro empréstimo não definido para vincular itens."
             );
         }
         $stmt_item->bind_param(
-            "isss",
-            $primeiro_emprestimo_id,
+            "isss", // i para id_emprestimo, s para isbn_falso, s para tombo, s para data
+            $primeiro_emprestimo_id, // Usa o ID do primeiro registro de tbemprestimos como chave estrangeira
             $isbn_falso_livro,
             $tombo_livro,
             $data_devolucao_livro
@@ -189,6 +208,7 @@ try {
         if ($stmt_estoque) {
             $stmt_estoque->bind_param("s", $isbn_falso_livro);
             if (!$stmt_estoque->execute()) {
+                // Loga o erro mas não interrompe a transação necessariamente
                 error_log(
                     "Erro na atualização do estoque para ISBN {$isbn_falso_livro}: " .
                         $stmt_estoque->error
@@ -204,8 +224,10 @@ try {
         $stmt_estoque->close();
     }
 
+    // Se tudo correu bem, comita a transação
     $conn->commit();
 
+    // Limpa a sessão de livros após sucesso
     unset($_SESSION["livros_emprestimo"]);
 
     ob_end_clean(); // Limpa buffer antes do JSON final
@@ -226,7 +248,7 @@ try {
         $conn->rollback();
     }
     error_log(
-        "ERRO FINALIZAR EMPRESTIMO (Debug N Emp): " . $e->getMessage()
+        "ERRO FINALIZAR EMPRESTIMO: " . $e->getMessage()
     );
     ob_end_clean(); // Limpa buffer em caso de erro
     echo json_encode([

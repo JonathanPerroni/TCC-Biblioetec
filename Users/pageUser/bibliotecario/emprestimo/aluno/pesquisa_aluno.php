@@ -60,10 +60,13 @@ $bibliotecario = $result->fetch_assoc();
                     </div>
                     <div class="card-body">
                         <?php if(isset($_SESSION['msg'])): ?>
-                            <div class="alert alert-<?= $_SESSION['msg_type'] ?>">
-                                <?= $_SESSION['msg'] ?>
+                            <div class="alert alert-<?= htmlspecialchars($_SESSION['msg_type']) ?>">
+                                <?= htmlspecialchars($_SESSION['msg']) ?>
                             </div>
-                            <?php unset($_SESSION['msg'], $_SESSION['msg_type']); ?>
+                            <?php 
+                                // --- GARANTA QUE ESTA LINHA EXISTE E ESTÁ AQUI ---
+                                unset($_SESSION['msg'], $_SESSION['msg_type']); 
+                            ?>
                         <?php endif; ?>
 
                         <form id="formPesquisa" method="post">

@@ -56,7 +56,7 @@ include_once('../seguranca.php'); // já verifica login e carrega CSRF
         <li class="tab-button" data-tab="lista_espera">Lista de Espera</li>
         <li class="tab-button" data-tab="pedidos.php">Pedidos</li>
         <li class="tab-button" data-tab="separacao.php">Separação</li>
-        <li class="tab-button" data-tab="">Recusa</li>
+        <li class="tab-button" data-tab="recusa.php">Recusa</li>
     </ul>
 
     <div id="tab-content" class="conteudo-tab">

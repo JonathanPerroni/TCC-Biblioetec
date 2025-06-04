@@ -239,6 +239,11 @@ function carregarDetalhesLivro(isbn) {
                     // Configurar data de devolução padrão (5 dias úteis)
                     const dataDevolucao = calcularDataDevolucao(5);
                     document.getElementById('data-devolucao').valueAsDate = dataDevolucao;
+                    
+                    // --- ADICIONE ESTA LINHA PARA RESETAR O CHECKBOX ---
+                    document.getElementById('sobrepor-regra').checked = false;
+                    // --- FIM DA LINHA ADICIONADA ---
+                
                 });
         }
 
@@ -257,34 +262,68 @@ function carregarDetalhesLivro(isbn) {
             return data;
         }
 
-        document.getElementById('btn-adicionar-livro').addEventListener('click', function() {
-            if(!livroAtual) return;
-            
-            const dataDevolucao = document.getElementById('data-devolucao').value;
-            const sobreporRegra = document.getElementById('sobrepor-regra').checked;
-            
-            // Verificar disponibilidade (exceto se sobreposta a regra)
-            const disponivel = livroAtual.total_exemplares - livroAtual.emprestados;
-            if(disponivel <= 0) {
-                alert('Não há exemplares disponíveis deste livro');
-                return;
-            }
-            
-            if(disponivel === 1 && !sobreporRegra) {
-                alert('Sobrepôr a regra do exemplar mínimo na biblioteca');
-                return;
-            }
-            
-            // Adicionar livro à lista
-            livrosSelecionados.push({
-                ...livroAtual,
-                tombo: livroAtual.tombo, // Garanta que o tombo está incluso
-                data_devolucao: dataDevolucao,
-                sobrepor_regra: sobreporRegra
-            });
-            atualizarListaLivros();
-            resetarFormulario();
-        });
+       document.getElementById('btn-adicionar-livro').addEventListener('click', function() {
+    console.log("--- Adicionar Livro Click ---"); // Log 1
+    if(!livroAtual) {
+        console.log("livroAtual is null, returning."); // Log 2
+        return;
+    }
+    // Usar JSON.stringify para ver o objeto completo
+    console.log("livroAtual:", JSON.stringify(livroAtual)); // Log 3
+
+    // Verificar disponibilidade (coloque suas verificações aqui)
+    const dataDevolucao = document.getElementById('data-devolucao').value;
+    const sobreporRegra = document.getElementById('sobrepor-regra').checked;
+    const disponivel = livroAtual.total_exemplares - livroAtual.emprestados;
+    // Adicione suas verificações de disponibilidade aqui...
+    // Exemplo:
+    // if(disponivel <= 0 && !sobreporRegra) { 
+    //     alert('Não há exemplares...'); 
+    //     console.log("Indisponível, retornando."); 
+    //     return; 
+    // }
+
+    const tomboAtual = livroAtual.tombo;
+    console.log("Tombo Atual:", tomboAtual, "Tipo:", typeof tomboAtual); // Log 4
+    if (!tomboAtual) {
+        alert('Erro: Tombo do livro não encontrado. Não é possível adicionar.');
+        console.log("Tombo não encontrado, retornando."); // Log 5
+        return;
+    }
+
+    console.log("Verificando duplicidade em:", JSON.stringify(livrosSelecionados)); // Log 6
+    let duplicadoEncontrado = false;
+    livrosSelecionados.forEach(livro => {
+        // Log para cada comparação
+        console.log(`Comparando Tombo existente: ${livro.tombo} (${typeof livro.tombo}) com Tombo Atual: ${tomboAtual} (${typeof tomboAtual})`); // Log 7
+        // Usar String() para comparação mais segura contra tipos diferentes
+        if (String(livro.tombo) === String(tomboAtual)) {
+            duplicadoEncontrado = true;
+        }
+    });
+
+    console.log("Duplicado Encontrado:", duplicadoEncontrado); // Log 8
+    if (duplicadoEncontrado) {
+        alert('Este livro (Tombo: ' + tomboAtual + ') já foi adicionado a este empréstimo.');
+        console.log("Livro já adicionado (duplicadoEncontrado=true), retornando."); // Log 9
+        return;
+    }
+
+    // Adicionar livro à lista
+    const novoLivro = {
+        ...livroAtual,
+        tombo: tomboAtual, // Garante que o tombo está no objeto adicionado
+        data_devolucao: dataDevolucao,
+        sobrepor_regra: sobreporRegra
+    };
+    console.log("Adicionando livro:", JSON.stringify(novoLivro)); // Log 10
+    livrosSelecionados.push(novoLivro);
+    console.log("livrosSelecionados agora:", JSON.stringify(livrosSelecionados)); // Log 11
+
+    atualizarListaLivros();
+    resetarFormulario();
+    console.log("Formulário resetado."); // Log 12
+});
 
         function atualizarListaLivros() {
             const listaEl = document.getElementById('lista-livros');

@@ -13,3 +13,67 @@
 [27-May-2025 12:07:18 Europe/Berlin] ERRO FINALIZAR EMPRESTIMO: Livro BANCO DE QUESTÕES 2010 não disponível no momento da confirmação
 [29-May-2025 03:42:00 Europe/Berlin] Erro ao buscar dados do comprovante: Unknown column 'a.telefone' in 'field list'
 
+[04-Jun-2025 02:33:56 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 02:33:56 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 1
+)
+
+[04-Jun-2025 02:33:56 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 1
+[04-Jun-2025 02:33:56 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 2
+[04-Jun-2025 03:26:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 03:26:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 2
+)
+
+[04-Jun-2025 03:26:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 2
+[04-Jun-2025 03:26:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 3
+[04-Jun-2025 04:35:31 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 04:35:31 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 3
+)
+
+[04-Jun-2025 04:35:31 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 3
+[04-Jun-2025 04:35:31 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 4
+[04-Jun-2025 04:46:03 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 04:46:03 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 4
+)
+
+[04-Jun-2025 04:46:03 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 4
+[04-Jun-2025 04:46:03 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 5
+[04-Jun-2025 05:18:05 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 05:18:05 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 5
+)
+
+[04-Jun-2025 05:18:05 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 5
+[04-Jun-2025 05:18:05 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 6
+[04-Jun-2025 06:00:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 06:00:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 6
+)
+
+[04-Jun-2025 06:00:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 6
+[04-Jun-2025 06:00:27 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 7
+[04-Jun-2025 06:01:12 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 06:01:12 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 7
+)
+
+[04-Jun-2025 06:01:12 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 7
+[04-Jun-2025 06:01:12 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 8
+[04-Jun-2025 06:17:48 Europe/Berlin] DEBUG N_EMPRESTIMO: Executando consulta: SELECT MAX(n_emprestimo) as max_n FROM tbemprestimos
+[04-Jun-2025 06:17:48 Europe/Berlin] DEBUG N_EMPRESTIMO: Resultado da consulta MAX: Array
+(
+    [max_n] => 8
+)
+
+[04-Jun-2025 06:17:48 Europe/Berlin] DEBUG N_EMPRESTIMO: Valor MAX obtido (ou 0): 8
+[04-Jun-2025 06:17:48 Europe/Berlin] DEBUG N_EMPRESTIMO: Próximo n_emprestimo calculado: 9
